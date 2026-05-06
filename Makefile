@@ -42,9 +42,17 @@ DOC_138639     = $(DOCS_DIR)/138639.pdf   # Part 2: EQPT user's guide
 DOC_138643     = $(DOCS_DIR)/138643.pdf   # Part 3: EQ3NR theoretical manual and user's guide
 DOC_138820     = $(DOCS_DIR)/138820.pdf   # Part 4: EQ6 theoretical manual and user's guide
 DOCS           = $(DOC_138894) $(DOC_138639) $(DOC_138643) $(DOC_138820)
+DOCS_SHA256    = docs/SHA256SUMS
 
 # Platform detection (used for packaging target warnings)
 UNAME_S := $(shell uname -s)
+
+# SHA256 verification command (sha256sum on Linux, shasum on macOS)
+ifeq ($(UNAME_S),Darwin)
+  SHA256_CHECK = shasum -a 256 -c
+else
+  SHA256_CHECK = sha256sum -c
+endif
 
 # ---- Source directories ----------------------------------------
 EQLIBU_SRC_DIR = $(SRC_BASE)/eqlibu/src
@@ -132,22 +140,27 @@ extract: $(EXTRACT_STAMP)
 # ============================================================
 # DOCS: download documentation PDFs from OSTI
 # ============================================================
-# Individual PDF rules
+# Individual PDF rules — each verifies its SHA256 after download.
+# If verification fails, the partial file is removed and make aborts.
+$(DOC_138894):
+	@mkdir -p $(DOCS_DIR)
+	curl -L -o $@ $(OSTI_BASE)/138894
+	cd $(DOCS_DIR) && grep 138894.pdf $(CURDIR)/$(DOCS_SHA256) | $(SHA256_CHECK) --strict - || { rm -f $@; exit 1; }
+
 $(DOC_138639):
 	@mkdir -p $(DOCS_DIR)
 	curl -L -o $@ $(OSTI_BASE)/138639
+	cd $(DOCS_DIR) && grep 138639.pdf $(CURDIR)/$(DOCS_SHA256) | $(SHA256_CHECK) --strict - || { rm -f $@; exit 1; }
 
 $(DOC_138643):
 	@mkdir -p $(DOCS_DIR)
 	curl -L -o $@ $(OSTI_BASE)/138643
+	cd $(DOCS_DIR) && grep 138643.pdf $(CURDIR)/$(DOCS_SHA256) | $(SHA256_CHECK) --strict - || { rm -f $@; exit 1; }
 
 $(DOC_138820):
 	@mkdir -p $(DOCS_DIR)
 	curl -L -o $@ $(OSTI_BASE)/138820
-
-$(DOC_138894):
-	@mkdir -p $(DOCS_DIR)
-	curl -L -o $@ $(OSTI_BASE)/138894
+	cd $(DOCS_DIR) && grep 138820.pdf $(CURDIR)/$(DOCS_SHA256) | $(SHA256_CHECK) --strict - || { rm -f $@; exit 1; }
 
 docs: $(DOCS)
 
@@ -311,7 +324,7 @@ docs-package: docs
 	tar -czf pkg/dist/eq3-6-docs_8.0a.tar.gz \
 	    -C $(DOCS_DIR) \
 	    --transform 's|^|eq3-6-docs_8.0a/|' \
-	    138639.pdf 138894.pdf
+	    138894.pdf 138639.pdf 138643.pdf 138820.pdf SHA256SUMS
 	@echo "Docs package written to pkg/dist/eq3-6-docs_8.0a.tar.gz"
 
 # ============================================================
