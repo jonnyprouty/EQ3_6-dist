@@ -1,0 +1,30 @@
+Source: eq3-6
+Section: science
+Priority: optional
+Maintainer: Your Name <you@example.com>
+Build-Depends: debhelper-compat (= 13), gfortran, unzip, curl
+Standards-Version: 4.6.2
+Homepage: https://github.com/llnl/EQ3_6
+Rules-Requires-Root: no
+
+Package: eq3-6
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: EQ3/6 geochemical equilibrium modeling software
+ EQ3/6 v8.0a is a software package for geochemical modeling of aqueous
+ solutions interacting with minerals, gases, and other solids. Originally
+ developed at Lawrence Livermore National Laboratory.
+ .
+ Includes five executables: eq3nr (speciation), eq6 (reaction path
+ modeling), eqpt (property estimation), xcon3 and xcon6 (input file
+ format converters).
+
+Package: eq3-6-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}
+Description: Documentation for EQ3/6 geochemical modeling software
+ PDF documentation for EQ3/6 v8.0a, retrieved from OSTI:
+ .
+  - EQPT user's guide, Part 2 (OSTI 138639)
+  - EQ3/6 package overview and installation guide (OSTI 138894)
