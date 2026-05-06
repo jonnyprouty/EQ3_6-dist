@@ -8,8 +8,10 @@ Summary:        EQ3/6 geochemical equilibrium modeling software
 License:        See NOTICE.txt in upstream distribution (BSD-3-Clause)
 URL:            https://github.com/llnl/EQ3_6
 Source0:        EQ36_80a_Linux.zip
-Source1:        https://www.osti.gov/servlets/purl/138639#eq3-6-eqpt-guide.pdf
-Source2:        https://www.osti.gov/servlets/purl/138894#eq3-6-install-guide.pdf
+Source1:        https://www.osti.gov/servlets/purl/138894#eq3-6-install-guide.pdf
+Source2:        https://www.osti.gov/servlets/purl/138639#eq3-6-eqpt-guide.pdf
+Source3:        https://www.osti.gov/servlets/purl/138643#eq3-6-eq3nr-manual.pdf
+Source4:        https://www.osti.gov/servlets/purl/138820#eq3-6-eq6-manual.pdf
 
 BuildRequires:  gcc-gfortran
 BuildRequires:  unzip
@@ -25,8 +27,10 @@ License:        See NOTICE.txt in upstream distribution (BSD-3-Clause)
 
 %description doc
 PDF documentation for EQ3/6 v8.0a:
-  - EQPT user's guide (OSTI 138639)
-  - EQ3/6 package overview and installation guide (OSTI 138894)
+  - Part 1: EQ3/6 package overview and installation guide (OSTI 138894)
+  - Part 2: EQPT user's guide (OSTI 138639)
+  - Part 3: EQ3NR theoretical manual and user's guide (OSTI 138643)
+  - Part 4: EQ6 theoretical manual and user's guide (OSTI 138820)
 
 %description
 EQ3/6 v8.0a is a software package for geochemical modeling of aqueous
@@ -123,8 +127,10 @@ install -m 755 bin/xcon3  %{buildroot}%{_bindir}/xcon3
 install -m 755 bin/xcon6  %{buildroot}%{_bindir}/xcon6
 
 install -d %{buildroot}%{_docdir}/%{name}
-install -m 644 %{SOURCE1} %{buildroot}%{_docdir}/%{name}/138639.pdf
-install -m 644 %{SOURCE2} %{buildroot}%{_docdir}/%{name}/138894.pdf
+install -m 644 %{SOURCE1} %{buildroot}%{_docdir}/%{name}/138894.pdf
+install -m 644 %{SOURCE2} %{buildroot}%{_docdir}/%{name}/138639.pdf
+install -m 644 %{SOURCE3} %{buildroot}%{_docdir}/%{name}/138643.pdf
+install -m 644 %{SOURCE4} %{buildroot}%{_docdir}/%{name}/138820.pdf
 
 %files
 %{_bindir}/eq3nr
@@ -134,8 +140,10 @@ install -m 644 %{SOURCE2} %{buildroot}%{_docdir}/%{name}/138894.pdf
 %{_bindir}/xcon6
 
 %files doc
-%{_docdir}/%{name}/138639.pdf
 %{_docdir}/%{name}/138894.pdf
+%{_docdir}/%{name}/138639.pdf
+%{_docdir}/%{name}/138643.pdf
+%{_docdir}/%{name}/138820.pdf
 
 %changelog
 * Wed May 06 2026 Packager <packager@example.com> - 8.0a-1

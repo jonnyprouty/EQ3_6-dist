@@ -37,9 +37,11 @@ EXTRACT_STAMP = $(SRC_BASE)/.extracted
 # Documentation PDFs from OSTI (downloaded by make docs; gitignored)
 DOCS_DIR       = docs
 OSTI_BASE      = https://www.osti.gov/servlets/purl
-DOC_138639     = $(DOCS_DIR)/138639.pdf   # EQPT user's guide (Part 2)
-DOC_138894     = $(DOCS_DIR)/138894.pdf   # EQ3/6 overview and installation guide
-DOCS           = $(DOC_138639) $(DOC_138894)
+DOC_138894     = $(DOCS_DIR)/138894.pdf   # Part 1: EQ3/6 overview and installation guide
+DOC_138639     = $(DOCS_DIR)/138639.pdf   # Part 2: EQPT user's guide
+DOC_138643     = $(DOCS_DIR)/138643.pdf   # Part 3: EQ3NR theoretical manual and user's guide
+DOC_138820     = $(DOCS_DIR)/138820.pdf   # Part 4: EQ6 theoretical manual and user's guide
+DOCS           = $(DOC_138894) $(DOC_138639) $(DOC_138643) $(DOC_138820)
 
 # Platform detection (used for packaging target warnings)
 UNAME_S := $(shell uname -s)
@@ -134,6 +136,14 @@ extract: $(EXTRACT_STAMP)
 $(DOC_138639):
 	@mkdir -p $(DOCS_DIR)
 	curl -L -o $@ $(OSTI_BASE)/138639
+
+$(DOC_138643):
+	@mkdir -p $(DOCS_DIR)
+	curl -L -o $@ $(OSTI_BASE)/138643
+
+$(DOC_138820):
+	@mkdir -p $(DOCS_DIR)
+	curl -L -o $@ $(OSTI_BASE)/138820
 
 $(DOC_138894):
 	@mkdir -p $(DOCS_DIR)

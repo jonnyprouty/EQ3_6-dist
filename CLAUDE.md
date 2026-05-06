@@ -71,7 +71,9 @@ PDFs are not stored in the repo. Fetch them with `make docs` (downloads to `docs
 
 | File | OSTI ID | Title |
 |---|---|---|
-| `docs/138639.pdf` | [138639](https://www.osti.gov/biblio/138639) | EQPT user's guide, Part 2 |
-| `docs/138894.pdf` | [138894](https://www.osti.gov/biblio/138894) | EQ3/6 overview and installation guide |
+| `docs/138894.pdf` | [138894](https://www.osti.gov/biblio/138894) | Part 1: EQ3/6 overview and installation guide |
+| `docs/138639.pdf` | [138639](https://www.osti.gov/biblio/138639) | Part 2: EQPT user's guide |
+| `docs/138643.pdf` | [138643](https://www.osti.gov/biblio/138643) | Part 3: EQ3NR theoretical manual and user's guide |
+| `docs/138820.pdf` | [138820](https://www.osti.gov/biblio/138820) | Part 4: EQ6 theoretical manual and user's guide |
 
 - `upstream/ReadMe.md` — Upstream distribution notes
