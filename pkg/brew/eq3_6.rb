@@ -1,5 +1,5 @@
 class Eq36 < Formula
-  desc "EQ3/6 geochemical equilibrium modeling software"
+  desc "EQ3/6 geochemical modeling software (unmodified LLNL upstream)"
   homepage "https://github.com/llnl/EQ3_6"
   url "https://github.com/llnl/EQ3_6/raw/HEAD/EQ36_80a_Linux.zip"
   sha256 "1d97b03aaf7c2f9fa22fe4dd95defb62d11e78e26dd8295d83ced02628d2f3bf"

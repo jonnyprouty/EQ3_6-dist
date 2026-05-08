@@ -33,9 +33,12 @@ PDF documentation for EQ3/6 v8.0a:
   - Part 4: EQ6 theoretical manual and user's guide (OSTI 138820)
 
 %description
-EQ3/6 v8.0a is a software package for geochemical modeling of aqueous
-solutions interacting with minerals, gases, and other solids. Originally
-developed at Lawrence Livermore National Laboratory.
+This package installs the unmodified EQ3/6 v8.0a binaries as distributed
+by Lawrence Livermore National Laboratory. The source is compiled directly
+from the upstream distribution ZIP without modification.
+
+EQ3/6 is a software package for geochemical modeling of aqueous solutions
+interacting with minerals, gases, and other solids.
 
 Includes five executables:
   eq3nr  - speciation / no-reaction calculation

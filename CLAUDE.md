@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-EQ3/6 v8.0a is a geochemical equilibrium modeling system written in fixed-form Fortran (.f files). This repo builds it from the upstream LLNL distribution and packages it for Linux (RPM, .deb) and macOS (Homebrew). The upstream source lives at `upstream/` (a git submodule pointing to https://github.com/llnl/EQ3_6).
+This repo packages the **unmodified** EQ3/6 v8.0a geochemical modeling software for Linux (RPM, .deb) and macOS (Homebrew). EQ3/6 is written in fixed-form Fortran and was originally developed at Lawrence Livermore National Laboratory (LLNL). No source modifications are made — the upstream distribution ZIP is extracted and compiled as-is.
+
+The upstream source lives at `upstream/` (a git submodule pointing to https://github.com/llnl/EQ3_6). A fresh checkout requires availability of that upstream repository.
 
 ## First-time setup
 
