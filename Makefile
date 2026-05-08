@@ -265,7 +265,7 @@ endif
 # ============================================================
 
 # -- RPM -------------------------------------------------------
-rpm:
+rpm: docs
 ifneq ($(UNAME_S),Linux)
 	@echo "WARNING: RPM packaging is designed for Linux (you are on $(UNAME_S))"
 endif
@@ -274,6 +274,10 @@ endif
 	@mkdir -p pkg/rpm/build/BUILD pkg/rpm/build/RPMS \
 	           pkg/rpm/build/SOURCES pkg/rpm/build/SPECS pkg/rpm/build/SRPMS
 	cp $(UPSTREAM_ZIP) pkg/rpm/build/SOURCES/EQ36_80a_Linux.zip
+	cp $(DOC_138894) pkg/rpm/build/SOURCES/138894.pdf
+	cp $(DOC_138639) pkg/rpm/build/SOURCES/138639.pdf
+	cp $(DOC_138643) pkg/rpm/build/SOURCES/138643.pdf
+	cp $(DOC_138820) pkg/rpm/build/SOURCES/138820.pdf
 	rpmbuild --define "_topdir $(CURDIR)/pkg/rpm/build" \
 	         -bb pkg/rpm/eq3_6.spec
 	@mkdir -p pkg/dist

@@ -8,10 +8,10 @@ Summary:        EQ3/6 geochemical equilibrium modeling software
 License:        See NOTICE.txt in upstream distribution (BSD-3-Clause)
 URL:            https://github.com/llnl/EQ3_6
 Source0:        EQ36_80a_Linux.zip
-Source1:        https://www.osti.gov/servlets/purl/138894#eq3-6-install-guide.pdf
-Source2:        https://www.osti.gov/servlets/purl/138639#eq3-6-eqpt-guide.pdf
-Source3:        https://www.osti.gov/servlets/purl/138643#eq3-6-eq3nr-manual.pdf
-Source4:        https://www.osti.gov/servlets/purl/138820#eq3-6-eq6-manual.pdf
+Source1:        138894.pdf
+Source2:        138639.pdf
+Source3:        138643.pdf
+Source4:        138820.pdf
 
 BuildRequires:  gcc-gfortran
 BuildRequires:  unzip
