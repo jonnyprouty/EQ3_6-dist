@@ -19,5 +19,8 @@
 *.buildinfo
 *.dsc
 
+# Test cache and run artifacts
+/tests/.data1_cache
+
 # macOS
 .DS_Store

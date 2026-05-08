@@ -18,7 +18,9 @@
 # ============================================================
 
 FC     = gfortran
-FFLAGS = -O2
+# -std=legacy accepts old-style Fortran 77 FORMAT strings (missing commas
+# between descriptors) that gfortran 15+ rejects at runtime by default.
+FFLAGS = -O2 -std=legacy
 
 # Upstream ZIP (provided by the git submodule)
 UPSTREAM_ZIP  = upstream/EQ36_80a_Linux.zip
@@ -334,6 +336,9 @@ docs-package: docs
 # ============================================================
 # CLEAN
 # ============================================================
+test: build
+	@bash tests/run_tests.sh
+
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
@@ -342,4 +347,4 @@ clean:
 distclean: clean
 	rm -rf $(SRC_BASE) $(DOCS_DIR) pkg/rpm/build pkg/deb/staging pkg/deb/staging-doc pkg/dist
 
-.PHONY: all build fetch extract docs docs-package symlinks rpm deb deb-doc brew clean distclean
+.PHONY: all build fetch extract docs docs-package symlinks rpm deb deb-doc brew test clean distclean

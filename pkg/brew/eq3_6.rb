@@ -29,7 +29,7 @@ class Eq36 < Formula
 
     compile_dir = lambda do |component|
       Dir["#{src}/#{component}/src/*.f"].sort.each do |f|
-        system gfortran, "-O2", "-c", f,
+        system gfortran, "-O2", "-std=legacy", "-c", f,
                "-o", "#{obj}/#{File.basename(f, ".f")}.o",
                "-J#{obj}"
       end
@@ -42,14 +42,14 @@ class Eq36 < Formula
     compile_dir.call("eq3nr")
 
     # EQ6: Fortran module files must precede all other eq6 sources.
-    system gfortran, "-O2", "-c", "#{src}/eq6/src/mod6pt.f",
+    system gfortran, "-O2", "-std=legacy", "-c", "#{src}/eq6/src/mod6pt.f",
            "-o", "#{obj}/mod6pt.o", "-J#{obj}"
-    system gfortran, "-O2", "-c", "#{src}/eq6/src/mod6xf.f",
+    system gfortran, "-O2", "-std=legacy", "-c", "#{src}/eq6/src/mod6xf.f",
            "-o", "#{obj}/mod6xf.o", "-J#{obj}"
     Dir["#{src}/eq6/src/*.f"].sort.reject { |f|
       f.end_with?("mod6pt.f", "mod6xf.f")
     }.each do |f|
-      system gfortran, "-O2", "-c", f,
+      system gfortran, "-O2", "-std=legacy", "-c", f,
              "-o", "#{obj}/#{File.basename(f, ".f")}.o",
              "-J#{obj}"
     end
@@ -86,9 +86,10 @@ class Eq36 < Formula
   end
 
   test do
-    # Each executable exits non-zero when run without input, but should
-    # print identifying text before failing.
+    # Without a data1 file present, eq3nr prints an EQLIBU startup error
+    # and exits cleanly. The version header (8.0a) is only emitted after
+    # the input file is opened, so we check the library identifier instead.
     output = shell_output("#{bin}/eq3nr 2>&1; true")
-    assert_match "8.0a", output
+    assert_match "EQLIBU/openin", output
   end
 end

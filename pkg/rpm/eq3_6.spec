@@ -56,7 +56,7 @@ find eq36src -name '*.gz' | xargs gunzip
 
 %build
 FC=gfortran
-FFLAGS="-O2"
+FFLAGS="-O2 -std=legacy"
 OBJ="%{_builddir}/%{name}-%{version}/obj"
 mkdir -p "${OBJ}" bin
 
