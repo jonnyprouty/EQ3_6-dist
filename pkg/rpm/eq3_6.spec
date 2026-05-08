@@ -121,6 +121,22 @@ ${FC} ${FFLAGS} -o bin/eqpt  ${EQLIBU_O} $(objs_for eq36src/eqpt/src)
 ${FC} ${FFLAGS} -o bin/xcon3 ${EQLIBU_O} $(objs_for eq36src/xcon3/src)
 ${FC} ${FFLAGS} -o bin/xcon6 ${EQLIBU_O} $(objs_for eq36src/xcon6/src)
 
+%check
+# Smoke-test each executable: confirm it runs and produces the expected
+# startup identifier.  The full test suite (make test in the packaging repo)
+# requires the extracted source tree and test input files, which are not
+# shipped as RPM sources.
+for exe in bin/eq3nr bin/eq6 bin/eqpt; do
+    output="$(./${exe} 2>&1 || true)"
+    echo "${output}" | grep -q "EQLIBU/openin" || \
+        { echo "FAIL: ${exe} did not produce expected startup output"; exit 1; }
+done
+for exe in bin/xcon3 bin/xcon6; do
+    output="$(./${exe} 2>&1 || true)"
+    echo "${output}" | grep -qE "XCON3|XCON6" || \
+        { echo "FAIL: ${exe} did not produce expected startup output"; exit 1; }
+done
+
 %install
 install -d %{buildroot}%{_bindir}
 install -m 755 bin/eq3nr  %{buildroot}%{_bindir}/eq3nr
