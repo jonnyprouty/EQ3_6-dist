@@ -80,3 +80,15 @@ PDFs are not stored in the repo. Fetch them with `make docs` (downloads to `docs
 | `docs/138820.pdf` | [138820](https://www.osti.gov/biblio/138820) | Part 4: EQ6 theoretical manual and user's guide |
 
 - `upstream/ReadMe.md` — Upstream distribution notes
+
+## Git workflow
+
+Always create a new branch before making any changes. Work on the branch until the change is confirmed complete, then merge it into `main`.
+
+```bash
+git checkout -b <branch-name>   # start work
+# ... make changes, commit ...
+git checkout main
+git merge <branch-name>         # merge when complete
+git branch -d <branch-name>
+```
