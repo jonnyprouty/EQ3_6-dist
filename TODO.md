@@ -17,7 +17,10 @@ pass/fail reporting. Migrating keeps tests in bash but removes the hand-rolled f
 - [x] Convert each `tests/cases/**/test.sh` to a `.bats` file
 - [x] Replace `tests/run_tests.sh` with a direct `bats tests/` invocation
 - [x] Update `make test` to invoke `bats`
-- [ ] Update RPM `%check`, deb rules, and Homebrew `test do` block to use `bats`
+- [x] Update RPM `%check`, deb rules, and Homebrew `test do` block to use `bats`
+  - Decision: packaging-time checks remain as raw shell/Ruby (environments lack test inputs);
+    instead, `tests/cases/packaging/packaging_checks.bats` runs the packaging check logic
+    against local binaries to catch stale expected strings.
 
 ---
 
