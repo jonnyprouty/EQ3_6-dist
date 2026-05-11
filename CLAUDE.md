@@ -81,6 +81,14 @@ PDFs are not stored in the repo. Fetch them with `make docs` (downloads to `docs
 
 - `upstream/ReadMe.md` — Upstream distribution notes
 
+## TODO list
+
+Before starting any task, read `TODO.md`. Ensure the approach chosen is compatible with the
+goals listed there, and ideally moves them forward. Avoid design choices that would make
+future items harder — for example, don't structure tests in a way that won't scale to 170+
+cases or that can't be migrated to BATS. TODO items don't need to be completed in every
+task, but we should not paint ourselves into a corner.
+
 ## Git workflow
 
 Always create a new branch before making any changes. Work on the branch until the change is confirmed complete, then merge it into `main`.
