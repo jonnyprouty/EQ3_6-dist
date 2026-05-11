@@ -12,11 +12,11 @@ The current bespoke `tests/run_tests.sh` + `tests/lib/helpers.sh` reimplements w
 TAP-format output (understood natively by GitHub Actions and most CI systems), and colored
 pass/fail reporting. Migrating keeps tests in bash but removes the hand-rolled framework.
 
-- [ ] Document `bats-core` as a test dependency (`dnf install bats` / `apt install bats` / `brew install bats-core`)
-- [ ] Convert `tests/lib/helpers.sh` to a BATS helper library (`load helpers` pattern)
-- [ ] Convert each `tests/cases/**/test.sh` to a `.bats` file
-- [ ] Replace `tests/run_tests.sh` with a direct `bats tests/` invocation
-- [ ] Update `make test` to invoke `bats`
+- [x] Document `bats-core` as a test dependency (`dnf install bats` / `apt install bats` / `brew install bats-core`)
+- [x] Convert `tests/lib/helpers.sh` to a BATS helper library (`load helpers` pattern)
+- [x] Convert each `tests/cases/**/test.sh` to a `.bats` file
+- [x] Replace `tests/run_tests.sh` with a direct `bats tests/` invocation
+- [x] Update `make test` to invoke `bats`
 - [ ] Update RPM `%check`, deb rules, and Homebrew `test do` block to use `bats`
 
 ---

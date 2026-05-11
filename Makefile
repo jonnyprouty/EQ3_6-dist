@@ -337,7 +337,7 @@ docs-package: docs
 # CLEAN
 # ============================================================
 test: build
-	@bash tests/run_tests.sh
+	@bats --recursive tests/cases/
 
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)

@@ -30,7 +30,7 @@ make docs     # downloads documentation PDFs to docs/ (requires internet)
 | `make symlinks LINK_DIR=/path` | Create symlinks; **`LINK_DIR` must be set explicitly** |
 | `make docs` | Download documentation PDFs from OSTI to `docs/` |
 | `make docs-package` | Create `pkg/dist/eq3-6-docs_8.0a.tar.gz` from downloaded PDFs |
-| `make test` | Run the test suite (requires a prior `make build`) |
+| `make test` | Run the BATS test suite (requires `bats-core` and a prior `make build`) |
 | `make rpm` | Build RPM (requires `rpm-build`); output → `pkg/dist/` |
 | `make deb` | Build binary .deb (requires `dpkg-dev`); output → `pkg/dist/` |
 | `make deb-doc` | Build documentation .deb; output → `pkg/dist/` |
