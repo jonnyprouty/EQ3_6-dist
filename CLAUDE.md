@@ -81,6 +81,51 @@ PDFs are not stored in the repo. Fetch them with `make docs` (downloads to `docs
 
 - `upstream/ReadMe.md` — Upstream distribution notes
 
+## macOS setup (from scratch)
+
+Tested on macOS 15 Sequoia, Intel x86_64. Apple Silicon should work identically
+(Homebrew installs to `/opt/homebrew` instead of `/usr/local`).
+
+**1. Xcode Command Line Tools** (provides `git`, `make`, `clang`, `curl`):
+```bash
+xcode-select --install
+```
+Skip if `xcode-select -p` already returns a path.
+
+**2. Homebrew** (https://brew.sh):
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+Follow any post-install instructions shown (e.g., adding brew to `$PATH`).
+
+**3. Clone the repo**:
+```bash
+git clone --recurse-submodules https://github.com/jonnyprouty/EQ3_6-dist.git
+cd EQ3_6-dist
+```
+
+**4. Build and install via Homebrew**:
+```bash
+make brew
+```
+This stages the formula into a local Homebrew tap and runs
+`brew install --build-from-source`. Homebrew will automatically install `gcc`
+(which provides `gfortran`) if not already present. Build takes ~2 minutes.
+
+**5. Verify**:
+```bash
+brew test eq3_6     # Homebrew smoke test
+eq3nr               # confirm in PATH
+```
+
+**Notes:**
+- `gfortran` comes from Homebrew's `gcc` formula — system Xcode does not include it.
+- Homebrew 4+ requires formulae to be in a tap; `make brew` handles this automatically
+  by creating a local tap at `$(brew --repository)/Library/Taps/local/homebrew-eq3-6/`.
+- SSH sessions may have a minimal `$PATH` that excludes `/usr/local/bin`. Either source
+  your shell profile or prefix commands with `PATH="/usr/local/bin:$PATH"`.
+- To run the BATS test suite on macOS: `brew install bats-core && make test`
+
 ## TODO list
 
 Before starting any task, read `TODO.md`. Ensure the approach chosen is compatible with the

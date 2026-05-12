@@ -317,11 +317,24 @@ endif
 	@echo "Docs .deb written to pkg/dist/"
 
 # -- Homebrew --------------------------------------------------
+# Homebrew 4+ requires formulae to live in a tap; local .rb files are no longer
+# accepted by `brew install`. This target stages the formula into a local tap
+# (local/eq3-6) and installs from there.
 brew:
 	@which brew > /dev/null 2>&1 || \
 	    { echo "ERROR: brew not found. See https://brew.sh"; exit 1; }
-	brew install --build-from-source pkg/brew/eq3_6.rb
-	@echo "Homebrew install complete."
+	@set -e; \
+	 TAP_DIR="$$(brew --repository)/Library/Taps/local/homebrew-eq3-6"; \
+	 mkdir -p "$$TAP_DIR/Formula"; \
+	 if [ ! -d "$$TAP_DIR/.git" ]; then \
+	     git -C "$$TAP_DIR" init -q; \
+	     git -C "$$TAP_DIR" commit --allow-empty -qm "init"; \
+	 fi; \
+	 cp pkg/brew/eq3_6.rb "$$TAP_DIR/Formula/eq3_6.rb"; \
+	 git -C "$$TAP_DIR" add "Formula/eq3_6.rb"; \
+	 git -C "$$TAP_DIR" diff --cached --quiet || git -C "$$TAP_DIR" commit -qm "update"; \
+	 brew install --build-from-source local/eq3-6/eq3_6
+	@echo "Done. Run 'brew test eq3_6' to verify."
 
 # -- Documentation package (tar of PDFs) -----------------------
 # Downloads docs first if not already present.
