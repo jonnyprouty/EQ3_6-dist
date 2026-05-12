@@ -57,14 +57,33 @@ thermodynamic databases (DATA0 files) rather than the standard `data1`. Conditio
 - Pressure: 0.2 GPa – 50 kbar
 - Temperature: 300–1000 °C
 
-**Status: unknown** — it is unclear whether the stock EQ3/6 v8.0a executables can run
-these cases as-is, or whether the DEW DATA0 files need to be regenerated using
-[pyDEW](https://gitlab.com/simonwmatthews/pyDEW). That is a prerequisite question.
+**Status: investigated — pyDEW required.** The DEW DATA0 files are in the old EQ3/6 R71
+format (circa 1987–1991) which is **incompatible** with v8.0a EQPT in two ways:
 
-- [ ] Audit a sample of DEW cases to confirm they run against current EQ3/6 executables
-- [ ] Determine whether DEW DATA0 files are directly usable or require regeneration via pyDEW
-- [ ] If pyDEW is needed: decide whether it becomes a test dependency or a separate `make` target
-- [ ] Add BATS test cases for DEW P-T suites (once runnable)
+1. **DATA0 format**: The old format has an explicit `NCT/NSQ` count header and no separate
+   `basis species` section (the first NSQ aqueous species are implicitly the basis species).
+   The v8.0a `EQPT/gnenb` scans for a `basis species` keyword and hits EOF on DEW DATA0.
+
+2. **data1 binary format**: The DEW-distributed pre-compiled EQPT (macOS) uses 8-byte
+   Fortran record length markers; our gfortran EQ3/6 uses 4-byte markers. Beyond that,
+   the internal data1 structure also changed between the R71 and v8.0a versions —
+   converting record markers is not sufficient for compatibility.
+
+**Consequence for the colleague**: The pre-compiled macOS EQ3/EQ6 executables from the DEW
+ZIPs work fine on Intel Mac (confirmed). They cannot be used on Linux directly. The
+modern v8.0a executables cannot read the old-format DATA0 or data1 files.
+
+**Required path**: [pyDEW](https://gitlab.com/simonwmatthews/pyDEW) generates DATA0 files
+for DEW conditions in the **modern v8.0a format**, which our EQPT can process. This is the
+intended migration path for running DEW cases with modern EQ3/6.
+
+- [x] Audit a sample of DEW cases to confirm they run against current EQ3/6 executables
+- [x] Determine whether DEW DATA0 files are directly usable or require regeneration via pyDEW
+- [ ] Set up pyDEW and generate modern-format DATA0 for a representative P-T case (e.g. `eqs_at_psat`)
+- [ ] Run our EQPT on the pyDEW-generated DATA0 to produce a v8.0a-compatible data1
+- [ ] Run a DEW EQ3 case end-to-end with our executables and verify output
+- [ ] Decide whether pyDEW becomes a test dependency or a `make dew-data1` target
+- [ ] Add BATS test cases for DEW P-T suites (once end-to-end pipeline is verified)
 
 ---
 
