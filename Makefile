@@ -22,6 +22,10 @@ FC     = gfortran
 # between descriptors) that gfortran 15+ rejects at runtime by default.
 FFLAGS = -O2 -std=legacy
 
+# Bake in Fortran/GCC runtimes for self-contained, archivable binaries.
+# glibc remains dynamic (ABI-stable across all target Linux versions).
+LDFLAGS = -static-libgfortran -static-libgcc
+
 # Upstream ZIP (provided by the git submodule)
 UPSTREAM_ZIP  = upstream/EQ36_80a_Linux.zip
 INNER_SRC_TAR = Linux/EQ3_6v8.0a/archsrc.tar
@@ -227,19 +231,168 @@ $(OBJ_DIR)/%.o: $(XCON6_SRC_DIR)/%.f $(EXTRACT_STAMP)
 # LINK: build executables
 # ============================================================
 $(BIN_DIR)/eq3nr: $(EQLIBU_OBJ) $(EQLIBG_OBJ) $(EQLIB_OBJ) $(EQ3NR_OBJ)
-	$(FC) $(FFLAGS) -o $@ $^
+	$(FC) $(FFLAGS) $(LDFLAGS) -o $@ $^
 
 $(BIN_DIR)/eq6: $(EQLIBU_OBJ) $(EQLIBG_OBJ) $(EQLIB_OBJ) $(EQ6_OBJ)
-	$(FC) $(FFLAGS) -o $@ $^
+	$(FC) $(FFLAGS) $(LDFLAGS) -o $@ $^
 
 $(BIN_DIR)/eqpt: $(EQLIBU_OBJ) $(EQPT_OBJ)
-	$(FC) $(FFLAGS) -o $@ $^
+	$(FC) $(FFLAGS) $(LDFLAGS) -o $@ $^
 
 $(BIN_DIR)/xcon3: $(EQLIBU_OBJ) $(XCON3_OBJ)
-	$(FC) $(FFLAGS) -o $@ $^
+	$(FC) $(FFLAGS) $(LDFLAGS) -o $@ $^
 
 $(BIN_DIR)/xcon6: $(EQLIBU_OBJ) $(XCON6_OBJ)
-	$(FC) $(FFLAGS) -o $@ $^
+	$(FC) $(FFLAGS) $(LDFLAGS) -o $@ $^
+
+# ============================================================
+# DEW VARIANT: SUPCRTandEQs/DEW_activities, gfortran build
+#
+# Independent variant of EQ3/6 modified for high P-T DEW conditions.
+# Built from https://gitlab.com/ENKI-portal/SUPCRTandEQs (DEW_activities branch).
+# Executables land in bin-dew/; does not conflict with v8.0a bin/.
+#
+# Quick start:
+#   make fetch-dew   - initialize upstream-dew submodule
+#   make build-dew   - compile all DEW executables to bin-dew/
+#   make test-dew    - run DEW smoke tests (skipped if bin-dew/ absent)
+# ============================================================
+
+DEW_UPSTREAM     = upstream-dew
+DEW_BIN_DIR      = bin-dew
+DEW_OBJ_DIR      = obj-dew
+
+# Include paths: root-level .h files + each subdir's own .h files.
+# -ffixed-line-length-none: the DEW source has lines > 72 chars (written for f2c);
+# standard F77 would silently truncate them, breaking format strings.
+DEW_FFLAGS = $(FFLAGS) -ffixed-line-length-none \
+    -I$(DEW_UPSTREAM) \
+    -I$(DEW_UPSTREAM)/EQPT \
+    -I$(DEW_UPSTREAM)/EQ3 \
+    -I$(DEW_UPSTREAM)/EQ6 \
+    -I$(DEW_UPSTREAM)/SUPCRT \
+    -I$(DEW_UPSTREAM)/CPRONS
+
+# Source files
+DEW_EQLIB_SRC      = $(DEW_UPSTREAM)/eqlibr136.f
+DEW_EQPT_SRC       = $(DEW_UPSTREAM)/EQPT/eqpt.f
+DEW_EQ3_SRC        = $(DEW_UPSTREAM)/EQ3/eq3nr110.f
+DEW_EQ6_SRC        = $(DEW_UPSTREAM)/EQ6/eq6r100.f
+DEW_SUPCRT_SRC_DIR = $(DEW_UPSTREAM)/SUPCRT
+DEW_CPRONS_SRC_DIR = $(DEW_UPSTREAM)/CPRONS
+
+# Object files
+DEW_EQLIB_OBJ  = $(DEW_OBJ_DIR)/eqlibr136.o
+DEW_EQPT_OBJ   = $(DEW_OBJ_DIR)/eqpt_dew.o
+DEW_EQ3_OBJ    = $(DEW_OBJ_DIR)/eq3nr110.o
+DEW_EQ6_OBJ    = $(DEW_OBJ_DIR)/eq6r100.o
+DEW_SUPCRT_OBJ = \
+    $(DEW_OBJ_DIR)/sup92pc.o \
+    $(DEW_OBJ_DIR)/reac92pc.o \
+    $(DEW_OBJ_DIR)/rep92pc.o \
+    $(DEW_OBJ_DIR)/H2O92D.o
+DEW_CPRONS_OBJ = $(DEW_OBJ_DIR)/cprons92.o
+
+DEW_EQLIB_A = $(DEW_OBJ_DIR)/libeq_dew.a
+
+# Patches to apply before compiling DEW sources.
+# Each patch is a unified diff relative to the repo root (patch -p1).
+# Re-applied when any patch file changes or the submodule is updated.
+DEW_PATCHES     = $(sort $(wildcard patches/dew-*.patch))
+DEW_PATCH_STAMP = $(DEW_OBJ_DIR)/.patches-applied
+
+DEW_TARGETS = \
+    $(DEW_BIN_DIR)/eqpt \
+    $(DEW_BIN_DIR)/eq3 \
+    $(DEW_BIN_DIR)/eq6 \
+    $(DEW_BIN_DIR)/supcrt \
+    $(DEW_BIN_DIR)/cprons92
+
+# ---- DEW fetch -----------------------------------------------
+fetch-dew:
+	git submodule update --init upstream-dew
+
+# ---- DEW patch precompile hook --------------------------------
+# Applies all patches/dew-*.patch to upstream-dew/ before compilation.
+# patch -N skips hunks that are already applied; || true absorbs the
+# non-zero exit so the stamp is always touched on success.
+# Re-runs when any patch changes or the submodule is updated.
+patch-dew: $(DEW_PATCH_STAMP)
+
+$(DEW_PATCH_STAMP): $(DEW_PATCHES) .git/modules/upstream-dew/HEAD | $(DEW_OBJ_DIR)
+	@if [ -n "$(DEW_PATCHES)" ]; then \
+	    echo "==> Applying DEW source patches ..."; \
+	    for p in $(DEW_PATCHES); do \
+	        echo "    $$p"; \
+	        patch -p1 -N --batch < "$$p" 2>/dev/null || true; \
+	    done; \
+	fi
+	@touch $@
+
+# ---- DEW build -----------------------------------------------
+build-dew: $(DEW_TARGETS)
+
+$(DEW_OBJ_DIR) $(DEW_BIN_DIR):
+	mkdir -p $@
+
+# Shared EQ library — static archive for clean linking
+$(DEW_EQLIB_OBJ): $(DEW_EQLIB_SRC) $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_EQLIB_A): $(DEW_EQLIB_OBJ)
+	ar rcs $@ $^
+
+# EQPT (DATA0→data1 preprocessor)
+$(DEW_EQPT_OBJ): $(DEW_EQPT_SRC) $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_BIN_DIR)/eqpt: $(DEW_EQPT_OBJ) $(DEW_EQLIB_A) | $(DEW_BIN_DIR)
+	$(FC) $(LDFLAGS) -o $@ $^
+
+# EQ3 speciation (R110)
+$(DEW_EQ3_OBJ): $(DEW_EQ3_SRC) $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_BIN_DIR)/eq3: $(DEW_EQ3_OBJ) $(DEW_EQLIB_A) | $(DEW_BIN_DIR)
+	$(FC) $(LDFLAGS) -o $@ $^
+
+# EQ6 mass transfer (R100)
+$(DEW_EQ6_OBJ): $(DEW_EQ6_SRC) $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_BIN_DIR)/eq6: $(DEW_EQ6_OBJ) $(DEW_EQLIB_A) | $(DEW_BIN_DIR)
+	$(FC) $(LDFLAGS) -o $@ $^
+
+# SUPCRT (thermodynamic property calculator; standalone, no eqlib)
+$(DEW_OBJ_DIR)/sup92pc.o: $(DEW_SUPCRT_SRC_DIR)/sup92pc.f $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_OBJ_DIR)/reac92pc.o: $(DEW_SUPCRT_SRC_DIR)/reac92pc.f $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_OBJ_DIR)/rep92pc.o: $(DEW_SUPCRT_SRC_DIR)/rep92pc.f $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_OBJ_DIR)/H2O92D.o: $(DEW_SUPCRT_SRC_DIR)/H2O92D.f $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_BIN_DIR)/supcrt: $(DEW_SUPCRT_OBJ) | $(DEW_BIN_DIR)
+	$(FC) $(LDFLAGS) -o $@ $^
+
+# CPRONS (sprons sequential→direct access converter; standalone)
+$(DEW_CPRONS_OBJ): $(DEW_CPRONS_SRC_DIR)/cprons92.f $(DEW_PATCH_STAMP) | $(DEW_OBJ_DIR)
+	$(FC) $(DEW_FFLAGS) -c $< -o $@
+
+$(DEW_BIN_DIR)/cprons92: $(DEW_CPRONS_OBJ) | $(DEW_BIN_DIR)
+	$(FC) $(LDFLAGS) -o $@ $^
+
+# ---- DEW test ------------------------------------------------
+test-dew:
+	@bats --recursive tests/cases/dew/
+
+# ---- DEW clean -----------------------------------------------
+clean-dew:
+	rm -rf $(DEW_OBJ_DIR) $(DEW_BIN_DIR)
 
 # ============================================================
 # SYMLINKS: create symlinks in a user-specified directory.
@@ -357,7 +510,8 @@ clean:
 
 # distclean also removes extracted source, downloaded docs, and packaging build trees.
 # Does NOT remove upstream/ (submodule), pkg/ source files, or .gitmodules.
-distclean: clean
+distclean: clean clean-dew
 	rm -rf $(SRC_BASE) $(DOCS_DIR) pkg/rpm/build pkg/deb/staging pkg/deb/staging-doc pkg/dist
 
-.PHONY: all build fetch extract docs docs-package symlinks rpm deb deb-doc brew test clean distclean
+.PHONY: all build fetch extract docs docs-package symlinks rpm deb deb-doc brew test clean distclean \
+        fetch-dew patch-dew build-dew test-dew clean-dew

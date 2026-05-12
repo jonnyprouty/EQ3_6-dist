@@ -92,14 +92,20 @@ bundles its own x86-64 Linux R71 EQPT, EQ3, and EQ6 binaries. `pyDEW.Fluid()` ru
 entire pipeline internally (DATA0 → EQPT → data1 → EQ3) using those bundled binaries.
 
 **Consequence**: The DEW and v8.0a stacks are **parallel, non-interoperating tracks**:
-- DEW calculations: use `pyDEW.Fluid()` in the container (R71 EQ3/EQ6, DEW EOS)
+- DEW calculations: use `bin-dew/` executables (native build) or `tools/run_dew.sh` (container)
 - Standard calculations: use our v8.0a `eq3nr`/`eq6` (ambient to moderate P-T)
 
-`tools/run_dew.sh` wraps the container for command-line use (podman/docker detection).
+`tools/run_dew.sh` wraps the pyDEW container for command-line aqueous speciation (podman/docker).
 `tools/dew_calc.py` is the Python entry point executed inside the container.
 
-**Dependency classification**: The pyDEW container is the DEW runtime, not a build tool.
-Researchers doing DEW calculations need it; standard EQ3/6 users do not.
+**Native DEW build** (`upstream-dew/` submodule, `make build-dew`): Builds five executables
+(`eqpt`, `eq3`, `eq6`, `supcrt`, `cprons92`) to `bin-dew/` from the
+[SUPCRTandEQs/DEW_activities](https://gitlab.com/ENKI-portal/SUPCRTandEQs) source using
+gfortran + `-std=legacy -ffixed-line-length-none`. Source patches in `patches/dew-*.patch`
+are applied automatically before compilation and are intended to be submitted upstream.
+
+**Dependency classification**: The pyDEW container is for the Python `pyDEW.Fluid()` workflow
+only. The native `bin-dew/` executables cover all direct EQ3/6 DEW use cases without a container.
 
 - [x] Audit a sample of DEW cases to confirm they run against current EQ3/6 executables
 - [x] Determine whether DEW DATA0 files are directly usable or require regeneration via pyDEW
@@ -107,8 +113,12 @@ Researchers doing DEW calculations need it; standard EQ3/6 users do not.
 - [x] Create `tools/run_dew_eqpt.sh` wrapper for correct DEW EQPT invocation (Apple Silicon)
 - [x] Clarify pyDEW architecture: R71 stack in container, not v8.0a bridge
 - [x] Create `tools/run_dew.sh` + `tools/dew_calc.py` for command-line DEW calculations
-- [ ] Add BATS test cases for DEW calculations (requires container at test time; mark as optional)
-- [ ] Document pyDEW container as optional DEW dependency in README
+- [x] Add `upstream-dew/` submodule and `make build-dew` for native DEW variant build
+- [x] Add `make patch-dew` precompile hook (auto-applies `patches/dew-*.patch`)
+- [x] Add BATS smoke tests for DEW variant (`tests/cases/dew/smoke/smoke_dew.bats`)
+- [ ] Add BATS test cases for DEW calculations with actual EQ3 input/output pairs
+- [ ] Document pyDEW container as optional dependency in README
+- [ ] Package DEW variant (RPM/deb for `eq3-6-dew`) — deferred; includes DATA0 and sprons93
 
 ---
 

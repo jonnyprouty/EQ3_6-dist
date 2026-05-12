@@ -1,0 +1,11 @@
+--- a/upstream-dew/EQ6/eq6r100.f
++++ b/upstream-dew/EQ6/eq6r100.f
+@@ -16089,7 +16089,7 @@
+       zi1=zi2+delzi                                                             
+       write (noutpt,105) zi2,zi1,delzi,nord                                     
+   105 format(1x,'base point= ',1pe12.5,', new point= ',1pe12.5,                 
+-     $ /1x,'  delzi= ',1pe12.5,', order= ',0pi1)                                
++     $ /1x,'  delzi= ',1pe12.5,', order= ',0p,i1)                                
+       write (noutpt,110)                                                        
+   110 format(/3x,'name         base value      new value',/)                    
+ c                                                                               

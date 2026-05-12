@@ -6,6 +6,7 @@
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BIN="$REPO_ROOT/bin"
+BIN_DEW="$REPO_ROOT/bin-dew"
 
 # ---------------------------------------------------------------------------
 # Workdir management — call in BATS setup()/teardown()
@@ -51,6 +52,33 @@ run_eq6() {
     local input_file="$2"
     cp "$input_file" "$workdir/input"
     (cd "$workdir" && "$BIN/eq6" > run.log 2>&1) || true
+}
+
+# ---------------------------------------------------------------------------
+# DEW variant helpers (bin-dew/)
+
+stage_data0_dew() {
+    local workdir="$1"
+    local src="$REPO_ROOT/upstream-dew/EQPT/DATA0"
+    if [ ! -f "$src" ]; then
+        echo "ERROR: $src not found — run 'make fetch-dew' first." >&2
+        return 1
+    fi
+    cp "$src" "$workdir/DATA0"
+}
+
+run_eq3_dew() {
+    local workdir="$1"
+    local input_file="$2"
+    cp "$input_file" "$workdir/input"
+    (cd "$workdir" && "$BIN_DEW/eq3" > run.log 2>&1) || true
+}
+
+run_eq6_dew() {
+    local workdir="$1"
+    local input_file="$2"
+    cp "$input_file" "$workdir/input"
+    (cd "$workdir" && "$BIN_DEW/eq6" > run.log 2>&1) || true
 }
 
 # ---------------------------------------------------------------------------
