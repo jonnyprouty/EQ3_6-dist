@@ -7,6 +7,9 @@ Standards-Version: 4.6.2
 Homepage: https://github.com/llnl/EQ3_6
 Rules-Requires-Root: no
 
+# Note: the DEW variant will be packaged as 'eq3-6-dew'. Its binaries
+# install with a 'dew-' prefix so both packages coexist without conflicts.
+
 Package: eq3-6
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}

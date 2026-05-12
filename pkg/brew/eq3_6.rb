@@ -73,6 +73,10 @@ class Eq36 < Formula
       f.end_with?("mod6pt.f", "mod6xf.f")
     }.map { |f| "#{obj}/#{File.basename(f, ".f")}.o" }
 
+    # Note: -static-libgfortran/-static-libgcc are omitted here intentionally.
+    # On macOS, Homebrew manages the gfortran runtime and there is no
+    # libgfortran-static formula; the Linux packaging uses static runtimes
+    # for archivability, but that concern does not apply to Homebrew installs.
     {
       "eq3nr" => eqlibu_o + eqlibg_o + eqlib_o + objs_for.call("eq3nr"),
       "eq6"   => eqlibu_o + eqlibg_o + eqlib_o + eq6_mod_o + eq6_other_o,

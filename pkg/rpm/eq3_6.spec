@@ -14,6 +14,7 @@ Source3:        138643.pdf
 Source4:        138820.pdf
 
 BuildRequires:  gcc-gfortran
+BuildRequires:  libgfortran-static
 BuildRequires:  unzip
 BuildRequires:  findutils
 
@@ -31,6 +32,11 @@ PDF documentation for EQ3/6 v8.0a:
   - Part 2: EQPT user's guide (OSTI 138639)
   - Part 3: EQ3NR theoretical manual and user's guide (OSTI 138643)
   - Part 4: EQ6 theoretical manual and user's guide (OSTI 138820)
+
+# Note: the DEW variant (SUPCRTandEQs/DEW_activities) will be packaged as
+# a separate 'eq3-6-dew' RPM.  Its binaries install with a 'dew-' prefix
+# (dew-eqpt, dew-eq3, dew-eq6, dew-supcrt, dew-cprons92) so both packages
+# can be installed simultaneously without name conflicts.
 
 %description
 This package installs the unmodified EQ3/6 v8.0a binaries as distributed
@@ -57,6 +63,9 @@ find eq36src -name '*.gz' | xargs gunzip
 %build
 FC=gfortran
 FFLAGS="-O2 -std=legacy"
+# Bake in Fortran/GCC runtimes so installed binaries are self-contained.
+# glibc remains dynamic (ABI-stable); matches what 'make build' produces.
+LDFLAGS="-static-libgfortran -static-libgcc"
 OBJ="%{_builddir}/%{name}-%{version}/obj"
 mkdir -p "${OBJ}" bin
 
@@ -104,7 +113,7 @@ EQLIBU_O=$(objs_for eq36src/eqlibu/src)
 EQLIBG_O=$(objs_for eq36src/eqlibg/src)
 EQLIB_O=$(objs_for eq36src/eqlib/src)
 
-${FC} ${FFLAGS} -o bin/eq3nr \
+${FC} ${FFLAGS} ${LDFLAGS} -o bin/eq3nr \
       ${EQLIBU_O} ${EQLIBG_O} ${EQLIB_O} \
       $(objs_for eq36src/eq3nr/src)
 
@@ -113,13 +122,13 @@ EQ6_OTHER_O=$(for f in eq36src/eq6/src/*.f; do
     [ "${base}" = "mod6pt" ] || [ "${base}" = "mod6xf" ] && continue
     echo "${OBJ}/${base}.o"
 done)
-${FC} ${FFLAGS} -o bin/eq6 \
+${FC} ${FFLAGS} ${LDFLAGS} -o bin/eq6 \
       ${EQLIBU_O} ${EQLIBG_O} ${EQLIB_O} \
       "${OBJ}/mod6pt.o" "${OBJ}/mod6xf.o" ${EQ6_OTHER_O}
 
-${FC} ${FFLAGS} -o bin/eqpt  ${EQLIBU_O} $(objs_for eq36src/eqpt/src)
-${FC} ${FFLAGS} -o bin/xcon3 ${EQLIBU_O} $(objs_for eq36src/xcon3/src)
-${FC} ${FFLAGS} -o bin/xcon6 ${EQLIBU_O} $(objs_for eq36src/xcon6/src)
+${FC} ${FFLAGS} ${LDFLAGS} -o bin/eqpt  ${EQLIBU_O} $(objs_for eq36src/eqpt/src)
+${FC} ${FFLAGS} ${LDFLAGS} -o bin/xcon3 ${EQLIBU_O} $(objs_for eq36src/xcon3/src)
+${FC} ${FFLAGS} ${LDFLAGS} -o bin/xcon6 ${EQLIBU_O} $(objs_for eq36src/xcon6/src)
 
 %check
 # Smoke-test each executable: confirm it runs and produces the expected

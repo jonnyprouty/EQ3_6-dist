@@ -57,6 +57,9 @@ make build-dew   # applies source patches + compiles 5 executables to bin-dew/
 | `make build-dew` | Apply patches + compile all 5 DEW executables to `bin-dew/` |
 | `make test-dew` | Run DEW BATS smoke tests (skipped if `bin-dew/` absent) |
 | `make clean-dew` | Remove `obj-dew/` and `bin-dew/` |
+| `make symlinks-dew LINK_DIR=/path` | Create `dew-` prefixed symlinks; **`LINK_DIR` must be set explicitly** |
+
+Running both `make symlinks` and `make symlinks-dew` into the same `LINK_DIR` produces zero name conflicts: v8.0a installs as `eq3nr`, `eq6`, `eqpt`, `xcon3`, `xcon6`; DEW installs as `dew-eq3`, `dew-eq6`, `dew-eqpt`, `dew-supcrt`, `dew-cprons92`.
 
 ## Architecture
 

@@ -395,9 +395,10 @@ clean-dew:
 	rm -rf $(DEW_OBJ_DIR) $(DEW_BIN_DIR)
 
 # ============================================================
-# SYMLINKS: create symlinks in a user-specified directory.
-# LINK_DIR has no default — it must be passed on the command line.
-# Example: make symlinks LINK_DIR=~/.local/bin
+# SYMLINKS: install executables as symlinks in a user-specified directory.
+# v8.0a: make symlinks LINK_DIR=~/.local/bin
+# DEW:   make symlinks-dew LINK_DIR=~/.local/bin  (installs with dew- prefix)
+# Both targets may point to the same LINK_DIR — no name conflicts.
 # ============================================================
 symlinks: _check-link-dir $(TARGETS)
 	mkdir -p $(LINK_DIR)
@@ -412,6 +413,23 @@ symlinks: _check-link-dir $(TARGETS)
 _check-link-dir:
 ifndef LINK_DIR
 	$(error LINK_DIR is not set. Usage: make symlinks LINK_DIR=/path/to/bin)
+endif
+
+# DEW variant symlinks — installed with dew- prefix so both variants
+# coexist in the same LINK_DIR without collision.
+symlinks-dew: _check-link-dir-dew $(DEW_TARGETS)
+	mkdir -p $(LINK_DIR)
+	ln -sf $(CURDIR)/$(DEW_BIN_DIR)/eqpt     $(LINK_DIR)/dew-eqpt
+	ln -sf $(CURDIR)/$(DEW_BIN_DIR)/eq3      $(LINK_DIR)/dew-eq3
+	ln -sf $(CURDIR)/$(DEW_BIN_DIR)/eq6      $(LINK_DIR)/dew-eq6
+	ln -sf $(CURDIR)/$(DEW_BIN_DIR)/supcrt   $(LINK_DIR)/dew-supcrt
+	ln -sf $(CURDIR)/$(DEW_BIN_DIR)/cprons92 $(LINK_DIR)/dew-cprons92
+	@echo "DEW symlinks (dew-*) created in $(LINK_DIR)"
+
+.PHONY: _check-link-dir-dew
+_check-link-dir-dew:
+ifndef LINK_DIR
+	$(error LINK_DIR is not set. Usage: make symlinks-dew LINK_DIR=/path/to/bin)
 endif
 
 # ============================================================
@@ -513,5 +531,5 @@ clean:
 distclean: clean clean-dew
 	rm -rf $(SRC_BASE) $(DOCS_DIR) pkg/rpm/build pkg/deb/staging pkg/deb/staging-doc pkg/dist
 
-.PHONY: all build fetch extract docs docs-package symlinks rpm deb deb-doc brew test clean distclean \
+.PHONY: all build fetch extract docs docs-package symlinks symlinks-dew rpm deb deb-doc brew test clean distclean \
         fetch-dew patch-dew build-dew test-dew clean-dew
