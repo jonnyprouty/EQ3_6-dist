@@ -1,3 +1,5 @@
+# Generated from eq3_6.rb.in by 'make brew' (or 'make generate').
+# Edit eq3_6.rb.in, not this file.
 class Eq36 < Formula
   desc "EQ3/6 geochemical modeling software (unmodified LLNL upstream)"
   homepage "https://github.com/llnl/EQ3_6"
@@ -27,9 +29,13 @@ class Eq36 < Formula
     gcc_version = Formula["gcc"].any_installed_version.major
     gfortran = Formula["gcc"].opt_bin/"gfortran-#{gcc_version}"
 
+    # Build flags — sourced from Makefile FFLAGS via template substitution.
+    # Note: -static-libgfortran/-static-libgcc intentionally omitted (no macOS equivalent).
+    fflags = "@@FFLAGS@@".split
+
     compile_dir = lambda do |component|
       Dir["#{src}/#{component}/src/*.f"].sort.each do |f|
-        system gfortran, "-O2", "-std=legacy", "-c", f,
+        system gfortran, *fflags, "-c", f,
                "-o", "#{obj}/#{File.basename(f, ".f")}.o",
                "-J#{obj}"
       end
@@ -42,14 +48,14 @@ class Eq36 < Formula
     compile_dir.call("eq3nr")
 
     # EQ6: Fortran module files must precede all other eq6 sources.
-    system gfortran, "-O2", "-std=legacy", "-c", "#{src}/eq6/src/mod6pt.f",
+    system gfortran, *fflags, "-c", "#{src}/eq6/src/mod6pt.f",
            "-o", "#{obj}/mod6pt.o", "-J#{obj}"
-    system gfortran, "-O2", "-std=legacy", "-c", "#{src}/eq6/src/mod6xf.f",
+    system gfortran, *fflags, "-c", "#{src}/eq6/src/mod6xf.f",
            "-o", "#{obj}/mod6xf.o", "-J#{obj}"
     Dir["#{src}/eq6/src/*.f"].sort.reject { |f|
       f.end_with?("mod6pt.f", "mod6xf.f")
     }.each do |f|
-      system gfortran, "-O2", "-std=legacy", "-c", f,
+      system gfortran, *fflags, "-c", f,
              "-o", "#{obj}/#{File.basename(f, ".f")}.o",
              "-J#{obj}"
     end
@@ -73,10 +79,6 @@ class Eq36 < Formula
       f.end_with?("mod6pt.f", "mod6xf.f")
     }.map { |f| "#{obj}/#{File.basename(f, ".f")}.o" }
 
-    # Note: -static-libgfortran/-static-libgcc are omitted here intentionally.
-    # On macOS, Homebrew manages the gfortran runtime and there is no
-    # libgfortran-static formula; the Linux packaging uses static runtimes
-    # for archivability, but that concern does not apply to Homebrew installs.
     {
       "eq3nr" => eqlibu_o + eqlibg_o + eqlib_o + objs_for.call("eq3nr"),
       "eq6"   => eqlibu_o + eqlibg_o + eqlib_o + eq6_mod_o + eq6_other_o,
@@ -84,7 +86,7 @@ class Eq36 < Formula
       "xcon3" => eqlibu_o + objs_for.call("xcon3"),
       "xcon6" => eqlibu_o + objs_for.call("xcon6"),
     }.each do |exe, objs|
-      system gfortran, "-O2", "-o", exe, *objs
+      system gfortran, *fflags, "-o", exe, *objs
       bin.install exe
     end
   end

@@ -1,5 +1,7 @@
+# Generated from eq3_6.spec.in by 'make rpm' (or 'make generate').
+# Edit eq3_6.spec.in, not this file.
 Name:           eq3-6
-Version:        8.0a
+Version:        @@VERSION@@
 Release:        1%{?dist}
 Summary:        EQ3/6 geochemical equilibrium modeling software
 
@@ -61,11 +63,11 @@ unzip -p %{SOURCE0} Linux/EQ3_6v8.0a/archsrc.tar | tar -xf - -C eq36src/
 find eq36src -name '*.gz' | xargs gunzip
 
 %build
-FC=gfortran
-FFLAGS="-O2 -std=legacy"
+FC=@@FC@@
+FFLAGS="@@FFLAGS@@"
 # Bake in Fortran/GCC runtimes so installed binaries are self-contained.
 # glibc remains dynamic (ABI-stable); matches what 'make build' produces.
-LDFLAGS="-static-libgfortran -static-libgcc"
+LDFLAGS="@@LDFLAGS@@"
 OBJ="%{_builddir}/%{name}-%{version}/obj"
 mkdir -p "${OBJ}" bin
 
