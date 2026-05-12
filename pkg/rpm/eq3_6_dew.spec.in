@@ -1,0 +1,115 @@
+# Generated from eq3_6_dew.spec.in by 'make rpm-dew' (or 'make generate').
+# Edit eq3_6_dew.spec.in, not this file.
+Name:           eq3-6-dew
+Version:        @@DEW_VERSION@@
+Release:        1%{?dist}
+Summary:        EQ3/6 DEW variant for high pressure-temperature geochemical modeling
+
+License:        See README.md in upstream distribution
+URL:            https://gitlab.com/ENKI-portal/SUPCRTandEQs
+Source0:        SUPCRTandEQs_DEW_activities.tar.gz
+Source1:        dew-eq6r100-0p-format.patch
+
+BuildRequires:  gcc-gfortran
+BuildRequires:  libgfortran-static
+BuildRequires:  findutils
+
+%description
+EQ3/6 DEW (Deep Earth Water) variant for high pressure-temperature geochemical
+modeling. Compiled from the SUPCRTandEQs/DEW_activities source by the ENKI portal.
+
+Executables are installed with a 'dew-' prefix so this package coexists with
+the eq3-6 package (LLNL v8.0a) without name conflicts.
+
+Includes five executables:
+  dew-eqpt    - DATA0 to data1 preprocessor (R71)
+  dew-eq3     - EQ3 speciation (R110)
+  dew-eq6     - EQ6 mass transfer (R100)
+  dew-supcrt  - SUPCRT92 thermodynamic property calculator
+  dew-cprons92 - sprons sequential to direct access converter
+
+Data files installed to /usr/share/eq3-6-dew/:
+  DATA0    - DEW thermodynamic database (required by dew-eqpt, dew-eq3, dew-eq6)
+  sprons93 - SUPCRT sequential property data (input for dew-supcrt / dew-cprons92)
+
+%prep
+tar -xzf %{SOURCE0}
+(cd SUPCRTandEQs && patch -p2 < %{SOURCE1})
+
+%build
+FC=@@FC@@
+FFLAGS="@@FFLAGS@@ -ffixed-line-length-none"
+LDFLAGS="@@LDFLAGS@@"
+SRC="$(pwd)/SUPCRTandEQs"
+FULL_FFLAGS="${FFLAGS} -I${SRC} -I${SRC}/EQPT -I${SRC}/EQ3 -I${SRC}/EQ6 -I${SRC}/SUPCRT -I${SRC}/CPRONS"
+OBJ="$(pwd)/obj"
+mkdir -p "${OBJ}" bin-dew
+
+# Shared EQ library
+${FC} ${FULL_FFLAGS} -c "${SRC}/eqlibr136.f" -o "${OBJ}/eqlibr136.o"
+ar rcs "${OBJ}/libeq_dew.a" "${OBJ}/eqlibr136.o"
+
+# EQPT (DATA0 to data1 preprocessor)
+${FC} ${FULL_FFLAGS} -c "${SRC}/EQPT/eqpt.f" -o "${OBJ}/eqpt.o"
+${FC} ${LDFLAGS} -o bin-dew/dew-eqpt "${OBJ}/eqpt.o" "${OBJ}/libeq_dew.a"
+
+# EQ3 speciation (R110)
+${FC} ${FULL_FFLAGS} -c "${SRC}/EQ3/eq3nr110.f" -o "${OBJ}/eq3nr110.o"
+${FC} ${LDFLAGS} -o bin-dew/dew-eq3 "${OBJ}/eq3nr110.o" "${OBJ}/libeq_dew.a"
+
+# EQ6 mass transfer (R100)
+${FC} ${FULL_FFLAGS} -c "${SRC}/EQ6/eq6r100.f" -o "${OBJ}/eq6r100.o"
+${FC} ${LDFLAGS} -o bin-dew/dew-eq6 "${OBJ}/eq6r100.o" "${OBJ}/libeq_dew.a"
+
+# SUPCRT92 (standalone, no eqlib)
+${FC} ${FULL_FFLAGS} -c "${SRC}/SUPCRT/sup92pc.f"   -o "${OBJ}/sup92pc.o"
+${FC} ${FULL_FFLAGS} -c "${SRC}/SUPCRT/reac92pc.f"  -o "${OBJ}/reac92pc.o"
+${FC} ${FULL_FFLAGS} -c "${SRC}/SUPCRT/rep92pc.f"   -o "${OBJ}/rep92pc.o"
+${FC} ${FULL_FFLAGS} -c "${SRC}/SUPCRT/H2O92D.f"    -o "${OBJ}/H2O92D.o"
+${FC} ${LDFLAGS} -o bin-dew/dew-supcrt \
+      "${OBJ}/sup92pc.o" "${OBJ}/reac92pc.o" "${OBJ}/rep92pc.o" "${OBJ}/H2O92D.o"
+
+# CPRONS92 (standalone)
+${FC} ${FULL_FFLAGS} -c "${SRC}/CPRONS/cprons92.f" -o "${OBJ}/cprons92.o"
+${FC} ${LDFLAGS} -o bin-dew/dew-cprons92 "${OBJ}/cprons92.o"
+
+%check
+for exe in bin-dew/dew-eq3 bin-dew/dew-eq6; do
+    output="$(./${exe} </dev/null 2>&1 || true)"
+    echo "${output}" | grep -q "eqlib/openin" || \
+        { echo "FAIL: ${exe} did not produce expected startup output"; exit 1; }
+done
+output="$(./bin-dew/dew-eqpt </dev/null 2>&1 || true)"
+echo "${output}" | grep -q "EQPT, version" || \
+    { echo "FAIL: dew-eqpt did not produce expected startup output"; exit 1; }
+output="$(./bin-dew/dew-supcrt </dev/null 2>&1 || true)"
+echo "${output}" | grep -q "SUPCRT92" || \
+    { echo "FAIL: dew-supcrt did not produce expected startup output"; exit 1; }
+output="$(./bin-dew/dew-cprons92 </dev/null 2>&1 || true)"
+echo "${output}" | grep -q "CPRONS92" || \
+    { echo "FAIL: dew-cprons92 did not produce expected startup output"; exit 1; }
+
+%install
+install -d %{buildroot}%{_bindir}
+install -m 755 bin-dew/dew-eqpt     %{buildroot}%{_bindir}/dew-eqpt
+install -m 755 bin-dew/dew-eq3      %{buildroot}%{_bindir}/dew-eq3
+install -m 755 bin-dew/dew-eq6      %{buildroot}%{_bindir}/dew-eq6
+install -m 755 bin-dew/dew-supcrt   %{buildroot}%{_bindir}/dew-supcrt
+install -m 755 bin-dew/dew-cprons92 %{buildroot}%{_bindir}/dew-cprons92
+
+install -d %{buildroot}%{_datadir}/eq3-6-dew
+install -m 644 SUPCRTandEQs/EQPT/DATA0      %{buildroot}%{_datadir}/eq3-6-dew/DATA0
+install -m 644 SUPCRTandEQs/CPRONS/sprons93 %{buildroot}%{_datadir}/eq3-6-dew/sprons93
+
+%files
+%{_bindir}/dew-eqpt
+%{_bindir}/dew-eq3
+%{_bindir}/dew-eq6
+%{_bindir}/dew-supcrt
+%{_bindir}/dew-cprons92
+%{_datadir}/eq3-6-dew/DATA0
+%{_datadir}/eq3-6-dew/sprons93
+
+%changelog
+* Tue May 12 2026 Packager <packager@example.com> - 3245r136-1
+- Initial RPM packaging of EQ3/6 DEW variant (SUPCRTandEQs/DEW_activities)

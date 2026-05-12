@@ -1,0 +1,75 @@
+# Generated from eq3_6_dew.rb.in by 'make brew-dew' (or 'make generate').
+# Edit eq3_6_dew.rb.in, not this file.
+class Eq36Dew < Formula
+  desc "EQ3/6 DEW variant for high pressure-temperature geochemical modeling"
+  homepage "https://gitlab.com/ENKI-portal/SUPCRTandEQs"
+  url "@@DEW_SRC_URL@@"
+  sha256 "@@DEW_SHA256@@"
+  version "3245r136"
+  license :cannot_represent  # see upstream README.md
+
+  # Homebrew's gcc formula provides gfortran on both macOS and Linux.
+  depends_on "gcc"
+
+  def install
+    gcc_version = Formula["gcc"].any_installed_version.major
+    gfortran = Formula["gcc"].opt_bin/"gfortran-#{gcc_version}"
+
+    # Fix gfortran 15 rejection of old F77 '0pi1' format descriptor.
+    # Equivalent to patches/dew-eq6r100-0p-format.patch in the packaging repo.
+    inreplace "EQ6/eq6r100.f", ",0pi1)", ",0p,i1)"
+
+    # -ffixed-line-length-none: DEW sources (written for f2c) have lines > 72 chars.
+    # -static-libgfortran/-static-libgcc intentionally omitted (no macOS equivalent).
+    fflags = "@@FFLAGS@@ -ffixed-line-length-none".split
+
+    src = buildpath
+    obj = buildpath/"obj"
+    obj.mkpath
+
+    iflags = ["-I#{src}", "-I#{src}/EQPT", "-I#{src}/EQ3",
+              "-I#{src}/EQ6", "-I#{src}/SUPCRT", "-I#{src}/CPRONS"]
+
+    # Shared EQ library
+    system gfortran, *fflags, *iflags, "-c", "#{src}/eqlibr136.f",
+           "-o", "#{obj}/eqlibr136.o"
+    system "ar", "rcs", "#{obj}/libeq_dew.a", "#{obj}/eqlibr136.o"
+
+    # EQPT (DATA0 to data1 preprocessor)
+    system gfortran, *fflags, *iflags, "-c", "#{src}/EQPT/eqpt.f",
+           "-o", "#{obj}/eqpt.o"
+    system gfortran, *fflags, "-o", "dew-eqpt", "#{obj}/eqpt.o", "#{obj}/libeq_dew.a"
+
+    # EQ3 speciation (R110)
+    system gfortran, *fflags, *iflags, "-c", "#{src}/EQ3/eq3nr110.f",
+           "-o", "#{obj}/eq3nr110.o"
+    system gfortran, *fflags, "-o", "dew-eq3", "#{obj}/eq3nr110.o", "#{obj}/libeq_dew.a"
+
+    # EQ6 mass transfer (R100)
+    system gfortran, *fflags, *iflags, "-c", "#{src}/EQ6/eq6r100.f",
+           "-o", "#{obj}/eq6r100.o"
+    system gfortran, *fflags, "-o", "dew-eq6", "#{obj}/eq6r100.o", "#{obj}/libeq_dew.a"
+
+    # SUPCRT92 (standalone, no eqlib)
+    %w[sup92pc reac92pc rep92pc H2O92D].each do |f|
+      system gfortran, *fflags, *iflags, "-c", "#{src}/SUPCRT/#{f}.f",
+             "-o", "#{obj}/#{f}.o"
+    end
+    system gfortran, *fflags, "-o", "dew-supcrt",
+           "#{obj}/sup92pc.o", "#{obj}/reac92pc.o",
+           "#{obj}/rep92pc.o", "#{obj}/H2O92D.o"
+
+    # CPRONS92 (standalone)
+    system gfortran, *fflags, *iflags, "-c", "#{src}/CPRONS/cprons92.f",
+           "-o", "#{obj}/cprons92.o"
+    system gfortran, *fflags, "-o", "dew-cprons92", "#{obj}/cprons92.o"
+
+    bin.install "dew-eqpt", "dew-eq3", "dew-eq6", "dew-supcrt", "dew-cprons92"
+    (share/"eq3-6-dew").install "EQPT/DATA0", "CPRONS/sprons93"
+  end
+
+  test do
+    output = shell_output("#{bin}/dew-eq3 2>&1; true")
+    assert_match "eqlib/openin", output
+  end
+end

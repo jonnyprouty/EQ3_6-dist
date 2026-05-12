@@ -58,6 +58,9 @@ make build-dew   # applies source patches + compiles 5 executables to bin-dew/
 | `make test-dew` | Run DEW BATS smoke tests (skipped if `bin-dew/` absent) |
 | `make clean-dew` | Remove `obj-dew/` and `bin-dew/` |
 | `make symlinks-dew LINK_DIR=/path` | Create `dew-` prefixed symlinks; **`LINK_DIR` must be set explicitly** |
+| `make rpm-dew` | Build DEW RPM (requires `rpm-build`); output → `pkg/dist/` |
+| `make deb-dew` | Build DEW .deb (requires `dpkg-dev`, prior `make build-dew`); output → `pkg/dist/` |
+| `make brew-dew` | Install DEW variant via `pkg/brew/eq3_6_dew.rb` Homebrew formula |
 
 Running both `make symlinks` and `make symlinks-dew` into the same `LINK_DIR` produces zero name conflicts: v8.0a installs as `eq3nr`, `eq6`, `eqpt`, `xcon3`, `xcon6`; DEW installs as `dew-eq3`, `dew-eq6`, `dew-eqpt`, `dew-supcrt`, `dew-cprons92`.
 
@@ -112,9 +115,11 @@ upstream/          git submodule → llnl/EQ3_6 (contains the ZIP archives)
 upstream-dew/      git submodule → gitlab.com/ENKI-portal/SUPCRTandEQs (DEW_activities)
 patches/           source patches applied before DEW compilation (dew-*.patch)
 pkg/
-  rpm/eq3_6.spec   RPM spec file
-  deb/debian/      Debian package metadata (control, rules, compat, changelog)
-  brew/eq3_6.rb    Homebrew formula
+  rpm/eq3_6.spec.in      RPM spec template for v8.0a (generated: eq3_6.spec)
+  rpm/eq3_6_dew.spec.in  RPM spec template for DEW variant (generated: eq3_6_dew.spec)
+  deb/debian/            Debian package metadata (control, control.dew, changelog, compat)
+  brew/eq3_6.rb.in       Homebrew formula template for v8.0a (generated: eq3_6.rb)
+  brew/eq3_6_dew.rb.in   Homebrew formula template for DEW variant (generated: eq3_6_dew.rb)
 src/               (gitignored) extracted Fortran source (v8.0a)
 bin/               (gitignored) compiled v8.0a executables
 obj/               (gitignored) v8.0a object files and .mod files

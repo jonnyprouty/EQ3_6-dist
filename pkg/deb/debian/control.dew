@@ -1,0 +1,17 @@
+Package: eq3-6-dew
+Version: 3245r136
+Architecture: amd64
+Maintainer: Your Name <you@example.com>
+Depends: libc6
+Description: EQ3/6 DEW variant for high pressure-temperature geochemical modeling
+ EQ3/6 DEW (Deep Earth Water) variant compiled from the SUPCRTandEQs/DEW_activities
+ source by the ENKI portal.
+ .
+ Executables are installed with a 'dew-' prefix so this package coexists with
+ the eq3-6 package (LLNL v8.0a) without name conflicts.
+ .
+ Includes five executables: dew-eqpt (DATA0 preprocessor), dew-eq3 (EQ3
+ speciation), dew-eq6 (EQ6 mass transfer), dew-supcrt (SUPCRT92 thermodynamic
+ calculator), dew-cprons92 (sprons converter).
+ .
+ Data files (DATA0, sprons93) are installed to /usr/share/eq3-6-dew/.
