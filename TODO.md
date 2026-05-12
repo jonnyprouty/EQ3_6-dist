@@ -70,15 +70,29 @@ format (circa 1987–1991) which is **incompatible** with v8.0a EQPT in two ways
    converting record markers is not sufficient for compatibility.
 
 **Consequence for the colleague**: The pre-compiled macOS EQ3/EQ6 executables from the DEW
-ZIPs work fine on Intel Mac (confirmed). They cannot be used on Linux directly. The
+ZIPs work fine on the right architecture. They cannot be used on Linux directly. The
 modern v8.0a executables cannot read the old-format DATA0 or data1 files.
 
-**Required path**: [pyDEW](https://gitlab.com/simonwmatthews/pyDEW) generates DATA0 files
-for DEW conditions in the **modern v8.0a format**, which our EQPT can process. This is the
-intended migration path for running DEW cases with modern EQ3/6.
+**DEW EQPT binary architecture**: The newer DEW EQPT binaries (e.g. in `10_kbar_300-650c`,
+dated 2025-03-07) are **ARM64 (Apple Silicon only)** — confirmed via Mach-O header
+`cf fa ed fe 0c 00 00 01`. They will not run on Intel Macs or Linux. This is why a
+colleague using an Intel Mac cannot run "Dimitri's EQPT" on the DEW DATA0 files.
+
+**DEW EQPT interactive stdin**: The DEW EQPT requires three interactive prompts (`n/n/y`
+for Pitzer/HKF/data0s). Running without piping answers causes `fmt: end of file` crash.
+`tools/run_dew_eqpt.sh` wraps this correctly for Apple Silicon users.
+
+**Immediate workaround**: Pre-built `data1` files are included in every DEW ZIP — the
+colleague can use those directly without re-running EQPT.
+
+**Required path for v8.0a**: [pyDEW](https://gitlab.com/simonwmatthews/pyDEW) generates
+DATA0 files for DEW conditions in the **modern v8.0a format**, which our EQPT can process.
+This is the intended migration path for running DEW cases with modern EQ3/6.
 
 - [x] Audit a sample of DEW cases to confirm they run against current EQ3/6 executables
 - [x] Determine whether DEW DATA0 files are directly usable or require regeneration via pyDEW
+- [x] Identify root cause of DEW EQPT failure for colleague (ARM64 binary, Intel Mac mismatch)
+- [x] Create `tools/run_dew_eqpt.sh` wrapper for correct DEW EQPT invocation (Apple Silicon)
 - [ ] Set up pyDEW and generate modern-format DATA0 for a representative P-T case (e.g. `eqs_at_psat`)
 - [ ] Run our EQPT on the pyDEW-generated DATA0 to produce a v8.0a-compatible data1
 - [ ] Run a DEW EQ3 case end-to-end with our executables and verify output
