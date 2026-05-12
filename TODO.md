@@ -85,19 +85,30 @@ for Pitzer/HKF/data0s). Running without piping answers causes `fmt: end of file`
 **Immediate workaround**: Pre-built `data1` files are included in every DEW ZIP — the
 colleague can use those directly without re-running EQPT.
 
-**Required path for v8.0a**: [pyDEW](https://gitlab.com/simonwmatthews/pyDEW) generates
-DATA0 files for DEW conditions in the **modern v8.0a format**, which our EQPT can process.
-This is the intended migration path for running DEW cases with modern EQ3/6.
+**pyDEW architecture — corrected understanding**: pyDEW generates R71-format DATA0
+(the same old format), NOT v8.0a-compatible DATA0. Our v8.0a EQPT cannot process it.
+The [pyDEW container](https://hub.docker.com/r/simonwmatthews/pydew) (`simonwmatthews/pydew:v2.15`)
+bundles its own x86-64 Linux R71 EQPT, EQ3, and EQ6 binaries. `pyDEW.Fluid()` runs the
+entire pipeline internally (DATA0 → EQPT → data1 → EQ3) using those bundled binaries.
+
+**Consequence**: The DEW and v8.0a stacks are **parallel, non-interoperating tracks**:
+- DEW calculations: use `pyDEW.Fluid()` in the container (R71 EQ3/EQ6, DEW EOS)
+- Standard calculations: use our v8.0a `eq3nr`/`eq6` (ambient to moderate P-T)
+
+`tools/run_dew.sh` wraps the container for command-line use (podman/docker detection).
+`tools/dew_calc.py` is the Python entry point executed inside the container.
+
+**Dependency classification**: The pyDEW container is the DEW runtime, not a build tool.
+Researchers doing DEW calculations need it; standard EQ3/6 users do not.
 
 - [x] Audit a sample of DEW cases to confirm they run against current EQ3/6 executables
 - [x] Determine whether DEW DATA0 files are directly usable or require regeneration via pyDEW
 - [x] Identify root cause of DEW EQPT failure for colleague (ARM64 binary, Intel Mac mismatch)
 - [x] Create `tools/run_dew_eqpt.sh` wrapper for correct DEW EQPT invocation (Apple Silicon)
-- [ ] Set up pyDEW and generate modern-format DATA0 for a representative P-T case (e.g. `eqs_at_psat`)
-- [ ] Run our EQPT on the pyDEW-generated DATA0 to produce a v8.0a-compatible data1
-- [ ] Run a DEW EQ3 case end-to-end with our executables and verify output
-- [ ] Decide whether pyDEW becomes a test dependency or a `make dew-data1` target
-- [ ] Add BATS test cases for DEW P-T suites (once end-to-end pipeline is verified)
+- [x] Clarify pyDEW architecture: R71 stack in container, not v8.0a bridge
+- [x] Create `tools/run_dew.sh` + `tools/dew_calc.py` for command-line DEW calculations
+- [ ] Add BATS test cases for DEW calculations (requires container at test time; mark as optional)
+- [ ] Document pyDEW container as optional DEW dependency in README
 
 ---
 
