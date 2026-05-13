@@ -398,6 +398,7 @@ test-dew:
 # ---- DEW clean -----------------------------------------------
 clean-dew:
 	rm -rf $(DEW_OBJ_DIR) $(DEW_BIN_DIR)
+	find upstream-dew -name '*.rej' -delete 2>/dev/null || true
 
 # ============================================================
 # SYMLINKS: install executables as symlinks in a user-specified directory.
