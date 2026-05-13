@@ -1,6 +1,6 @@
 Package: eq3-6-dew
-Version: 3245r136
-Architecture: amd64
+Version: @@DEW_VERSION@@
+Architecture: @@DEB_ARCH@@
 Maintainer: Your Name <you@example.com>
 Depends: libc6
 Description: EQ3/6 DEW variant for high pressure-temperature geochemical modeling

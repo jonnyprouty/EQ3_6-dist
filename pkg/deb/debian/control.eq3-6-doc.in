@@ -1,0 +1,12 @@
+Package: eq3-6-doc
+Version: @@VERSION@@
+Architecture: all
+Section: doc
+Maintainer: Your Name <you@example.com>
+Description: Documentation for EQ3/6 geochemical modeling software
+ PDF documentation for EQ3/6 v8.0a, retrieved from OSTI:
+ .
+  - Part 1: EQ3/6 package overview and installation guide (OSTI 138894)
+  - Part 2: EQPT user's guide (OSTI 138639)
+  - Part 3: EQ3NR theoretical manual and user's guide (OSTI 138643)
+  - Part 4: EQ6 theoretical manual and user's guide (OSTI 138820)

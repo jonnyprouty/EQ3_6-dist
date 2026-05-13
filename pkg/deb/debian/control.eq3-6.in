@@ -1,0 +1,16 @@
+Package: eq3-6
+Version: @@VERSION@@
+Architecture: @@DEB_ARCH@@
+Maintainer: Your Name <you@example.com>
+Depends: libc6
+Description: EQ3/6 geochemical equilibrium modeling software
+ This package installs the unmodified EQ3/6 v8.0a binaries as distributed
+ by Lawrence Livermore National Laboratory. The source is compiled directly
+ from the upstream distribution ZIP without modification.
+ .
+ EQ3/6 is a software package for geochemical modeling of aqueous solutions
+ interacting with minerals, gases, and other solids.
+ .
+ Includes five executables: eq3nr (speciation), eq6 (reaction path
+ modeling), eqpt (property estimation), xcon3 and xcon6 (input file
+ format converters).

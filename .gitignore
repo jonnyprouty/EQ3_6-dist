@@ -22,6 +22,11 @@
 /pkg/deb/staging/
 /pkg/dist/
 
+# Generated deb binary control files (produced from *.in templates by make generate)
+/pkg/deb/debian/control.eq3-6
+/pkg/deb/debian/control.eq3-6-doc
+/pkg/deb/debian/control.dew
+
 # Debian build artifacts (land one level above pkg/deb/ with dpkg-buildpackage)
 *.deb
 *.changes

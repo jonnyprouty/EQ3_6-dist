@@ -55,6 +55,9 @@ DOCS_SHA256    = docs/SHA256SUMS
 # Platform detection (used for packaging target warnings)
 UNAME_S := $(shell uname -s)
 
+# Debian/Ubuntu architecture token (e.g. amd64, arm64)
+DEB_ARCH := $(shell dpkg --print-architecture 2>/dev/null || echo amd64)
+
 # SHA256 verification command (sha256sum on Linux, shasum on macOS)
 ifeq ($(UNAME_S),Darwin)
   SHA256_CHECK = shasum -a 256 -c
@@ -478,7 +481,25 @@ pkg/brew/eq3_6_dew.rb: pkg/brew/eq3_6_dew.rb.in Makefile $(DEW_SRC_TARBALL)
 	    -e "s|@@DEW_SHA256@@|$$DEW_SHA256|g" \
 	    $< > $@
 
-generate: pkg/rpm/eq3_6.spec pkg/rpm/eq3_6_dew.spec pkg/brew/eq3_6.rb pkg/brew/eq3_6_dew.rb
+pkg/deb/debian/control.eq3-6: pkg/deb/debian/control.eq3-6.in Makefile
+	sed \
+	    -e 's|@@VERSION@@|$(VERSION)|g' \
+	    -e 's|@@DEB_ARCH@@|$(DEB_ARCH)|g' \
+	    $< > $@
+
+pkg/deb/debian/control.eq3-6-doc: pkg/deb/debian/control.eq3-6-doc.in Makefile
+	sed \
+	    -e 's|@@VERSION@@|$(VERSION)|g' \
+	    $< > $@
+
+pkg/deb/debian/control.dew: pkg/deb/debian/control.dew.in Makefile
+	sed \
+	    -e 's|@@DEW_VERSION@@|$(DEW_VERSION)|g' \
+	    -e 's|@@DEB_ARCH@@|$(DEB_ARCH)|g' \
+	    $< > $@
+
+generate: pkg/rpm/eq3_6.spec pkg/rpm/eq3_6_dew.spec pkg/brew/eq3_6.rb pkg/brew/eq3_6_dew.rb \
+          pkg/deb/debian/control.eq3-6 pkg/deb/debian/control.eq3-6-doc pkg/deb/debian/control.dew
 
 # ============================================================
 # PACKAGING
@@ -506,7 +527,7 @@ endif
 	@echo "RPM written to pkg/dist/"
 
 # -- DEB -------------------------------------------------------
-deb: build
+deb: build pkg/deb/debian/control.eq3-6
 ifneq ($(UNAME_S),Linux)
 	@echo "WARNING: .deb packaging is designed for Linux (you are on $(UNAME_S))"
 endif
@@ -516,11 +537,11 @@ endif
 	@mkdir -p pkg/deb/staging/usr/bin pkg/deb/staging/DEBIAN pkg/dist
 	cp $(BIN_DIR)/eq3nr $(BIN_DIR)/eq6 $(BIN_DIR)/eqpt \
 	   $(BIN_DIR)/xcon3 $(BIN_DIR)/xcon6 pkg/deb/staging/usr/bin/
-	cp pkg/deb/debian/control pkg/deb/staging/DEBIAN/control
-	dpkg-deb --build pkg/deb/staging pkg/dist/eq3-6_8.0a_amd64.deb
+	cp pkg/deb/debian/control.eq3-6 pkg/deb/staging/DEBIAN/control
+	dpkg-deb --build pkg/deb/staging pkg/dist/eq3-6_$(VERSION)_$(DEB_ARCH).deb
 	@echo ".deb written to pkg/dist/"
 
-deb-doc: docs
+deb-doc: docs pkg/deb/debian/control.eq3-6-doc
 ifneq ($(UNAME_S),Linux)
 	@echo "WARNING: .deb packaging is designed for Linux (you are on $(UNAME_S))"
 endif
@@ -530,9 +551,8 @@ endif
 	@mkdir -p pkg/deb/staging-doc/usr/share/doc/eq3-6 \
 	           pkg/deb/staging-doc/DEBIAN pkg/dist
 	cp $(DOCS) pkg/deb/staging-doc/usr/share/doc/eq3-6/
-	grep -A5 'Package: eq3-6-doc' pkg/deb/debian/control \
-	    | grep -v '^--' > pkg/deb/staging-doc/DEBIAN/control
-	dpkg-deb --build pkg/deb/staging-doc pkg/dist/eq3-6-doc_8.0a_all.deb
+	cp pkg/deb/debian/control.eq3-6-doc pkg/deb/staging-doc/DEBIAN/control
+	dpkg-deb --build pkg/deb/staging-doc pkg/dist/eq3-6-doc_$(VERSION)_all.deb
 	@echo "Docs .deb written to pkg/dist/"
 
 # -- Homebrew --------------------------------------------------
@@ -577,7 +597,7 @@ endif
 
 # -- DEW deb ---------------------------------------------------
 # Copies pre-built bin-dew/ binaries into a staging tree and calls dpkg-deb.
-deb-dew: build-dew
+deb-dew: build-dew pkg/deb/debian/control.dew
 ifneq ($(UNAME_S),Linux)
 	@echo "WARNING: .deb packaging is designed for Linux (you are on $(UNAME_S))"
 endif
@@ -596,7 +616,7 @@ endif
 	cp $(DEW_UPSTREAM)/EQPT/DATA0       pkg/deb/staging-dew/usr/share/eq3-6-dew/DATA0
 	cp $(DEW_UPSTREAM)/CPRONS/sprons93  pkg/deb/staging-dew/usr/share/eq3-6-dew/sprons93
 	cp pkg/deb/debian/control.dew pkg/deb/staging-dew/DEBIAN/control
-	dpkg-deb --build pkg/deb/staging-dew pkg/dist/eq3-6-dew_$(DEW_VERSION)_amd64.deb
+	dpkg-deb --build pkg/deb/staging-dew pkg/dist/eq3-6-dew_$(DEW_VERSION)_$(DEB_ARCH).deb
 	@echo "DEW .deb written to pkg/dist/"
 
 # -- DEW Homebrew ----------------------------------------------
@@ -641,6 +661,7 @@ distclean: clean clean-dew
 	rm -rf $(SRC_BASE) $(DOCS_DIR) \
 	    pkg/rpm/build pkg/rpm/eq3_6.spec pkg/rpm/eq3_6_dew.spec \
 	    pkg/deb/staging pkg/deb/staging-doc pkg/deb/staging-dew \
+	    pkg/deb/debian/control.eq3-6 pkg/deb/debian/control.eq3-6-doc pkg/deb/debian/control.dew \
 	    pkg/brew/eq3_6.rb pkg/brew/eq3_6_dew.rb $(DEW_SRC_TARBALL) \
 	    pkg/dist
 

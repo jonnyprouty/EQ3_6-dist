@@ -117,7 +117,8 @@ patches/           source patches applied before DEW compilation (dew-*.patch)
 pkg/
   rpm/eq3_6.spec.in      RPM spec template for v8.0a (generated: eq3_6.spec)
   rpm/eq3_6_dew.spec.in  RPM spec template for DEW variant (generated: eq3_6_dew.spec)
-  deb/debian/            Debian package metadata (control, control.dew, changelog, compat)
+  deb/debian/            Debian package metadata (control, *.in templates → generated control.*)
+
   brew/eq3_6.rb.in       Homebrew formula template for v8.0a (generated: eq3_6.rb)
   brew/eq3_6_dew.rb.in   Homebrew formula template for DEW variant (generated: eq3_6_dew.rb)
 src/               (gitignored) extracted Fortran source (v8.0a)
@@ -184,6 +185,46 @@ eq3nr               # confirm in PATH
 - SSH sessions may have a minimal `$PATH` that excludes `/usr/local/bin`. Either source
   your shell profile or prefix commands with `PATH="/usr/local/bin:$PATH"`.
 - To run the BATS test suite on macOS: `brew install bats-core && make test`
+
+## Template policy
+
+Any packaging file that contains version strings, compiler flags, architecture tokens,
+or other Makefile-controlled values must use the `.in` template system:
+
+1. Create a `<name>.in` file with `@@TOKEN@@` placeholders.
+2. Add a generation rule to the Makefile (see the `pkg/rpm/eq3_6.spec` rule as the
+   canonical pattern).
+3. Add the generated output to `.gitignore` and to `distclean`.
+4. Add the generated output as a prerequisite of the `generate` target.
+
+Tokens available: `@@VERSION@@`, `@@DEW_VERSION@@`, `@@FC@@`, `@@FFLAGS@@`,
+`@@LDFLAGS@@`, `@@DEB_ARCH@@`, `@@DEW_SRC_URL@@`, `@@DEW_SHA256@@`.
+
+Candidates include RPM spec files, Homebrew formulae, and `.deb` binary control files.
+Static metadata (package descriptions, `Architecture: all` for arch-independent docs)
+does not need templating.
+
+When reviewing a proposed new packaging file, check: does it contain any of the values
+listed above hard-coded? If yes, make it a `.in` template instead.
+
+## Ubuntu 26.04 LTS build setup
+
+For building `.deb` packages on Ubuntu Server 26.04 LTS (recommended over Desktop —
+same repos, ~2 GB lighter):
+
+```bash
+sudo apt update
+sudo apt install -y gfortran dpkg-dev bats
+```
+
+To verify static Fortran runtime libraries are available (required for
+`-static-libgfortran -static-libgcc`):
+```bash
+dpkg -L libgfortran-dev | grep '\.a$'
+```
+
+After cloning, run `make generate` before any deb targets — this produces the binary
+control files from `.in` templates using the local architecture.
 
 ## TODO list
 
