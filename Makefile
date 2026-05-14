@@ -117,13 +117,24 @@ XCON6_OBJ      = $(patsubst $(XCON6_SRC_DIR)/%.f,  $(OBJ_DIR)/%.o, $(XCON6_SRC))
 
 all: build
 
-build: $(EXTRACT_STAMP) $(TARGETS)
+# Two-phase build: extraction first, then a fresh $(MAKE) invocation so that
+# the wildcard-based source lists (EQLIBU_SRC etc.) are re-evaluated after
+# src/ is populated.  Without the sub-make, a clean-checkout build would see
+# empty wildcard expansions and fail at the link step with "no input files".
+build: $(EXTRACT_STAMP)
+	@$(MAKE) --no-print-directory $(TARGETS)
 
 # ============================================================
 # FETCH: initialize / update the upstream git submodule
 # ============================================================
 fetch:
 	git submodule update --init upstream
+
+# Error rule: fires when make tries to build a target that needs the upstream
+# ZIP but the submodule hasn't been initialized yet.
+$(UPSTREAM_ZIP):
+	@echo "ERROR: $(UPSTREAM_ZIP) not found. Run: make fetch"
+	@exit 1
 
 # ============================================================
 # EXTRACT: unpack source from upstream ZIP, then decompress
@@ -136,8 +147,6 @@ fetch:
 # (BSD gunzip on macOS does not support the -r flag).
 # ============================================================
 $(EXTRACT_STAMP): $(UPSTREAM_ZIP)
-	@test -f $(UPSTREAM_ZIP) || \
-	    { echo "ERROR: $(UPSTREAM_ZIP) not found. Run: make fetch"; exit 1; }
 	@echo "==> Extracting Fortran sources from $(UPSTREAM_ZIP) ..."
 	@mkdir -p $(SRC_BASE)
 	unzip -p $(UPSTREAM_ZIP) $(INNER_SRC_TAR) | tar -xf - -C $(SRC_BASE)/
@@ -316,6 +325,13 @@ DEW_TARGETS = \
 # ---- DEW fetch -----------------------------------------------
 fetch-dew:
 	git submodule update --init upstream-dew
+
+# Error rule: fires when make tries to build a DEW target but the submodule
+# hasn't been initialized yet.  The DEW patch stamp depends on this file to
+# detect when the submodule is updated to a new commit.
+.git/modules/upstream-dew/HEAD:
+	@echo "ERROR: upstream-dew/ submodule not initialized. Run: make fetch-dew"
+	@exit 1
 
 # ---- DEW patch precompile hook --------------------------------
 # Applies all patches/dew-*.patch to upstream-dew/ before compilation.
