@@ -116,11 +116,14 @@ XCON6_OBJ      = $(XCON6_SRCS:%.f=$(OBJ_DIR)/%.o)
 
 all: build
 
+# CPU count for parallel compilation: nproc (Linux), sysctl (macOS), fallback 1.
+NPROC := $(shell nproc 2>/dev/null || sysctl -n hw.logicalcpu 2>/dev/null || echo 1)
+
 # Two-phase build: extraction first, then a fresh $(MAKE) invocation for
 # compilation.  The sub-make ensures src/ is fully populated before any
 # compile rules fire, regardless of how make schedules prerequisites.
 build: $(EXTRACT_STAMP)
-	@$(MAKE) --no-print-directory $(TARGETS)
+	@$(MAKE) --no-print-directory -j$(NPROC) $(TARGETS)
 
 # ============================================================
 # FETCH: initialize / update the upstream git submodule
