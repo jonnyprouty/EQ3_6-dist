@@ -748,6 +748,7 @@ docs-package: docs
 farm: _farm-check-config farm-push
 	@$(MAKE) --no-print-directory -j3 --output-sync=target \
 	    farm-fedora farm-ubuntu farm-mac
+	@$(MAKE) --no-print-directory farm-collect
 
 _farm-check-config:
 ifeq (,$(wildcard ssh_build_farm.mk))
@@ -768,6 +769,18 @@ farm-ubuntu:
 farm-mac:
 	$(MAC_CONNECTION) git -C $(MAC_FARM_REPO) pull --ff-only
 	$(MAC_CONNECTION) $(MAKE) -C $(MAC_FARM_REPO) platform-build PLATFORM_TARGET=mac
+
+# Collect packages from all remote builders into local pkg/dist/.
+# Remote builders are those where *_CONNECTION is non-empty (i.e. not this machine).
+# Mac is omitted: 'make brew' installs locally and produces no pkg/dist/ artifacts.
+farm-collect: _farm-check-config
+	mkdir -p pkg/dist
+ifneq ($(FEDORA_CONNECTION),)
+	rsync -a $(FEDORA_BUILDER):$(FEDORA_FARM_REPO)/pkg/dist/ pkg/dist/
+endif
+ifneq ($(UBUNTU_CONNECTION),)
+	rsync -a $(UBUNTU_BUILDER):$(UBUNTU_FARM_REPO)/pkg/dist/ pkg/dist/
+endif
 
 # ============================================================
 # CLEAN
@@ -794,4 +807,4 @@ distclean: clean clean-dew
         rpm deb deb-doc brew test clean distclean \
         fetch-dew patch-dew build-dew test-dew clean-dew \
         rpm-dew deb-dew brew-dew \
-        farm _farm-check-config farm-push farm-fedora farm-ubuntu farm-mac platform-build
+        farm _farm-check-config farm-push farm-fedora farm-ubuntu farm-mac farm-collect platform-build
