@@ -448,7 +448,7 @@ $(DEW_BIN_DIR)/cprons92: $(DEW_CPRONS_OBJ) | $(DEW_BIN_DIR)
 	$(FC) $(LDFLAGS) -o $@ $^
 
 # ---- DEW test ------------------------------------------------
-test-dew:
+test-dew: build-dew
 	@bats --recursive tests/cases/dew/
 
 # ---- DEW clean -----------------------------------------------
@@ -588,11 +588,13 @@ PLATFORM_PKGS_ubuntu := deb deb-dew
 PLATFORM_PKGS_mac    := brew brew-dew
 
 # Entry point invoked on each farm builder (locally or via SSH).
-# Pulls the latest commit, then runs the full build + test + packaging pipeline.
+# Assumes git pull has already been run by the calling farm target.
+# Initializes submodules, then runs the full build + test + packaging pipeline.
 # PLATFORM_TARGET must be set to 'fedora', 'ubuntu', or 'mac'.
 platform-build:
-	git pull --ff-only
-	$(MAKE) generate build test build-dew test-dew $(PLATFORM_PKGS_$(PLATFORM_TARGET))
+	$(MAKE) fetch fetch-dew
+	$(MAKE) generate build build-dew test test-dew
+	$(MAKE) $(PLATFORM_PKGS_$(PLATFORM_TARGET))
 
 # -- RPM -------------------------------------------------------
 rpm: pkg/rpm/eq3_6.spec docs
@@ -756,12 +758,15 @@ farm-push:
 	git push
 
 farm-fedora:
+	$(FEDORA_CONNECTION) git -C $(FEDORA_FARM_REPO) pull --ff-only
 	$(FEDORA_CONNECTION) $(MAKE) -C $(FEDORA_FARM_REPO) platform-build PLATFORM_TARGET=fedora
 
 farm-ubuntu:
+	$(UBUNTU_CONNECTION) git -C $(UBUNTU_FARM_REPO) pull --ff-only
 	$(UBUNTU_CONNECTION) $(MAKE) -C $(UBUNTU_FARM_REPO) platform-build PLATFORM_TARGET=ubuntu
 
 farm-mac:
+	$(MAC_CONNECTION) git -C $(MAC_FARM_REPO) pull --ff-only
 	$(MAC_CONNECTION) $(MAKE) -C $(MAC_FARM_REPO) platform-build PLATFORM_TARGET=mac
 
 # ============================================================
