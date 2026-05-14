@@ -666,7 +666,7 @@ docs-package: docs
 # ============================================================
 # CLEAN
 # ============================================================
-test: build
+test: build pkg/rpm/eq3_6.spec pkg/brew/eq3_6.rb
 	@bats --recursive tests/cases/
 
 clean:
