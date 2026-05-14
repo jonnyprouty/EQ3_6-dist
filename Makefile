@@ -84,31 +84,30 @@ TARGETS = \
     $(BIN_DIR)/xcon6
 
 # ---- Source file lists -----------------------------------------
-# Note: wildcards expand only after extraction; see EXTRACT_STAMP dependency.
-EQLIBU_SRC = $(wildcard $(EQLIBU_SRC_DIR)/*.f)
-EQLIBG_SRC = $(wildcard $(EQLIBG_SRC_DIR)/*.f)
-EQLIB_SRC  = $(wildcard $(EQLIB_SRC_DIR)/*.f)
-EQ3NR_SRC  = $(wildcard $(EQ3NR_SRC_DIR)/*.f)
-EQPT_SRC   = $(wildcard $(EQPT_SRC_DIR)/*.f)
-XCON3_SRC  = $(wildcard $(XCON3_SRC_DIR)/*.f)
-XCON6_SRC  = $(wildcard $(XCON6_SRC_DIR)/*.f)
-
-# EQ6: modules must compile before the rest (they define Fortran modules
-# consumed via USE statements in several other eq6 source files).
-EQ6_MODULE_SRC = $(EQ6_SRC_DIR)/mod6pt.f $(EQ6_SRC_DIR)/mod6xf.f
-EQ6_OTHER_SRC  = $(filter-out $(EQ6_MODULE_SRC), $(wildcard $(EQ6_SRC_DIR)/*.f))
+# Basenames are defined in sources.mk (tracked); full paths are derived here.
+# Update sources.mk with 'make regen-sources' after bumping the upstream submodule.
+include sources.mk
+EQLIBU_SRC     = $(addprefix $(EQLIBU_SRC_DIR)/, $(EQLIBU_SRCS))
+EQLIBG_SRC     = $(addprefix $(EQLIBG_SRC_DIR)/, $(EQLIBG_SRCS))
+EQLIB_SRC      = $(addprefix $(EQLIB_SRC_DIR)/,  $(EQLIB_SRCS))
+EQ3NR_SRC      = $(addprefix $(EQ3NR_SRC_DIR)/,  $(EQ3NR_SRCS))
+EQ6_MODULE_SRC = $(addprefix $(EQ6_SRC_DIR)/,    $(EQ6_MODULE_SRCS))
+EQ6_OTHER_SRC  = $(addprefix $(EQ6_SRC_DIR)/,    $(EQ6_OTHER_SRCS))
+EQPT_SRC       = $(addprefix $(EQPT_SRC_DIR)/,   $(EQPT_SRCS))
+XCON3_SRC      = $(addprefix $(XCON3_SRC_DIR)/,  $(XCON3_SRCS))
+XCON6_SRC      = $(addprefix $(XCON6_SRC_DIR)/,  $(XCON6_SRCS))
 
 # ---- Object file lists -----------------------------------------
-EQLIBU_OBJ     = $(patsubst $(EQLIBU_SRC_DIR)/%.f, $(OBJ_DIR)/%.o, $(EQLIBU_SRC))
-EQLIBG_OBJ     = $(patsubst $(EQLIBG_SRC_DIR)/%.f, $(OBJ_DIR)/%.o, $(EQLIBG_SRC))
-EQLIB_OBJ      = $(patsubst $(EQLIB_SRC_DIR)/%.f,  $(OBJ_DIR)/%.o, $(EQLIB_SRC))
-EQ3NR_OBJ      = $(patsubst $(EQ3NR_SRC_DIR)/%.f,  $(OBJ_DIR)/%.o, $(EQ3NR_SRC))
-EQ6_MODULE_OBJ = $(OBJ_DIR)/mod6pt.o $(OBJ_DIR)/mod6xf.o
-EQ6_OTHER_OBJ  = $(patsubst $(EQ6_SRC_DIR)/%.f,    $(OBJ_DIR)/%.o, $(EQ6_OTHER_SRC))
+EQLIBU_OBJ     = $(EQLIBU_SRCS:%.f=$(OBJ_DIR)/%.o)
+EQLIBG_OBJ     = $(EQLIBG_SRCS:%.f=$(OBJ_DIR)/%.o)
+EQLIB_OBJ      = $(EQLIB_SRCS:%.f=$(OBJ_DIR)/%.o)
+EQ3NR_OBJ      = $(EQ3NR_SRCS:%.f=$(OBJ_DIR)/%.o)
+EQ6_MODULE_OBJ = $(EQ6_MODULE_SRCS:%.f=$(OBJ_DIR)/%.o)
+EQ6_OTHER_OBJ  = $(EQ6_OTHER_SRCS:%.f=$(OBJ_DIR)/%.o)
 EQ6_OBJ        = $(EQ6_MODULE_OBJ) $(EQ6_OTHER_OBJ)
-EQPT_OBJ       = $(patsubst $(EQPT_SRC_DIR)/%.f,   $(OBJ_DIR)/%.o, $(EQPT_SRC))
-XCON3_OBJ      = $(patsubst $(XCON3_SRC_DIR)/%.f,  $(OBJ_DIR)/%.o, $(XCON3_SRC))
-XCON6_OBJ      = $(patsubst $(XCON6_SRC_DIR)/%.f,  $(OBJ_DIR)/%.o, $(XCON6_SRC))
+EQPT_OBJ       = $(EQPT_SRCS:%.f=$(OBJ_DIR)/%.o)
+XCON3_OBJ      = $(XCON3_SRCS:%.f=$(OBJ_DIR)/%.o)
+XCON6_OBJ      = $(XCON6_SRCS:%.f=$(OBJ_DIR)/%.o)
 
 # ============================================================
 # DEFAULT TARGET
@@ -117,10 +116,9 @@ XCON6_OBJ      = $(patsubst $(XCON6_SRC_DIR)/%.f,  $(OBJ_DIR)/%.o, $(XCON6_SRC))
 
 all: build
 
-# Two-phase build: extraction first, then a fresh $(MAKE) invocation so that
-# the wildcard-based source lists (EQLIBU_SRC etc.) are re-evaluated after
-# src/ is populated.  Without the sub-make, a clean-checkout build would see
-# empty wildcard expansions and fail at the link step with "no input files".
+# Two-phase build: extraction first, then a fresh $(MAKE) invocation for
+# compilation.  The sub-make ensures src/ is fully populated before any
+# compile rules fire, regardless of how make schedules prerequisites.
 build: $(EXTRACT_STAMP)
 	@$(MAKE) --no-print-directory $(TARGETS)
 
@@ -518,6 +516,25 @@ pkg/deb/debian/control.dew: pkg/deb/debian/control.dew.in Makefile
 generate: pkg/rpm/eq3_6.spec pkg/rpm/eq3_6_dew.spec pkg/brew/eq3_6.rb pkg/brew/eq3_6_dew.rb \
           pkg/deb/debian/control.eq3-6 pkg/deb/debian/control.eq3-6-doc pkg/deb/debian/control.dew
 
+# Regenerate sources.mk from the extracted source tree.
+# Run after updating the upstream submodule, then review 'git diff sources.mk' and commit.
+regen-sources: $(EXTRACT_STAMP)
+	@echo "==> Regenerating sources.mk ..."
+	@python3 tools/gen_sources.py > sources.mk
+	@echo "==> Done. Review 'git diff sources.mk' before committing."
+
+# Validate that sources.mk matches the extracted source tree.
+# Fails with a diff if any directory has added or removed .f files.
+check-sources: $(EXTRACT_STAMP)
+	@python3 tools/gen_sources.py > /tmp/sources.mk.check
+	@if diff -u sources.mk /tmp/sources.mk.check > /dev/null 2>&1; then \
+	    echo "==> sources.mk is up to date."; \
+	else \
+	    echo "ERROR: sources.mk is out of sync with extracted tree. Run 'make regen-sources'."; \
+	    diff -u sources.mk /tmp/sources.mk.check; \
+	    exit 1; \
+	fi
+
 # ============================================================
 # PACKAGING
 # All package artifacts are written to pkg/dist/.
@@ -666,7 +683,7 @@ docs-package: docs
 # ============================================================
 # CLEAN
 # ============================================================
-test: build pkg/rpm/eq3_6.spec pkg/brew/eq3_6.rb
+test: build check-sources pkg/rpm/eq3_6.spec pkg/brew/eq3_6.rb
 	@bats --recursive tests/cases/
 
 clean:
