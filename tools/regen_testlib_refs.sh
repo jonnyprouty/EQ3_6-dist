@@ -1,15 +1,23 @@
 #!/usr/bin/env bash
-# Regenerate testlib reference outputs and BATS test files.
+# Regenerate testlib reference outputs and BATS test files for the current platform.
 # Run via: make regen-testlib-refs
-# Commit the results in tests/testlib/expected/ and tests/cases/testlib/.
+# Commit the results in tests/testlib/expected/<platform>/ and tests/cases/testlib/.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BIN="$REPO_ROOT/bin"
 DATA1_CACHE="$REPO_ROOT/tests/.data1_cache"
 INPUTS="$REPO_ROOT/tests/testlib/inputs"
-EXPECTED="$REPO_ROOT/tests/testlib/expected"
 CASES="$REPO_ROOT/tests/cases/testlib"
+
+# Canonical platform tag: 'linux' or 'mac'.
+case "$(uname -s)" in
+    Darwin) PLATFORM=mac ;;
+    *)      PLATFORM=linux ;;
+esac
+EXPECTED="$REPO_ROOT/tests/testlib/expected/$PLATFORM"
+
+echo "==> Platform: $PLATFORM  (writing to tests/testlib/expected/$PLATFORM/)"
 
 strip_timing() {
     grep -v \
@@ -70,7 +78,7 @@ gen_bats_file() {
             echo "    run_${exe/-/_} \"\$WORKDIR\" \"\$REPO_ROOT/tests/testlib/inputs/${lib}/${base}.${ext}\""
             echo "    assert_match \"Normal exit\" \"\$WORKDIR/output\""
             echo "    assert_output_matches_ref \"\$WORKDIR/output\" \\"
-            echo "        \"\$REPO_ROOT/tests/testlib/expected/${lib}/${base}.out\""
+            echo "        \"${lib}/${base}.out\""
             echo "}"
             echo ""
         done
@@ -97,4 +105,4 @@ done
 gen_bats_file 6tlib_cmp eq6 com 6i
 echo "    => tests/cases/testlib/6tlib_cmp.bats"
 
-echo "==> Done. Commit tests/testlib/expected/ and tests/cases/testlib/."
+echo "==> Done. Commit tests/testlib/expected/$PLATFORM/ and tests/cases/testlib/."

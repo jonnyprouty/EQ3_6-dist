@@ -109,6 +109,12 @@ assert_no_match() {
 
 DATA1_CACHE="$REPO_ROOT/tests/.data1_cache"
 
+# Canonical platform tag used for reference output selection.
+case "$(uname -s)" in
+    Darwin) _EQ_PLATFORM=mac ;;
+    *)      _EQ_PLATFORM=linux ;;
+esac
+
 # Stage the cached data1 file for the given dataset into workdir.
 # dataset: com | hmw | ymp | ypf | fmt
 stage_data1_for() {
@@ -134,10 +140,18 @@ normalize_eq_output() {
         "$file"
 }
 
-# Assert that two EQ3/6 output files are identical after normalization.
+# Assert that the actual EQ3/6 output matches the platform-appropriate reference.
+# expected_rel: path relative to tests/testlib/expected/ (e.g. 3tlib_cmp/acidmwb.out).
+# Looks for tests/testlib/expected/<platform>/<expected_rel> first, then
+# tests/testlib/expected/linux/<expected_rel> as fallback.
 assert_output_matches_ref() {
     local actual="$1"
-    local expected="$2"
+    local expected_rel="$2"
+    local expected
+    expected="$REPO_ROOT/tests/testlib/expected/$_EQ_PLATFORM/$expected_rel"
+    if [ ! -f "$expected" ]; then
+        expected="$REPO_ROOT/tests/testlib/expected/linux/$expected_rel"
+    fi
     local diff_out
     diff_out=$(diff <(normalize_eq_output "$actual") <(normalize_eq_output "$expected")) || {
         echo "Output does not match reference $expected:" >&2
