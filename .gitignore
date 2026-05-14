@@ -38,6 +38,7 @@ ssh_build_farm.mk
 
 # Test cache and run artifacts
 /tests/.data1_cache
+/tests/testlib/inputs/
 
 # EQ3/6 runtime output files (produced when running executables from repo root)
 /data1

@@ -103,3 +103,45 @@ assert_no_match() {
         return 1
     fi
 }
+
+# ---------------------------------------------------------------------------
+# Testlib helpers
+
+DATA1_CACHE="$REPO_ROOT/tests/.data1_cache"
+
+# Stage the cached data1 file for the given dataset into workdir.
+# dataset: com | hmw | ymp | ypf | fmt
+stage_data1_for() {
+    local workdir="$1"
+    local dataset="$2"
+    local src="$DATA1_CACHE/data1.${dataset}"
+    if [ ! -f "$src" ]; then
+        echo "ERROR: $src not found — run 'make extract-testlib' first." >&2
+        return 1
+    fi
+    cp "$src" "$workdir/data1"
+}
+
+# Normalize EQ3/6 output for comparison: strip the four timing lines that
+# contain wall-clock timestamps and run time, which vary between runs.
+normalize_eq_output() {
+    local file="$1"
+    grep -v \
+        -e '^ Run  [0-9][0-9]:[0-9][0-9]:[0-9][0-9]' \
+        -e '^          Start time = ' \
+        -e '^            End time = ' \
+        -e '^           Run time = ' \
+        "$file"
+}
+
+# Assert that two EQ3/6 output files are identical after normalization.
+assert_output_matches_ref() {
+    local actual="$1"
+    local expected="$2"
+    local diff_out
+    diff_out=$(diff <(normalize_eq_output "$actual") <(normalize_eq_output "$expected")) || {
+        echo "Output does not match reference $expected:" >&2
+        echo "$diff_out" | head -40 >&2
+        return 1
+    }
+}
