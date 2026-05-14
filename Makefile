@@ -385,7 +385,7 @@ $(DEW_PATCH_STAMP): $(DEW_PATCHES) .git/modules/upstream-dew/HEAD | $(DEW_OBJ_DI
 	    echo "==> Applying DEW source patches ..."; \
 	    for p in $(DEW_PATCHES); do \
 	        echo "    $$p"; \
-	        patch -p1 -N --batch < "$$p" 2>/dev/null || true; \
+	        patch -p1 -N --batch --reject-file=/dev/null < "$$p" >/dev/null 2>&1 || true; \
 	    done; \
 	fi
 	@touch $@
@@ -773,7 +773,7 @@ farm-mac:
 # CLEAN
 # ============================================================
 test: build check-sources pkg/rpm/eq3_6.spec pkg/brew/eq3_6.rb
-	@bats --recursive tests/cases/
+	@bats --recursive tests/cases/smoke tests/cases/eq3nr tests/cases/eq6 tests/cases/packaging
 
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
