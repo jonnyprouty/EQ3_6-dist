@@ -119,6 +119,45 @@ all: build
 # CPU count for parallel compilation: nproc (Linux), sysctl (macOS), fallback 1.
 NPROC := $(shell nproc 2>/dev/null || sysctl -n hw.logicalcpu 2>/dev/null || echo 1)
 
+# ---- Farm build configuration ----------------------------------
+# Builder hostnames live in ssh_build_farm.mk (gitignored, never committed).
+# Copy ssh_build_farm.mk.example to ssh_build_farm.mk and fill in your hostnames.
+-include ssh_build_farm.mk
+
+FEDORA_BUILDER   ?=
+UBUNTU_BUILDER   ?=
+MAC_BUILDER      ?=
+# Per-platform repo paths (tilde expands on the LOCAL shell before SSH sees it,
+# so macOS builders with /Users/<user>/ need MAC_FARM_REPO set explicitly).
+FEDORA_FARM_REPO ?=
+UBUNTU_FARM_REPO ?=
+MAC_FARM_REPO    ?=
+
+# Short hostname of this machine — decides local vs SSH for each platform.
+CURRENT_HOST := $(shell hostname -s 2>/dev/null || hostname)
+
+# *_CONNECTION is empty when running on the designated builder (local execution),
+# or 'ssh <host>' when not (remote execution via SSH).
+# Evaluated at parse time so local/remote routing is decided before any recipe runs.
+ifeq ($(CURRENT_HOST),$(FEDORA_BUILDER))
+FEDORA_CONNECTION :=
+else
+FEDORA_CONNECTION := ssh $(FEDORA_BUILDER)
+endif
+
+ifeq ($(CURRENT_HOST),$(UBUNTU_BUILDER))
+UBUNTU_CONNECTION :=
+else
+UBUNTU_CONNECTION := ssh $(UBUNTU_BUILDER)
+endif
+
+# Mac needs Homebrew's bin dirs in PATH; pass via env so SSH sessions pick them up.
+ifeq ($(CURRENT_HOST),$(MAC_BUILDER))
+MAC_CONNECTION :=
+else
+MAC_CONNECTION := ssh $(MAC_BUILDER) env PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin
+endif
+
 # Two-phase build: extraction first, then a fresh $(MAKE) invocation for
 # compilation.  The sub-make ensures src/ is fully populated before any
 # compile rules fire, regardless of how make schedules prerequisites.
@@ -543,6 +582,18 @@ check-sources: $(EXTRACT_STAMP)
 # All package artifacts are written to pkg/dist/.
 # ============================================================
 
+# Per-platform packaging targets for the farm build.
+PLATFORM_PKGS_fedora := rpm rpm-dew
+PLATFORM_PKGS_ubuntu := deb deb-dew
+PLATFORM_PKGS_mac    := brew brew-dew
+
+# Entry point invoked on each farm builder (locally or via SSH).
+# Pulls the latest commit, then runs the full build + test + packaging pipeline.
+# PLATFORM_TARGET must be set to 'fedora', 'ubuntu', or 'mac'.
+platform-build:
+	git pull --ff-only
+	$(MAKE) generate build test build-dew test-dew $(PLATFORM_PKGS_$(PLATFORM_TARGET))
+
 # -- RPM -------------------------------------------------------
 rpm: pkg/rpm/eq3_6.spec docs
 ifneq ($(UNAME_S),Linux)
@@ -684,6 +735,36 @@ docs-package: docs
 	@echo "Docs package written to pkg/dist/eq3-6-docs_8.0a.tar.gz"
 
 # ============================================================
+# FARM BUILD: parallel packaging across all three platforms
+# ============================================================
+# Requires ssh_build_farm.mk (copy from ssh_build_farm.mk.example).
+# Pushes current commit, then builds all three platforms in parallel.
+# *_CONNECTION is empty for the local builder, 'ssh <host>' for remote.
+#
+# Usage:  make farm
+
+farm: _farm-check-config farm-push
+	@$(MAKE) --no-print-directory -j3 --output-sync=target \
+	    farm-fedora farm-ubuntu farm-mac
+
+_farm-check-config:
+ifeq (,$(wildcard ssh_build_farm.mk))
+	$(error ssh_build_farm.mk not found. Copy ssh_build_farm.mk.example and fill in builder hostnames.)
+endif
+
+farm-push:
+	git push
+
+farm-fedora:
+	$(FEDORA_CONNECTION) $(MAKE) -C $(FEDORA_FARM_REPO) platform-build PLATFORM_TARGET=fedora
+
+farm-ubuntu:
+	$(UBUNTU_CONNECTION) $(MAKE) -C $(UBUNTU_FARM_REPO) platform-build PLATFORM_TARGET=ubuntu
+
+farm-mac:
+	$(MAC_CONNECTION) $(MAKE) -C $(MAC_FARM_REPO) platform-build PLATFORM_TARGET=mac
+
+# ============================================================
 # CLEAN
 # ============================================================
 test: build check-sources pkg/rpm/eq3_6.spec pkg/brew/eq3_6.rb
@@ -707,4 +788,5 @@ distclean: clean clean-dew
 .PHONY: all build fetch extract docs docs-package generate symlinks symlinks-dew \
         rpm deb deb-doc brew test clean distclean \
         fetch-dew patch-dew build-dew test-dew clean-dew \
-        rpm-dew deb-dew brew-dew
+        rpm-dew deb-dew brew-dew \
+        farm _farm-check-config farm-push farm-fedora farm-ubuntu farm-mac platform-build

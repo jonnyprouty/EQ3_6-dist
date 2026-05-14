@@ -1,0 +1,10 @@
+# Copy this file to ssh_build_farm.mk (gitignored) and fill in your builder hostnames.
+# ssh_build_farm.mk is never committed — hostnames and addresses stay out of git.
+# FARM_REPO must be an absolute path or a tilde path the remote shell can expand.
+
+FEDORA_BUILDER    := fedora_builder
+UBUNTU_BUILDER    := ubuntu_builder
+MAC_BUILDER       := mac_builder
+FEDORA_FARM_REPO  := ~/EQ36-dist
+UBUNTU_FARM_REPO  := ~/EQ36-dist
+MAC_FARM_REPO     := ~/EQ36-dist

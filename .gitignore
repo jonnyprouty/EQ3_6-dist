@@ -1,3 +1,6 @@
+# Farm build configuration (hostnames must not enter git)
+ssh_build_farm.mk
+
 # Build artifacts
 /obj/
 /bin/

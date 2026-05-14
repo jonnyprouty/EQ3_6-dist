@@ -64,6 +64,24 @@ make build-dew   # applies source patches + compiles 5 executables to bin-dew/
 
 Running both `make symlinks` and `make symlinks-dew` into the same `LINK_DIR` produces zero name conflicts: v8.0a installs as `eq3nr`, `eq6`, `eqpt`, `xcon3`, `xcon6`; DEW installs as `dew-eq3`, `dew-eq6`, `dew-eqpt`, `dew-supcrt`, `dew-cprons92`.
 
+### Farm build
+
+`make farm` builds packages on all three platforms in parallel. Before use, copy
+`ssh_build_farm.mk.example` to `ssh_build_farm.mk` (gitignored) and fill in your builder
+hostnames. The file is never committed — hostnames stay out of git.
+
+- Pushes the current commit to the remote
+- Each platform runs `platform-build` via its `*_CONNECTION` variable: empty string for the
+  local machine, `ssh <host>` (or `ssh <host> env PATH=...` for Mac) for remote machines
+- Fedora: RPMs via `make rpm rpm-dew`
+- Ubuntu: .deb packages via `make deb deb-dew`
+- Mac: Homebrew install via `make brew brew-dew`
+- Output from each machine is buffered and printed as a complete block when it finishes
+
+The machine whose `hostname -s` matches `FEDORA_BUILDER`, `UBUNTU_BUILDER`, or `MAC_BUILDER`
+runs its platform build locally without SSH. Routing is decided at Makefile parse time via
+`ifeq`, so recipe lines contain no conditionals.
+
 ## Architecture
 
 ### v8.0a variant (`bin/`)
