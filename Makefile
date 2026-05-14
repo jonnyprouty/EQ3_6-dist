@@ -593,6 +593,7 @@ check-sources: $(EXTRACT_STAMP)
 #   make regen-testlib-refs -- regenerate reference outputs and .bats files (then commit)
 #   make test-testlib       -- run testlib BATS suite
 
+# data1.com is compiled from data0.cmp (the "comprehensive" database; upstream names it cmp).
 $(DATA1_CACHE)/data1.com: $(UPSTREAM_ZIP) $(BIN_DIR)/eqpt $(SRC_BASE)/eqpt/src/slist
 	mkdir -p $(DATA1_CACHE)
 	TMPDIR=$$(mktemp -d); \
@@ -603,7 +604,24 @@ $(DATA1_CACHE)/data1.com: $(UPSTREAM_ZIP) $(BIN_DIR)/eqpt $(SRC_BASE)/eqpt/src/s
 	cp "$$TMPDIR/data1" $@; \
 	rm -rf "$$TMPDIR"
 
+# Pattern rule for all other datasets where the cache name matches the archive name.
+# Handles: data1.fmt, data1.hmw, data1.ymp, data1.ypf (and any future dataset added to archdb.tar).
+$(DATA1_CACHE)/data1.%: $(UPSTREAM_ZIP) $(BIN_DIR)/eqpt $(SRC_BASE)/eqpt/src/slist
+	mkdir -p $(DATA1_CACHE)
+	TMPDIR=$$(mktemp -d); \
+	unzip -p $(UPSTREAM_ZIP) $(INNER_DB_TAR) \
+	    | tar -xOf - db/data0.$*.gz | gunzip > "$$TMPDIR/data0"; \
+	cp $(SRC_BASE)/eqpt/src/slist "$$TMPDIR/slist"; \
+	(cd "$$TMPDIR" && $(CURDIR)/$(BIN_DIR)/eqpt > run.log 2>&1) || { cat "$$TMPDIR/run.log"; rm -rf "$$TMPDIR"; exit 1; }; \
+	cp "$$TMPDIR/data1" $@; \
+	rm -rf "$$TMPDIR"
+
 TESTLIB_CMP_STAMP = $(DATA1_CACHE)/.inputs-extracted-cmp
+TESTLIB_FMT_STAMP = $(DATA1_CACHE)/.inputs-extracted-fmt
+TESTLIB_HMW_STAMP = $(DATA1_CACHE)/.inputs-extracted-hmw
+TESTLIB_YMP_STAMP = $(DATA1_CACHE)/.inputs-extracted-ymp
+TESTLIB_YPF_STAMP = $(DATA1_CACHE)/.inputs-extracted-ypf
+TESTLIB_XCH_STAMP = $(DATA1_CACHE)/.inputs-extracted-xch
 
 $(TESTLIB_CMP_STAMP): $(TESTLIB_PC_ZIP) $(DATA1_CACHE)/data1.com
 	mkdir -p $(TESTLIB_INPUTS)/3tlib_cmp $(TESTLIB_INPUTS)/6tlib_cmp
@@ -611,12 +629,45 @@ $(TESTLIB_CMP_STAMP): $(TESTLIB_PC_ZIP) $(DATA1_CACHE)/data1.com
 	    "3tlib_cmp/*.3i" "6tlib_cmp/*.6i"
 	@touch $@
 
-extract-testlib: $(EXTRACT_STAMP) $(TESTLIB_CMP_STAMP)
+$(TESTLIB_FMT_STAMP): $(TESTLIB_PC_ZIP) $(DATA1_CACHE)/data1.fmt
+	mkdir -p $(TESTLIB_INPUTS)/3tlib_fmt $(TESTLIB_INPUTS)/6tlib_fmt
+	cd $(TESTLIB_INPUTS) && unzip -q -o $(CURDIR)/$(TESTLIB_PC_ZIP) \
+	    "3tlib_fmt/*.3i" "6tlib_fmt/*.6i"
+	@touch $@
 
-regen-testlib-refs: $(TESTLIB_CMP_STAMP)
+$(TESTLIB_HMW_STAMP): $(TESTLIB_PC_ZIP) $(DATA1_CACHE)/data1.hmw
+	mkdir -p $(TESTLIB_INPUTS)/3tlib_hmw $(TESTLIB_INPUTS)/6tlib_hmw
+	cd $(TESTLIB_INPUTS) && unzip -q -o $(CURDIR)/$(TESTLIB_PC_ZIP) \
+	    "3tlib_hmw/*.3i" "6tlib_hmw/*.6i"
+	@touch $@
+
+$(TESTLIB_YMP_STAMP): $(TESTLIB_PC_ZIP) $(DATA1_CACHE)/data1.ymp
+	mkdir -p $(TESTLIB_INPUTS)/3tlib_ymp $(TESTLIB_INPUTS)/6tlib_ymp
+	cd $(TESTLIB_INPUTS) && unzip -q -o $(CURDIR)/$(TESTLIB_PC_ZIP) \
+	    "3tlib_ymp/*.3i" "6tlib_ymp/*.6i"
+	@touch $@
+
+$(TESTLIB_YPF_STAMP): $(TESTLIB_PC_ZIP) $(DATA1_CACHE)/data1.ypf
+	mkdir -p $(TESTLIB_INPUTS)/3tlib_ypf $(TESTLIB_INPUTS)/6tlib_ypf
+	cd $(TESTLIB_INPUTS) && unzip -q -o $(CURDIR)/$(TESTLIB_PC_ZIP) \
+	    "3tlib_ypf/*.3i" "6tlib_ypf/*.6i"
+	@touch $@
+
+$(TESTLIB_XCH_STAMP): $(TESTLIB_PC_ZIP) $(DATA1_CACHE)/data1.com
+	mkdir -p $(TESTLIB_INPUTS)/xchtlib
+	cd $(TESTLIB_INPUTS) && unzip -q -o $(CURDIR)/$(TESTLIB_PC_ZIP) \
+	    "xchtlib/*.3i" "xchtlib/*.6i"
+	@touch $@
+
+TESTLIB_ALL_STAMPS = $(TESTLIB_CMP_STAMP) $(TESTLIB_FMT_STAMP) $(TESTLIB_HMW_STAMP) \
+                     $(TESTLIB_YMP_STAMP) $(TESTLIB_YPF_STAMP) $(TESTLIB_XCH_STAMP)
+
+extract-testlib: $(EXTRACT_STAMP) $(TESTLIB_ALL_STAMPS)
+
+regen-testlib-refs: $(TESTLIB_ALL_STAMPS)
 	@bash tools/regen_testlib_refs.sh
 
-test-testlib: $(TESTLIB_CMP_STAMP)
+test-testlib: $(TESTLIB_ALL_STAMPS)
 	@bats --recursive tests/cases/testlib/
 
 # ============================================================
