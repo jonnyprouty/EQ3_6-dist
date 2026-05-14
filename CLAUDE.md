@@ -178,13 +178,20 @@ brew test eq3_6     # Homebrew smoke test
 eq3nr               # confirm in PATH
 ```
 
+**6. Run the test suite** (optional):
+```bash
+brew install bats-core
+make test
+```
+
 **Notes:**
 - `gfortran` comes from Homebrew's `gcc` formula — system Xcode does not include it.
 - Homebrew 4+ requires formulae to be in a tap; `make brew` handles this automatically
   by creating a local tap at `$(brew --repository)/Library/Taps/local/homebrew-eq3-6/`.
 - SSH sessions may have a minimal `$PATH` that excludes `/usr/local/bin`. Either source
   your shell profile or prefix commands with `PATH="/usr/local/bin:$PATH"`.
-- To run the BATS test suite on macOS: `brew install bats-core && make test`
+- `make test` requires `bats-core`; SSH sessions need `export PATH=/usr/local/bin:$PATH`
+  if `bats` is not found.
 
 ## Template policy
 
