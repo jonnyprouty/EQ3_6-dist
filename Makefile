@@ -674,8 +674,10 @@ clean:
 
 # distclean also removes extracted source, downloaded docs, and packaging build trees.
 # Does NOT remove upstream/ (submodule), pkg/ source files, or .gitmodules.
+# $(DOCS) removes only the gitignored PDF files; docs/SHA256SUMS is tracked and must stay.
 distclean: clean clean-dew
-	rm -rf $(SRC_BASE) $(DOCS_DIR) \
+	rm -rf $(SRC_BASE) \
+	    $(DOCS) \
 	    pkg/rpm/build pkg/rpm/eq3_6.spec pkg/rpm/eq3_6_dew.spec \
 	    pkg/deb/staging pkg/deb/staging-doc pkg/deb/staging-dew \
 	    pkg/deb/debian/control.eq3-6 pkg/deb/debian/control.eq3-6-doc pkg/deb/debian/control.dew \
