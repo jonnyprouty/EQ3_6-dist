@@ -242,9 +242,19 @@ Three DATA0 databases are compiled at setup time into `tests/.dew_data_cache/`:
 
 ### Reference outputs and reproducibility
 
-Reference outputs live in `tests/dew/expected/linux/`. A `mac/` directory would hold
-macOS references if they diverge; currently only `linux/` exists and the `assert_dew_output_matches_ref`
-helper falls back to `linux/` on any non-macOS platform.
+Reference outputs live in `tests/dew/expected/<platform>/`. Platforms currently committed:
+
+| Platform tag | Host | Compiler |
+|---|---|---|
+| `linux` | Fedora 43 x86-64 | gfortran 15.2.1 (Red Hat RPM) |
+| `ubuntu` | Ubuntu 26.04 x86-64 | gfortran 15.2.0 (Ubuntu apt) |
+
+The `assert_dew_output_matches_ref` helper resolves:
+1. `tests/dew/expected/<platform>/<case>.out` if it exists
+2. `tests/dew/expected/linux/<case>.out` as fallback
+
+Platform is detected at test time from `uname -s` and `/etc/os-release` (see
+`_EQ_PLATFORM` in `tests/lib/helpers.bash`).
 
 To regenerate references for the current platform:
 ```bash
@@ -252,6 +262,43 @@ make extract-dew-workshop   # rebuild data caches (required first)
 make regen-dew-refs         # writes to tests/dew/expected/<platform>/
 # commit the results
 ```
+
+### Platform-divergent DEW EQ6 case
+
+One EQ6 case produces different output between Fedora gfortran 15.2.1 and
+Ubuntu gfortran 15.2.0:
+
+| Case | First differing quantity | Fedora (linux) | Ubuntu |
+|---|---|---|---|
+| `pelitic_10kbar_eq6` | Reaction progress | 2.04013621037949E-05 | 2.04013500438004E-05 |
+
+This is genuine ODE path divergence — the same phenomenon documented for `6tlib_*`
+cases above — not rounding noise.  The EQ6 R100 reaction path integration
+(subroutine `path` in `eq6r100.f`, line 7071) uses a predictor-corrector method
+where predictor values for the next step are computed by subroutine `taylor`
+(line 15032) as truncated Taylor series in the reaction-progress variable `delzi`.
+The Taylor coefficients `dzvec0` are finite-difference derivatives of the basis
+variable vector `zvec0`, accumulated by subroutine `zvecpr` (line 16057) after
+each accepted step.
+
+At each step `path` calls `taylor` to extrapolate, then calls `eqcalc` (line 2568)
+to correct via Newton-Raphson.  The corrected step is accepted or rejected based on
+whether the residual functions in `betaz` (line 1468) fall within tolerance.  When
+the step is accepted, `zvecpr` updates the derivative vectors for the next predictor.
+
+Because Fedora gfortran 15.2.1 (Red Hat RPM) and Ubuntu gfortran 15.2.0 (Ubuntu apt)
+are different packaging builds of the same upstream release, they apply different
+optimization passes and produce different x87/SSE2 instruction sequences for the
+Taylor accumulation loop in `taylor`.  The resulting extended-precision intermediates
+differ by ≤1 ULP.  After enough steps those differences compound into divergent
+step-size decisions in `path`, sending the two builds down different branches of
+the adaptive step-size controller.  At step 17 of the `pelitic_10kbar_eq6` run,
+the two builds take a different number of Newton-Raphson corrector iterations,
+causing all subsequent reaction-progress values to differ.
+
+The divergence is confined to `pelitic_10kbar_eq6` because it is the longest DEW
+EQ6 run (over 22 000 output lines, 17 accepted steps).  The shorter `mor_hydrothermal`
+run converges in fewer steps and does not reach the bifurcation point.
 
 ### Why the DEW binaries needed initialization flags
 
