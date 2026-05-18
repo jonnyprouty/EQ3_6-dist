@@ -1,0 +1,1906 @@
+
+ EQ6, version 3245R100
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+ Supported by EQLIB, version 3245R136
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+
+ Run                    
+
+
+
+ --- reading the input file ---
+ NEW JHU 2 KB DATAFILE: MAY, 1993                                                
+                                                                                 
+                                                                                 
+   This run calculates the reaction of MOR WATER with                            
+                                                                                 
+    CLINOCHLORE   1.0 MOLES                                                      
+    PYRRHOTITE    0.01 MOLES (RATE 0.01)                                         
+    MUSCOVITE     1.0 MOLES (RATE 0.03)                                          
+                                                                                 
+                                                                                 
+ TITRATION system at 350 C.                                                      
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+   The bottom half of this input file is the pickup file produced by             
+ eq3nr using the input file MOR produced in MAY, 1993                            
+                                                                                 
+                                                                                 
+ endit.                                                                          
+     nmodl1=  1              nmodl2=  0
+     tempc0=  3.50000E+02     jtemp=  0
+        tk1=  0.00000E+00       tk2=  0.00000E+00       tk3=  0.00000E+00
+     zistrt=  0.00000E+00     zimax=  1.00000E-07
+      tstrt=  0.00000E+00    timemx=  0.00000E+00
+     kstpmx=         1000     cplim=  0.00000E+00
+     dzprnt=  1.00000E+38    dzprlg=  5.00000E-01    ksppmx= 10000
+     dzplot=  1.00000E+38    dzpllg=  1.00000E+04    ksplmx= 10000
+      ifile= 16
+                 1    2    3    4    5    6    7    8    9   10
+   iopt1-10=     0    0    0    0    0    0    0    0    0    0
+      11-20=     0    0    0    0    0    0    0    0    0    0
+   iopr1-10=     0    0    0    0    1    0    0    1    0    0
+  iopr11-20=     0    0    0    0    0    0    0    0    0    0
+   iodb1-10=     0    0    0    0    0    0    0    0    0    0
+      11-20=     0    0    0    0    0    0    0    0    0    0
+      nxopt=  0
+      nffg =  0
+       nrct=     3
+   reactant= PYRRHOTITE        
+      jcode=  0               jreac=  0
+       morr=  1.00000E-02      modr=  0.00000E+00
+        nsk=  0                  sk=  0.00000E+00        fk=  0.00000E+00
+        nrk=  1                nrpk=  0
+        rk1=  1.00000E-02       rk2=  0.00000E+00       rk3=  0.00000E+00
+   reactant= CLINOCHLORE       
+      jcode=  0               jreac=  0
+       morr=  1.00000E+00      modr=  0.00000E+00
+        nsk=  0                  sk=  0.00000E+00        fk=  0.00000E+00
+        nrk=  1                nrpk=  0
+        rk1=  1.00000E+00       rk2=  0.00000E+00       rk3=  0.00000E+00
+   reactant= QUARTZ            
+      jcode=  0               jreac=  0
+       morr=  1.00000E+00      modr=  0.00000E+00
+        nsk=  0                  sk=  0.00000E+00        fk=  0.00000E+00
+        nrk=  1                nrpk=  0
+        rk1=  1.00000E+00       rk2=  0.00000E+00       rk3=  0.00000E+00
+     dlzidp=  0.00000E+00
+      tolbt=  1.00000E-10     toldl=  1.00000E-10      tolx=  0.00000E+00
+     tolsat=  0.00000E+00    tolsst=  0.00000E+00
+     screw1=  0.00000E+00    screw2=  0.00000E+00    screw3=  0.00000E+00
+     screw4=  0.00000E+00    screw5=  0.00000E+00    screw6=  0.00000E+00
+     zklogu=        0.000    zklogl=        0.000     zkfac=        0.000
+     dlzmx1=  0.00000E+00    dlzmx2=  0.00000E+00    nordlm=  0
+     itermx=  0              ntrymx=  0
+     npslmx=  0              nsslmx=  0              ioscan=  0
+     MID-OCEAN RIDGE HYDROTHERMAL FLUIDS                                         
+                                                                                 
+         pH = 4.7                                                                
+         logfO2 =  -30                                                           
+                                                                                 
+                                                                                 
+         Uses May, 1993 JHU datafile                                             
+                                                                                 
+                                                                                 
+                                                                                 
+ endit.                                                                          
+     uacion= CL-         
+     tempci=  3.50000E+02
+      nxmod=  1
+    species= FECL2             
+       type=  0              option=  1              xlkmod=  0.00000E+00
+      iopg1=  0               iopg2= -1               iopg3=  0
+      iopg4=  0               iopg5=  1               iopg6=  0
+      iopg7=  0               iopg8=  0               iopg9=  0
+     iopg10=  0
+        kct= 16                 ksq= 17                 kmt= 17
+        kxt= 17                kdim= 17                kprs=  0
+ component            moles            moles aqueous
+    O                  5.555392491354190E+01       0.000000000000000E+00
+    NA                 4.300173733816080E-01       0.000000000000000E+00
+    K                  2.486041717050700E-02       0.000000000000000E+00
+    CA                 2.150698775830990E-02       0.000000000000000E+00
+    MG                 9.874512257996420E-05       0.000000000000000E+00
+    AL                 4.076861932740290E-06       0.000000000000000E+00
+    SI                 1.599419558262240E-02       0.000000000000000E+00
+    ZN                 1.101254299833350E-04       0.000000000000000E+00
+    BA                 9.466249987326340E-05       0.000000000000000E+00
+    H                  1.110235110002140E+02       0.000000000000000E+00
+    C                  6.615652581427920E-03       0.000000000000000E+00
+    CL                 4.889572372580140E-01       0.000000000000000E+00
+    S                  2.300703020660310E-03       0.000000000000000E+00
+    MN                 6.097783494019680E-04       0.000000000000000E+00
+    FE                 1.799559689721480E-03       0.000000000000000E+00
+    CU                 1.494980083517890E-05       0.000000000000000E+00
+    electr             1.439374824923110E-02
+    H2O                H2O                 1.744360912091830E+00
+    NA+                NA+                -5.284163231667490E-01
+    K+                 K+                 -1.698513122251540E+00
+    CA++               CA++               -2.213232560072400E+00
+    MG++               MG++               -5.098212121353590E+00
+    AL+++              AL+++              -1.574824519629090E+01
+    SIO2(AQ)           SIO2(AQ)           -1.796041253481430E+00
+    ZN++               ZN++               -9.052136874899240E+00
+    BA++               BA++               -5.125874743776210E+00
+    H+                 H+                 -4.548125859881310E+00
+    CO2(AQ)            CO3--              -2.181444559371160E+00
+    CL-                CL-                -4.888519533593960E-01
+    H2S(AQ)            SO4--              -2.641069559905820E+00
+    MN++               MN++               -5.851274168203210E+00
+    FE++               FE++               -4.552325859984200E+00
+    CU+                CU+                -9.292753741191440E+00
+    O2(G)              O2(G)              -3.000000000000000E+01
+
+ --- the input file has been successfully read ---
+
+ --- reading the data1 file ---
+
+ --- the data1 file has been successfully read ---
+
+                       1.000  FECL2                   
+                           ==
+                       2.000  CL-                     
+                    +  1.000  FE++                    
+
+       log k of the above reaction at    350.000
+        deg celsius and    500.000 bars was changed from 
+          -3.7074 to    -3.7074
+
+
+      switching CO3--                    from the basis for CO2(AQ)                 
+
+
+                       1.000  CO2(AQ)                 
+                    +  1.000  H2O                     
+                           ==
+                       2.000  H+                      
+                    +  1.000  CO3--                   
+
+                       1.000  CO3--                   
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+      switching SO4--                    from the basis for H2S(AQ)                 
+
+
+                       1.000  H2S(AQ)                 
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H+                      
+                    +  1.000  SO4--                   
+
+                       1.000  SO4--                   
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2S(AQ)                 
+                    +  2.000  O2(G)                   
+
+
+
+
+
+
+ eeeee  qqq   666 
+ e     q   q 6    
+ eeee  q   q 6666 
+ e     q q q 6   6
+ eeeee  qqq   666 
+           q      
+
+
+
+ eq6.3245R100  
+  supported by eqlib.3245R136  
+
+
+ NEW JHU 2 KB DATAFILE: MAY, 1993                                                
+                                                                                 
+                                                                                 
+   This run calculates the reaction of MOR WATER with                            
+                                                                                 
+    CLINOCHLORE   1.0 MOLES                                                      
+    PYRRHOTITE    0.01 MOLES (RATE 0.01)                                         
+    MUSCOVITE     1.0 MOLES (RATE 0.03)                                          
+                                                                                 
+                                                                                 
+ TITRATION system at 350 C.                                                      
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+   The bottom half of this input file is the pickup file produced by             
+ eq3nr using the input file MOR produced in MAY, 1993                            
+                                                                                 
+                                                                                 
+
+     MID-OCEAN RIDGE HYDROTHERMAL FLUIDS                                         
+                                                                                 
+         pH = 4.7                                                                
+         logfO2 =  -30                                                           
+                                                                                 
+                                                                                 
+         Uses May, 1993 JHU datafile                                             
+                                                                                 
+                                                                                 
+                                                                                 
+
+ DATA FILE DATA0.3230U03                                                         
+   1 ATM.-STEAM SATURATION CURVE DATA                                            
+   LAST REVISED SEPT. 1991                                                       
+                                                                                 
+
+   the activity coefficients of aqueous solute species
+ and the activity of water are calculated according to
+ b-dot equation plus others      
+
+
+    no. of elements in the data base = 27
+    no. of elements dimensioned for = 70
+    no. of active elements = 16
+
+       no. of aqueous species dimensioned for = 750
+       no. of aqueous species loaded = 120
+       no. of active aqueous species =  98
+
+          no. of aqueous reactions dimensioned for = 679
+          no. of aqueous reactions loaded =  92
+          no. of active aqueous reactions =  82
+
+
+             no. of pure minerals dimensioned for = 750
+             no. of pure minerals loaded = 106
+             no. of active pure minerals = 104
+
+             no. of gases dimensioned for =  15
+             no. of gases loaded =   7
+             no. of active gases =   7
+
+                no. of solid solutions in the data base =  15
+                no. of solid solutions dimensioned for =  20
+                no. of active solid solutions =   0
+
+    zistrt =  0.000000E+00 (initial value of zi)
+    zimax  =  1.000000E-07 (maximum value of zi)
+    timemx =  1.000000E+38 (maximum value of time, sec)
+    kstpmx =          1000 (maximum number of steps this run)
+
+
+       dzprnt =  1.000000E+38 (linear print interval)
+       dzprlg =  5.000000E-01 (logarithmic print interval)
+       dlzidp =  1.000000E+38 (p.r.s. transfer interval)
+
+       maximum permitted step sizes.....
+          dlzmx1 =  1.000000E-08 (nord=0)
+          dlzmx2 =  1.000000E+38 (nord.ge.1)
+       nordlm =  6 (maximum permitted order)
+
+
+    temperature =    350.000 c
+
+
+    nmodl1 =  1 (physical system switch)
+      1 = titration, 2 = closed, 3 = flow-through)
+    nmodl2 =  0 (economy mode permission switch)
+      0 = normal, 1 = economy, 3 = super economy)
+
+       iopt1  =  0 (kinetic mode switch)
+       iopt2  =  0 (suppress phase boundary location)
+       iopt3  =  0 (interfacing output switch)
+       iopt4  =  0 (permit solid solutions switch)
+       iopt5  =  0 (remove initial solids switch)
+       iopt6  =  0 (clear p.r.s. at start switch)
+       iopt7  =  0 (auto basis switch mode switch)
+       iopt8  =  0 (linear vs. log taylor-s series)
+       iopt9  =  0 (not used)
+       iopt10 =  0 (not used)
+       iopt11 =  0 (suppress all redox reactions switch)
+       iopt12 =  0 (not used)
+       iopt13 =  0 (tab file output switch)
+       iopt14 =  0 (ahv input file access)
+       iopt15 =  0 (not used)
+       iopt16-20   (not used)
+       ifile  = 16 (supplementary input file)
+
+          iopg1  =  0 (choice of act. coeff. equations)
+          iopg2  = -1 (choice of ph scale)
+          iopg3  =  0 (e-lambda switch for hydration theory)
+          iopg4  =  0 (not used)
+          iopg5  =  1 (gamC 0: omega-hat (specify C pos in iopg9), 1: bdot*xi)
+          iopg6  =  0 (choice of pitzer j(x) approximation)
+          iopg7  =  0 (a(H2O)=1 if =0, a(H2O)=X(H2O) if =1)
+          iopg8  =  0 (if =1 then uses high T range 650-1000 C)
+          iopg9  =  0 (position of C in the datafile)
+          iopg10 =  0 (Gamma-gam options)
+
+       iopr1  =  0 (print loading of species from data1)
+       iopr2  =  0 (print derivatives of basis elements)
+       iopr3  =  0 (print loaded species and log k values)
+       iopr4  =  0 (print aqueous species distribution)
+       iopr5  =  1 (print cation/h+ activity ratios)
+       iopr6  =  0 (print element/oxide comp. of mineral assemblage)
+       iopr7  =  0 (print mineral affinity summary)
+       iopr8  =  1 (print gas fugacity summary)
+       iopr9  =  0 (print mean molal activity coefficient)
+       iopr10 =  0 (print tabulation of pitzer coefficients)
+       iopr11 =  0 (print major species for each element)
+       iopr12-20   (not used)
+
+          iodb1  =  0 (enable comp. messages)
+          iodb2  =  0 (print pre-newton-raphson optimization)
+          iodb3  =  0 (print order/scaling info.)
+          iodb4  =  0 (print newton iteration info.)
+          iodb5  =  0 (print search iterations)
+          iodb6  =  0 (print hpsatz iterations)
+          iodb7  =  0 (print f.d. and t.s. calculations)
+          iodb8  =  0 (turns iodb3 on and off)
+          iodb9  =  0 (print kinetics info.)
+          iodb10 =  0 (check basis var. f.d. and t.s.)
+          iodb11 =  0 (check reac. rate f.d. and t.s.)
+          iodb12 =  0 (iteration variable killer option)
+          iodb13 =  0 (not used)
+          iodb14 =  0 (not used)
+          iodb15 =  0 (not used)
+          iodb16 =  0 (turn on akmatr prints)
+          iodb17-20   (not used)
+
+       tolbt  =  1.000000E-10 (residual function convergence tolerance)
+       toldl  =  1.000000E-10 (correction term convergence tolerance)
+       tolx   =  1.000000E-08 (sol-sol reactant/product identity tolerance)
+       tolsat =  5.000000E-04 (lower supersaturation tolerance)
+       tolsst =  1.000000E-03 (upper supersaturation tolerance)
+
+
+   screw1 =  1.000E-04 (primary step-size parameter for basis variables)
+   screw2 =    0.00000 (not used)
+   screw3 =  1.000E-04 (step size parameter for rate functions)
+   screw4 =  1.000E-04 (corrector parameter for rate functions)
+   screw5 =    4.00000 (under-relaxation control for n-r iteration)
+   screw6 =    4.00000 (step size parameter for economy mode)
+
+       zklogu =     -7.000 (threshhold log mass for solids)
+       zklogl =      2.000 (log mass decrement for p.r.s shift)
+        zkfac =      0.980 (shift adjustment factor)
+       zklgmn =     -7.009 (minimum log mass after a shift)
+
+
+           itermx= 30 (newton-raphson iteration limit)
+           ntrymx= 25 (phase assemblage try limit)
+           npslmx=  8 (critical phase instability slide limit)
+           nsslmx=  3 (critical redox instability slide limit)
+
+
+      iacion = 16, CL-          (defines xisteq)
+
+
+
+   --- inactive loaded aqueous species ---
+
+
+     SR++                   PB++                   AG+               
+     NH4+                   F-                     HG++              
+     AU+                    CS+                    CD++              
+     U++++                  HPO4--                 N2(AQ)            
+     HG2++                  AU+++                  NO3-              
+     U++                    U+++                   UO2+              
+     UO2++                  AGCL0                  FE(AC)2           
+
+
+   --- inactive loaded minerals ---
+
+
+     STAUROLITE             FE-CHLORITOID     
+
+
+                     --- reactants and rate coefficients ---
+
+      forward/dissolution=
+
+   PYRRHOTITE               arbitrary relative rate
+                    rk1=  1.00000E-02   rk2=  0.00000E+00   rk3=  0.00000E+00
+   CLINOCHLORE              arbitrary relative rate
+                    rk1=  1.00000E+00   rk2=  0.00000E+00   rk3=  0.00000E+00
+   QUARTZ                   arbitrary relative rate
+                    rk1=  1.00000E+00   rk2=  0.00000E+00   rk3=  0.00000E+00
+
+   reverse/precipitation=
+
+   PYRRHOTITE               no precipitation rate
+   CLINOCHLORE              no precipitation rate
+   QUARTZ                   no precipitation rate
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+ stepping to zi=  0.0000E+00, delzi=  0.0000E+00, nord= 0
+
+   attempted species assemblage no.   1
+
+              1      1  H2O                             
+              2      2  NA+                             
+              3      3  K+                              
+              4      4  CA++                            
+              5      5  MG++                            
+              6      6  AL+++                           
+              7      7  SIO2(AQ)                        
+              8      9  ZN++                            
+              9     12  BA++                            
+             10     13  H+                              
+             11     14  CO3--                           
+             12     16  CL-                             
+             13     17  SO4--                           
+             14     20  MN++                            
+             15     21  FE++                            
+             16     22  CU+                             
+             17     28  O2(G)                           
+
+               ncycle=  0
+ iter =    5
+      10 supersaturated pure minerals
+       0 supersaturated solid solutions
+
+                          the most supersaturated phases     affinity, kcal
+
+                            1      11   MAGNESITE              87.45555960
+                            2      67   COPPER                  4.85711567
+                            3       2   MAGNETITE               7.74896601
+                            4       4   HEMATITE                3.55998464
+                            5      21   FAYALITE                2.92875879
+                            6      31   FERROSILITE             0.99240857
+                            7      69   PYRRHOTITE              0.56090621
+                            8      59   CHAMOSITE       X       7.96623766
+
+
+   attempted species assemblage no.   2
+
+              1      1  H2O                             
+              2      2  NA+                             
+              3      3  K+                              
+              4      4  CA++                            
+              5      5  MG++                            
+              6      6  AL+++                           
+              7      7  SIO2(AQ)                        
+              8      9  ZN++                            
+              9     12  BA++                            
+             10     13  H+                              
+             11     14  CO3--                           
+             12     16  CL-                             
+             13     17  SO4--                           
+             14     20  MN++                            
+             15     21  FE++                            
+             16     22  CU+                             
+             17     28  O2(G)                           
+             18     11  MAGNESITE                       
+
+ iter =   18
+       1 supersaturated pure minerals
+       0 supersaturated solid solutions
+
+                          the most supersaturated phases     affinity, kcal
+
+                            1      67   COPPER                  3.44101106
+
+
+   attempted species assemblage no.   3
+
+              1      1  H2O                             
+              2      2  NA+                             
+              3      3  K+                              
+              4      4  CA++                            
+              5      5  MG++                            
+              6      6  AL+++                           
+              7      7  SIO2(AQ)                        
+              8      9  ZN++                            
+              9     12  BA++                            
+             10     13  H+                              
+             11     14  CO3--                           
+             12     16  CL-                             
+             13     17  SO4--                           
+             14     20  MN++                            
+             15     21  FE++                            
+             16     22  CU+                             
+             17     28  O2(G)                           
+             18     11  MAGNESITE                       
+             19     67  COPPER                          
+
+ iter =   11
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                     reaction progress        =  0.00000000000000E+00
+                     log of reaction progress =    -999.0000000
+
+                     temperature    =    350.000 degrees c
+                     total pressure =    500.000 bars
+
+                     computing units remaining =      0.000
+
+
+ change in the product phase assemblage
+
+ start or re-start of run
+
+
+                               --- reactant summary ---
+
+
+     definitions and conventions
+
+          delta x = x now - x at start
+          affinity is + for forward direction (dissolution),
+                      - for reverse direction (precipitation)
+          rates are + for forward direction (dissolution),
+                    - for reverse direction (precipitation)
+
+
+         reactant            moles       delta moles      grams        delta grams
+
+   PYRRHOTITE              1.00000E-02    0.00000E+00    8.79070E-01    0.00000E+00
+   CLINOCHLORE             1.00000E+00    0.00000E+00    5.55797E+02    0.00000E+00
+   QUARTZ                  1.00000E+00    0.00000E+00    6.00843E+01    0.00000E+00
+
+
+                current total mass =  6.16760E+02 grams
+                delta total mass   =  0.00000E+00 grams
+                delta total volume =      0.00000 cc
+
+
+         reactant           affinity     rel. rate
+
+   PYRRHOTITE                 2.6669    1.00000E-02
+   CLINOCHLORE              450.4509    1.00000E+00
+   QUARTZ                     0.6046    1.00000E+00
+
+          affinity of the overall irreversible reaction=   451.082 kcal
+          contributions from irreversible reactions
+          with no thermodynamic data are not included
+
+
+
+      --- element totals for the aqueous phase ---
+
+   element         mg/kg soln.         molal conc.          moles
+
+      O          8.624879E+05        5.555371E+01        5.555363E+01
+      NA         9.593067E+03        4.300180E-01        4.300174E-01
+      K          9.431986E+02        2.486045E-02        2.486042E-02
+      CA         8.364580E+02        2.150702E-02        2.150699E-02
+      MG         6.855208E-30        2.906623E-34        2.906619E-34
+      AL         1.067406E-01        4.076868E-06        4.076862E-06
+      SI         4.358945E+02        1.599422E-02        1.599420E-02
+      ZN         6.986657E+00        1.101256E-04        1.101254E-04
+      BA         1.261480E+01        9.466263E-05        9.466250E-05
+      H          1.085849E+05        1.110237E+02        1.110235E+02
+      C          7.595521E+01        6.516917E-03        6.516907E-03
+      CL         1.682135E+04        4.889579E-01        4.889572E-01
+      S          7.157493E+01        2.300706E-03        2.300703E-03
+      MN         3.250736E+01        6.097792E-04        6.097783E-04
+      FE         9.752208E+01        1.799562E-03        1.799560E-03
+      CU         6.068508E-02        9.841413E-07        9.841399E-07
+
+      co3--                          0.000000E+00        0.000000E+00
+      so4--                          0.000000E+00        0.000000E+00
+      s--                            0.000000E+00        0.000000E+00
+
+    warning-- co3--, so4--, and s-- totals require that routine comp1 
+    have the names of non-carbonate carbon, sulfide sulfur,
+    and non-sulfate sulfur aqueous species
+
+
+   single ion activities and activity coefficients are here defined
+   with respect to the internal ph scale       
+
+
+
+                                       ph           eh           pe
+
+     internal ph scale               4.1308        1.1313    9.1498E+00
+     modified nbs ph scale           3.9790        1.1501    9.3017E+00
+     rational ph scale               3.9790        1.1501    9.3017E+00
+
+   phcl =      4.7716
+
+
+
+          oxygen fugacity =  1.04690E-30
+          log oxygen fugacity = -29.98009
+
+
+
+                              activity of water =   1.00000
+               log activity of water =   0.00000
+               alkalinity =  0.000000E+00 equiv/kg solvent
+                                          (not def. for t.gt.50 c)
+
+                    ionic strength =  3.379505E-01 molal
+                 sum of molalities =    0.8292129040266
+               osmotic coefficient =   -0.00000
+                    equiv. stoich. ionic strength =  4.889579E-01 molal
+
+                         mass of solution =   1.030536 kg
+                         mass of solvent  =   0.999999 kg
+                         mass of solutes  =   0.030537 kg
+                         conc of solutes  =   2.963248 per cent (w/w)
+
+
+   species                moles        grams          conc        log conc      log g      log act
+
+   H2O                  5.55086E+01   9.99999E+02
+   NA+                  2.96196E-01   6.80948E+00   2.96197E-01    -0.52842    -0.15187    -0.68029
+   K+                   2.00209E-02   7.82784E-01   2.00209E-02    -1.69852    -0.15187    -1.85039
+   CA++                 6.12296E-03   2.45408E-01   6.12297E-03    -2.21304    -0.67237    -2.88540
+   MG++                 2.34792E-35   5.70662E-34   2.34792E-35   -34.62932    -0.67237   -35.30168
+   AL+++                3.15942E-14   8.52461E-13   3.15943E-14   -13.50039    -1.53986   -15.04025
+   SIO2(AQ)             1.59942E-02   9.60998E-01   1.59942E-02    -1.79604     0.00000    -1.79604
+   ZN++                 8.86792E-10   5.79784E-08   8.86793E-10    -9.05218    -0.67237    -9.72454
+   BA++                 7.48333E-06   1.02769E-03   7.48334E-06    -5.12590    -0.67237    -5.79827
+   H+                   1.04961E-04   1.05790E-04   1.04961E-04    -3.97897    -0.15187    -4.13084
+   CO3--                1.61826E-12   9.71107E-11   1.61827E-12   -11.79095    -0.67237   -12.46332
+   CL-                  3.24456E-01   1.15029E+01   3.24456E-01    -0.48884    -0.15187    -0.64071
+   SO4--                2.36928E-12   2.27588E-10   2.36929E-12   -11.62538    -0.67237   -12.29775
+   MN++                 1.40829E-06   7.73687E-05   1.40829E-06    -5.85131    -0.67237    -6.52367
+   FE++                 2.80306E-05   1.56543E-03   2.80307E-05    -4.55237    -0.67237    -5.22473
+   CU+                  3.72310E-11   2.36588E-09   3.72310E-11   -10.42909    -0.17877   -10.60787
+   O2(AQ)               1.54980E-33   4.95919E-32   1.54981E-33   -32.80972     0.02163   -32.78809
+   H2(AQ)               6.98100E-04   1.40723E-03   6.98101E-04    -3.15608     0.02163    -3.13445
+   CH4(AQ)              1.03409E-05   1.65895E-04   1.03409E-05    -4.98544     0.02163    -4.96381
+   HS-                  4.19243E-06   1.38635E-04   4.19244E-06    -5.37753    -0.15187    -5.52940
+   FE+++                8.65491E-18   4.83351E-16   8.65492E-18   -17.06274    -1.53986   -18.60260
+   CU++                 7.28846E-18   4.63153E-16   7.28847E-18   -17.13736    -0.67237   -17.80973
+   HCO3-                1.07823E-06   6.57904E-05   1.07823E-06    -5.96729    -0.15187    -6.11916
+   CLO4-                4.46651E-79   4.44197E-77   4.46651E-79   -78.35003    -0.15187   -78.50190
+   OH-                  1.22662E-06   2.08616E-05   1.22663E-06    -5.91129    -0.15187    -6.06316
+   CH3COO-              1.45847E-14   8.61148E-13   1.45847E-14   -13.83610    -0.15187   -13.98797
+   CH3CH2COO-           3.78476E-21   2.76557E-19   3.78477E-21   -20.42196    -0.15187   -20.57383
+   AL(OH)3              6.88850E-09   5.37327E-07   6.88851E-09    -8.16187     0.00000    -8.16187
+   AL(OH)4 -            4.06997E-06   3.86691E-04   4.06998E-06    -5.39041    -0.15187    -5.54228
+   BACL+                8.71792E-05   1.50631E-02   8.71793E-05    -4.05959    -0.15187    -4.21146
+   CACL+                9.37024E-03   7.07763E-01   9.37026E-03    -2.02825    -0.15187    -2.18012
+   CACL2                6.00970E-03   6.66992E-01   6.00971E-03    -2.22115     0.00000    -2.22115
+   CACO3                7.40176E-10   7.40837E-08   7.40177E-10    -9.13066     0.00000    -9.13066
+   CAHCO3+              4.04435E-06   4.08872E-04   4.04435E-06    -5.39315    -0.12694    -5.52009
+   CA(OH)+              3.99701E-08   2.28179E-06   3.99702E-08    -7.39826    -0.15187    -7.55013
+   CUCL                 1.18306E-09   1.17122E-07   1.18306E-09    -8.92699     0.00000    -8.92699
+   CUCL2-               3.43550E-07   4.61910E-05   3.43550E-07    -6.46401    -0.15187    -6.61588
+   CUCL3--              6.30402E-07   1.07108E-04   6.30403E-07    -6.20038    -0.67237    -6.87275
+   CU(OH)3-             8.96735E-09   1.02737E-06   8.96737E-09    -8.04734    -0.15187    -8.19921
+   FECL+                1.82147E-04   1.66300E-02   1.82147E-04    -3.73958    -0.15187    -3.89145
+   FECL2                1.58937E-03   2.01458E-01   1.58937E-03    -2.79877     0.00000    -2.79877
+   FE(OH)+              9.21524E-09   6.71370E-07   9.21525E-09    -8.03549    -0.15187    -8.18736
+   KCL                  4.83950E-03   3.60791E-01   4.83951E-03    -2.31520     0.00000    -2.31520
+   KOH                  3.91560E-09   2.19687E-07   3.91561E-09    -8.40720     0.00000    -8.40720
+   MNCL+                6.08370E-04   5.49912E-02   6.08371E-04    -3.21583    -0.15187    -3.36770
+   NACL                 1.33821E-01   7.82087E+00   1.33821E-01    -0.87348     0.00000    -0.87348
+   NAHCO3               1.61337E-07   1.35534E-05   1.61337E-07    -6.79227     0.00000    -6.79227
+   NAOH                 1.15707E-07   4.62795E-06   1.15708E-07    -6.93664     0.00000    -6.93664
+   ZNCL+                5.13280E-05   5.17556E-03   5.13281E-05    -4.28964    -0.15187    -4.44152
+   ZNCL2                1.68239E-05   2.29287E-03   1.68240E-05    -4.77407     0.00000    -4.77407
+   ZNCL3-               6.65554E-07   1.14302E-04   6.65555E-07    -6.17682    -0.15187    -6.32869
+   ZNCL4--              4.13070E-05   8.55848E-03   4.13071E-05    -4.38398    -0.67237    -5.05634
+   HSIO3-               3.69027E-08   2.84489E-06   3.69028E-08    -7.43294    -0.15187    -7.58481
+   H2S(AQ)              2.29651E-03   7.82554E-02   2.29651E-03    -2.63893     0.00000    -2.63893
+   CO2(AQ)              6.50128E-03   2.86120E-01   6.50129E-03    -2.18700     0.00000    -2.18700
+   HCL                  1.40001E-04   5.10455E-03   1.40001E-04    -3.85387     0.00000    -3.85387
+
+           --- activity ratios of cations ---
+
+
+           log (NA+   /h+**0)             3.4505516
+           log (K+    /h+**0)             2.2804561
+           log (CA++  /h+**0)             5.3762786
+           log (MG++  /h+**0)           -27.0399996
+           log (AL+++ /h+**0)            -2.6477279
+           log (ZN++  /h+**0)            -1.4628612
+           log (BA++  /h+**0)             2.4634118
+           log (MN++  /h+**0)             1.7380098
+           log (FE++  /h+**0)             3.0369501
+           log (CU+   /h+**0)            -6.4770235
+           log (FE+++ /h+**0)            -6.2100734
+           log (CU++  /h+**0)            -9.5480469
+
+
+           --- summary of solid product phases---
+
+
+  product                    log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0054843    9.87451E-05    8.32562E-03    2.76783E-03
+   COPPER                   -4.8549385    1.39657E-05    8.87462E-04    9.93377E-05
+
+
+                --- grand summary of solid phases (e.s.+p.r.s.+reactants) ---
+
+      phase/end-member       log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0054843    9.87451E-05    8.32562E-03    2.76783E-03
+   CLINOCHLORE               0.0000000    1.00000E+00    5.55797E+02    2.11470E+02
+   COPPER                   -4.8549385    1.39657E-05    8.87462E-04    9.93377E-05
+   PYRRHOTITE               -2.0000000    1.00000E-02    8.79070E-01    1.82000E-01
+   QUARTZ                    0.0000000    1.00000E+00    6.00843E+01    2.26880E+01
+
+
+                           mass, grams        volume, cc
+
+           created         9.213078E-03       2.867164E-03
+           destroyed       0.000000E+00       0.000000E+00
+           net             9.213078E-03       2.867164E-03
+
+          warning-- these volume totals may be incomplete because
+          of missing partial molar volume data in the data base
+
+
+
+           --- mineral saturation state summary ---
+
+
+   mineral        affinity, kcal    state        mineral        affinity, kcal    state
+
+ MAGNETITE              -1.9424                CORUNDUM               -2.1598       
+ HEMATITE               -2.8975                DIASPORE               -0.7463       
+ MAGNESITE               0.0000  satd          ANDALUSITE             -2.2084       
+ KYANITE                -2.1828                SILLIMANITE            -2.4109       
+ LAWSONITE              -6.0144                ZOISITE                -8.5193       
+ CLINOZOISITE           -8.8159                FAYALITE               -3.5390       
+ JADEITE                -6.4877                FERROSILITE            -2.2415       
+ WOLLASTONITE           -8.0432                PSEUDOWOLLASTONITE     -8.5365       
+ MICROCLINE     X       -5.1736                SANIDINE        X      -5.6013       
+ K-FELDSPAR             -5.0168                ALBITE                 -3.1802       
+ LOW ALBITE             -3.3056                ANORTHITE              -4.9394       
+ KAOLINITE              -2.8415                PYROPHYLLITE           -3.5261       
+ MUSCOVITE              -3.0477                ANNITE                 -6.0494       
+ PARAGONITE             -1.8812                MARGARITE              -4.4446       
+ PREHNITE               -9.9915                CHAMOSITE       X      -4.9724       
+ ALMANDINE              -6.2182                COESITE                -1.5399       
+ COPPER                  0.0000  satd          GRAPHITE               -9.1215       
+ PYRRHOTITE             -2.6669                SPHALERITE             -6.1508       
+ WURTZITE               -9.2589                PYRITE                 -4.3380       
+ CHALCOPYRITE           -9.3971                FERROUS OXIDE          -3.3791       
+ GIBBSITE               -4.5729                HALITE                 -6.8292       
+ SIDERITE               -9.2587                QUARTZ                 -0.6046       
+ CRISTOBALITE-ALPHA     -1.3460                CRISTOBALITE-BETA      -1.7937       
+ CHALCEDONY             -0.9867                AMORPHOUS SILICA       -1.7880       
+
+
+           --- summary of gas species ---
+
+           gas                log fugacity         fugacity         partial pressure
+
+   CO2(G)                         0.02600       1.06169E+00
+   O2(G)                        -29.98009       1.04690E-30
+   S2(G)                        -10.45908       3.47469E-11
+   CH4(G)                        -2.23381       5.83697E-03
+   H2(G)                         -0.41995       3.80230E-01
+   H2S(G)                        -0.68625       2.05947E-01
+   STEAM                         -1.50570       3.12104E-02
+
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+ stepping to zi=  1.0000E-08, delzi=  1.0000E-08, nord= 0
+               ncycle=  0
+ steps completed =     1, iter =  4, ncorr = 0
+ most rapidly changing is zvclg1(AL+++             ) =    -13.4981
+
+ stepping to zi=  1.0000E-08, delzi=  6.0775E-17, nord= 0
+ steps completed =     2, iter =  1, ncorr = 0
+ most rapidly changing is zvclg1(AL+++             ) =    -13.4981
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                     reaction progress        =  9.99999999999998E-09
+                     log of reaction progress =      -8.0000000
+
+                     temperature    =    350.000 degrees c
+                     total pressure =    500.000 bars
+
+                     computing units remaining =      0.000
+
+
+ step size is limited by the print requirement
+
+
+                               --- reactant summary ---
+
+
+
+         reactant            moles       delta moles      grams        delta grams
+
+   PYRRHOTITE              1.00000E-02    1.00000E-10    8.79070E-01    8.79070E-09
+   CLINOCHLORE             1.00000E+00    1.00000E-08    5.55797E+02    5.55797E-06
+   QUARTZ                  1.00000E+00    1.00000E-08    6.00843E+01    6.00843E-07
+
+
+                current total mass =  6.16760E+02 grams
+                delta total mass   =  6.16760E-06 grams
+                delta total volume =      0.00000 cc
+
+
+         reactant           affinity     rel. rate
+
+   PYRRHOTITE                 2.6671    1.00000E-02
+   CLINOCHLORE              450.4385    1.00000E+00
+   QUARTZ                     0.6046    1.00000E+00
+
+          affinity of the overall irreversible reaction=   451.070 kcal
+          contributions from irreversible reactions
+          with no thermodynamic data are not included
+
+
+
+      --- element totals for the aqueous phase ---
+
+   element         mg/kg soln.         molal conc.          moles
+
+      O          8.624879E+05        5.555371E+01        5.555363E+01
+      NA         9.593067E+03        4.300180E-01        4.300174E-01
+      K          9.431986E+02        2.486045E-02        2.486042E-02
+      CA         8.364580E+02        2.150702E-02        2.150699E-02
+      MG         6.856313E-30        2.907092E-34        2.907088E-34
+      AL         1.072642E-01        4.096868E-06        4.096862E-06
+      SI         4.358956E+02        1.599426E-02        1.599424E-02
+      ZN         6.986656E+00        1.101256E-04        1.101254E-04
+      BA         1.261480E+01        9.466263E-05        9.466250E-05
+      H          1.085849E+05        1.110237E+02        1.110235E+02
+      C          7.595463E+01        6.516867E-03        6.516857E-03
+      CL         1.682135E+04        4.889579E-01        4.889572E-01
+      S          7.157493E+01        2.300706E-03        2.300703E-03
+      MN         3.250736E+01        6.097792E-04        6.097783E-04
+      FE         9.752209E+01        1.799562E-03        1.799560E-03
+      CU         6.068964E-02        9.842153E-07        9.842139E-07
+
+      co3--                          0.000000E+00        0.000000E+00
+      so4--                          0.000000E+00        0.000000E+00
+      s--                            0.000000E+00        0.000000E+00
+
+    warning-- co3--, so4--, and s-- totals require that routine comp1 
+    have the names of non-carbonate carbon, sulfide sulfur,
+    and non-sulfate sulfur aqueous species
+
+
+   single ion activities and activity coefficients are here defined
+   with respect to the internal ph scale       
+
+
+
+                                       ph           eh           pe
+
+     internal ph scale               4.1308        1.1313    9.1499E+00
+     modified nbs ph scale           3.9789        1.1501    9.3017E+00
+     rational ph scale               3.9789        1.1501    9.3017E+00
+
+   phcl =      4.7715
+
+
+
+          oxygen fugacity =  1.04690E-30
+          log oxygen fugacity = -29.98009
+
+
+
+                              activity of water =   1.00000
+               log activity of water =   0.00000
+               alkalinity =  0.000000E+00 equiv/kg solvent
+                                          (not def. for t.gt.50 c)
+
+                    ionic strength =  3.379506E-01 molal
+                 sum of molalities =    0.8292129256106
+               osmotic coefficient =   -0.00000
+                    equiv. stoich. ionic strength =  4.889579E-01 molal
+
+                         mass of solution =   1.030536 kg
+                         mass of solvent  =   0.999999 kg
+                         mass of solutes  =   0.030537 kg
+                         conc of solutes  =   2.963248 per cent (w/w)
+
+
+   species                moles        grams          conc        log conc      log g      log act
+
+   H2O                  5.55086E+01   9.99999E+02
+   NA+                  2.96196E-01   6.80948E+00   2.96197E-01    -0.52842    -0.15187    -0.68029
+   K+                   2.00209E-02   7.82784E-01   2.00209E-02    -1.69852    -0.15187    -1.85039
+   CA++                 6.12296E-03   2.45408E-01   6.12297E-03    -2.21304    -0.67237    -2.88540
+   MG++                 2.34830E-35   5.70754E-34   2.34830E-35   -34.62925    -0.67237   -35.30161
+   AL+++                3.17590E-14   8.56906E-13   3.17590E-14   -13.49813    -1.53986   -15.03799
+   SIO2(AQ)             1.59942E-02   9.61000E-01   1.59942E-02    -1.79604     0.00000    -1.79604
+   ZN++                 8.86792E-10   5.79784E-08   8.86793E-10    -9.05218    -0.67237    -9.72454
+   BA++                 7.48333E-06   1.02769E-03   7.48334E-06    -5.12590    -0.67237    -5.79827
+   H+                   1.04969E-04   1.05798E-04   1.04969E-04    -3.97894    -0.15187    -4.13081
+   CO3--                1.61800E-12   9.70951E-11   1.61801E-12   -11.79102    -0.67237   -12.46339
+   CL-                  3.24456E-01   1.15029E+01   3.24456E-01    -0.48884    -0.15187    -0.64071
+   SO4--                2.36892E-12   2.27552E-10   2.36892E-12   -11.62545    -0.67237   -12.29782
+   MN++                 1.40829E-06   7.73687E-05   1.40829E-06    -5.85131    -0.67237    -6.52367
+   FE++                 2.80306E-05   1.56543E-03   2.80307E-05    -4.55237    -0.67237    -5.22473
+   CU+                  3.72338E-11   2.36606E-09   3.72339E-11   -10.42906    -0.17877   -10.60783
+   O2(AQ)               1.54980E-33   4.95918E-32   1.54980E-33   -32.80972     0.02163   -32.78809
+   H2(AQ)               6.98100E-04   1.40723E-03   6.98101E-04    -3.15608     0.02163    -3.13445
+   CH4(AQ)              1.03408E-05   1.65894E-04   1.03408E-05    -4.98544     0.02163    -4.96382
+   HS-                  4.19211E-06   1.38624E-04   4.19212E-06    -5.37757    -0.15187    -5.52944
+   FE+++                8.65557E-18   4.83388E-16   8.65558E-18   -17.06270    -1.53986   -18.60257
+   CU++                 7.28958E-18   4.63224E-16   7.28959E-18   -17.13730    -0.67237   -17.80966
+   HCO3-                1.07814E-06   6.57848E-05   1.07814E-06    -5.96733    -0.15187    -6.11920
+   CLO4-                4.46650E-79   4.44196E-77   4.46651E-79   -78.35003    -0.15187   -78.50190
+   OH-                  1.22653E-06   2.08599E-05   1.22653E-06    -5.91132    -0.15187    -6.06319
+   CH3COO-              1.45834E-14   8.61070E-13   1.45834E-14   -13.83614    -0.15187   -13.98801
+   CH3CH2COO-           3.78440E-21   2.76531E-19   3.78440E-21   -20.42200    -0.15187   -20.57387
+   AL(OH)3              6.92283E-09   5.40004E-07   6.92284E-09    -8.15972     0.00000    -8.15972
+   AL(OH)4 -            4.08994E-06   3.88588E-04   4.08994E-06    -5.38828    -0.15187    -5.54015
+   BACL+                8.71792E-05   1.50631E-02   8.71793E-05    -4.05959    -0.15187    -4.21146
+   CACL+                9.37024E-03   7.07763E-01   9.37026E-03    -2.02825    -0.15187    -2.18012
+   CACL2                6.00970E-03   6.66992E-01   6.00971E-03    -2.22115     0.00000    -2.22115
+   CACO3                7.40057E-10   7.40717E-08   7.40058E-10    -9.13073     0.00000    -9.13073
+   CAHCO3+              4.04401E-06   4.08837E-04   4.04401E-06    -5.39319    -0.12694    -5.52013
+   CA(OH)+              3.99671E-08   2.28161E-06   3.99671E-08    -7.39830    -0.15187    -7.55017
+   CUCL                 1.18315E-09   1.17131E-07   1.18316E-09    -8.92696     0.00000    -8.92696
+   CUCL2-               3.43576E-07   4.61945E-05   3.43577E-07    -6.46398    -0.15187    -6.61585
+   CUCL3--              6.30450E-07   1.07117E-04   6.30451E-07    -6.20035    -0.67237    -6.87272
+   CU(OH)3-             8.96666E-09   1.02729E-06   8.96667E-09    -8.04737    -0.15187    -8.19924
+   FECL+                1.82147E-04   1.66300E-02   1.82147E-04    -3.73958    -0.15187    -3.89145
+   FECL2                1.58937E-03   2.01458E-01   1.58937E-03    -2.79877     0.00000    -2.79877
+   FE(OH)+              9.21453E-09   6.71318E-07   9.21455E-09    -8.03553    -0.15187    -8.18740
+   KCL                  4.83950E-03   3.60791E-01   4.83951E-03    -2.31520     0.00000    -2.31520
+   KOH                  3.91530E-09   2.19670E-07   3.91531E-09    -8.40723     0.00000    -8.40723
+   MNCL+                6.08370E-04   5.49912E-02   6.08371E-04    -3.21583    -0.15187    -3.36770
+   NACL                 1.33821E-01   7.82087E+00   1.33821E-01    -0.87348     0.00000    -0.87348
+   NAHCO3               1.61323E-07   1.35523E-05   1.61324E-07    -6.79230     0.00000    -6.79230
+   NAOH                 1.15698E-07   4.62760E-06   1.15699E-07    -6.93667     0.00000    -6.93667
+   ZNCL+                5.13280E-05   5.17556E-03   5.13281E-05    -4.28964    -0.15187    -4.44152
+   ZNCL2                1.68239E-05   2.29287E-03   1.68240E-05    -4.77407     0.00000    -4.77407
+   ZNCL3-               6.65554E-07   1.14302E-04   6.65555E-07    -6.17682    -0.15187    -6.32869
+   ZNCL4--              4.13070E-05   8.55848E-03   4.13071E-05    -4.38398    -0.67237    -5.05634
+   HSIO3-               3.69000E-08   2.84468E-06   3.69000E-08    -7.43297    -0.15187    -7.58484
+   H2S(AQ)              2.29651E-03   7.82554E-02   2.29651E-03    -2.63893     0.00000    -2.63893
+   CO2(AQ)              6.50123E-03   2.86118E-01   6.50124E-03    -2.18700     0.00000    -2.18700
+   HCL                  1.40011E-04   5.10494E-03   1.40011E-04    -3.85384     0.00000    -3.85384
+
+           --- activity ratios of cations ---
+
+
+           log (NA+   /h+**0)             3.4505182
+           log (K+    /h+**0)             2.2804228
+           log (CA++  /h+**0)             5.3762119
+           log (MG++  /h+**0)           -27.0399963
+           log (AL+++ /h+**0)            -2.6455693
+           log (ZN++  /h+**0)            -1.4629279
+           log (BA++  /h+**0)             2.4633451
+           log (MN++  /h+**0)             1.7379431
+           log (FE++  /h+**0)             3.0368834
+           log (CU+   /h+**0)            -6.4770236
+           log (FE+++ /h+**0)            -6.2101401
+           log (CU++  /h+**0)            -9.5480471
+
+
+           --- summary of solid product phases---
+
+
+  product                    log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0052645    9.87951E-05    8.32983E-03    2.76923E-03
+   COPPER                   -4.8549408    1.39656E-05    8.87457E-04    9.93372E-05
+
+
+                --- grand summary of solid phases (e.s.+p.r.s.+reactants) ---
+
+      phase/end-member       log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0052645    9.87951E-05    8.32983E-03    2.76923E-03
+   CLINOCHLORE              -0.0000000    1.00000E+00    5.55797E+02    2.11470E+02
+   COPPER                   -4.8549408    1.39656E-05    8.87457E-04    9.93372E-05
+   PYRRHOTITE               -2.0000000    1.00000E-02    8.79070E-01    1.82000E-01
+   QUARTZ                   -0.0000000    1.00000E+00    6.00843E+01    2.26880E+01
+
+
+                           mass, grams        volume, cc
+
+           created         9.217289E-03       2.868565E-03
+           destroyed       6.167603E-06       2.343400E-06
+           net             9.211121E-03       2.866221E-03
+
+          warning-- these volume totals may be incomplete because
+          of missing partial molar volume data in the data base
+
+
+
+           --- mineral saturation state summary ---
+
+
+   mineral        affinity, kcal    state        mineral        affinity, kcal    state
+
+ MAGNETITE              -1.9430                CORUNDUM               -2.1475       
+ HEMATITE               -2.8979                DIASPORE               -0.7401       
+ MAGNESITE              -0.0000  satd          ANDALUSITE             -2.1961       
+ KYANITE                -2.1704                SILLIMANITE            -2.3986       
+ LAWSONITE              -6.0023                ZOISITE                -8.5012       
+ CLINOZOISITE           -8.7978                FAYALITE               -3.5394       
+ JADEITE                -6.4817                FERROSILITE            -2.2417       
+ WOLLASTONITE           -8.0434                PSEUDOWOLLASTONITE     -8.5367       
+ MICROCLINE     X       -5.1675                SANIDINE        X      -5.5952       
+ K-FELDSPAR             -5.0107                ALBITE                 -3.1741       
+ LOW ALBITE             -3.2996                ANORTHITE              -4.9273       
+ KAOLINITE              -2.8292                PYROPHYLLITE           -3.5138       
+ MUSCOVITE              -3.0293                ANNITE                 -6.0439       
+ PARAGONITE             -1.8628                MARGARITE              -4.4201       
+ PREHNITE               -9.9795                CHAMOSITE       X      -4.9610       
+ ALMANDINE              -6.2064                COESITE                -1.5399       
+ COPPER                 -0.0000  satd          GRAPHITE               -9.1215       
+ PYRRHOTITE             -2.6671                SPHALERITE             -6.1510       
+ WURTZITE               -9.2591                PYRITE                 -4.3382       
+ CHALCOPYRITE           -9.3973                FERROUS OXIDE          -3.3793       
+ GIBBSITE               -4.5668                HALITE                 -6.8292       
+ SIDERITE               -9.2589                QUARTZ                 -0.6046       
+ CRISTOBALITE-ALPHA     -1.3460                CRISTOBALITE-BETA      -1.7937       
+ CHALCEDONY             -0.9867                AMORPHOUS SILICA       -1.7880       
+
+
+           --- summary of gas species ---
+
+           gas                log fugacity         fugacity         partial pressure
+
+   CO2(G)                         0.02600       1.06169E+00
+   O2(G)                        -29.98009       1.04690E-30
+   S2(G)                        -10.45908       3.47469E-11
+   CH4(G)                        -2.23382       5.83693E-03
+   H2(G)                         -0.41995       3.80231E-01
+   H2S(G)                        -0.68625       2.05947E-01
+   STEAM                         -1.50570       3.12104E-02
+
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+ stepping to zi=  2.0000E-08, delzi=  1.0000E-08, nord= 0
+               ncycle=  0
+ steps completed =     3, iter =  4, ncorr = 0
+ most rapidly changing is zvclg1(AL+++             ) =    -13.4959
+
+ stepping to zi=  3.0000E-08, delzi=  1.0000E-08, nord= 0
+               ncycle=  0
+ steps completed =     4, iter =  4, ncorr = 0
+ most rapidly changing is zvclg1(AL+++             ) =    -13.4936
+
+ stepping to zi=  3.1623E-08, delzi=  1.6228E-09, nord= 2
+               ncycle=  0
+ steps completed =     5, iter =  1, ncorr = 0
+ most rapidly changing is zvclg1(AL+++             ) =    -13.4933
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                     reaction progress        =  3.16227766016837E-08
+                     log of reaction progress =      -7.5000000
+
+                     temperature    =    350.000 degrees c
+                     total pressure =    500.000 bars
+
+                     computing units remaining =      0.000
+
+
+ step size is limited by the print requirement
+
+
+                               --- reactant summary ---
+
+
+
+         reactant            moles       delta moles      grams        delta grams
+
+   PYRRHOTITE              1.00000E-02    3.16228E-10    8.79070E-01    2.77986E-08
+   CLINOCHLORE             1.00000E+00    3.16228E-08    5.55797E+02    1.75758E-05
+   QUARTZ                  1.00000E+00    3.16228E-08    6.00843E+01    1.90003E-06
+
+
+                current total mass =  6.16760E+02 grams
+                delta total mass   =  1.95037E-05 grams
+                delta total volume =      0.00001 cc
+
+
+         reactant           affinity     rel. rate
+
+   PYRRHOTITE                 2.6675    1.00000E-02
+   CLINOCHLORE              450.4120    1.00000E+00
+   QUARTZ                     0.6046    1.00000E+00
+
+          affinity of the overall irreversible reaction=   451.043 kcal
+          contributions from irreversible reactions
+          with no thermodynamic data are not included
+
+
+
+      --- element totals for the aqueous phase ---
+
+   element         mg/kg soln.         molal conc.          moles
+
+      O          8.624878E+05        5.555371E+01        5.555363E+01
+      NA         9.593067E+03        4.300180E-01        4.300174E-01
+      K          9.431986E+02        2.486045E-02        2.486042E-02
+      CA         8.364580E+02        2.150702E-02        2.150699E-02
+      MG         6.858702E-30        2.908105E-34        2.908101E-34
+      AL         1.083965E-01        4.140113E-06        4.140107E-06
+      SI         4.358980E+02        1.599434E-02        1.599432E-02
+      ZN         6.986656E+00        1.101256E-04        1.101254E-04
+      BA         1.261480E+01        9.466263E-05        9.466250E-05
+      H          1.085849E+05        1.110237E+02        1.110235E+02
+      C          7.595337E+01        6.516758E-03        6.516749E-03
+      CL         1.682135E+04        4.889579E-01        4.889572E-01
+      S          7.157494E+01        2.300707E-03        2.300703E-03
+      MN         3.250736E+01        6.097792E-04        6.097783E-04
+      FE         9.752210E+01        1.799563E-03        1.799560E-03
+      CU         6.069950E-02        9.843751E-07        9.843738E-07
+
+      co3--                          0.000000E+00        0.000000E+00
+      so4--                          0.000000E+00        0.000000E+00
+      s--                            0.000000E+00        0.000000E+00
+
+    warning-- co3--, so4--, and s-- totals require that routine comp1 
+    have the names of non-carbonate carbon, sulfide sulfur,
+    and non-sulfate sulfur aqueous species
+
+
+   single ion activities and activity coefficients are here defined
+   with respect to the internal ph scale       
+
+
+
+                                       ph           eh           pe
+
+     internal ph scale               4.1307        1.1313    9.1499E+00
+     modified nbs ph scale           3.9789        1.1501    9.3018E+00
+     rational ph scale               3.9789        1.1501    9.3018E+00
+
+   phcl =      4.7715
+
+
+
+          oxygen fugacity =  1.04690E-30
+          log oxygen fugacity = -29.98009
+
+
+
+                              activity of water =   1.00000
+               log activity of water =   0.00000
+               alkalinity =  0.000000E+00 equiv/kg solvent
+                                          (not def. for t.gt.50 c)
+
+                    ionic strength =  3.379506E-01 molal
+                 sum of molalities =    0.8292129722814
+               osmotic coefficient =   -0.00000
+                    equiv. stoich. ionic strength =  4.889579E-01 molal
+
+                         mass of solution =   1.030536 kg
+                         mass of solvent  =   0.999999 kg
+                         mass of solutes  =   0.030537 kg
+                         conc of solutes  =   2.963248 per cent (w/w)
+
+
+   species                moles        grams          conc        log conc      log g      log act
+
+   H2O                  5.55086E+01   9.99999E+02
+   NA+                  2.96196E-01   6.80948E+00   2.96197E-01    -0.52842    -0.15187    -0.68029
+   K+                   2.00209E-02   7.82784E-01   2.00209E-02    -1.69852    -0.15187    -1.85039
+   CA++                 6.12296E-03   2.45408E-01   6.12297E-03    -2.21304    -0.67237    -2.88540
+   MG++                 2.34912E-35   5.70953E-34   2.34912E-35   -34.62909    -0.67237   -35.30146
+   AL+++                3.21155E-14   8.66527E-13   3.21156E-14   -13.49328    -1.53986   -15.03315
+   SIO2(AQ)             1.59943E-02   9.61005E-01   1.59943E-02    -1.79603     0.00000    -1.79603
+   ZN++                 8.86792E-10   5.79785E-08   8.86793E-10    -9.05218    -0.67237    -9.72454
+   BA++                 7.48333E-06   1.02769E-03   7.48334E-06    -5.12590    -0.67237    -5.79827
+   H+                   1.04986E-04   1.05816E-04   1.04987E-04    -3.97887    -0.15187    -4.13074
+   CO3--                1.61744E-12   9.70613E-11   1.61744E-12   -11.79117    -0.67237   -12.46354
+   CL-                  3.24456E-01   1.15029E+01   3.24456E-01    -0.48884    -0.15187    -0.64071
+   SO4--                2.36812E-12   2.27476E-10   2.36813E-12   -11.62560    -0.67237   -12.29796
+   MN++                 1.40829E-06   7.73687E-05   1.40829E-06    -5.85131    -0.67237    -6.52367
+   FE++                 2.80306E-05   1.56543E-03   2.80307E-05    -4.55237    -0.67237    -5.22473
+   CU+                  3.72400E-11   2.36645E-09   3.72401E-11   -10.42899    -0.17877   -10.60776
+   O2(AQ)               1.54980E-33   4.95917E-32   1.54980E-33   -32.80972     0.02163   -32.78809
+   H2(AQ)               6.98101E-04   1.40723E-03   6.98102E-04    -3.15608     0.02163    -3.13445
+   CH4(AQ)              1.03407E-05   1.65892E-04   1.03407E-05    -4.98545     0.02163    -4.96382
+   HS-                  4.19142E-06   1.38601E-04   4.19142E-06    -5.37764    -0.15187    -5.52951
+   FE+++                8.65701E-18   4.83468E-16   8.65702E-18   -17.06263    -1.53986   -18.60249
+   CU++                 7.29199E-18   4.63377E-16   7.29200E-18   -17.13715    -0.67237   -17.80952
+   HCO3-                1.07794E-06   6.57728E-05   1.07794E-06    -5.96740    -0.15187    -6.11927
+   CLO4-                4.46648E-79   4.44194E-77   4.46649E-79   -78.35003    -0.15187   -78.50190
+   OH-                  1.22633E-06   2.08565E-05   1.22633E-06    -5.91139    -0.15187    -6.06326
+   CH3COO-              1.45806E-14   8.60902E-13   1.45806E-14   -13.83623    -0.15187   -13.98810
+   CH3CH2COO-           3.78360E-21   2.76473E-19   3.78361E-21   -20.42209    -0.15187   -20.57396
+   AL(OH)3              6.99706E-09   5.45795E-07   6.99707E-09    -8.15508     0.00000    -8.15508
+   AL(OH)4 -            4.13311E-06   3.92690E-04   4.13311E-06    -5.38372    -0.15187    -5.53559
+   BACL+                8.71792E-05   1.50631E-02   8.71793E-05    -4.05959    -0.15187    -4.21146
+   CACL+                9.37024E-03   7.07763E-01   9.37026E-03    -2.02825    -0.15187    -2.18012
+   CACL2                6.00970E-03   6.66992E-01   6.00971E-03    -2.22115     0.00000    -2.22115
+   CACO3                7.39799E-10   7.40459E-08   7.39800E-10    -9.13089     0.00000    -9.13089
+   CAHCO3+              4.04327E-06   4.08763E-04   4.04327E-06    -5.39327    -0.12694    -5.52021
+   CA(OH)+              3.99604E-08   2.28123E-06   3.99605E-08    -7.39837    -0.15187    -7.55024
+   CUCL                 1.18335E-09   1.17150E-07   1.18335E-09    -8.92689     0.00000    -8.92689
+   CUCL2-               3.43633E-07   4.62021E-05   3.43633E-07    -6.46390    -0.15187    -6.61577
+   CUCL3--              6.30555E-07   1.07134E-04   6.30556E-07    -6.20028    -0.67237    -6.87264
+   CU(OH)3-             8.96517E-09   1.02712E-06   8.96518E-09    -8.04744    -0.15187    -8.19931
+   FECL+                1.82147E-04   1.66300E-02   1.82147E-04    -3.73958    -0.15187    -3.89145
+   FECL2                1.58937E-03   2.01458E-01   1.58938E-03    -2.79877     0.00000    -2.79877
+   FE(OH)+              9.21301E-09   6.71207E-07   9.21302E-09    -8.03560    -0.15187    -8.18747
+   KCL                  4.83950E-03   3.60791E-01   4.83951E-03    -2.31520     0.00000    -2.31520
+   KOH                  3.91465E-09   2.19634E-07   3.91466E-09    -8.40731     0.00000    -8.40731
+   MNCL+                6.08370E-04   5.49912E-02   6.08371E-04    -3.21583    -0.15187    -3.36770
+   NACL                 1.33821E-01   7.82087E+00   1.33821E-01    -0.87348     0.00000    -0.87348
+   NAHCO3               1.61294E-07   1.35498E-05   1.61294E-07    -6.79238     0.00000    -6.79238
+   NAOH                 1.15679E-07   4.62683E-06   1.15679E-07    -6.93674     0.00000    -6.93674
+   ZNCL+                5.13280E-05   5.17556E-03   5.13281E-05    -4.28964    -0.15187    -4.44152
+   ZNCL2                1.68239E-05   2.29287E-03   1.68240E-05    -4.77407     0.00000    -4.77407
+   ZNCL3-               6.65554E-07   1.14302E-04   6.65555E-07    -6.17682    -0.15187    -6.32869
+   ZNCL4--              4.13070E-05   8.55848E-03   4.13071E-05    -4.38398    -0.67237    -5.05634
+   HSIO3-               3.68941E-08   2.84422E-06   3.68941E-08    -7.43304    -0.15187    -7.58491
+   H2S(AQ)              2.29651E-03   7.82555E-02   2.29652E-03    -2.63893     0.00000    -2.63893
+   CO2(AQ)              6.50113E-03   2.86113E-01   6.50113E-03    -2.18701     0.00000    -2.18701
+   HCL                  1.40035E-04   5.10578E-03   1.40035E-04    -3.85376     0.00000    -3.85376
+
+           --- activity ratios of cations ---
+
+
+           log (NA+   /h+**0)             3.4504461
+           log (K+    /h+**0)             2.2803507
+           log (CA++  /h+**0)             5.3760677
+           log (MG++  /h+**0)           -27.0399891
+           log (AL+++ /h+**0)            -2.6409370
+           log (ZN++  /h+**0)            -1.4630721
+           log (BA++  /h+**0)             2.4632009
+           log (MN++  /h+**0)             1.7377989
+           log (FE++  /h+**0)             3.0367393
+           log (CU+   /h+**0)            -6.4770237
+           log (FE+++ /h+**0)            -6.2102845
+           log (CU++  /h+**0)            -9.5480475
+
+
+           --- summary of solid product phases---
+
+
+  product                    log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0047895    9.89032E-05    8.33895E-03    2.77226E-03
+   COPPER                   -4.8549458    1.39654E-05    8.87447E-04    9.93361E-05
+
+
+                --- grand summary of solid phases (e.s.+p.r.s.+reactants) ---
+
+      phase/end-member       log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0047895    9.89032E-05    8.33895E-03    2.77226E-03
+   CLINOCHLORE              -0.0000000    1.00000E+00    5.55797E+02    2.11470E+02
+   COPPER                   -4.8549458    1.39654E-05    8.87447E-04    9.93361E-05
+   PYRRHOTITE               -2.0000000    1.00000E-02    8.79070E-01    1.82000E-01
+   QUARTZ                   -0.0000000    1.00000E+00    6.00843E+01    2.26880E+01
+
+
+                           mass, grams        volume, cc
+
+           created         9.226394E-03       2.871594E-03
+           destroyed       1.950367E-05       7.410481E-06
+           net             9.206891E-03       2.864183E-03
+
+          warning-- these volume totals may be incomplete because
+          of missing partial molar volume data in the data base
+
+
+
+           --- mineral saturation state summary ---
+
+
+   mineral        affinity, kcal    state        mineral        affinity, kcal    state
+
+ MAGNETITE              -1.9442                CORUNDUM               -2.1211       
+ HEMATITE               -2.8987                DIASPORE               -0.7269       
+ MAGNESITE              -0.0000  satd          ANDALUSITE             -2.1697       
+ KYANITE                -2.1440                SILLIMANITE            -2.3721       
+ LAWSONITE              -5.9762                ZOISITE                -8.4624       
+ CLINOZOISITE           -8.7590                FAYALITE               -3.5402       
+ JADEITE                -6.4686                FERROSILITE            -2.2421       
+ WOLLASTONITE           -8.0438                PSEUDOWOLLASTONITE     -8.5371       
+ MICROCLINE     X       -5.1545                SANIDINE        X      -5.5822       
+ K-FELDSPAR             -4.9977                ALBITE                 -3.1611       
+ LOW ALBITE             -3.2865                ANORTHITE              -4.9013       
+ KAOLINITE              -2.8028                PYROPHYLLITE           -3.4873       
+ MUSCOVITE              -2.9899                ANNITE                 -6.0321       
+ PARAGONITE             -1.8234                MARGARITE              -4.3677       
+ PREHNITE               -9.9539                CHAMOSITE       X      -4.9366       
+ ALMANDINE              -6.1812                COESITE                -1.5399       
+ COPPER                 -0.0000  satd          GRAPHITE               -9.1215       
+ PYRRHOTITE             -2.6675                SPHALERITE             -6.1514       
+ WURTZITE               -9.2595                PYRITE                 -4.3386       
+ CHALCOPYRITE           -9.3977                FERROUS OXIDE          -3.3797       
+ GIBBSITE               -4.5536                HALITE                 -6.8292       
+ SIDERITE               -9.2594                QUARTZ                 -0.6046       
+ CRISTOBALITE-ALPHA     -1.3460                CRISTOBALITE-BETA      -1.7936       
+ CHALCEDONY             -0.9867                AMORPHOUS SILICA       -1.7879       
+
+
+           --- summary of gas species ---
+
+           gas                log fugacity         fugacity         partial pressure
+
+   CO2(G)                         0.02599       1.06167E+00
+   O2(G)                        -29.98009       1.04690E-30
+   S2(G)                        -10.45908       3.47468E-11
+   CH4(G)                        -2.23382       5.83686E-03
+   H2(G)                         -0.41995       3.80231E-01
+   H2S(G)                        -0.68624       2.05947E-01
+   STEAM                         -1.50570       3.12104E-02
+
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+ stepping to zi=  4.7851E-08, delzi=  1.6228E-08, nord= 2
+               ncycle=  0
+ steps completed =     6, iter =  2, ncorr = 0
+ most rapidly changing is zvclg1(AL+++             ) =    -13.4897
+
+ stepping to zi=  1.0000E-07, delzi=  5.2149E-08, nord= 3
+               ncycle=  0
+ steps completed =     7, iter =  2, ncorr = 0
+ most rapidly changing is zvclg1(AL+++             ) =    -13.4783
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                     reaction progress        =  9.99999999999996E-08
+                     log of reaction progress =      -7.0000000
+
+                     temperature    =    350.000 degrees c
+                     total pressure =    500.000 bars
+
+                     computing units remaining =      0.000
+
+
+ step size is limited by the print requirement
+
+
+                               --- reactant summary ---
+
+
+
+         reactant            moles       delta moles      grams        delta grams
+
+   PYRRHOTITE              1.00000E-02    1.00000E-09    8.79070E-01    8.79070E-08
+   CLINOCHLORE             1.00000E+00    1.00000E-07    5.55797E+02    5.55797E-05
+   QUARTZ                  1.00000E+00    1.00000E-07    6.00843E+01    6.00843E-06
+
+
+                current total mass =  6.16760E+02 grams
+                delta total mass   =  6.16760E-05 grams
+                delta total volume =      0.00002 cc
+
+
+         reactant           affinity     rel. rate
+
+   PYRRHOTITE                 2.6688    1.00000E-02
+   CLINOCHLORE              450.3298    1.00000E+00
+   QUARTZ                     0.6046    1.00000E+00
+
+          affinity of the overall irreversible reaction=   450.961 kcal
+          contributions from irreversible reactions
+          with no thermodynamic data are not included
+
+
+
+      --- element totals for the aqueous phase ---
+
+   element         mg/kg soln.         molal conc.          moles
+
+      O          8.624878E+05        5.555371E+01        5.555363E+01
+      NA         9.593067E+03        4.300180E-01        4.300174E-01
+      K          9.431986E+02        2.486045E-02        2.486042E-02
+      CA         8.364580E+02        2.150702E-02        2.150699E-02
+      MG         6.866263E-30        2.911311E-34        2.911307E-34
+      AL         1.119770E-01        4.276868E-06        4.276862E-06
+      SI         4.359054E+02        1.599462E-02        1.599460E-02
+      ZN         6.986656E+00        1.101256E-04        1.101254E-04
+      BA         1.261480E+01        9.466263E-05        9.466250E-05
+      H          1.085849E+05        1.110237E+02        1.110235E+02
+      C          7.594938E+01        6.516417E-03        6.516407E-03
+      CL         1.682135E+04        4.889579E-01        4.889572E-01
+      S          7.157496E+01        2.300707E-03        2.300704E-03
+      MN         3.250736E+01        6.097792E-04        6.097783E-04
+      FE         9.752213E+01        1.799563E-03        1.799561E-03
+      CU         6.073068E-02        9.848808E-07        9.848794E-07
+
+      co3--                          0.000000E+00        0.000000E+00
+      so4--                          0.000000E+00        0.000000E+00
+      s--                            0.000000E+00        0.000000E+00
+
+    warning-- co3--, so4--, and s-- totals require that routine comp1 
+    have the names of non-carbonate carbon, sulfide sulfur,
+    and non-sulfate sulfur aqueous species
+
+
+   single ion activities and activity coefficients are here defined
+   with respect to the internal ph scale       
+
+
+
+                                       ph           eh           pe
+
+     internal ph scale               4.1305        1.1313    9.1502E+00
+     modified nbs ph scale           3.9786        1.1501    9.3020E+00
+     rational ph scale               3.9786        1.1501    9.3020E+00
+
+   phcl =      4.7712
+
+
+
+          oxygen fugacity =  1.04689E-30
+          log oxygen fugacity = -29.98010
+
+
+
+                              activity of water =   1.00000
+               log activity of water =   0.00000
+               alkalinity =  0.000000E+00 equiv/kg solvent
+                                          (not def. for t.gt.50 c)
+
+                    ionic strength =  3.379507E-01 molal
+                 sum of molalities =    0.8292131198696
+               osmotic coefficient =   -0.00000
+                    equiv. stoich. ionic strength =  4.889579E-01 molal
+
+                         mass of solution =   1.030536 kg
+                         mass of solvent  =   0.999999 kg
+                         mass of solutes  =   0.030537 kg
+                         conc of solutes  =   2.963250 per cent (w/w)
+
+
+   species                moles        grams          conc        log conc      log g      log act
+
+   H2O                  5.55086E+01   9.99999E+02
+   NA+                  2.96196E-01   6.80948E+00   2.96197E-01    -0.52842    -0.15187    -0.68029
+   K+                   2.00209E-02   7.82784E-01   2.00209E-02    -1.69852    -0.15187    -1.85039
+   CA++                 6.12296E-03   2.45408E-01   6.12297E-03    -2.21304    -0.67237    -2.88540
+   MG++                 2.35171E-35   5.71582E-34   2.35171E-35   -34.62862    -0.67237   -35.30098
+   AL+++                3.32461E-14   8.97031E-13   3.32461E-14   -13.47826    -1.53986   -15.01812
+   SIO2(AQ)             1.59946E-02   9.61022E-01   1.59946E-02    -1.79603     0.00000    -1.79603
+   ZN++                 8.86792E-10   5.79785E-08   8.86794E-10    -9.05218    -0.67237    -9.72454
+   BA++                 7.48333E-06   1.02769E-03   7.48334E-06    -5.12590    -0.67237    -5.79827
+   H+                   1.05042E-04   1.05871E-04   1.05042E-04    -3.97864    -0.15187    -4.13051
+   CO3--                1.61566E-12   9.69544E-11   1.61566E-12   -11.79165    -0.67237   -12.46402
+   CL-                  3.24456E-01   1.15029E+01   3.24456E-01    -0.48884    -0.15187    -0.64071
+   SO4--                2.36561E-12   2.27235E-10   2.36562E-12   -11.62606    -0.67237   -12.29842
+   MN++                 1.40829E-06   7.73688E-05   1.40829E-06    -5.85131    -0.67237    -6.52367
+   FE++                 2.80307E-05   1.56543E-03   2.80307E-05    -4.55237    -0.67237    -5.22473
+   CU+                  3.72595E-11   2.36769E-09   3.72596E-11   -10.42876    -0.17877   -10.60753
+   O2(AQ)               1.54979E-33   4.95915E-32   1.54979E-33   -32.80973     0.02163   -32.78810
+   H2(AQ)               6.98103E-04   1.40724E-03   6.98104E-04    -3.15608     0.02163    -3.13445
+   CH4(AQ)              1.03403E-05   1.65885E-04   1.03403E-05    -4.98547     0.02163    -4.96384
+   HS-                  4.18922E-06   1.38529E-04   4.18923E-06    -5.37787    -0.15187    -5.52974
+   FE+++                8.66155E-18   4.83722E-16   8.66156E-18   -17.06240    -1.53986   -18.60227
+   CU++                 7.29963E-18   4.63863E-16   7.29964E-18   -17.13670    -0.67237   -17.80907
+   HCO3-                1.07732E-06   6.57349E-05   1.07732E-06    -5.96766    -0.15187    -6.11953
+   CLO4-                4.46643E-79   4.44189E-77   4.46644E-79   -78.35004    -0.15187   -78.50191
+   OH-                  1.22568E-06   2.08455E-05   1.22568E-06    -5.91162    -0.15187    -6.06349
+   CH3COO-              1.45715E-14   8.60370E-13   1.45716E-14   -13.83649    -0.15187   -13.98836
+   CH3CH2COO-           3.78110E-21   2.76290E-19   3.78111E-21   -20.42238    -0.15187   -20.57425
+   AL(OH)3              7.23198E-09   5.64119E-07   7.23199E-09    -8.14074     0.00000    -8.14074
+   AL(OH)4 -            4.26963E-06   4.05660E-04   4.26963E-06    -5.36961    -0.15187    -5.52148
+   BACL+                8.71792E-05   1.50631E-02   8.71793E-05    -4.05959    -0.15187    -4.21146
+   CACL+                9.37024E-03   7.07763E-01   9.37026E-03    -2.02825    -0.15187    -2.18012
+   CACL2                6.00970E-03   6.66992E-01   6.00971E-03    -2.22115     0.00000    -2.22115
+   CACO3                7.38985E-10   7.39644E-08   7.38986E-10    -9.13136     0.00000    -9.13136
+   CAHCO3+              4.04094E-06   4.08527E-04   4.04094E-06    -5.39352    -0.12694    -5.52046
+   CA(OH)+              3.99395E-08   2.28004E-06   3.99395E-08    -7.39860    -0.15187    -7.55047
+   CUCL                 1.18397E-09   1.17212E-07   1.18397E-09    -8.92666     0.00000    -8.92666
+   CUCL2-               3.43813E-07   4.62263E-05   3.43813E-07    -6.46368    -0.15187    -6.61555
+   CUCL3--              6.30885E-07   1.07190E-04   6.30886E-07    -6.20005    -0.67237    -6.87242
+   CU(OH)3-             8.96044E-09   1.02658E-06   8.96045E-09    -8.04767    -0.15187    -8.19954
+   FECL+                1.82147E-04   1.66300E-02   1.82148E-04    -3.73958    -0.15187    -3.89145
+   FECL2                1.58937E-03   2.01458E-01   1.58938E-03    -2.79877     0.00000    -2.79877
+   FE(OH)+              9.20818E-09   6.70855E-07   9.20819E-09    -8.03583    -0.15187    -8.18770
+   KCL                  4.83950E-03   3.60791E-01   4.83951E-03    -2.31520     0.00000    -2.31520
+   KOH                  3.91260E-09   2.19519E-07   3.91260E-09    -8.40753     0.00000    -8.40753
+   MNCL+                6.08370E-04   5.49912E-02   6.08371E-04    -3.21583    -0.15187    -3.36770
+   NACL                 1.33821E-01   7.82087E+00   1.33821E-01    -0.87348     0.00000    -0.87348
+   NAHCO3               1.61201E-07   1.35420E-05   1.61201E-07    -6.79263     0.00000    -6.79263
+   NAOH                 1.15619E-07   4.62440E-06   1.15619E-07    -6.93697     0.00000    -6.93697
+   ZNCL+                5.13280E-05   5.17556E-03   5.13281E-05    -4.28964    -0.15187    -4.44151
+   ZNCL2                1.68239E-05   2.29287E-03   1.68240E-05    -4.77407     0.00000    -4.77407
+   ZNCL3-               6.65554E-07   1.14302E-04   6.65555E-07    -6.17682    -0.15187    -6.32869
+   ZNCL4--              4.13070E-05   8.55848E-03   4.13071E-05    -4.38398    -0.67237    -5.05634
+   HSIO3-               3.68753E-08   2.84278E-06   3.68754E-08    -7.43326    -0.15187    -7.58513
+   H2S(AQ)              2.29651E-03   7.82556E-02   2.29652E-03    -2.63893     0.00000    -2.63893
+   CO2(AQ)              6.50079E-03   2.86098E-01   6.50080E-03    -2.18703     0.00000    -2.18703
+   HCL                  1.40108E-04   5.10846E-03   1.40108E-04    -3.85354     0.00000    -3.85354
+
+           --- activity ratios of cations ---
+
+
+           log (NA+   /h+**0)             3.4502182
+           log (K+    /h+**0)             2.2801227
+           log (CA++  /h+**0)             5.3756119
+           log (MG++  /h+**0)           -27.0399665
+           log (AL+++ /h+**0)            -2.6265958
+           log (ZN++  /h+**0)            -1.4635279
+           log (BA++  /h+**0)             2.4627450
+           log (MN++  /h+**0)             1.7373430
+           log (FE++  /h+**0)             3.0362836
+           log (CU+   /h+**0)            -6.4770244
+           log (FE+++ /h+**0)            -6.2107407
+           log (CU++  /h+**0)            -9.5480487
+
+
+           --- summary of solid product phases---
+
+
+  product                    log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0032908    9.92451E-05    8.36777E-03    2.78184E-03
+   COPPER                   -4.8549615    1.39649E-05    8.87415E-04    9.93325E-05
+
+
+                --- grand summary of solid phases (e.s.+p.r.s.+reactants) ---
+
+      phase/end-member       log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0032908    9.92451E-05    8.36777E-03    2.78184E-03
+   CLINOCHLORE              -0.0000000    1.00000E+00    5.55797E+02    2.11470E+02
+   COPPER                   -4.8549615    1.39649E-05    8.87415E-04    9.93325E-05
+   PYRRHOTITE               -2.0000000    1.00000E-02    8.79070E-01    1.82000E-01
+   QUARTZ                   -0.0000000    1.00000E+00    6.00843E+01    2.26880E+01
+
+
+                           mass, grams        volume, cc
+
+           created         9.255188E-03       2.881173E-03
+           destroyed       6.167603E-05       2.343400E-05
+           net             9.193512E-03       2.857739E-03
+
+          warning-- these volume totals may be incomplete because
+          of missing partial molar volume data in the data base
+
+
+
+           --- mineral saturation state summary ---
+
+
+   mineral        affinity, kcal    state        mineral        affinity, kcal    state
+
+ MAGNETITE              -1.9481                CORUNDUM               -2.0393       
+ HEMATITE               -2.9013                DIASPORE               -0.6860       
+ MAGNESITE              -0.0000  satd          ANDALUSITE             -2.0879       
+ KYANITE                -2.0622                SILLIMANITE            -2.2903       
+ LAWSONITE              -5.8957                ZOISITE                -8.3423       
+ CLINOZOISITE           -8.6388                FAYALITE               -3.5428       
+ JADEITE                -6.4284                FERROSILITE            -2.2433       
+ WOLLASTONITE           -8.0451                PSEUDOWOLLASTONITE     -8.5384       
+ MICROCLINE     X       -5.1142                SANIDINE        X      -5.5419       
+ K-FELDSPAR             -4.9574                ALBITE                 -3.1208       
+ LOW ALBITE             -3.2462                ANORTHITE              -4.8207       
+ KAOLINITE              -2.7210                PYROPHYLLITE           -3.4055       
+ MUSCOVITE              -2.8678                ANNITE                 -5.9957       
+ PARAGONITE             -1.7013                MARGARITE              -4.2054       
+ PREHNITE               -9.8746                CHAMOSITE       X      -4.8613       
+ ALMANDINE              -6.1033                COESITE                -1.5399       
+ COPPER                 -0.0000  satd          GRAPHITE               -9.1215       
+ PYRRHOTITE             -2.6688                SPHALERITE             -6.1527       
+ WURTZITE               -9.2608                PYRITE                 -4.3399       
+ CHALCOPYRITE           -9.3990                FERROUS OXIDE          -3.3810       
+ GIBBSITE               -4.5127                HALITE                 -6.8292       
+ SIDERITE               -9.2607                QUARTZ                 -0.6046       
+ CRISTOBALITE-ALPHA     -1.3460                CRISTOBALITE-BETA      -1.7936       
+ CHALCEDONY             -0.9867                AMORPHOUS SILICA       -1.7879       
+
+
+           --- summary of gas species ---
+
+           gas                log fugacity         fugacity         partial pressure
+
+   CO2(G)                         0.02597       1.06161E+00
+   O2(G)                        -29.98010       1.04689E-30
+   S2(G)                        -10.45909       3.47467E-11
+   CH4(G)                        -2.23384       5.83662E-03
+   H2(G)                         -0.41995       3.80232E-01
+   H2S(G)                        -0.68624       2.05947E-01
+   STEAM                         -1.50570       3.12104E-02
+
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+ stepping to zi=  1.0000E-07, delzi=  4.1028E-22, nord= 3
+ steps completed =     8, iter =  1, ncorr = 0
+ most rapidly changing is zvclg1(O2(G)             ) =    -29.9801
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                     reaction progress        =  1.00000000000000E-07
+                     log of reaction progress =      -7.0000000
+
+                     temperature    =    350.000 degrees c
+                     total pressure =    500.000 bars
+
+                     computing units remaining =      0.000
+
+
+ maximum value of reaction progress
+
+
+                               --- reactant summary ---
+
+
+
+         reactant            moles       delta moles      grams        delta grams
+
+   PYRRHOTITE              1.00000E-02    1.00000E-09    8.79070E-01    8.79070E-08
+   CLINOCHLORE             1.00000E+00    1.00000E-07    5.55797E+02    5.55797E-05
+   QUARTZ                  1.00000E+00    1.00000E-07    6.00843E+01    6.00843E-06
+
+
+                current total mass =  6.16760E+02 grams
+                delta total mass   =  6.16760E-05 grams
+                delta total volume =      0.00002 cc
+
+
+         reactant           affinity     rel. rate
+
+   PYRRHOTITE                 2.6688    1.00000E-02
+   CLINOCHLORE              450.3298    1.00000E+00
+   QUARTZ                     0.6046    1.00000E+00
+
+          affinity of the overall irreversible reaction=   450.961 kcal
+          contributions from irreversible reactions
+          with no thermodynamic data are not included
+
+
+
+      --- element totals for the aqueous phase ---
+
+   element         mg/kg soln.         molal conc.          moles
+
+      O          8.624878E+05        5.555371E+01        5.555363E+01
+      NA         9.593067E+03        4.300180E-01        4.300174E-01
+      K          9.431986E+02        2.486045E-02        2.486042E-02
+      CA         8.364580E+02        2.150702E-02        2.150699E-02
+      MG         6.866263E-30        2.911311E-34        2.911307E-34
+      AL         1.119770E-01        4.276868E-06        4.276862E-06
+      SI         4.359054E+02        1.599462E-02        1.599460E-02
+      ZN         6.986656E+00        1.101256E-04        1.101254E-04
+      BA         1.261480E+01        9.466263E-05        9.466250E-05
+      H          1.085849E+05        1.110237E+02        1.110235E+02
+      C          7.594938E+01        6.516417E-03        6.516407E-03
+      CL         1.682135E+04        4.889579E-01        4.889572E-01
+      S          7.157496E+01        2.300707E-03        2.300704E-03
+      MN         3.250736E+01        6.097792E-04        6.097783E-04
+      FE         9.752213E+01        1.799563E-03        1.799561E-03
+      CU         6.073068E-02        9.848808E-07        9.848794E-07
+
+      co3--                          0.000000E+00        0.000000E+00
+      so4--                          0.000000E+00        0.000000E+00
+      s--                            0.000000E+00        0.000000E+00
+
+    warning-- co3--, so4--, and s-- totals require that routine comp1 
+    have the names of non-carbonate carbon, sulfide sulfur,
+    and non-sulfate sulfur aqueous species
+
+
+   single ion activities and activity coefficients are here defined
+   with respect to the internal ph scale       
+
+
+
+                                       ph           eh           pe
+
+     internal ph scale               4.1305        1.1313    9.1502E+00
+     modified nbs ph scale           3.9786        1.1501    9.3020E+00
+     rational ph scale               3.9786        1.1501    9.3020E+00
+
+   phcl =      4.7712
+
+
+
+          oxygen fugacity =  1.04689E-30
+          log oxygen fugacity = -29.98010
+
+
+
+                              activity of water =   1.00000
+               log activity of water =   0.00000
+               alkalinity =  0.000000E+00 equiv/kg solvent
+                                          (not def. for t.gt.50 c)
+
+                    ionic strength =  3.379507E-01 molal
+                 sum of molalities =    0.8292131198699
+               osmotic coefficient =   -0.00000
+                    equiv. stoich. ionic strength =  4.889579E-01 molal
+
+                         mass of solution =   1.030536 kg
+                         mass of solvent  =   0.999999 kg
+                         mass of solutes  =   0.030537 kg
+                         conc of solutes  =   2.963250 per cent (w/w)
+
+
+   species                moles        grams          conc        log conc      log g      log act
+
+   H2O                  5.55086E+01   9.99999E+02
+   NA+                  2.96196E-01   6.80948E+00   2.96197E-01    -0.52842    -0.15187    -0.68029
+   K+                   2.00209E-02   7.82784E-01   2.00209E-02    -1.69852    -0.15187    -1.85039
+   CA++                 6.12296E-03   2.45408E-01   6.12297E-03    -2.21304    -0.67237    -2.88540
+   MG++                 2.35171E-35   5.71582E-34   2.35171E-35   -34.62862    -0.67237   -35.30098
+   AL+++                3.32461E-14   8.97031E-13   3.32461E-14   -13.47826    -1.53986   -15.01812
+   SIO2(AQ)             1.59946E-02   9.61022E-01   1.59946E-02    -1.79603     0.00000    -1.79603
+   ZN++                 8.86792E-10   5.79785E-08   8.86794E-10    -9.05218    -0.67237    -9.72454
+   BA++                 7.48333E-06   1.02769E-03   7.48334E-06    -5.12590    -0.67237    -5.79827
+   H+                   1.05042E-04   1.05871E-04   1.05042E-04    -3.97864    -0.15187    -4.13051
+   CO3--                1.61566E-12   9.69544E-11   1.61566E-12   -11.79165    -0.67237   -12.46402
+   CL-                  3.24456E-01   1.15029E+01   3.24456E-01    -0.48884    -0.15187    -0.64071
+   SO4--                2.36561E-12   2.27235E-10   2.36562E-12   -11.62606    -0.67237   -12.29842
+   MN++                 1.40829E-06   7.73688E-05   1.40829E-06    -5.85131    -0.67237    -6.52367
+   FE++                 2.80307E-05   1.56543E-03   2.80307E-05    -4.55237    -0.67237    -5.22473
+   CU+                  3.72595E-11   2.36769E-09   3.72596E-11   -10.42876    -0.17877   -10.60753
+   O2(AQ)               1.54979E-33   4.95915E-32   1.54979E-33   -32.80973     0.02163   -32.78810
+   H2(AQ)               6.98103E-04   1.40724E-03   6.98104E-04    -3.15608     0.02163    -3.13445
+   CH4(AQ)              1.03403E-05   1.65885E-04   1.03403E-05    -4.98547     0.02163    -4.96384
+   HS-                  4.18922E-06   1.38529E-04   4.18923E-06    -5.37787    -0.15187    -5.52974
+   FE+++                8.66155E-18   4.83722E-16   8.66156E-18   -17.06240    -1.53986   -18.60227
+   CU++                 7.29963E-18   4.63863E-16   7.29964E-18   -17.13670    -0.67237   -17.80907
+   HCO3-                1.07732E-06   6.57349E-05   1.07732E-06    -5.96766    -0.15187    -6.11953
+   CLO4-                4.46643E-79   4.44189E-77   4.46644E-79   -78.35004    -0.15187   -78.50191
+   OH-                  1.22568E-06   2.08455E-05   1.22568E-06    -5.91162    -0.15187    -6.06349
+   CH3COO-              1.45715E-14   8.60370E-13   1.45716E-14   -13.83649    -0.15187   -13.98836
+   CH3CH2COO-           3.78110E-21   2.76290E-19   3.78111E-21   -20.42238    -0.15187   -20.57425
+   AL(OH)3              7.23198E-09   5.64119E-07   7.23199E-09    -8.14074     0.00000    -8.14074
+   AL(OH)4 -            4.26963E-06   4.05660E-04   4.26963E-06    -5.36961    -0.15187    -5.52148
+   BACL+                8.71792E-05   1.50631E-02   8.71793E-05    -4.05959    -0.15187    -4.21146
+   CACL+                9.37024E-03   7.07763E-01   9.37026E-03    -2.02825    -0.15187    -2.18012
+   CACL2                6.00970E-03   6.66992E-01   6.00971E-03    -2.22115     0.00000    -2.22115
+   CACO3                7.38985E-10   7.39644E-08   7.38986E-10    -9.13136     0.00000    -9.13136
+   CAHCO3+              4.04094E-06   4.08527E-04   4.04094E-06    -5.39352    -0.12694    -5.52046
+   CA(OH)+              3.99395E-08   2.28004E-06   3.99395E-08    -7.39860    -0.15187    -7.55047
+   CUCL                 1.18397E-09   1.17212E-07   1.18397E-09    -8.92666     0.00000    -8.92666
+   CUCL2-               3.43813E-07   4.62263E-05   3.43813E-07    -6.46368    -0.15187    -6.61555
+   CUCL3--              6.30885E-07   1.07190E-04   6.30886E-07    -6.20005    -0.67237    -6.87242
+   CU(OH)3-             8.96044E-09   1.02658E-06   8.96045E-09    -8.04767    -0.15187    -8.19954
+   FECL+                1.82147E-04   1.66300E-02   1.82148E-04    -3.73958    -0.15187    -3.89145
+   FECL2                1.58937E-03   2.01458E-01   1.58938E-03    -2.79877     0.00000    -2.79877
+   FE(OH)+              9.20818E-09   6.70855E-07   9.20819E-09    -8.03583    -0.15187    -8.18770
+   KCL                  4.83950E-03   3.60791E-01   4.83951E-03    -2.31520     0.00000    -2.31520
+   KOH                  3.91260E-09   2.19519E-07   3.91260E-09    -8.40753     0.00000    -8.40753
+   MNCL+                6.08370E-04   5.49912E-02   6.08371E-04    -3.21583    -0.15187    -3.36770
+   NACL                 1.33821E-01   7.82087E+00   1.33821E-01    -0.87348     0.00000    -0.87348
+   NAHCO3               1.61201E-07   1.35420E-05   1.61201E-07    -6.79263     0.00000    -6.79263
+   NAOH                 1.15619E-07   4.62440E-06   1.15619E-07    -6.93697     0.00000    -6.93697
+   ZNCL+                5.13280E-05   5.17556E-03   5.13281E-05    -4.28964    -0.15187    -4.44151
+   ZNCL2                1.68239E-05   2.29287E-03   1.68240E-05    -4.77407     0.00000    -4.77407
+   ZNCL3-               6.65554E-07   1.14302E-04   6.65555E-07    -6.17682    -0.15187    -6.32869
+   ZNCL4--              4.13070E-05   8.55848E-03   4.13071E-05    -4.38398    -0.67237    -5.05634
+   HSIO3-               3.68753E-08   2.84278E-06   3.68754E-08    -7.43326    -0.15187    -7.58513
+   H2S(AQ)              2.29651E-03   7.82556E-02   2.29652E-03    -2.63893     0.00000    -2.63893
+   CO2(AQ)              6.50079E-03   2.86098E-01   6.50080E-03    -2.18703     0.00000    -2.18703
+   HCL                  1.40108E-04   5.10846E-03   1.40108E-04    -3.85354     0.00000    -3.85354
+
+           --- activity ratios of cations ---
+
+
+           log (NA+   /h+**0)             3.4502182
+           log (K+    /h+**0)             2.2801227
+           log (CA++  /h+**0)             5.3756119
+           log (MG++  /h+**0)           -27.0399665
+           log (AL+++ /h+**0)            -2.6265958
+           log (ZN++  /h+**0)            -1.4635279
+           log (BA++  /h+**0)             2.4627450
+           log (MN++  /h+**0)             1.7373430
+           log (FE++  /h+**0)             3.0362836
+           log (CU+   /h+**0)            -6.4770244
+           log (FE+++ /h+**0)            -6.2107407
+           log (CU++  /h+**0)            -9.5480487
+
+
+           --- summary of solid product phases---
+
+
+  product                    log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0032908    9.92451E-05    8.36777E-03    2.78184E-03
+   COPPER                   -4.8549615    1.39649E-05    8.87415E-04    9.93325E-05
+
+
+                --- grand summary of solid phases (e.s.+p.r.s.+reactants) ---
+
+      phase/end-member       log moles        moles        grams        volume, cc
+
+   MAGNESITE                -4.0032908    9.92451E-05    8.36777E-03    2.78184E-03
+   CLINOCHLORE              -0.0000000    1.00000E+00    5.55797E+02    2.11470E+02
+   COPPER                   -4.8549615    1.39649E-05    8.87415E-04    9.93325E-05
+   PYRRHOTITE               -2.0000000    1.00000E-02    8.79070E-01    1.82000E-01
+   QUARTZ                   -0.0000000    1.00000E+00    6.00843E+01    2.26880E+01
+
+
+                           mass, grams        volume, cc
+
+           created         9.255188E-03       2.881173E-03
+           destroyed       6.167603E-05       2.343400E-05
+           net             9.193512E-03       2.857739E-03
+
+          warning-- these volume totals may be incomplete because
+          of missing partial molar volume data in the data base
+
+
+
+           --- mineral saturation state summary ---
+
+
+   mineral        affinity, kcal    state        mineral        affinity, kcal    state
+
+ MAGNETITE              -1.9481                CORUNDUM               -2.0393       
+ HEMATITE               -2.9013                DIASPORE               -0.6860       
+ MAGNESITE              -0.0000  satd          ANDALUSITE             -2.0879       
+ KYANITE                -2.0622                SILLIMANITE            -2.2903       
+ LAWSONITE              -5.8957                ZOISITE                -8.3423       
+ CLINOZOISITE           -8.6388                FAYALITE               -3.5428       
+ JADEITE                -6.4284                FERROSILITE            -2.2433       
+ WOLLASTONITE           -8.0451                PSEUDOWOLLASTONITE     -8.5384       
+ MICROCLINE     X       -5.1142                SANIDINE        X      -5.5419       
+ K-FELDSPAR             -4.9574                ALBITE                 -3.1208       
+ LOW ALBITE             -3.2462                ANORTHITE              -4.8207       
+ KAOLINITE              -2.7210                PYROPHYLLITE           -3.4055       
+ MUSCOVITE              -2.8678                ANNITE                 -5.9957       
+ PARAGONITE             -1.7013                MARGARITE              -4.2054       
+ PREHNITE               -9.8746                CHAMOSITE       X      -4.8613       
+ ALMANDINE              -6.1033                COESITE                -1.5399       
+ COPPER                 -0.0000  satd          GRAPHITE               -9.1215       
+ PYRRHOTITE             -2.6688                SPHALERITE             -6.1527       
+ WURTZITE               -9.2608                PYRITE                 -4.3399       
+ CHALCOPYRITE           -9.3990                FERROUS OXIDE          -3.3810       
+ GIBBSITE               -4.5127                HALITE                 -6.8292       
+ SIDERITE               -9.2607                QUARTZ                 -0.6046       
+ CRISTOBALITE-ALPHA     -1.3460                CRISTOBALITE-BETA      -1.7936       
+ CHALCEDONY             -0.9867                AMORPHOUS SILICA       -1.7879       
+
+
+           --- summary of gas species ---
+
+           gas                log fugacity         fugacity         partial pressure
+
+   CO2(G)                         0.02597       1.06161E+00
+   O2(G)                        -29.98010       1.04689E-30
+   S2(G)                        -10.45909       3.47467E-11
+   CH4(G)                        -2.23384       5.83662E-03
+   H2(G)                         -0.41995       3.80232E-01
+   H2S(G)                        -0.68624       2.05947E-01
+   STEAM                         -1.50570       3.12104E-02
+
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                     --- maximum value of reaction progress ---
+
+ ---  the reaction path has terminated normally ---
+
+
+           8 steps were taken
+       zi increased from 
+               0.00000E+00 to  1.00000E-07
+       the average value of delzi was  1.25000E-08
+       the average matrix dimension was   19
+
+
+
+
+ --- no further input found ---
+

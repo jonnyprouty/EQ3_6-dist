@@ -1,0 +1,2576 @@
+
+ EQ3NR, version 3245R110
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+ Supported by EQLIB, version 3245R136
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+
+ Run                    
+
+
+
+ --- reading the input file ---
+ 550 C & 10.0 kbar                                                               
+                                                                                 
+ Fluid in equilibrium with pelitic rock:                                         
+                                                                                 
+ Garnet & Cpx compositions based on Viete et al.                                 
+ Sample CA-13-01                                                                 
+ Garnet(ss):      Pyrope:    0.12                                                
+                  Almandine: 0.63                                                
+                  Grossular: 0.25                                                
+                                                                                 
+ Clinopyroxene: Diopside     0.32                                                
+                Hedenbergite 0.26                                                
+                Jadeite      0.42                                                
+ Quartz                                                                          
+                                                                                 
+                                                                                 
+ QFM is -17.3                                                                    
+                                                                                 
+ log fO2 at QFM - 1.0                                                            
+                                                                                 
+                                                                                 
+                                                                                 
+ endit.                                                                          
+       tempc=  0.55000E+03
+         rho=  0.10234E+01    tdspkg=  0.00000E+00     tdspl=  0.00000E+00
+         fep= -0.18300E+02    uredox=                         
+       tolbt=  0.00000E+00     toldl=  0.00000E+00    tolsat=  0.00000E+00
+     itermx=  0
+                 1    2    3    4    5    6    7    8    9   10
+   iopt1-10=     0    0    0    2    0    0    0    0    0    0
+   iopg1-10=     0   -1    0    0    0    0    1    0    8    2
+   iopr1-10=     0    2    0    0    0    0    1    0    0    0
+  iopr11-20=     0    0    0    0    0    0    0    0    0    0
+   iodb1-10=     0    0    0    0    0    0    0    0    0    0
+      uebal= NA+                     
+     uacion= CL-                     
+      nxmod=  3
+    species= CRISTOBALITE-ALPHA      
+       type=  1              option= -1              xlkmod=  0.00000E+00
+    species= CA(OH)+                 
+       type=  0              option= -1              xlkmod=  0.00000E+00
+    species= H2CO3(AQ)               
+       type=  0              option= -1              xlkmod=  0.00000E+00
+ data file master species= NA+                     
+    switch with species=                         
+    jflag=  0   csp=   0.500000000E+00
+ data file master species= CL-                     
+    switch with species=                         
+    jflag=  0   csp=   0.500000000E+00
+ data file master species= K+                      
+    switch with species=                         
+    jflag= 20   csp=   0.000000000E+00
+            uphas1= KFELDSPAR(SS)              uphas2=                         
+ data file master species= CA+2                    
+    switch with species=                         
+    jflag= 20   csp=   0.000000000E+00
+            uphas1= GARNET(SS)                 uphas2=                         
+ data file master species= MG+2                    
+    switch with species=                         
+    jflag= 20   csp=   0.000000000E+00
+            uphas1= GARNET(SS)                 uphas2=                         
+ data file master species= FE+2                    
+    switch with species=                         
+    jflag= 20   csp=   0.000000000E+00
+            uphas1= GARNET(SS)                 uphas2=                         
+ data file master species= AL+3                    
+    switch with species=                         
+    jflag= 19   csp=   0.000000000E+00
+            uphas1= PARAGONITE                 uphas2=                         
+ data file master species= CO2(AQ)                 
+    switch with species=                         
+    jflag=  0   csp=   0.100000000E+01
+ data file master species= H+                      
+    switch with species=                         
+    jflag= 20   csp=   0.000000000E+00
+            uphas1= PLAGIOCLASE(SS)            uphas2=                         
+ data file master species= H4SIO4(AQ)              
+    switch with species=                         
+    jflag= 19   csp=   0.000000000E+00
+            uphas1= QUARTZ_ALPHA               uphas2=                         
+endit.  
+ solid solutions
+    GARNET(SS)              
+ component     mole fraction
+      PYROPE                         0.1200
+      ALMANDINE                      0.6300
+      GROSSULAR                      0.2500
+      endit.                  
+    CLINOPYROXENE(SS)       
+ component     mole fraction
+      DIOPSIDE                       0.3200
+      HEDENBERGITE                   0.2600
+      JADEITE                        0.4200
+      endit.                  
+    PLAGIOCLASE(SS)         
+ component     mole fraction
+      ALBITE                         0.8800
+      ANORTHITE                      0.1200
+      endit.                  
+    KFELDSPAR(SS)           
+ component     mole fraction
+      KFELDSPAR                      0.3100
+      ALBITE                         0.6900
+      endit.                  
+    BIOTITE(SS)             
+ component     mole fraction
+      PHLOGOPITE                     0.5100
+      ANNITE                         0.4900
+      endit.                  
+    endit.                  
+
+ --- the input file has been successfuly read ---
+
+ --- reading the data1 file ---
+
+ --- the data1 file has been successfully read ---
+ * note- suppress species CRISTOBALITE-ALPHA       was not among
+       the loaded minerals                 (eqlib/supprs)
+
+ the species CA(OH)+                  has been user-suppressed
+
+ the species H2CO3(AQ)                has been user-suppressed
+
+
+
+
+
+
+
+ eeee   qqq   33333  n   n  rrrr   
+ e     q   q      3  nn  n  r   r  
+ eeee  q   q    33   n n n  rrrr   
+ e     q q q      3  n  nn  r  r   
+ eeee   qqq   3333   n   n  r   r  
+           q                       
+
+
+MODIFIED FOR DEW CALCULATIONS     
+
+
+
+ eq3nr.3245R110
+  supported by eqlib.3245R136
+
+
+ 550 C & 10.0 kbar                                                               
+                                                                                 
+ Fluid in equilibrium with pelitic rock:                                         
+                                                                                 
+ Garnet & Cpx compositions based on Viete et al.                                 
+ Sample CA-13-01                                                                 
+ Garnet(ss):      Pyrope:    0.12                                                
+                  Almandine: 0.63                                                
+                  Grossular: 0.25                                                
+                                                                                 
+ Clinopyroxene: Diopside     0.32                                                
+                Hedenbergite 0.26                                                
+                Jadeite      0.42                                                
+ Quartz                                                                          
+                                                                                 
+                                                                                 
+ QFM is -17.3                                                                    
+                                                                                 
+ log fO2 at QFM - 1.0                                                            
+                                                                                 
+                                                                                 
+                                                                                 
+
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+
+   the activity coefficients of aqueous solute species
+ and the activity of water are calculated according to
+ b-dot equation plus others      
+
+
+
+ temperature= 550.00 degrees celsius
+ pressure= ********* bars
+
+
+         29 elements are in the data base
+         70 elements can be loaded into memory
+         11 elements are active in this problem
+
+
+        105 aqueous species are in the data base
+         83 aqueous species were loaded into memory
+        750 aqueous species can be loaded into memory
+         62 aqueous species are active in this problem
+
+         75 aqueous reactions are in the data base
+         53 aqueous reactions were loaded into memory
+        679 aqueous reactions can be loaded into memory
+
+
+              81 minerals are in the data base
+              71 minerals were loaded into memory
+             750 minerals can be loaded into memory
+              71 minerals are active in this problem
+
+              11 solid solutions are in the data base
+              20 solid solutions can be loaded into memory
+
+               7 gases are in the data base
+               5 gases were loaded into memory
+              15 gases can be loaded into memory
+               5 gases are active in this problem
+
+
+
+
+      iopt1  =  0 (redox option switch)
+      iopt2  =  0 (automatic basis switching switch)
+      iopt3  =  0 (interfacing output control switch)
+      iopt4  =  2 (turn-on solid solutions switch)
+      iopt5  =  0 (not used)
+      iopt6  =  0 (conv. test criteria switch)
+      iopt7  =  0 (0/1 3245/post-3245 pickup file)
+      iopt8  =  0 (not used)
+      iopt9  =  0 (not used)
+      iopt10 =  0 (not used)
+
+
+
+           iopg1  =  0 (act. coeff. choice)
+           iopg2  = -1 (ph scale convention switch)
+           iopg3  =  0 (iopg1=3 - 0/1 uelam= on/onplus)
+           iopg4  =  0 (iopg1=3 or 4 - f switch - 0/1 dhoa/dhca)
+           iopg5  =  0 (Activity coeff mode for C)
+           iopg6  =  0 (approx. of j(x) function)
+           iopg7  =  1 (a(H2O)=1 if =0, a(H2O)=X(H2O) if =1)
+           iopg8  =  0 (if =1 then uses high T range 650-1000 C)
+           iopg9  =  8 (position of C in the datafile)
+           iopg10 =  2 (Gamma-gam options)
+
+
+                iopr1  =  0 (list loading of species)
+                iopr2  =  2 (list reactions and log k values)
+                iopr3  =  0 (aqueous species print order control)
+                iopr4  =  0 (aqueous species print cut-off control)
+                iopr5  =  0 (mass balance percentages print control)
+                iopr6  =  0 (mean ionic act coeff print control)
+                iopr7  =  1 (mineral affinity print control)
+                iopr8  =  0 (ion size and hydr. no. print control)
+                iopr9  =  0 (pitzer coefficients tabulation)
+                iopr10 =  0 (print concbs array)
+                iopr11 =  0 (not used)
+                iopr12 =  0 (not used)
+                iopr13 =  0 (not used)
+                iopr14 =  0 (not used)
+                iopr15 =  0 (not used)
+                iopr16 =  0 (not used)
+                iopr17 =  0 (not used)
+                iopr18 =  0 (not used)
+                iopr19 =  0 (not used)
+                iopr20 =  0 (not used)
+
+
+                     iodb1  =  0 (print info. messages switch)
+                     iodb2  =  0 (print pre-newton-raphson optimizations switch)
+                     iodb3  =  0 (request iteration variables to kill)
+                     iodb4  =  0 (print newton-raphson iterations switch)
+                     iodb5  =  0 (list stoichiometric equivalences)
+                     iodb6  =  0 (controls iodb5 level of detail)
+                     iodb7  =  0 (write reactions on file rlist switch)
+                     iodb8  =  0 (not used)
+                     iodb9  =  0 (not used)
+                     iodb10 =  0 (not used)
+
+
+      the default redox state is constrained by log fo2 =     -18.3000 (log bars)
+
+
+                solution density =  1.02336 g/ml
+
+                total dissolved salts =       0.00 mg/kg solution
+                total dissolved salts =       0.00 mg/l
+
+
+           tolbt  =  0.10000E-05 (convergence tolerance on residual functions)
+           toldl  =  0.10000E-05 (convergence tolerance on correction terms)
+           tolsat =  0.50000E+00 (phase saturation tolerance, does not affect
+                                  convergence)
+
+
+
+                                    ----- input constraints -----
+
+     species          csp       jflag  type of input      controlling phase
+
+   NA+                         0.50000E+00    0   tot conc, molal                                    
+   CL-                         0.50000E+00    0   tot conc, molal                                    
+   K+                          0.00000E+00   20   solid solution equil       KFELDSPAR(SS)           
+
+                       1.000  KFELDSPAR               
+                    +  4.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  K+                      
+   CA+2                        0.00000E+00   20   solid solution equil       GARNET(SS)              
+
+                       1.000  GROSSULAR               
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.001  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+   MG+2                        0.00000E+00   20   solid solution equil       GARNET(SS)              
+
+                       1.000  PYROPE                  
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.001  MG+2                    
+   FE+2                        0.00000E+00   20   solid solution equil       GARNET(SS)              
+
+                       1.000  ALMANDINE               
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.001  FE+2                    
+   AL+3                        0.00000E+00   19   mineral equilibrium        PARAGONITE              
+
+                       1.000  PARAGONITE              
+                    + 10.000  H+                      
+                           ==
+                       3.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  NA+                     
+   CO2(AQ)                     0.10000E+01    0   tot conc, molal                                    
+   H+                          0.00000E+00   20   solid solution equil       PLAGIOCLASE(SS)         
+
+                       1.000  ALBITE                  
+                    +  4.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  NA+                     
+   H4SIO4(AQ)                  0.00000E+00   19   mineral equilibrium        QUARTZ_ALPHA            
+
+                       1.000  QUARTZ_ALPHA            
+                    +  2.000  H2O                     
+                           ==
+                       1.000  H4SIO4(AQ)              
+
+
+                     ----- input solid solution compositions -----
+
+
+      KFELDSPAR(SS)     
+
+                              mole fraction
+            KFELDSPAR            0.3100
+            ALBITE               0.6900
+
+      PLAGIOCLASE(SS)   
+
+                              mole fraction
+            ALBITE               0.8800
+            ANORTHITE            0.1200
+
+      BIOTITE(SS)       
+
+                              mole fraction
+            PHLOGOPITE           0.5100
+            ANNITE               0.4900
+
+      GARNET(SS)        
+
+                              mole fraction
+            PYROPE               0.1200
+            ALMANDINE            0.6300
+            GROSSULAR            0.2500
+
+      CLINOPYROXENE(SS) 
+
+                              mole fraction
+            DIOPSIDE             0.3200
+            JADEITE              0.4200
+            HEDENBERGITE         0.2600
+
+
+ the ion that defines equiv. stoich. ionic strength
+   is CL-                     
+
+ electrical balance will be achieved by adjusting
+   the concentration of NA+                     
+
+
+                     --- inactive aqueous species ---
+
+  CA(OH)+                   H2CO3(AQ)               
+
+
+
+                                --- modified input constraints ---
+
+     species          csp       jflag  type of input      controlling phase
+
+   H+                          0.00000E+00   20   solid solution equil       PLAGIOCLASE(SS)         
+
+                       1.000  ALBITE                  
+                    +  4.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  NA+                     
+   AL+3                        0.00000E+00   19   mineral equilibrium        PARAGONITE              
+
+                       1.000  PARAGONITE              
+                    + 10.000  H+                      
+                           ==
+                       3.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  NA+                     
+   CA+2                        0.00000E+00   20   solid solution equil       GARNET(SS)              
+
+                       1.000  GROSSULAR               
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.001  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+   CO2(AQ)                     0.10000E+01    0   tot conc, molal         
+   H4SIO4(AQ)                  0.00000E+00   19   mineral equilibrium        QUARTZ_ALPHA            
+
+                       1.000  QUARTZ_ALPHA            
+                    +  2.000  H2O                     
+                           ==
+                       1.000  H4SIO4(AQ)              
+   CL-                         0.50000E+00    0   tot conc, molal         
+   FE+2                        0.00000E+00   20   solid solution equil       GARNET(SS)              
+
+                       1.000  ALMANDINE               
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.001  FE+2                    
+   K+                          0.00000E+00   20   solid solution equil       KFELDSPAR(SS)           
+
+                       1.000  KFELDSPAR               
+                    +  4.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  K+                      
+   MG+2                        0.00000E+00   20   solid solution equil       GARNET(SS)              
+
+                       1.000  PYROPE                  
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.001  MG+2                    
+   NA+                         0.50000E+00    0   tot conc, molal         
+
+
+
+
+
+ ---listing of species and reactions ---
+
+       temperature=    550.000 degrees celsius
+       pressure=   10000.0     bars
+
+        --- strict basis species ---
+
+                              H2O                     
+                              H+                      
+                              AL+3                    
+                              CA+2                    
+                              CO2(AQ)                 
+                              H4SIO4(AQ)              
+                              CL-                     
+                              FE+2                    
+                              K+                      
+                              MG+2                    
+                              NA+                     
+
+
+        --- aqueous species dissociation reactions ---
+
+ --------------------------------------------------
+
+                       1.000  CH3COO-                 
+                    +  1.000  H+                      
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      51.3024
+
+ --------------------------------------------------
+
+                       1.000  CH3COOH(AQ)             
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      45.2747
+
+ --------------------------------------------------
+
+                       1.000  AL(OH)4-                
+                    +  4.000  H+                      
+                           ==
+                       4.000  H2O                     
+                    +  1.000  AL+3                    
+
+          log k=       4.9364
+
+ --------------------------------------------------
+
+                       1.000  AL(OH)SI(OH)-           
+                    +  4.000  H+                      
+                           ==
+                       3.000  H2O                     
+                    +  1.000  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=       2.8234
+
+ --------------------------------------------------
+
+                       1.000  CA(HCO3)+               
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CA+2                    
+                    +  1.000  CO2(AQ)                 
+
+          log k=       2.2677
+
+ --------------------------------------------------
+
+                       1.000  CA(HCOO)+               
+                    +  1.000  H+                      
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CA+2                    
+                    +  1.000  CO2(AQ)                 
+
+          log k=      13.6684
+
+ --------------------------------------------------
+
+                       1.000  CA(H3SIO4)+             
+                    +  1.000  H+                      
+                           ==
+                       1.000  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=       1.6431
+
+ --------------------------------------------------
+
+                       1.000  CACL+                   
+                           ==
+                       1.000  CA+2                    
+                    +  1.000  CL-                     
+
+          log k=      -2.2763
+
+ --------------------------------------------------
+
+                       1.000  CACO3(AQ)               
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CA+2                    
+                    +  1.000  CO2(AQ)                 
+
+          log k=       9.4561
+
+ --------------------------------------------------
+
+                       1.000  CO(AQ)                  
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  CO2(AQ)                 
+
+          log k=      12.0361
+
+ --------------------------------------------------
+
+                       1.000  CO3-2                   
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      15.4850
+
+ --------------------------------------------------
+
+                       1.000  ETHANE(AQ)              
+                    +  3.500  O2(G)                   
+                           ==
+                       3.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      76.3797
+
+ --------------------------------------------------
+
+                       1.000  ETHANOL(AQ)             
+                    +  3.000  O2(G)                   
+                           ==
+                       3.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      68.1484
+
+ --------------------------------------------------
+
+                       1.000  ETHYLENE(AQ)            
+                    +  3.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      69.4490
+
+ --------------------------------------------------
+
+                       1.000  FE(HCOO)+               
+                    +  1.000  H+                      
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  FE+2                    
+
+          log k=       7.9585
+
+ --------------------------------------------------
+
+                       1.000  FE(OH)+                 
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  FE+2                    
+
+          log k=       3.9783
+
+ --------------------------------------------------
+
+                       1.000  FE+3                    
+                    +  0.500  H2O                     
+                           ==
+                       1.000  H+                      
+                    +  1.000  FE+2                    
+                    +  0.250  O2(G)                   
+
+          log k=       2.2291
+
+ --------------------------------------------------
+
+                       1.000  FECL+                   
+                           ==
+                       1.000  CL-                     
+                    +  1.000  FE+2                    
+
+          log k=      -1.9257
+
+ --------------------------------------------------
+
+                       1.000  FECL+2                  
+                    +  0.500  H2O                     
+                           ==
+                       1.000  H+                      
+                    +  1.000  CL-                     
+                    +  1.000  FE+2                    
+                    +  0.250  O2(G)                   
+
+          log k=      -2.9833
+
+ --------------------------------------------------
+
+                       1.000  FECL2(AQ)               
+                           ==
+                       2.000  CL-                     
+                    +  1.000  FE+2                    
+
+          log k=      -5.2417
+
+ --------------------------------------------------
+
+                       1.000  FECL3(AQ)               
+                    +  0.500  H2O                     
+                           ==
+                       1.000  H+                      
+                    +  3.000  CL-                     
+                    +  1.000  FE+2                    
+                    +  0.250  O2(G)                   
+
+          log k=      -3.7333
+
+ --------------------------------------------------
+
+                       1.000  FECL4-                  
+                    +  0.500  H2O                     
+                           ==
+                       1.000  H+                      
+                    +  4.000  CL-                     
+                    +  1.000  FE+2                    
+                    +  0.250  O2(G)                   
+
+          log k=       0.2016
+
+ --------------------------------------------------
+
+                       1.000  FE(OH)2(AQ)             
+                    +  2.000  H+                      
+                           ==
+                       2.000  H2O                     
+                    +  1.000  FE+2                    
+
+          log k=       9.1142
+
+ --------------------------------------------------
+
+                       1.000  HCOO-                   
+                    +  1.000  H+                      
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      17.7115
+
+ --------------------------------------------------
+
+                       1.000  HCOOH(AQ)               
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      13.5754
+
+ --------------------------------------------------
+
+                       1.000  H2(AQ)                  
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+
+          log k=      11.9911
+
+ --------------------------------------------------
+
+                       1.000  AL(OH)3(AQ)             
+                    +  3.000  H+                      
+                           ==
+                       3.000  H2O                     
+                    +  1.000  AL+3                    
+
+          log k=       0.1789
+
+ --------------------------------------------------
+
+                       1.000  HCL(AQ)                 
+                           ==
+                       1.000  H+                      
+                    +  1.000  CL-                     
+
+          log k=      -1.6053
+
+ --------------------------------------------------
+
+                       1.000  HCO3-                   
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=       6.6833
+
+ --------------------------------------------------
+
+                       1.000  FE(OH)3-                
+                    +  3.000  H+                      
+                           ==
+                       3.000  H2O                     
+                    +  1.000  FE+2                    
+
+          log k=      14.5952
+
+ --------------------------------------------------
+
+                       1.000  H3SIO4-                 
+                    +  1.000  H+                      
+                           ==
+                       1.000  H4SIO4(AQ)              
+
+          log k=       7.3772
+
+ --------------------------------------------------
+
+                       1.000  KCL(AQ)                 
+                           ==
+                       1.000  CL-                     
+                    +  1.000  K+                      
+
+          log k=       0.0983
+
+ --------------------------------------------------
+
+                       1.000  KOH(AQ)                 
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  K+                      
+
+          log k=       7.2342
+
+ --------------------------------------------------
+
+                       1.000  METHANE(AQ)             
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      41.9409
+
+ --------------------------------------------------
+
+                       1.000  METHANOL(AQ)            
+                    +  1.500  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      36.0227
+
+ --------------------------------------------------
+
+                       1.000  MG(HCO3)+               
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  MG+2                    
+
+          log k=       3.9201
+
+ --------------------------------------------------
+
+                       1.000  MG(H3SIO4)+             
+                    +  1.000  H+                      
+                           ==
+                       1.000  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=       5.1436
+
+ --------------------------------------------------
+
+                       1.000  MGCL+                   
+                           ==
+                       1.000  CL-                     
+                    +  1.000  MG+2                    
+
+          log k=      -1.8183
+
+ --------------------------------------------------
+
+                       1.000  MGCO3(AQ)               
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  MG+2                    
+
+          log k=      14.0676
+
+ --------------------------------------------------
+
+                       1.000  MG(OH)+                 
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  MG+2                    
+
+          log k=       3.7725
+
+ --------------------------------------------------
+
+                       1.000  MGSIC+                  
+                    +  1.000  H+                      
+                           ==
+                       1.000  CO2(AQ)                 
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=      -2.1403
+
+ --------------------------------------------------
+
+                       1.000  NACL(AQ)                
+                           ==
+                       1.000  CL-                     
+                    +  1.000  NA+                     
+
+          log k=       0.0375
+
+ --------------------------------------------------
+
+                       1.000  NACO3-                  
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  NA+                     
+
+          log k=      14.4179
+
+ --------------------------------------------------
+
+                       1.000  NAHCO3(AQ)              
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  NA+                     
+
+          log k=       5.2123
+
+ --------------------------------------------------
+
+                       1.000  NAOH(AQ)                
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  NA+                     
+
+          log k=       7.4172
+
+ --------------------------------------------------
+
+                       1.000  O2(AQ)                  
+                           ==
+                       1.000  O2(G)                   
+
+          log k=       3.3651
+
+ --------------------------------------------------
+
+                       1.000  OH-                     
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+
+          log k=       7.9509
+
+ --------------------------------------------------
+
+                       1.000  PROPANE(AQ)             
+                    +  5.000  O2(G)                   
+                           ==
+                       4.000  H2O                     
+                    +  3.000  CO2(AQ)                 
+
+          log k=     110.3357
+
+ --------------------------------------------------
+
+                       1.000  PROPANOL(AQ)            
+                    +  4.500  O2(G)                   
+                           ==
+                       4.000  H2O                     
+                    +  3.000  CO2(AQ)                 
+
+          log k=     102.5811
+
+ --------------------------------------------------
+
+                       1.000  H6SI2O7(AQ)             
+                    +  1.000  H2O                     
+                           ==
+                       2.000  H4SIO4(AQ)              
+
+          log k=      -0.2494
+
+ --------------------------------------------------
+
+                       1.000  H8SI3O10(AQ)            
+                    +  2.000  H2O                     
+                           ==
+                       3.000  H4SIO4(AQ)              
+
+          log k=       1.7824
+
+ --------------------------------------------------
+
+        --- mineral dissolution reactions ----
+
+ --------------------------------------------------
+
+                       1.000  DIAMOND                 
+                    +  1.000  O2(G)                   
+                           ==
+                       1.000  CO2(AQ)                 
+
+          log k=      21.0125
+
+ --------------------------------------------------
+
+                       1.000  MAGNETITE               
+                    +  6.000  H+                      
+                           ==
+                       3.000  H2O                     
+                    +  3.000  FE+2                    
+                    +  0.500  O2(G)                   
+
+          log k=      -2.4330
+
+ --------------------------------------------------
+
+                       1.000  CORUNDUM                
+                    +  6.000  H+                      
+                           ==
+                       3.000  H2O                     
+                    +  2.000  AL+3                    
+
+          log k=      -6.5522
+
+ --------------------------------------------------
+
+                       1.000  HEMATITE                
+                    +  4.000  H+                      
+                           ==
+                       2.000  H2O                     
+                    +  2.000  FE+2                    
+                    +  0.500  O2(G)                   
+
+          log k=      -4.3500
+
+ --------------------------------------------------
+
+                       1.000  PERICLASE               
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  MG+2                    
+
+          log k=       6.4206
+
+ --------------------------------------------------
+
+                       1.000  LIME                    
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CA+2                    
+
+          log k=      12.1516
+
+ --------------------------------------------------
+
+                       1.000  SPINEL                  
+                    +  8.000  H+                      
+                           ==
+                       4.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  1.000  MG+2                    
+
+          log k=      -1.7554
+
+ --------------------------------------------------
+
+                       1.000  BRUCITE                 
+                    +  2.000  H+                      
+                           ==
+                       2.000  H2O                     
+                    +  1.000  MG+2                    
+
+          log k=       5.6735
+
+ --------------------------------------------------
+
+                       1.000  DIASPORE                
+                    +  3.000  H+                      
+                           ==
+                       2.000  H2O                     
+                    +  1.000  AL+3                    
+
+          log k=      -3.1552
+
+ --------------------------------------------------
+
+                       1.000  CALCITE                 
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CA+2                    
+                    +  1.000  CO2(AQ)                 
+
+          log k=       5.6118
+
+ --------------------------------------------------
+
+                       1.000  MAGNESITE               
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  MG+2                    
+
+          log k=       4.3575
+
+ --------------------------------------------------
+
+                       1.000  SIDERITE                
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  FE+2                    
+
+          log k=       2.8892
+
+ --------------------------------------------------
+
+                       1.000  ARAGONITE               
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CA+2                    
+                    +  1.000  CO2(AQ)                 
+
+          log k=       5.6380
+
+ --------------------------------------------------
+
+                       1.000  DOLOMITE                
+                    +  4.000  H+                      
+                           ==
+                       2.000  H2O                     
+                    +  1.000  CA+2                    
+                    +  2.000  CO2(AQ)                 
+                    +  1.000  MG+2                    
+
+          log k=       9.8111
+
+ --------------------------------------------------
+
+                       1.000  ANDALUSITE              
+                    +  6.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=      -7.3137
+
+ --------------------------------------------------
+
+                       1.000  KYANITE                 
+                    +  6.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=      -7.5820
+
+ --------------------------------------------------
+
+                       1.000  SILLIMANITE             
+                    +  6.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=      -7.3991
+
+ --------------------------------------------------
+
+                       1.000  GLAUCOPHANE             
+                    +  8.000  H2O                     
+                    + 14.000  H+                      
+                           ==
+                       2.000  AL+3                    
+                    +  8.000  H4SIO4(AQ)              
+                    +  3.000  MG+2                    
+                    +  2.000  NA+                     
+
+          log k=       8.2380
+
+ --------------------------------------------------
+
+                       1.000  LAWSONITE               
+                    +  8.000  H+                      
+                           ==
+                       2.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  1.000  CA+2                    
+                    +  2.000  H4SIO4(AQ)              
+
+          log k=      -2.6474
+
+ --------------------------------------------------
+
+                       1.000  PUMPELLYITE             
+                    + 25.000  H+                      
+                           ==
+                       4.000  H2O                     
+                    +  5.000  AL+3                    
+                    +  4.000  CA+2                    
+                    +  6.000  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=       5.1498
+
+ --------------------------------------------------
+
+                       1.000  ZOISITE                 
+                    + 13.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  3.000  AL+3                    
+                    +  2.000  CA+2                    
+                    +  3.000  H4SIO4(AQ)              
+
+          log k=      -2.3122
+
+ --------------------------------------------------
+
+                       1.000  CLINOZOISITE            
+                    + 13.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  3.000  AL+3                    
+                    +  2.000  CA+2                    
+                    +  3.000  H4SIO4(AQ)              
+
+          log k=      -2.0567
+
+ --------------------------------------------------
+
+                       1.000  FORSTERITE              
+                    +  2.000  H+                      
+                           ==
+                       0.500  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=       4.1009
+
+ --------------------------------------------------
+
+                       1.000  FAYALITE                
+                    +  2.000  H+                      
+                           ==
+                       0.500  H4SIO4(AQ)              
+                    +  1.000  FE+2                    
+
+          log k=       2.2098
+
+ --------------------------------------------------
+
+                       1.000  MONTICELLITE            
+                    +  4.000  H+                      
+                           ==
+                       1.000  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=      11.2202
+
+ --------------------------------------------------
+
+                       1.000  MERWINITE               
+                    +  8.000  H+                      
+                           ==
+                       3.000  CA+2                    
+                    +  2.000  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=      26.0582
+
+ --------------------------------------------------
+
+                       1.000  CHRYSOTILE              
+                    +  6.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  2.000  H4SIO4(AQ)              
+                    +  3.000  MG+2                    
+
+          log k=      11.6252
+
+ --------------------------------------------------
+
+                       1.000  ENSTATITE_CL            
+                    +  2.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       2.000  H4SIO4(AQ)              
+                    +  2.000  MG+2                    
+
+          log k=       6.8609
+
+ --------------------------------------------------
+
+                       1.000  ENSTATITE_OR            
+                    +  1.000  H2O                     
+                    +  2.000  H+                      
+                           ==
+                       1.000  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=       3.4424
+
+ --------------------------------------------------
+
+                       1.000  ENSTATITE_PR            
+                    +  1.000  H2O                     
+                    +  2.000  H+                      
+                           ==
+                       1.000  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=       3.5412
+
+ --------------------------------------------------
+
+                       1.000  DIOPSIDE                
+                    +  2.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  CA+2                    
+                    +  2.000  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=       7.7729
+
+ --------------------------------------------------
+
+                       1.000  HEDENBERGITE            
+                    +  2.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  CA+2                    
+                    +  2.000  H4SIO4(AQ)              
+                    +  1.000  FE+2                    
+
+          log k=       6.5136
+
+ --------------------------------------------------
+
+                       1.000  JADEITE                 
+                    +  2.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  AL+3                    
+                    +  2.000  H4SIO4(AQ)              
+                    +  1.000  NA+                     
+
+          log k=      -0.1514
+
+ --------------------------------------------------
+
+                       1.000  CAALPYROXENE            
+                    +  8.000  H+                      
+                           ==
+                       2.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  1.000  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=      -0.7528
+
+ --------------------------------------------------
+
+                       1.000  FERROSILITE             
+                    +  1.000  H2O                     
+                    +  2.000  H+                      
+                           ==
+                       1.000  H4SIO4(AQ)              
+                    +  1.000  FE+2                    
+
+          log k=       1.7984
+
+ --------------------------------------------------
+
+                       1.000  WOLLASTONITE            
+                    +  1.000  H2O                     
+                    +  2.000  H+                      
+                           ==
+                       1.000  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=       5.8181
+
+ --------------------------------------------------
+
+                       1.000  PSEUDOWOLLA             
+                    +  1.000  H2O                     
+                    +  2.000  H+                      
+                           ==
+                       1.000  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=       5.9295
+
+ --------------------------------------------------
+
+                       1.000  TREMOLITE               
+                    +  8.000  H2O                     
+                    + 14.000  H+                      
+                           ==
+                       2.000  CA+2                    
+                    +  8.000  H4SIO4(AQ)              
+                    +  5.000  MG+2                    
+
+          log k=      23.5537
+
+ --------------------------------------------------
+
+                       1.000  ANTHOPHYLLITE           
+                    +  8.000  H2O                     
+                    + 14.000  H+                      
+                           ==
+                       8.000  H4SIO4(AQ)              
+                    +  7.000  MG+2                    
+
+          log k=      22.4931
+
+ --------------------------------------------------
+
+                       1.000  CORDIERITE              
+                    +  2.000  H2O                     
+                    + 16.000  H+                      
+                           ==
+                       4.000  AL+3                    
+                    +  5.000  H4SIO4(AQ)              
+                    +  2.000  MG+2                    
+
+          log k=      -7.4059
+
+ --------------------------------------------------
+
+                       1.000  KFELDSPAR               
+                    +  4.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  K+                      
+
+          log k=      -2.0364
+
+ --------------------------------------------------
+
+                       1.000  ALBITE                  
+                    +  4.000  H2O                     
+                    +  4.000  H+                      
+                           ==
+                       1.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  NA+                     
+
+          log k=      -1.5630
+
+ --------------------------------------------------
+
+                       1.000  ANORTHITE               
+                    +  8.000  H+                      
+                           ==
+                       2.000  AL+3                    
+                    +  1.000  CA+2                    
+                    +  2.000  H4SIO4(AQ)              
+
+          log k=      -2.7989
+
+ --------------------------------------------------
+
+                       1.000  GEHLENITE               
+                    + 10.000  H+                      
+                           ==
+                       3.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  2.000  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=       7.6396
+
+ --------------------------------------------------
+
+                       1.000  KAOLINITE               
+                    +  6.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  2.000  H4SIO4(AQ)              
+
+          log k=      -7.5141
+
+ --------------------------------------------------
+
+                       1.000  ANTIGORITE              
+                    + 48.000  H+                      
+                           ==
+                       5.500  H2O                     
+                    + 17.000  H4SIO4(AQ)              
+                    + 24.000  MG+2                    
+
+          log k=      88.7665
+
+ --------------------------------------------------
+
+                       1.000  PYROPHYLLITE            
+                    +  4.000  H2O                     
+                    +  6.000  H+                      
+                           ==
+                       2.000  AL+3                    
+                    +  4.000  H4SIO4(AQ)              
+
+          log k=      -9.5955
+
+ --------------------------------------------------
+
+                       1.000  TALC                    
+                    +  4.000  H2O                     
+                    +  6.000  H+                      
+                           ==
+                       4.000  H4SIO4(AQ)              
+                    +  3.000  MG+2                    
+
+          log k=       8.4611
+
+ --------------------------------------------------
+
+                       1.000  MUSCOVITE               
+                    + 10.000  H+                      
+                           ==
+                       3.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  K+                      
+
+          log k=      -9.5892
+
+ --------------------------------------------------
+
+                       1.000  ANNITE                  
+                    +  3.332  H+                      
+                           ==
+                       0.333  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.000  FE+2                    
+                    +  0.333  K+                      
+
+          log k=       1.6408
+
+ --------------------------------------------------
+
+                       1.000  PHLOGOPITE              
+                    +  3.332  H+                      
+                           ==
+                       0.333  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  0.333  K+                      
+                    +  1.000  MG+2                    
+
+          log k=       3.0076
+
+ --------------------------------------------------
+
+                       1.000  PARAGONITE              
+                    + 10.000  H+                      
+                           ==
+                       3.000  AL+3                    
+                    +  3.000  H4SIO4(AQ)              
+                    +  1.000  NA+                     
+
+          log k=      -8.8377
+
+ --------------------------------------------------
+
+                       1.000  MARGARITE               
+                    + 14.000  H+                      
+                           ==
+                       4.000  H2O                     
+                    +  4.000  AL+3                    
+                    +  1.000  CA+2                    
+                    +  2.000  H4SIO4(AQ)              
+
+          log k=      -9.9921
+
+ --------------------------------------------------
+
+                       1.000  PREHNITE                
+                    + 10.000  H+                      
+                           ==
+                       2.000  AL+3                    
+                    +  2.000  CA+2                    
+                    +  3.000  H4SIO4(AQ)              
+
+          log k=       2.4040
+
+ --------------------------------------------------
+
+                       1.000  CLINOCHLORE             
+                    +  3.200  H+                      
+                           ==
+                       1.200  H2O                     
+                    +  0.400  AL+3                    
+                    +  0.600  H4SIO4(AQ)              
+                    +  1.000  MG+2                    
+
+          log k=       1.9495
+
+ --------------------------------------------------
+
+                       1.000  CHAMOSITE               
+                    +  3.200  H+                      
+                           ==
+                       1.200  H2O                     
+                    +  0.400  AL+3                    
+                    +  0.600  H4SIO4(AQ)              
+                    +  1.000  FE+2                    
+
+          log k=       1.0474
+
+ --------------------------------------------------
+
+                       1.000  PYROPE                  
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.001  MG+2                    
+
+          log k=       1.3882
+
+ --------------------------------------------------
+
+                       1.000  ALMANDINE               
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.000  H4SIO4(AQ)              
+                    +  1.001  FE+2                    
+
+          log k=      -0.7965
+
+ --------------------------------------------------
+
+                       1.000  GROSSULAR               
+                    +  4.000  H+                      
+                           ==
+                       0.666  AL+3                    
+                    +  1.001  CA+2                    
+                    +  1.000  H4SIO4(AQ)              
+
+          log k=       2.6509
+
+ --------------------------------------------------
+
+                       1.000  MEIONITE                
+                    + 26.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  6.000  AL+3                    
+                    +  4.000  CA+2                    
+                    +  1.000  CO2(AQ)                 
+                    +  6.000  H4SIO4(AQ)              
+
+          log k=      -1.9067
+
+ --------------------------------------------------
+
+                       1.000  QUARTZ_ALPHA            
+                    +  2.000  H2O                     
+                           ==
+                       1.000  H4SIO4(AQ)              
+
+          log k=      -0.7996
+
+ --------------------------------------------------
+
+                       1.000  QUARTZ_BETA             
+                    +  2.000  H2O                     
+                           ==
+                       1.000  H4SIO4(AQ)              
+
+          log k=      -0.7574
+
+ --------------------------------------------------
+
+                       1.000  COESITE                 
+                    +  2.000  H2O                     
+                           ==
+                       1.000  H4SIO4(AQ)              
+
+          log k=      -0.6303
+
+ --------------------------------------------------
+
+                       1.000  IRON_ALPHA              
+                    +  2.000  H+                      
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  1.000  FE+2                    
+
+          log k=      16.5175
+
+ --------------------------------------------------
+
+                       1.000  IRON_GAMMA              
+                    +  2.000  H+                      
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  1.000  FE+2                    
+
+          log k=      16.5830
+
+ --------------------------------------------------
+
+                       1.000  GRAPHITE                
+                    +  1.000  O2(G)                   
+                           ==
+                       1.000  CO2(AQ)                 
+
+          log k=      20.7842
+
+ --------------------------------------------------
+
+                       1.000  HALITE                  
+                           ==
+                       1.000  CL-                     
+                    +  1.000  NA+                     
+
+          log k=       1.6430
+
+ --------------------------------------------------
+
+                       1.000  SYLVITE                 
+                           ==
+                       1.000  CL-                     
+                    +  1.000  K+                      
+
+          log k=       1.7962
+
+ --------------------------------------------------
+
+                       1.000  CRISTO_ALPHA            
+                    +  2.000  H2O                     
+                           ==
+                       1.000  H4SIO4(AQ)              
+
+          log k=      -0.5194
+
+ --------------------------------------------------
+
+                       1.000  CRISTO_BETA             
+                    +  2.000  H2O                     
+                           ==
+                       1.000  H4SIO4(AQ)              
+
+          log k=      -0.4826
+
+ --------------------------------------------------
+
+                       1.000  HERCYNITE               
+                    +  8.000  H+                      
+                           ==
+                       4.000  H2O                     
+                    +  2.000  AL+3                    
+                    +  1.000  FE+2                    
+
+          log k=      -4.4343
+
+ --------------------------------------------------
+
+        --- gas dissolution reactions ---
+
+ --------------------------------------------------
+
+                       1.000  O2(G)                   
+                           ==
+                       1.000  O2(G)                   
+
+          log k=       0.0000
+
+ --------------------------------------------------
+
+                       1.000  H2(G)                   
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+
+          log k=       8.8228
+
+ --------------------------------------------------
+
+                       1.000  CO2(G)                  
+                           ==
+                       1.000  CO2(AQ)                 
+
+          log k=      -4.6421
+
+ --------------------------------------------------
+
+                       1.000  CH4(G)                  
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      38.0904
+
+ --------------------------------------------------
+
+                       1.000  H2O(G)                  
+                           ==
+                       1.000  H2O                     
+
+          log k=      -1.6113
+
+ --------------------------------------------------
+ * note- optimization ended outside requested limits (arrset)
+
+ iter=   0, delmax=  0.00000E+00 (unrelaxed)
+        del(                )=  0.00000E+00, delfnc =  0.00000E+00
+       beta(CONC    NA+     )=  5.58584E-01, betfnc =  0.00000E+00
+       no. of under-relaxation cycles=   0
+        bbig=  5.58584E-01, ubbig= NA+                     
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  1.40101E-01, ubgamx= AL+3                    
+         bxi=  2.60071E-01, bxistq= -3.09574E-02
+ iter=   1, delmax=  1.18536E+00 (unrelaxed)
+        del(CONC    AL+3    )= -5.92679E-01, delfnc =  0.00000E+00
+       beta(CONC    NA+     )=  4.38271E-01, betfnc =  2.15390E-01
+       no. of under-relaxation cycles=   0
+        bbig=  4.38271E-01, ubbig= NA+                     
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  1.57162E-01, ubgamx= AL+3                    
+         bxi= -2.24655E-01, bxistq= -6.38030E-02
+ iter=   2, delmax=  1.09136E+00 (unrelaxed)
+        del(CONC    AL+3    )= -1.09136E+00, delfnc =  7.92991E-02
+       beta(CONC    NA+     )=  1.77894E-01, betfnc =  5.94101E-01
+       no. of under-relaxation cycles=   0
+        bbig=  1.77894E-01, ubbig= NA+                     
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  1.95215E-01, ubgamx= AL+3                    
+         bxi= -2.68728E-01, bxistq= -7.80427E-02
+ iter=   3, delmax=  4.57103E-01 (unrelaxed)
+        del(CONC    AL+3    )= -4.57103E-01, delfnc =  5.81162E-01
+       beta(CONC    AL+3    )= -6.11345E-02, betfnc =  6.56343E-01
+       no. of under-relaxation cycles=   0
+        bbig=  4.83695E-02, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  9.55297E-02, ubgamx= AL+3                    
+         bxi= -1.40353E-01, bxistq= -3.63100E-02
+ iter=   4, delmax=  1.33413E-01 (unrelaxed)
+        del(CONC    AL+3    )= -1.33413E-01, delfnc =  7.08134E-01
+       beta(CONC    AL+3    )= -1.76500E-02, betfnc =  7.11293E-01
+       no. of under-relaxation cycles=   0
+        bbig=  8.34802E-03, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  2.76391E-02, ubgamx= AL+3                    
+         bxi= -4.26876E-02, bxistq= -4.61478E-03
+ iter=   5, delmax=  2.80522E-02 (unrelaxed)
+        del(CONC    AL+3    )= -2.80522E-02, delfnc =  7.89734E-01
+       beta(CONC    AL+3    )= -3.49427E-03, betfnc =  8.02024E-01
+       no. of under-relaxation cycles=   0
+        bbig=  1.22591E-03, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  5.45294E-03, ubgamx= AL+3                    
+         bxi= -8.57851E-03, bxistq= -7.43181E-04
+ iter=   6, delmax=  4.85679E-03 (unrelaxed)
+        del(CONC    AL+3    )= -4.85679E-03, delfnc =  8.26866E-01
+       beta(CONC    AL+3    )= -5.82060E-04, betfnc =  8.33425E-01
+       no. of under-relaxation cycles=   0
+        bbig=  1.86985E-04, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  9.05580E-04, ubgamx= AL+3                    
+         bxi= -1.43138E-03, bxistq= -1.35617E-04
+ iter=   7, delmax=  7.86558E-04 (unrelaxed)
+        del(CONC    AL+3    )= -7.86558E-04, delfnc =  8.38050E-01
+       beta(CONC    AL+3    )= -9.30369E-05, betfnc =  8.40159E-01
+       no. of under-relaxation cycles=   0
+        bbig=  2.92865E-05, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  1.44597E-04, ubgamx= AL+3                    
+         bxi= -2.28783E-04, bxistq= -2.22956E-05
+ iter=   8, delmax=  1.25054E-04 (unrelaxed)
+        del(CONC    AL+3    )= -1.25054E-04, delfnc =  8.41011E-01
+       beta(CONC    AL+3    )= -1.47436E-05, betfnc =  8.41530E-01
+       no. of under-relaxation cycles=   0
+        bbig=  4.62142E-06, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  2.29084E-05, ubgamx= AL+3                    
+         bxi= -3.62530E-05, bxistq= -3.55236E-06
+ iter=   9, delmax=  1.97955E-05 (unrelaxed)
+        del(CONC    AL+3    )= -1.97955E-05, delfnc =  8.41704E-01
+       beta(CONC    AL+3    )= -2.33225E-06, betfnc =  8.41812E-01
+       no. of under-relaxation cycles=   0
+        bbig=  7.30458E-07, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  3.62363E-06, ubgamx= AL+3                    
+         bxi= -5.73467E-06, bxistq= -5.62525E-07
+ iter=  10, delmax=  3.13074E-06 (unrelaxed)
+        del(CONC    AL+3    )= -3.13074E-06, delfnc =  8.41846E-01
+       beta(CONC    AL+3    )= -3.68806E-07, betfnc =  8.41867E-01
+       no. of under-relaxation cycles=   0
+        bbig=  1.15493E-07, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  5.73010E-07, ubgamx= AL+3                    
+         bxi= -9.06838E-07, bxistq= -8.89710E-08
+ iter=  11, delmax=  4.95054E-07 (unrelaxed)
+        del(CONC    AL+3    )= -4.95054E-07, delfnc =  8.41873E-01
+       beta(CONC    AL+3    )= -5.83168E-08, betfnc =  8.41877E-01
+       no. of under-relaxation cycles=   0
+        bbig=  1.82616E-08, ubbig= CO2(AQ)                 
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  9.06060E-08, ubgamx= AL+3                    
+         bxi= -1.43392E-07, bxistq= -1.40689E-08
+
+
+ hybrid newton-raphson iteration converged in  11 steps 
+
+
+
+                     ----- Summary of the Aqueous Phase -----
+
+
+           ----- Elemental composition of the aqueous phase -----
+
+
+        element      mg/l           mg/kg            moles/kg
+
+          O       984942.9861     962459.9223    0.6015600100E+02
+          H       116816.9581     114150.4046    0.1132556847E+03
+          AL         814.4841        795.8921    0.2949765185E-01
+          CA         336.2138        328.5391    0.8197082802E-02
+          C        12291.5772      12011.0002    0.1000000018E+01
+          SI       17733.4666      17328.6689    0.6169969875E+00
+          CL       18140.5911      17726.5000    0.5000000012E+00
+          FE         498.5080        487.1287    0.8722558461E-02
+          K          961.7836        939.8292    0.2403759670E-01
+          MG        8560.5619       8365.1520    0.3441741196E+00
+          NA        6507.2270       6358.6880    0.2765877171E+00
+
+
+           ----- elemental composition as strict basis species -----
+
+
+        species     mg/l           mg/kg            moles/kg
+
+          H2O    1109038.1442    1083722.3892    0.6015600100E+02
+          H+      116816.9581     114150.4046    0.1132556847E+03
+          AL+3       814.4841        795.8921    0.2949765185E-01
+          CA+2       336.2138        328.5391    0.8197082802E-02
+          CO2(AQ   45037.8698      44009.8008    0.1000000018E+01
+          H4SIO4   60687.7863      59302.4804    0.6169969875E+00
+          CL-      18140.5911      17726.5000    0.5000000012E+00
+          FE+2       498.5080        487.1287    0.8722558461E-02
+          K+         961.7836        939.8292    0.2403759670E-01
+          MG+2      8560.5619       8365.1520    0.3441741196E+00
+          NA+       6507.2270       6358.6880    0.2765877171E+00
+
+
+           --- equivalent composition of the aqueous phase (cte balances) ---
+
+            original basis                        existing basis
+
+   species              moles/kg h2o   species              moles/kg h2o
+
+     H2O             0.5000000000E+01     H2O             0.6015600100E+02
+     H+              0.5000000000E+01     H+              0.1132556847E+03
+     AL+3            0.5000000000E+01     AL+3            0.2949765185E-01
+     CA+2            0.5000000000E+01     CA+2            0.8197082802E-02
+     CO2(AQ)         0.5000000000E+01     CO2(AQ)         0.1000000018E+01
+     H4SIO4(AQ)      0.5000000000E+01     H4SIO4(AQ)      0.6169969875E+00
+     CL-             0.5000000000E+01     CL-             0.5000000012E+00
+     FE+2            0.5000000000E+01     FE+2            0.8722558461E-02
+     K+              0.5000000000E+01     K+              0.2403759670E-01
+     MG+2            0.5000000000E+01     MG+2            0.3441741196E+00
+     NA+             0.5000000000E+01     NA+             0.2765877171E+00
+
+
+   single ion activities and activity coefficients are here defined
+   with respect to the internal ph scale       
+
+
+
+                                       ph           eh           pe
+
+     internal ph scale               5.4252       -1.6320   -9.9927E+00
+     modified nbs ph scale           5.3986       -1.6277   -9.9661E+00
+     rational ph scale               5.1268       -1.5833   -9.6943E+00
+
+   phcl =      6.0455
+
+
+                             activity of water =    0.96613
+                         log activity of water =   -0.01496
+
+                    true osmotic coefficient=    0.98285
+          stoichiometric osmotic coefficient=    0.68101
+
+                    sum of true molalities=    1.9458158784116
+          sum of stoichiometric molalities=    2.8082587988130
+
+                    true ionic strength=    0.5662479280308
+          stoichiometric ionic strength=    1.2552621451485
+
+        equiv. stoich. ionic strength (CL-   ) =    0.5000000013212
+
+           ----- electrical balance totals -----
+
+
+                                               equiv/kg
+
+                      sigma(mz) cations =     0.5660620437E+00
+                      sigma(mz) anions  =    -0.5660620241E+00
+                           total charge =     0.1132124068E+01
+                            mean charge =     0.5660620339E+00
+                       charge imbalance =     0.1966927132E-07
+
+            total charge = sigma(mz) cations + abs ( sigma(mz) anions )
+            mean charge = 1/2 total charge
+
+
+            the electrical imbalance is 
+
+                             0.00 per cent of the total charge
+                             0.00 per cent of the mean charge
+                             0.00 per cent of sigma(mz) cations
+                             0.00 per cent of abs ( sigma(mz) anions )
+
+
+           ----- electrical balancing on NA+    -----
+
+                    mg/l           mg/kg            moles/kg
+
+          input    11763.4055      11494.8850    0.5000000000E+00
+          final     6507.2270       6358.6880    0.2765877171E+00
+          adj      -5256.1786      -5136.1970   -0.2234122829E+00
+
+
+                     ----- activity ratios of ions -----
+
+           log ( act(AL+3        ) / act(h+)xx 3 ) =     -3.5797
+           log ( act(CA+2        ) / act(h+)xx 2 ) =      5.2572
+           log ( act(CO2(AQ)     )               ) =     -0.3245
+           log ( act(H4SIO4(AQ)  )               ) =     -0.8295
+           log ( act(CL-         ) x act(h+)xx 1 ) =     -6.0455
+           log ( act(FE+2        ) / act(h+)xx 2 ) =      2.2142
+           log ( act(K+          ) / act(h+)xx 1 ) =      3.4634
+           log ( act(MG+2        ) / act(h+)xx 2 ) =      3.6773
+           log ( act(NA+         ) / act(h+)xx 1 ) =      4.3899
+
+
+           ----- distribution of aqueous species -----
+
+       species          molal conc   log conc      log g    activity     log act
+
+   CO2(AQ)              0.520695492E+00    -0.2834    -0.0411   0.473660324E+00    -0.3245
+   CL-                  0.476521461E+00    -0.3219    -0.2984   0.239710523E+00    -0.6203
+   MGSIC+               0.344163284E+00    -0.4632    -0.2984   0.173128741E+00    -0.7616
+   NA+                  0.183272481E+00    -0.7369    -0.2984   0.921938377E-01    -1.0353
+   H4SIO4(AQ)           0.153395551E+00    -0.8142    -0.0153   0.148072518E+00    -0.8295
+   NAHCO3(AQ)           0.713537087E-01    -1.1466    -0.0153   0.688776382E-01    -1.1619
+   HCO3-                0.502088648E-01    -1.2992    -0.2984   0.252571903E-01    -1.5976
+   H6SI2O7(AQ)          0.417477071E-01    -1.3794    -0.0153   0.402990051E-01    -1.3947
+   AL(OH)SI(OH)-        0.279299366E-01    -1.5539    -0.2984   0.140499437E-01    -1.8523
+   K+                   0.217058242E-01    -1.6634    -0.2984   0.109189509E-01    -1.9618
+   NACL(AQ)             0.209989104E-01    -1.6778    -0.0153   0.202702197E-01    -1.6931
+   FE(HCOO)+            0.869798339E-02    -2.0606    -0.2984   0.437545487E-02    -2.3590
+   OH-                  0.572377902E-02    -2.2423    -0.2984   0.287930382E-02    -2.5407
+   CA(H3SIO4)+          0.454694633E-02    -2.3423    -0.2984   0.228730702E-02    -2.6407
+   CA(HCO3)+            0.333588198E-02    -2.4768    -0.2984   0.167809024E-02    -2.7752
+   H3SIO4-              0.328741718E-02    -2.4831    -0.2984   0.165371039E-02    -2.7815
+   KCL(AQ)              0.216212236E-02    -2.6651    -0.0153   0.208709378E-02    -2.6805
+   H2(AQ)               0.144291230E-02    -2.8408    -0.0153   0.139284128E-02    -2.8561
+   AL(OH)4-             0.140483085E-02    -2.8524    -0.2984   0.706689554E-03    -3.1508
+   NAOH(AQ)             0.939914765E-03    -3.0269    -0.0153   0.907298448E-03    -3.0422
+   HCOO-                0.664682976E-03    -3.1774    -0.2984   0.334363752E-03    -3.4758
+   CO(AQ)               0.637784848E-03    -3.1953    -0.0153   0.615652849E-03    -3.2107
+   CACL+                0.229702032E-03    -3.6388    -0.2984   0.115549873E-03    -3.9372
+   KOH(AQ)              0.169650180E-03    -3.7704    -0.0153   0.163763089E-03    -3.7858
+   AL(OH)3(AQ)          0.162884396E-03    -3.7881    -0.0153   0.157232087E-03    -3.8035
+   CO3-2                0.149075521E-03    -3.8266    -1.1476   0.106130396E-04    -4.9742
+   H8SI3O10(AQ)         0.594667296E-04    -4.2257    -0.0153   0.574031534E-04    -4.2411
+   HCL(AQ)              0.375970083E-04    -4.4248    -0.0153   0.362923411E-04    -4.4402
+   CA+2                 0.358416621E-04    -4.4456    -1.1476   0.255165287E-05    -5.5932
+   CACO3(AQ)            0.299819906E-04    -4.5231    -0.0153   0.289415748E-04    -4.5385
+   FECL2(AQ)            0.240053387E-04    -4.6197    -0.0153   0.231723209E-04    -4.6350
+   NACO3-               0.227024003E-04    -4.6439    -0.2984   0.114202710E-04    -4.9423
+   CA(HCOO)+            0.187288063E-04    -4.7275    -0.2984   0.942138460E-05    -5.0259
+   HCOOH(AQ)            0.178007163E-04    -4.7496    -0.0153   0.171830073E-04    -4.7649
+   H+                   0.746832571E-05    -5.1268    -0.2984   0.375688486E-05    -5.4252
+   MG(OH)+              0.579555500E-05    -5.2369    -0.2984   0.291541018E-05    -5.5353
+   MGCL+                0.210531211E-05    -5.6767    -0.2984   0.105906136E-05    -5.9751
+   METHANE(AQ)          0.208922946E-05    -5.6800    -0.0153   0.201673036E-05    -5.6954
+   MG(HCO3)+            0.195395441E-05    -5.7091    -0.2984   0.982922015E-06    -6.0075
+   MG+2                 0.942994713E-06    -6.0255    -1.1476   0.671340285E-07    -7.1731
+   FE(OH)3-             0.198472839E-06    -6.7023    -0.2984   0.998402631E-07    -7.0007
+   FE(OH)+              0.124224921E-06    -6.9058    -0.2984   0.624904086E-07    -7.2042
+   FE(OH)2(AQ)          0.121746512E-06    -6.9145    -0.0153   0.117521743E-06    -6.9299
+   FECL+                0.928212801E-07    -7.0324    -0.2984   0.466930441E-07    -7.3307
+   MG(H3SIO4)+          0.377917958E-07    -7.4226    -0.2984   0.190108775E-07    -7.7210
+   FE+2                 0.324662134E-07    -7.4886    -1.1476   0.231134668E-08    -8.6361
+   METHANOL(AQ)         0.122520365E-08    -8.9118    -0.0153   0.118268742E-08    -8.9271
+   CH3COOH(AQ)          0.458840593E-09    -9.3383    -0.0153   0.442918202E-09    -9.3537
+   CH3COO-              0.219878277E-09    -9.6578    -0.2984   0.110608107E-09    -9.9562
+   MGCO3(AQ)            0.192974065E-10   -10.7145    -0.0153   0.186277603E-10   -10.7298
+   ETHANE(AQ)           0.981063970E-13   -13.0083    -0.0153   0.947019720E-13   -13.0236
+   ETHANOL(AQ)          0.118299998E-13   -13.9270    -0.0153   0.114194827E-13   -13.9424
+   FECL+2               0.761617615E-15   -15.1183    -1.1476   0.542213630E-16   -16.2658
+   ETHYLENE(AQ)         0.612809731E-15   -15.2127    -0.0153   0.591544402E-15   -15.2280
+   FECL3(AQ)            0.181478988E-16   -16.7412    -0.0153   0.175181421E-16   -16.7565
+   AL+3                 0.510116972E-17   -17.2923    -2.5629   0.139578304E-19   -19.8552
+   FE+3                 0.506935323E-18   -18.2950    -2.5629   0.138707741E-20   -20.8579
+   PROPANE(AQ)          0.140020346E-19   -19.8538    -0.0153   0.135161450E-19   -19.8691
+   FECL4-               0.969851496E-21   -21.0133    -0.2984   0.487876472E-21   -21.3117
+   PROPANOL(AQ)         0.563361596E-21   -21.2492    -0.0153   0.543812185E-21   -21.2646
+   O2(AQ)               0.237707486E-21   -21.6240    -0.0411   0.216235029E-21   -21.6651
+
+
+           ----- major aqueous species contributing to mass balances -----
+
+
+ aqueous species accounting for 99% or more of AL+3              
+
+     species            molal conc    per cent
+
+   AL(OH)SI(OH)-         0.2793E-01    94.69
+   AL(OH)4-              0.1405E-02     4.76
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.45
+
+
+ aqueous species accounting for 99% or more of CA+2              
+
+     species            molal conc    per cent
+
+   CA(H3SIO4)+           0.4547E-02    55.47
+   CA(HCO3)+             0.3336E-02    40.70
+   CACL+                 0.2297E-03     2.80
+   CA+2                  0.3584E-04     0.44
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.41
+
+
+ aqueous species accounting for 99% or more of CO2(AQ)           
+
+     species            molal conc    per cent
+
+   CO2(AQ)               0.5207E+00    52.07
+   MGSIC+                0.3442E+00    34.42
+   NAHCO3(AQ)            0.7135E-01     7.14
+   HCO3-                 0.5021E-01     5.02
+   FE(HCOO)+             0.8698E-02     0.87
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.51
+
+
+ aqueous species accounting for 99% or more of H4SIO4(AQ)        
+
+     species            molal conc    per cent
+
+   MGSIC+                0.3442E+00    55.78
+   H4SIO4(AQ)            0.1534E+00    24.86
+   H6SI2O7(AQ)           0.4175E-01    13.53
+   AL(OH)SI(OH)-         0.2793E-01     4.53
+   CA(H3SIO4)+           0.4547E-02     0.74
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.44
+
+
+ aqueous species accounting for 99% or more of CL-               
+
+     species            molal conc    per cent
+
+   CL-                   0.4765E+00    95.30
+   NACL(AQ)              0.2100E-01     4.20
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.50
+
+
+ aqueous species accounting for 99% or more of FE+2              
+
+     species            molal conc    per cent
+
+   FE(HCOO)+             0.8698E-02    99.72
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.72
+
+
+ aqueous species accounting for 99% or more of K+                
+
+     species            molal conc    per cent
+
+   K+                    0.2171E-01    90.30
+   KCL(AQ)               0.2162E-02     8.99
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.29
+
+
+ aqueous species accounting for 99% or more of MG+2              
+
+     species            molal conc    per cent
+
+   MGSIC+                0.3442E+00   100.00
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                              100.00
+
+
+ aqueous species accounting for 99% or more of NA+               
+
+     species            molal conc    per cent
+
+   NA+                   0.1833E+00    66.26
+   NAHCO3(AQ)            0.7135E-01    25.80
+   NACL(AQ)              0.2100E-01     7.59
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.65
+
+
+
+           ----- summary of aqueous redox reactions -----
+
+      couple         eh, volts      pe-       log fo2     ah, kcal
+
+   default            -1.632   -0.9993E+01    -18.300     -37.638
+
+
+           ----- summary of aqueous non-equilibrium non-redox reactions -----
+
+      couple       affinity, kcal
+
+      none
+
+
+           ----- summary of stoichiometric mineral saturation states -----
+
+
+   mineral       log q/k   aff, kcal  state           mineral       log q/k   aff, kcal  state
+
+ DIAMOND          -3.037    -11.439                 MAGNETITE        -0.119     -0.449  satd 
+ CORUNDUM         -0.652     -2.456                 HEMATITE         -0.402     -1.512       
+ PERICLASE        -2.758    -10.389                 LIME             -6.909    -26.025       
+ SPINEL           -1.786     -6.729                 BRUCITE          -2.026     -7.632       
+ DIASPORE         -0.454     -1.712                 CALCITE          -0.694     -2.615       
+ MAGNESITE        -1.020     -3.841                 SIDERITE         -1.014     -3.821       
+ ARAGONITE        -0.720     -2.713                 DOLOMITE         -1.556     -5.859       
+ ANDALUSITE       -0.690     -2.599                 KYANITE          -0.422     -1.589       
+ SILLIMANITE      -0.605     -2.278                 GLAUCOPHANE      -2.102     -7.918       
+ LAWSONITE        -0.944     -3.555                 PUMPELLYITE      -3.379    -12.728       
+ ZOISITE          -0.416     -1.567                 CLINOZOISITE     -0.672     -2.529       
+ FORSTERITE       -0.838     -3.158                 FAYALITE         -0.410     -1.546       
+ MONTICELLITE     -3.115    -11.734                 MERWINITE        -8.268    -31.144       
+ CHRYSOTILE       -2.267     -8.540                 ENSTATITE_CL     -1.135     -4.277       
+ ENSTATITE_OR     -0.580     -2.183                 ENSTATITE_PR     -0.678     -2.556       
+ DIOPSIDE         -0.468     -1.761                 HEDENBERGITE     -0.671     -2.529       
+ JADEITE          -0.668     -2.514                 CAALPYROXENE     -2.009     -7.566       
+ FERROSILITE      -0.399     -1.502                 WOLLASTONITE     -1.375     -5.181       
+ PSEUDOWOLLA      -1.487     -5.601                 TREMOLITE        -1.169     -4.405       
+ ANTHOPHYLLIT     -3.269    -12.311                 CORDIERITE       -3.676    -13.846       
+ KFELDSPAR        -0.509     -1.916                 ALBITE           -0.056     -0.209  satd 
+ ANORTHITE        -0.762     -2.871                 GEHLENITE        -5.159    -19.432       
+ KAOLINITE        -1.319     -4.969                 ANTIGORITE      -14.696    -55.353       
+ PYROPHYLLITE     -0.822     -3.096                 TALC             -0.687     -2.590       
+ MUSCOVITE        -0.175     -0.659                 ANNITE           -0.295     -1.111       
+ PHLOGOPITE       -0.199     -0.748                 PARAGONITE        0.000      0.000  satd 
+ MARGARITE        -0.788     -2.969                 PREHNITE         -1.538     -5.791       
+ CLINOCHLORE      -0.220     -0.828                 CHAMOSITE        -0.781     -2.941       
+ PYROPE           -0.921     -3.468                 ALMANDINE        -0.201     -0.756       
+ GROSSULAR        -0.602     -2.268                 MEIONITE         -3.859    -14.536       
+ QUARTZ_ALPHA     -0.000     -0.000  satd           QUARTZ_BETA      -0.042     -0.159  satd 
+ COESITE          -0.169     -0.638                 IRON_ALPHA       -5.168    -19.467       
+ IRON_GAMMA       -5.234    -19.713                 GRAPHITE         -2.809    -10.579       
+ HALITE           -3.299    -12.425                 SYLVITE          -4.378    -16.491       
+ CRISTO_ALPHA     -0.280     -1.055                 CRISTO_BETA      -0.317     -1.194       
+ HERCYNITE        -0.571     -2.149       
+1
+
+                               ----- summary of input solid solutions -----
+
+       mineral             log q/k        aff, kcal      state
+
+
+    GARNET(SS)        
+
+
+   PYROPE                  0.0000001      0.0000002     approx. saturated
+
+   ALMANDINE               0.0000001      0.0000002     approx. saturated
+
+   GROSSULAR               0.0000001      0.0000002     approx. saturated
+
+    For fixed composition solid solution phase:
+
+   GARNET(SS)              0.0000001      0.0000002
+
+    CLINOPYROXENE(SS) 
+
+
+   DIOPSIDE                0.0272772      0.1027424     approx. saturated
+
+   JADEITE                -0.2907666     -1.0952010     undersaturated
+
+   HEDENBERGITE           -0.0863237     -0.3251469     approx. saturated
+
+    For fixed composition solid solution phase:
+
+   CLINOPYROXENE(SS)      -0.1358374     -0.5116451
+
+    PLAGIOCLASE(SS)   
+
+
+   ALBITE                  0.0000001      0.0000002     approx. saturated
+
+   ANORTHITE               0.1585020      0.5970135     supersaturated
+
+    For fixed composition solid solution phase:
+
+   PLAGIOCLASE(SS)         0.0190203      0.0716418
+
+    KFELDSPAR(SS)     
+
+
+   KFELDSPAR               0.0000001      0.0000002     approx. saturated
+
+   ALBITE                  0.1056336      0.3978795     approx. saturated
+
+    For fixed composition solid solution phase:
+
+   KFELDSPAR(SS)           0.0728872      0.2745370
+
+    BIOTITE(SS)       
+
+
+   PHLOGOPITE              0.0938591      0.3535295     approx. saturated
+
+   ANNITE                  0.0149556      0.0563316     approx. saturated
+
+    For fixed composition solid solution phase:
+
+   BIOTITE(SS)             0.0551964      0.2079026
+
+ GARNET(SS)        
+      ideal solution                
+
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        PYROPE            0.1200        1.0000        0.1200       -0.9208        0.0000       -0.9208
+        ALMANDINE         0.6300        1.0000        0.6300       -0.2007        0.0000       -0.2007
+        GROSSULAR         0.2500        1.0000        0.2500       -0.6021        0.0000       -0.6021
+
+ CLINOPYROXENE(SS) 
+      ideal solution                
+
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        DIOPSIDE          0.3200        1.0000        0.3200       -0.4949        0.0000       -0.4949
+        JADEITE           0.4200        1.0000        0.4200       -0.3768        0.0000       -0.3768
+        HEDENBERGITE      0.2600        1.0000        0.2600       -0.5850        0.0000       -0.5850
+
+ PLAGIOCLASE(SS)   
+      ideal solution                
+
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        ALBITE            0.8800        1.0000        0.8800       -0.0555        0.0000       -0.0555
+        ANORTHITE         0.1200        1.0000        0.1200       -0.9208        0.0000       -0.9208
+
+ KFELDSPAR(SS)     
+      ideal solution                
+
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        KFELDSPAR         0.3100        1.0000        0.3100       -0.5086        0.0000       -0.5086
+        ALBITE            0.6900        1.0000        0.6900       -0.1612        0.0000       -0.1612
+
+ BIOTITE(SS)       
+      ideal solution                
+
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        PHLOGOPITE        0.5100        1.0000        0.5100       -0.2924        0.0000       -0.2924
+        ANNITE            0.4900        1.0000        0.4900       -0.3098        0.0000       -0.3098
+1
+                               ----- summary of hypothetical solid solutions -----
+
+       mineral             log q/k        aff, kcal      state
+
+
+_____________________________________________________________________
+
+   KFELDSPAR(SS)           0.0755470      0.2845553     approx. saturated
+     KFELDSPAR             0.0755470      0.2845553
+     ALBITE                0.0755470      0.2845553
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        KFELDSPAR         0.2605        1.0000        0.2605       -0.5842        0.0000       -0.5842
+        ALBITE            0.7395        1.0000        0.7395       -0.1311        0.0000       -0.1311
+
+_____________________________________________________________________
+
+   PLAGIOCLASE(SS)         0.0223688      0.0842544     approx. saturated
+     ALBITE                0.0223688      0.0842544
+     ANORTHITE             0.0223688      0.0842544
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        ALBITE            0.8358        1.0000        0.8358       -0.0779        0.0000       -0.0779
+        ANORTHITE         0.1642        1.0000        0.1642       -0.7847        0.0000       -0.7847
+
+_____________________________________________________________________
+
+   ORTHOPYROXENE(SS)      -0.1788307     -0.6735835     undersaturated
+     ENSTATITE_OR         -0.1788307     -0.6735835
+     FERROSILITE          -0.1788307     -0.6735835
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        ENSTATITE_OR      0.3973        1.0000        0.3973       -0.4008        0.0000       -0.4008
+        FERROSILITE       0.6027        1.0000        0.6027       -0.2199        0.0000       -0.2199
+
+_____________________________________________________________________
+
+   OLIVINE(SS)            -0.2726099     -1.0268121     undersaturated
+     FORSTERITE           -0.2726099     -1.0268121
+     FAYALITE             -0.2726099     -1.0268121
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        FORSTERITE        0.2718        1.0000        0.2718       -0.5658        0.0000       -0.5658
+        FAYALITE          0.7282        1.0000        0.7282       -0.1377        0.0000       -0.1377
+
+_____________________________________________________________________
+
+   BIOTITE(SS)             0.0569829      0.2146319     approx. saturated
+     PHLOGOPITE            0.0569829      0.2146319
+     ANNITE                0.0569829      0.2146319
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        PHLOGOPITE        0.5552        1.0000        0.5552       -0.2556        0.0000       -0.2556
+        ANNITE            0.4448        1.0000        0.4448       -0.3518        0.0000       -0.3518
+
+_____________________________________________________________________
+
+   GARNET(SS)              0.0000001      0.0000002     approx. saturated
+     PYROPE                0.0000001      0.0000002
+     ALMANDINE             0.0000001      0.0000002
+     GROSSULAR             0.0000001      0.0000002
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        PYROPE            0.1200        1.0000        0.1200       -0.9208        0.0000       -0.9208
+        ALMANDINE         0.6300        1.0000        0.6300       -0.2007        0.0000       -0.2007
+        GROSSULAR         0.2500        1.0000        0.2500       -0.6021        0.0000       -0.6021
+
+_____________________________________________________________________
+
+   CLINOPYROXENE(SS)      -0.1141315     -0.4298876     approx. saturated
+     DIOPSIDE             -0.1141315     -0.4298876
+     JADEITE              -0.1141315     -0.4298876
+     HEDENBERGITE         -0.1141315     -0.4298876
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        DIOPSIDE          0.4432        1.0000        0.4432       -0.3534        0.0000       -0.3534
+        JADEITE           0.2796        1.0000        0.2796       -0.5534        0.0000       -0.5534
+        HEDENBERGITE      0.2772        1.0000        0.2772       -0.5572        0.0000       -0.5572
+
+_____________________________________________________________________
+
+   CHLORITE(SS)           -0.1143067     -0.4305476     approx. saturated
+     CLINOCHLORE          -0.1143067     -0.4305476
+     CHAMOSITE            -0.1143067     -0.4305476
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        CLINOCHLORE       0.7844        1.0000        0.7844       -0.1054        0.0000       -0.1054
+        CHAMOSITE         0.2156        1.0000        0.2156       -0.6664        0.0000       -0.6664
+
+_____________________________________________________________________
+
+   CALCITE(SS)            -0.4039265     -1.5214290     undersaturated
+     CALCITE              -0.4039265     -1.5214290
+     MAGNESITE            -0.4039265     -1.5214290
+     SIDERITE             -0.4039265     -1.5214290
+
+     ideal solution                
+                           xbar         lamda         activity     log xbar     log lamda    log act
+
+        CALCITE           0.5126        1.0000        0.5126       -0.2902        0.0000       -0.2902
+        MAGNESITE         0.2422        1.0000        0.2422       -0.6158        0.0000       -0.6158
+        SIDERITE          0.2452        1.0000        0.2452       -0.6106        0.0000       -0.6106
+
+
+     5 approx. saturated pure minerals
+    10 approx. saturated end-members of specified solid solutions
+     6 saturated end-members of hypothetical solid solutions
+
+
+     0 supersaturated pure minerals
+     1 supersatd. end-members of specified solid solutions
+     0 supersatd. hypothetical solid solution phases
+
+
+
+
+                     ----- summary of gases -----
+
+
+       gas                   fugacity    log fugacity
+
+   O2(G)                   0.501187E-18    -18.30000
+   H2(G)                   0.205228E+01      0.31224
+   CO2(G)                  0.207762E+05      4.31757
+   CH4(G)                  0.142936E-01     -1.84486
+   H2O(G)                  0.394764E+02      1.59634
+
+ ----- end of output -----
+ ----- pickup file successfully written -----
+
+ --- reading the input file ---
+
+ --- no further input found ---
+
+
+ normal exit

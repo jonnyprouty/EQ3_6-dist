@@ -244,10 +244,11 @@ Three DATA0 databases are compiled at setup time into `tests/.dew_data_cache/`:
 
 Reference outputs live in `tests/dew/expected/<platform>/`. Platforms currently committed:
 
-| Platform tag | Host | Compiler |
-|---|---|---|
-| `linux` | Fedora 43 x86-64 | gfortran 15.2.1 (Red Hat RPM) |
-| `ubuntu` | Ubuntu 26.04 x86-64 | gfortran 15.2.0 (Ubuntu apt) |
+| Platform tag | Host | Compiler | Divergent cases |
+|---|---|---|---|
+| `linux` | Fedora 43 x86-64 | gfortran 15.2.1 (Red Hat RPM) | baseline (8/8 refs) |
+| `ubuntu` | Ubuntu 26.04 x86-64 | gfortran 15.2.0 (Ubuntu apt) | `pelitic_10kbar_eq6` (1/8 ref) |
+| `mac` | macOS 15 x86-64 | gfortran 15.2.0 (Homebrew) | `co2_650c_10kbar`, `pelitic_550c_10kbar`, `pelitic_10kbar_eq6`, `mor_hydrothermal` (4/8 refs) |
 
 The `assert_dew_output_matches_ref` helper resolves:
 1. `tests/dew/expected/<platform>/<case>.out` if it exists
@@ -263,42 +264,68 @@ make regen-dew-refs         # writes to tests/dew/expected/<platform>/
 # commit the results
 ```
 
-### Platform-divergent DEW EQ6 case
+### Platform-divergent DEW cases
 
-One EQ6 case produces different output between Fedora gfortran 15.2.1 and
-Ubuntu gfortran 15.2.0:
+#### EQ3 cases (macOS only)
 
-| Case | First differing quantity | Fedora (linux) | Ubuntu |
+Two EQ3 speciation cases produce different last-digit values on macOS:
+
+| Case | First differing quantity | Fedora/Ubuntu (linux) | Mac |
 |---|---|---|---|
-| `pelitic_10kbar_eq6` | Reaction progress | 2.04013621037949E-05 | 2.04013500438004E-05 |
+| `co2_650c_10kbar` | `beta(CONC H+)` activity coefficient | 2.50422E-10 | 2.50423E-10 |
+| `pelitic_550c_10kbar` | Charge imbalance | 0.1966927105E-07 | 0.1966927132E-07 |
 
-This is genuine ODE path divergence — the same phenomenon documented for `6tlib_*`
-cases above — not rounding noise.  The EQ6 R100 reaction path integration
-(subroutine `path` in `eq6r100.f`, line 7071) uses a predictor-corrector method
-where predictor values for the next step are computed by subroutine `taylor`
-(line 15032) as truncated Taylor series in the reaction-progress variable `delzi`.
-The Taylor coefficients `dzvec0` are finite-difference derivatives of the basis
-variable vector `zvec0`, accumulated by subroutine `zvecpr` (line 16057) after
-each accepted step.
+EQ3NR speciation is algebraic (no ODE integration), so these differ for a different
+reason than the EQ6 cases.  The DEW EQ3 R110 activity coefficient model calls
+subroutine `betgam` (in `eqlibr136.f`), which iterates the Helgeson-Kirkham-Flowers
+equations and the Born dielectric correction for the DEW pressure-temperature model.
+The iteration accumulates inner products of species molalities and activity
+coefficients — operations where Homebrew gfortran 15.2.0 produces slightly different
+x87 extended-precision intermediates than Red Hat gfortran 15.2.1.  For ambient cases
+(psat dataset) the values agree; for high P-T cases (10 kbar) the HKF terms are
+larger and the extended-precision divergence is large enough to round to a different
+last digit.
+
+#### EQ6 cases
+
+`pelitic_10kbar_eq6` diverges on both Ubuntu and macOS relative to the Fedora baseline,
+while `mor_hydrothermal` diverges only on macOS:
+
+| Case | Platform | First differing quantity | linux value | Platform value |
+|---|---|---|---|---|
+| `pelitic_10kbar_eq6` | ubuntu | Reaction progress | 2.04013621037949E-05 | 2.04013500438004E-05 |
+| `pelitic_10kbar_eq6` | mac | Reaction progress | 2.04013621037949E-05 | 2.04013697534068E-05 |
+| `mor_hydrothermal` | mac | COPPER saturation index | -0.0000 | 0.0000 (sign-of-zero) |
+
+These are genuine ODE path divergences — the same phenomenon documented for `6tlib_*`
+cases above.  The EQ6 R100 reaction path integration (subroutine `path` in
+`eq6r100.f`, line 7071) uses a predictor-corrector method where predictor values for
+the next step are computed by subroutine `taylor` (line 15032) as truncated Taylor
+series in the reaction-progress variable `delzi`.  The Taylor coefficients `dzvec0`
+are finite-difference derivatives of the basis variable vector `zvec0`, accumulated
+by subroutine `zvecpr` (line 16057) after each accepted step.
 
 At each step `path` calls `taylor` to extrapolate, then calls `eqcalc` (line 2568)
 to correct via Newton-Raphson.  The corrected step is accepted or rejected based on
 whether the residual functions in `betaz` (line 1468) fall within tolerance.  When
 the step is accepted, `zvecpr` updates the derivative vectors for the next predictor.
 
-Because Fedora gfortran 15.2.1 (Red Hat RPM) and Ubuntu gfortran 15.2.0 (Ubuntu apt)
-are different packaging builds of the same upstream release, they apply different
-optimization passes and produce different x87/SSE2 instruction sequences for the
-Taylor accumulation loop in `taylor`.  The resulting extended-precision intermediates
-differ by ≤1 ULP.  After enough steps those differences compound into divergent
-step-size decisions in `path`, sending the two builds down different branches of
-the adaptive step-size controller.  At step 17 of the `pelitic_10kbar_eq6` run,
-the two builds take a different number of Newton-Raphson corrector iterations,
-causing all subsequent reaction-progress values to differ.
+Different gfortran packaging builds (Red Hat RPM vs Ubuntu apt vs Homebrew) apply
+different optimization passes and produce different x87/SSE2 instruction sequences
+for the Taylor accumulation loop in `taylor`.  The resulting extended-precision
+intermediates differ by ≤1 ULP.  After enough steps those differences compound into
+divergent step-size decisions in `path`, sending different builds down different
+branches of the adaptive step-size controller.
 
-The divergence is confined to `pelitic_10kbar_eq6` because it is the longest DEW
-EQ6 run (over 22 000 output lines, 17 accepted steps).  The shorter `mor_hydrothermal`
-run converges in fewer steps and does not reach the bifurcation point.
+- On **Ubuntu** the bifurcation occurs at step 17 of `pelitic_10kbar_eq6` (the Ubuntu
+  and Fedora builds take a different number of Newton-Raphson corrector iterations at
+  that step).
+- On **macOS** the bifurcation occurs at step 2, and `mor_hydrothermal` also diverges
+  at the final saturation index print (sign of a near-zero value in subroutine `wrtabx`).
+- `pelitic_10kbar_eq6` diverges on all non-Fedora platforms because it is the longest
+  DEW EQ6 run (22 000+ output lines, 17 accepted steps) — more steps means more
+  opportunities for accumulated ULP differences to cross a convergence threshold.
+  `mor_hydrothermal` is shorter (1 900 lines) and only diverges on macOS.
 
 ### Why the DEW binaries needed initialization flags
 
