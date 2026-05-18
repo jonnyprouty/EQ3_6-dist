@@ -1,0 +1,615 @@
+
+ EQ3NR, version 3245R110
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+ Supported by EQLIB, version 3245R136
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+
+
+
+
+ --- reading the input file ---
+ Impure calcite: solubility of Ca and Mg in water                                
+                                                                                 
+  Uses February, 2009 JHU datafile                                               
+                                                                                 
+  Suppressed: aragonite and disordered dolomite                                  
+                                                                                 
+  CO3-- calculated BY USING CHARGE BALANCE                                       
+  O2 fugacity set at atmospheric value                                           
+  CO2 fugacity calculated                                                        
+                                                                                 
+  pH set to 9.9                                                                  
+                                                                                 
+ endit.                                                                          
+       tempc=   .25000E+02
+         rho=   .10000E+01    tdspkg=   .00000E+00     tdspl=   .00000E+00
+         fep=  -.70000E+00    uredox=                         
+       tolbt=   .00000E+00     toldl=   .00000E+00    tolsat=   .00000E+00
+     itermx=  0
+                 1    2    3    4    5    6    7    8    9   10
+   iopt1-10=     0    0    0    2    0    0    0    0    0    0
+   iopg1-10=     0   -1    0    0    0    0    0    0    0    0
+   iopr1-10=     0    0    0    0    0    0    1    0    0    0
+  iopr11-20=     0    0    0    0    0    0    0    0    0    0
+   iodb1-10=     0    0    0    0    0    0    0    0    0    0
+      uebal= CO3--                   
+     uacion= CL-                     
+      nxmod=  2
+    species= ARAGONITE               
+       type=  1              option= -1              xlkmod=   .00000E+00
+    species= DOLOMITE_DIS.           
+       type=  1              option= -1              xlkmod=   .00000E+00
+ data file master species= NA+                     
+    switch with species=                         
+    jflag=  0   csp=   .10000E+00
+ data file master species= CA++                    
+    switch with species=                         
+    jflag= 20   csp=   .00000E+00
+            uphas1= CALCITE(SS)                uphas2=                 
+ data file master species= MG++                    
+    switch with species=                         
+    jflag= 20   csp=   .00000E+00
+            uphas1= CALCITE(SS)                uphas2=                 
+ data file master species= CO3--                   
+    switch with species=                         
+    jflag=  0   csp=   .27000E-03
+ data file master species= CL-                     
+    switch with species=                         
+    jflag=  0   csp=   .10000E+00
+ data file master species= SIO2(AQ)                
+    switch with species=                         
+    jflag=  0   csp=   .10000E-03
+ data file master species= H+                      
+    switch with species=                         
+    jflag= 16   csp=  -.98700E+01
+endit.  
+ solid solutions
+    CALCITE(SS)             
+ component     mole fraction
+      CALCITE                         .9990
+      MAGNESITE                       .0010
+      endit.                  
+    endit.                  
+
+ --- the input file has been successfuly read ---
+
+ --- reading the data1 file ---
+
+ --- the data1 file has been successfully read ---
+ the species ARAGONITE                has been user-suppressed
+
+ the species DOLOMITE_DIS.            has been user-suppressed
+
+
+
+
+
+
+
+ eeee   qqq   33333  n   n  rrrr   
+ e     q   q      3  nn  n  r   r  
+ eeee  q   q    33   n n n  rrrr   
+ e     q q q      3  n  nn  r  r   
+ eeee   qqq   3333   n   n  r   r  
+           q                       
+
+
+MODIFIED FOR DEW CALCULATIONS     
+
+
+
+ eq3nr.3245R110
+  supported by eqlib.3245R136
+
+
+ Impure calcite: solubility of Ca and Mg in water                                
+                                                                                 
+  Uses February, 2009 JHU datafile                                               
+                                                                                 
+  Suppressed: aragonite and disordered dolomite                                  
+                                                                                 
+  CO3-- calculated BY USING CHARGE BALANCE                                       
+  O2 fugacity set at atmospheric value                                           
+  CO2 fugacity calculated                                                        
+                                                                                 
+  pH set to 9.9                                                                  
+                                                                                 
+
+ DATA FILE DATA0.3230U03                                                         
+   1 ATM.-STEAM SATURATION CURVE DATA                                            
+   LAST REVISED SEPT. 1991                                                       
+                                                                                 
+
+   the activity coefficients of aqueous solute species
+ and the activity of water are calculated according to
+ b-dot equation plus others      
+
+
+
+ temperature=  25.00 degrees celsius
+ pressure=     .0320 bars
+
+
+         30 elements are in the data base
+         70 elements can be loaded into memory
+          8 elements are active in this problem
+
+
+        274 aqueous species are in the data base
+         97 aqueous species were loaded into memory
+        750 aqueous species can be loaded into memory
+         55 aqueous species are active in this problem
+
+        243 aqueous reactions are in the data base
+         66 aqueous reactions were loaded into memory
+        679 aqueous reactions can be loaded into memory
+
+
+             171 minerals are in the data base
+              41 minerals were loaded into memory
+             750 minerals can be loaded into memory
+              38 minerals are active in this problem
+
+              16 solid solutions are in the data base
+              20 solid solutions can be loaded into memory
+
+               8 gases are in the data base
+               5 gases were loaded into memory
+              15 gases can be loaded into memory
+               5 gases are active in this problem
+
+
+
+
+      iopt1  =  0 (redox option switch)
+      iopt2  =  0 (automatic basis switching switch)
+      iopt3  =  0 (interfacing output control switch)
+      iopt4  =  2 (turn-on solid solutions switch)
+      iopt5  =  0 (not used)
+      iopt6  =  0 (conv. test criteria switch)
+      iopt7  =  0 (0/1 3245/post-3245 pickup file)
+      iopt8  =  0 (not used)
+      iopt9  =  0 (not used)
+      iopt10 =  0 (not used)
+
+
+
+           iopg1  =  0 (act. coeff. choice)
+           iopg2  = -1 (ph scale convention switch)
+           iopg3  =  0 (iopg1=3 - 0/1 uelam= on/onplus)
+           iopg4  =  0 (iopg1=3 or 4 - f switch - 0/1 dhoa/dhca)
+           iopg5  =  0 (gamC 0: omega-hat (C is 2nd bs), 1: bdot*xi)
+           iopg6  =  0 (approx. of j(x) function)
+           iopg7  =  0 (a(H2O)=1 if =0, a(H2O)=X(H2O) if =1)
+           iopg8  =  0 (if =1 then uses high T range 650-1000 C)
+           iopg9  =  0 (position of C in the datafile)
+           iopg10 =  0 (not used)
+
+
+                iopr1  =  0 (list loading of species)
+                iopr2  =  0 (list reactions and log k values)
+                iopr3  =  0 (aqueous species print order control)
+                iopr4  =  0 (aqueous species print cut-off control)
+                iopr5  =  0 (mass balance percentages print control)
+                iopr6  =  0 (mean ionic act coeff print control)
+                iopr7  =  1 (mineral affinity print control)
+                iopr8  =  0 (ion size and hydr. no. print control)
+                iopr9  =  0 (pitzer coefficients tabulation)
+                iopr10 =  0 (print concbs array)
+                iopr11 =  0 (not used)
+                iopr12 =  0 (not used)
+                iopr13 =  0 (not used)
+                iopr14 =  0 (not used)
+                iopr15 =  0 (not used)
+                iopr16 =  0 (not used)
+                iopr17 =  0 (not used)
+                iopr18 =  0 (not used)
+                iopr19 =  0 (not used)
+                iopr20 =  0 (not used)
+
+
+                     iodb1  =  0 (print info. messages switch)
+                     iodb2  =  0 (print pre-newton-raphson optimizations switch)
+                     iodb3  =  0 (request iteration variables to kill)
+                     iodb4  =  0 (print newton-raphson iterations switch)
+                     iodb5  =  0 (list stoichiometric equivalences)
+                     iodb6  =  0 (controls iodb5 level of detail)
+                     iodb7  =  0 (write reactions on file rlist switch)
+                     iodb8  =  0 (not used)
+                     iodb9  =  0 (not used)
+                     iodb10 =  0 (not used)
+
+
+      the default redox state is constrained by log fo2 =       -.7000 (log bars)
+
+
+                solution density =  1.00000 g/ml
+
+                total dissolved salts =        .00 mg/kg solution
+                total dissolved salts =        .00 mg/l
+
+
+           tolbt  =   .10000E-05 (convergence tolerance on residual functions)
+           toldl  =   .10000E-05 (convergence tolerance on correction terms)
+           tolsat =   .50000E+00 (phase saturation tolerance, does not affect
+                                  convergence)
+
+
+
+                                    ----- input constraints -----
+
+     species          csp       jflag  type of input      controlling phase
+
+   NA+                          .10000E+00    0   tot conc, molal                                    
+   CA++                         .00000E+00   20   solid solution equil       CALCITE(SS)             
+
+                       1.000  CALCITE                 
+                           ==
+                       1.000  CA++                    
+                    +  1.000  CO3--                   
+   MG++                         .00000E+00   20   solid solution equil       CALCITE(SS)             
+
+                       1.000  MAGNESITE               
+                           ==
+                       1.000  MG++                    
+                    +  1.000  CO3--                   
+   CO3--                        .27000E-03    0   tot conc, molal                                    
+   CL-                          .10000E+00    0   tot conc, molal                                    
+   SIO2(AQ)                     .10000E-03    0   tot conc, molal                                    
+   H+                          -.98700E+01   16   log activity                                       
+
+
+                     ----- input solid solution compositions -----
+
+
+      CALCITE(SS)       
+
+                              mole fraction
+            CALCITE               .9990
+            MAGNESITE             .0010
+
+
+ the ion that defines equiv. stoich. ionic strength
+   is CL-                     
+
+ electrical balance will be achieved by adjusting
+   the concentration of CO3--                   
+
+
+                     --- inactive aqueous species ---
+
+
+
+
+                                --- modified input constraints ---
+
+     species          csp       jflag  type of input      controlling phase
+
+   NA+                          .10000E+00    0   tot conc, molal         
+   CA++                         .00000E+00   20   solid solution equil       CALCITE(SS)             
+
+                       1.000  CALCITE                 
+                           ==
+                       1.000  CA++                    
+                    +  1.000  CO3--                   
+   MG++                         .00000E+00   20   solid solution equil       CALCITE(SS)             
+
+                       1.000  MAGNESITE               
+                           ==
+                       1.000  MG++                    
+                    +  1.000  CO3--                   
+   SIO2(AQ)                     .10000E-03    0   tot conc, molal         
+   H+                          -.98700E+01   16   log activity            
+   CO3--                        .27000E-03    0   tot conc, molal         
+   CL-                          .10000E+00    0   tot conc, molal         
+   O2(AQ)                       .00000E+00   27   dependent species       
+   H2(AQ)                       .00000E+00   27   dependent species       
+   CH4(AQ)                      .00000E+00   30   eliminated species      
+   CH3OH(AQ)                    .00000E+00   30   eliminated species      
+   HCO3-                        .00000E+00   30   eliminated species      
+   CLO4-                        .00000E+00   30   eliminated species      
+   OH-                          .00000E+00   30   eliminated species      
+   HCOO-                        .00000E+00   30   eliminated species      
+   CH3COO-                      .00000E+00   30   eliminated species      
+   CH3CH2COO-                   .00000E+00   30   eliminated species      
+   GLYCOLATE                    .00000E+00   30   eliminated species      
+   LACTATE                      .00000E+00   30   eliminated species      
+   PENTANOATE                   .00000E+00   30   eliminated species      
+   PENTANOL                     .00000E+00   30   eliminated species      
+   CO(AQ)                       .00000E+00   30   eliminated species      
+   HEXANE(AQ)                   .00000E+00   30   eliminated species      
+   OCTANE(AQ)                   .00000E+00   30   eliminated species      
+   DECANE(AQ)                   .00000E+00   30   eliminated species      
+   GLUTARIC,AQ                  .00000E+00   30   eliminated species      
+   H-SUCCINATE                  .00000E+00   30   eliminated species      
+
+
+
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near      nan     molal ---
+
+ --- MG++         has a required concentration near     -nan     molal ---
+
+ --- O2(AQ)       has a required concentration near      nan     molal ---
+
+ --- H2(AQ)       has a required concentration near     -nan     molal ---
+
+ --- reconsider your choice of input constraints ---
+ * note- optimization ended outside requested limits (arrset)
+
+
+ --- reading the input file ---
+
+ --- no further input found ---
+
+
+ normal exit

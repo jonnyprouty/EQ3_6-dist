@@ -352,3 +352,67 @@ in `betgam` where the missing `include "eqlgp.h"` left `iopg1` (the activity
 coefficient model selector) as an uninitialized local variable rather than reading
 it from COMMON `/eqlgp/`.  This bug caused spurious "entry to betgam with iopg1 = *****"
 aborts when the CHARACTER initialization flag changed the stack layout.
+
+---
+
+## pyDEW container comparison
+
+`make compare-dew-container` runs all 8 DEW workshop test inputs through the
+[pyDEW container](https://hub.docker.com/r/simonwmatthews/pydew) (`simonwmatthews/pydew:v2.15`)
+and compares results against the committed native `bin-dew/` references.  This is an
+informational comparison tool, not part of CI or `make test`.
+
+```
+make compare-dew-container       # compare (requires podman or docker, DEW/*.zip files)
+make regen-container-refs        # regenerate committed container refs (then commit)
+```
+
+### What the container is
+
+The pyDEW container bundles x86-64 Linux executables from the **R71 EQ3/EQ6 code base**
+(circa 1987–1991), distinct from the **R110/R100** code in the `upstream-dew/` submodule.
+These two stacks share the same DATA0 thermodynamic databases but differ in:
+
+- Fortran record-length markers in the binary data1 file: 8-byte (container, from the
+  original f2c/SVR4 Fortran convention) vs. 4-byte (gfortran default).  The data1 files
+  from one stack cannot be read by the other.
+- Output format: the R71 code prints scientific notation without a leading zero
+  (`.25000E+02`) while R110/R100 prints with a leading zero (`0.25000E+02`).
+- Some descriptive label strings for activity-coefficient options (`iopg5`, `iopg9`,
+  `iopg10`) were updated between R71 and R110 to reflect the expanded DEW P-T model.
+
+### Determinism
+
+All 8 cases are deterministic across 3 runs on the container (tested on Fedora 43,
+podman, `simonwmatthews/pydew:v2.15`).  The container's EQ3/EQ6 binaries were not
+compiled with `-finit-character=32`, so CHARACTER variables are initialized to null
+bytes (0x00) rather than spaces.  On Linux, the OS initializes heap memory to zero
+for new processes, making the uninitialized values reproducibly null — this is why
+the container is deterministic despite lacking the init flag.
+
+### What differs between container and native outputs
+
+Tested with `make compare-dew-container` on the 8 workshop cases (Fedora 43,
+`simonwmatthews/pydew:v2.15` container, compared to `tests/dew/expected/linux/`):
+
+| Case | Changed lines | Nature of differences |
+|---|---|---|
+| `surface_seawater` | 134 | Format only |
+| `calcite_25c` | 314 | Format only |
+| `calcite_solid_soln` | 348 | Format only |
+| `co2_h2o` | 290 | Format only |
+| `co2_650c_10kbar` | 388 | Format only |
+| `pelitic_550c_10kbar` | 952 | Format only |
+| `pelitic_10kbar_eq6` | 20827 | Format only (long reaction path: many steps × same pattern) |
+| `mor_hydrothermal` | 742 | Format + updated label text |
+
+All differences are cosmetic (see "What the container is" above).  All thermodynamic
+values — equilibrium constants, molalities, saturation indices, reaction progress,
+charge balance — are numerically identical between the two stacks for all 8 cases.
+
+### Committed container references
+
+Reference outputs live in `tests/dew/expected/container/`.  They are normalized (timing
+lines and null bytes stripped) so that future `make compare-dew-container` runs can
+detect if the container outputs change (e.g. a new image version introduces numerical
+differences).  Regenerate with `make regen-container-refs` after pulling a new image.

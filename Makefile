@@ -762,6 +762,15 @@ regen-dew-refs: $(DEW_WORKSHOP_STAMPS)
 test-dew-workshop: $(DEW_WORKSHOP_STAMPS)
 	@bats tests/cases/dew/workshop/
 
+# Compare DEW workshop outputs against the pyDEW container (simonwmatthews/pydew:v2.15).
+# Requires: podman or docker, DEW/*.zip files.
+# --regen writes committed reference outputs to tests/dew/expected/container/.
+compare-dew-container:
+	@bash tools/compare_dew_container.sh
+
+regen-container-refs:
+	@bash tools/compare_dew_container.sh --regen
+
 # ============================================================
 # PACKAGING
 # All package artifacts are written to pkg/dist/.
@@ -996,4 +1005,5 @@ distclean: clean clean-dew
         rpm-dew deb-dew brew-dew \
         farm _farm-check-config farm-push farm-fedora farm-ubuntu farm-mac farm-collect platform-build \
         extract-testlib regen-testlib-refs test-testlib \
-        extract-dew-workshop regen-dew-refs test-dew-workshop
+        extract-dew-workshop regen-dew-refs test-dew-workshop \
+        compare-dew-container regen-container-refs

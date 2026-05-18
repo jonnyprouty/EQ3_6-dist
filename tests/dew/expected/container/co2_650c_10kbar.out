@@ -1,0 +1,901 @@
+
+ EQ3NR, version 3245R110
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+ Supported by EQLIB, version 3245R136
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+
+
+
+
+ --- reading the input file ---
+ 650 C & 10.0 kbar, January, 2025                                                
+                                                                                 
+ Test CO2 with dilute NaCl fluid in equilibrium with:                            
+ Nothing!                                                                        
+                                                                                 
+ QFM is -17.3                                                                    
+ log fO2 at QFM + 5.0                                                            
+                                                                                 
+ New CO2 Jan. 17th, 2025 (iopg5 = 0)                                             
+ a(H2O) = X(H2O) (iopg7 = 1)                                                     
+                                                                                 
+ Suppressed H2CO3(aq)ss                                                          
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+ endit.                                                                          
+       tempc=   .65000E+03
+         rho=   .10234E+01    tdspkg=   .00000E+00     tdspl=   .00000E+00
+         fep=  -.12300E+02    uredox=                         
+       tolbt=   .00000E+00     toldl=   .00000E+00    tolsat=   .00000E+00
+     itermx=  0
+                 1    2    3    4    5    6    7    8    9   10
+   iopt1-10=     0    0    0    0    0    0    0    0    0    0
+   iopg1-10=     0   -1    0    0    0    0    1    0    8    2
+   iopr1-10=     0    2    0    0    0    0    1    0    0    0
+  iopr11-20=     0    0    0    0    0    0    0    0    0    0
+   iodb1-10=     0    0    0    0    0    0    0    0    0    0
+      uebal= H+                      
+     uacion= CL-                     
+      nxmod=  1
+    species= H2CO3(AQ)               
+       type=  0              option= -1              xlkmod=   .00000E+00
+ data file master species= NA+                     
+    switch with species=                         
+    jflag=  0   csp=   .10000E-04
+ data file master species= CL-                     
+    switch with species=                         
+    jflag=  0   csp=   .10000E-04
+ data file master species= CO2(AQ)                 
+    switch with species=                         
+    jflag=  0   csp=   .55510E+02
+ data file master species= H+                      
+    switch with species=                         
+    jflag= 16   csp=  -.50000E+01
+endit.  
+
+ --- the input file has been successfuly read ---
+
+ --- reading the data1 file ---
+
+ --- the data1 file has been successfully read ---
+ the species H2CO3(AQ)                has been user-suppressed
+
+
+
+
+
+
+
+ eeee   qqq   33333  n   n  rrrr   
+ e     q   q      3  nn  n  r   r  
+ eeee  q   q    33   n n n  rrrr   
+ e     q q q      3  n  nn  r  r   
+ eeee   qqq   3333   n   n  r   r  
+           q                       
+
+
+MODIFIED FOR DEW CALCULATIONS     
+
+
+
+ eq3nr.3245R110
+  supported by eqlib.3245R136
+
+
+ 650 C & 10.0 kbar, January, 2025                                                
+                                                                                 
+ Test CO2 with dilute NaCl fluid in equilibrium with:                            
+ Nothing!                                                                        
+                                                                                 
+ QFM is -17.3                                                                    
+ log fO2 at QFM + 5.0                                                            
+                                                                                 
+ New CO2 Jan. 17th, 2025 (iopg5 = 0)                                             
+ a(H2O) = X(H2O) (iopg7 = 1)                                                     
+                                                                                 
+ Suppressed H2CO3(aq)ss                                                          
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+
+   the activity coefficients of aqueous solute species
+ and the activity of water are calculated according to
+ b-dot equation plus others      
+
+
+
+ temperature= 650.00 degrees celsius
+ pressure= ********* bars
+
+
+         29 elements are in the data base
+         70 elements can be loaded into memory
+          5 elements are active in this problem
+
+
+        105 aqueous species are in the data base
+         53 aqueous species were loaded into memory
+        750 aqueous species can be loaded into memory
+         27 aqueous species are active in this problem
+
+         75 aqueous reactions are in the data base
+         23 aqueous reactions were loaded into memory
+        679 aqueous reactions can be loaded into memory
+
+
+              81 minerals are in the data base
+               3 minerals were loaded into memory
+             750 minerals can be loaded into memory
+               3 minerals are active in this problem
+
+              11 solid solutions are in the data base
+              20 solid solutions can be loaded into memory
+
+               7 gases are in the data base
+               5 gases were loaded into memory
+              15 gases can be loaded into memory
+               5 gases are active in this problem
+
+
+
+
+      iopt1  =  0 (redox option switch)
+      iopt2  =  0 (automatic basis switching switch)
+      iopt3  =  0 (interfacing output control switch)
+      iopt4  =  0 (turn-on solid solutions switch)
+      iopt5  =  0 (not used)
+      iopt6  =  0 (conv. test criteria switch)
+      iopt7  =  0 (0/1 3245/post-3245 pickup file)
+      iopt8  =  0 (not used)
+      iopt9  =  0 (not used)
+      iopt10 =  0 (not used)
+
+
+
+           iopg1  =  0 (act. coeff. choice)
+           iopg2  = -1 (ph scale convention switch)
+           iopg3  =  0 (iopg1=3 - 0/1 uelam= on/onplus)
+           iopg4  =  0 (iopg1=3 or 4 - f switch - 0/1 dhoa/dhca)
+           iopg5  =  0 (gamC 0: omega-hat (C is 2nd bs), 1: bdot*xi)
+           iopg6  =  0 (approx. of j(x) function)
+           iopg7  =  1 (a(H2O)=1 if =0, a(H2O)=X(H2O) if =1)
+           iopg8  =  0 (if =1 then uses high T range 650-1000 C)
+           iopg9  =  8 (position of C in the datafile)
+           iopg10 =  2 (not used)
+
+
+                iopr1  =  0 (list loading of species)
+                iopr2  =  2 (list reactions and log k values)
+                iopr3  =  0 (aqueous species print order control)
+                iopr4  =  0 (aqueous species print cut-off control)
+                iopr5  =  0 (mass balance percentages print control)
+                iopr6  =  0 (mean ionic act coeff print control)
+                iopr7  =  1 (mineral affinity print control)
+                iopr8  =  0 (ion size and hydr. no. print control)
+                iopr9  =  0 (pitzer coefficients tabulation)
+                iopr10 =  0 (print concbs array)
+                iopr11 =  0 (not used)
+                iopr12 =  0 (not used)
+                iopr13 =  0 (not used)
+                iopr14 =  0 (not used)
+                iopr15 =  0 (not used)
+                iopr16 =  0 (not used)
+                iopr17 =  0 (not used)
+                iopr18 =  0 (not used)
+                iopr19 =  0 (not used)
+                iopr20 =  0 (not used)
+
+
+                     iodb1  =  0 (print info. messages switch)
+                     iodb2  =  0 (print pre-newton-raphson optimizations switch)
+                     iodb3  =  0 (request iteration variables to kill)
+                     iodb4  =  0 (print newton-raphson iterations switch)
+                     iodb5  =  0 (list stoichiometric equivalences)
+                     iodb6  =  0 (controls iodb5 level of detail)
+                     iodb7  =  0 (write reactions on file rlist switch)
+                     iodb8  =  0 (not used)
+                     iodb9  =  0 (not used)
+                     iodb10 =  0 (not used)
+
+
+      the default redox state is constrained by log fo2 =     -12.3000 (log bars)
+
+
+                solution density =  1.02336 g/ml
+
+                total dissolved salts =        .00 mg/kg solution
+                total dissolved salts =        .00 mg/l
+
+
+           tolbt  =   .10000E-05 (convergence tolerance on residual functions)
+           toldl  =   .10000E-05 (convergence tolerance on correction terms)
+           tolsat =   .50000E+00 (phase saturation tolerance, does not affect
+                                  convergence)
+
+
+
+                                    ----- input constraints -----
+
+     species          csp       jflag  type of input      controlling phase
+
+   NA+                          .10000E-04    0   tot conc, molal                                    
+   CL-                          .10000E-04    0   tot conc, molal                                    
+   CO2(AQ)                      .55510E+02    0   tot conc, molal                                    
+   H+                          -.50000E+01   16   log activity                                       
+
+
+ the ion that defines equiv. stoich. ionic strength
+   is CL-                     
+
+ electrical balance will be achieved by adjusting
+   the concentration of H+                      
+
+
+                     --- inactive aqueous species ---
+
+  H2CO3(AQ)               
+
+
+
+                                --- modified input constraints ---
+
+     species          csp       jflag  type of input      controlling phase
+
+   H+                          -.50000E+01   16   log activity            
+   CO2(AQ)                      .55510E+02    0   tot conc, molal         
+   CL-                          .10000E-04    0   tot conc, molal         
+   NA+                          .10000E-04    0   tot conc, molal         
+
+
+
+
+
+ ---listing of species and reactions ---
+
+       temperature=    650.000 degrees celsius
+       pressure=   10000.0     bars
+
+        --- strict basis species ---
+
+                              H2O                     
+                              H+                      
+                              CO2(AQ)                 
+                              CL-                     
+                              NA+                     
+
+
+        --- aqueous species dissociation reactions ---
+
+ --------------------------------------------------
+
+                       1.000  CH3COO-                 
+                    +  1.000  H+                      
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      45.9155
+
+ --------------------------------------------------
+
+                       1.000  CH3COOH(AQ)             
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      39.3560
+
+ --------------------------------------------------
+
+                       1.000  CO(AQ)                  
+                    +   .500  O2(G)                   
+                           ==
+                       1.000  CO2(AQ)                 
+
+          log k=       9.4801
+
+ --------------------------------------------------
+
+                       1.000  CO3-2                   
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      16.3398
+
+ --------------------------------------------------
+
+                       1.000  ETHANE(AQ)              
+                    +  3.500  O2(G)                   
+                           ==
+                       3.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      65.7749
+
+ --------------------------------------------------
+
+                       1.000  ETHANOL(AQ)             
+                    +  3.000  O2(G)                   
+                           ==
+                       3.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      58.8845
+
+ --------------------------------------------------
+
+                       1.000  ETHYLENE(AQ)            
+                    +  3.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  2.000  CO2(AQ)                 
+
+          log k=      59.8202
+
+ --------------------------------------------------
+
+                       1.000  HCOO-                   
+                    +  1.000  H+                      
+                    +   .500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      16.3544
+
+ --------------------------------------------------
+
+                       1.000  HCOOH(AQ)               
+                    +   .500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      11.8395
+
+ --------------------------------------------------
+
+                       1.000  H2(AQ)                  
+                    +   .500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+
+          log k=       9.6717
+
+ --------------------------------------------------
+
+                       1.000  HCL(AQ)                 
+                           ==
+                       1.000  H+                      
+                    +  1.000  CL-                     
+
+          log k=      -2.2893
+
+ --------------------------------------------------
+
+                       1.000  HCO3-                   
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=       7.2347
+
+ --------------------------------------------------
+
+                       1.000  METHANE(AQ)             
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      35.7219
+
+ --------------------------------------------------
+
+                       1.000  METHANOL(AQ)            
+                    +  1.500  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      31.1107
+
+ --------------------------------------------------
+
+                       1.000  NACL(AQ)                
+                           ==
+                       1.000  CL-                     
+                    +  1.000  NA+                     
+
+          log k=       -.1983
+
+ --------------------------------------------------
+
+                       1.000  NACO3-                  
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  NA+                     
+
+          log k=      15.0342
+
+ --------------------------------------------------
+
+                       1.000  NAHCO3(AQ)              
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+                    +  1.000  NA+                     
+
+          log k=       5.2910
+
+ --------------------------------------------------
+
+                       1.000  NAOH(AQ)                
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  NA+                     
+
+          log k=       7.0885
+
+ --------------------------------------------------
+
+                       1.000  O2(AQ)                  
+                           ==
+                       1.000  O2(G)                   
+
+          log k=       2.7195
+
+ --------------------------------------------------
+
+                       1.000  OH-                     
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+
+          log k=       7.9372
+
+ --------------------------------------------------
+
+                       1.000  PROPANE(AQ)             
+                    +  5.000  O2(G)                   
+                           ==
+                       4.000  H2O                     
+                    +  3.000  CO2(AQ)                 
+
+          log k=      95.4279
+
+ --------------------------------------------------
+
+                       1.000  PROPANOL(AQ)            
+                    +  4.500  O2(G)                   
+                           ==
+                       4.000  H2O                     
+                    +  3.000  CO2(AQ)                 
+
+          log k=      88.9775
+
+ --------------------------------------------------
+
+        --- mineral dissolution reactions ----
+
+ --------------------------------------------------
+
+                       1.000  DIAMOND                 
+                    +  1.000  O2(G)                   
+                           ==
+                       1.000  CO2(AQ)                 
+
+          log k=      18.4512
+
+ --------------------------------------------------
+
+                       1.000  GRAPHITE                
+                    +  1.000  O2(G)                   
+                           ==
+                       1.000  CO2(AQ)                 
+
+          log k=      18.2183
+
+ --------------------------------------------------
+
+                       1.000  HALITE                  
+                           ==
+                       1.000  CL-                     
+                    +  1.000  NA+                     
+
+          log k=       1.4244
+
+ --------------------------------------------------
+
+        --- gas dissolution reactions ---
+
+ --------------------------------------------------
+
+                       1.000  O2(G)                   
+                           ==
+                       1.000  O2(G)                   
+
+          log k=        .0000
+
+ --------------------------------------------------
+
+                       1.000  H2(G)                   
+                    +   .500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+
+          log k=       7.0288
+
+ --------------------------------------------------
+
+                       1.000  CO2(G)                  
+                           ==
+                       1.000  CO2(AQ)                 
+
+          log k=      -4.4593
+
+ --------------------------------------------------
+
+                       1.000  CH4(G)                  
+                    +  2.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+                    +  1.000  CO2(AQ)                 
+
+          log k=      32.5783
+
+ --------------------------------------------------
+
+                       1.000  H2O(G)                  
+                           ==
+                       1.000  H2O                     
+
+          log k=      -1.3329
+
+ --------------------------------------------------
+ * note- optimization ended outside requested limits (arrset)
+
+ iter=   0, delmax=  0.00000E+00 (unrelaxed)
+        del(                )=  0.00000E+00, delfnc =  0.00000E+00
+       beta(CONC    H+      )= -9.98972E-01, betfnc =  0.00000E+00
+       no. of under-relaxation cycles=   0
+        bbig=  1.52985E-04, ubbig= CL-                     
+        bneg= -5.80161E-01, ubneg= NA+                     
+       bgamx=  5.32022E-01, ubgamx= CO2(AQ)                 
+         bxi= -3.28037E-01, bxistq= -1.69407E-16
+ iter=   1, delmax=  8.49926E-01 (unrelaxed)
+        del(CONC    NA+     )=  4.24963E-01, delfnc =  0.00000E+00
+       beta(CONC    H+      )= -9.95378E-01, betfnc =  3.59752E-03
+       no. of under-relaxation cycles=   0
+        bbig=  1.59938E-03, ubbig= CL-                     
+        bneg= -1.35349E-01, ubneg= NA+                     
+       bgamx=  3.85977E-01, ubgamx= CO3-2                   
+         bxi= -8.89969E-01, bxistq=  1.40101E-03
+ iter=   2, delmax=  4.33139E-01 (unrelaxed)
+        del(CONC    H+      )=  2.16569E-01, delfnc =  4.90381E-01
+       beta(CONC    H+      )= -9.86958E-01, betfnc =  8.45830E-03
+       no. of under-relaxation cycles=   0
+        bbig=  1.79044E-03, ubbig= CL-                     
+        bneg= -3.67493E-02, ubneg= NA+                     
+       bgamx=  6.33456E-02, ubgamx= CO3-2                   
+         bxi= -4.59668E-01, bxistq=  3.44056E-04
+ iter=   3, delmax=  4.29667E-01 (unrelaxed)
+        del(CONC    H+      )=  2.14834E-01, delfnc =  8.01511E-03
+       beta(CONC    H+      )= -9.64872E-01, betfnc =  2.23785E-02
+       no. of under-relaxation cycles=   0
+        bbig=  7.11486E-03, ubbig= NA+                     
+        bneg= -2.25835E-04, ubneg= CO2(AQ)                 
+       bgamx=  4.33015E-02, ubgamx= CO3-2                   
+         bxi= -4.14718E-01, bxistq=  5.73100E-04
+ iter=   4, delmax=  4.20678E-01 (unrelaxed)
+        del(CONC    H+      )=  2.10339E-01, delfnc =  2.09214E-02
+       beta(CONC    H+      )= -9.09792E-01, betfnc =  5.70855E-02
+       no. of under-relaxation cycles=   0
+        bbig=  2.29922E-02, ubbig= NA+                     
+        bneg= -1.07075E-04, ubneg= CO2(AQ)                 
+       bgamx=  3.18029E-02, ubgamx= CO3-2                   
+         bxi= -3.88971E-01, bxistq=  9.95394E-04
+ iter=   5, delmax=  3.97733E-01 (unrelaxed)
+        del(CONC    H+      )=  1.98866E-01, delfnc =  5.45430E-02
+       beta(CONC    H+      )= -7.89041E-01, betfnc =  1.32723E-01
+       no. of under-relaxation cycles=   0
+        bbig=  2.43512E-02, ubbig= NA+                     
+        bneg= -5.02232E-05, ubneg= CO2(AQ)                 
+       bgamx=  2.19075E-02, ubgamx= CO3-2                   
+         bxi= -3.40668E-01, bxistq=  1.27865E-03
+ iter=   6, delmax=  3.46232E-01 (unrelaxed)
+        del(CONC    H+      )=  1.73116E-01, delfnc =  1.29485E-01
+       beta(CONC    H+      )= -5.86297E-01, betfnc =  2.56950E-01
+       no. of under-relaxation cycles=   0
+        bbig=  1.91588E-02, ubbig= NA+                     
+        bneg= -2.34734E-05, ubneg= CO2(AQ)                 
+       bgamx=  1.29988E-02, ubgamx= CO3-2                   
+         bxi= -2.52397E-01, bxistq=  9.49275E-04
+ iter=   7, delmax=  2.58212E-01 (unrelaxed)
+        del(CONC    H+      )=  2.58212E-01, delfnc =  2.54223E-01
+       beta(CONC    H+      )= -8.34886E-02, betfnc =  8.57600E-01
+       no. of under-relaxation cycles=   0
+        bbig=  1.05024E-02, ubbig= NA+                     
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  8.59412E-03, ubgamx= CO3-2                   
+         bxi= -1.94608E-01, bxistq=  4.19434E-03
+ iter=   8, delmax=  3.68868E-02 (unrelaxed)
+        del(CONC    H+      )=  3.68868E-02, delfnc =  8.57145E-01
+       beta(CONC    CL-     )=  3.26868E-04, betfnc =  9.96085E-01
+       no. of under-relaxation cycles=   0
+        bbig=  3.26868E-04, ubbig= CL-                     
+        bneg=  0.00000E+00, ubneg= none                    
+       bgamx=  1.50829E-04, ubgamx= CO3-2                   
+         bxi= -3.99272E-03, bxistq= -9.35356E-03
+ iter=   9, delmax=  1.46330E-04 (unrelaxed)
+        del(CONC    CL-     )= -1.46330E-04, delfnc =  9.96033E-01
+       beta(CONC    H+      )=  1.19129E-07, betfnc =  9.99636E-01
+       no. of under-relaxation cycles=   0
+        bbig=  7.81665E-08, ubbig= CL-                     
+        bneg= -1.23139E-13, ubneg= CO2(AQ)                 
+       bgamx=  2.49978E-07, ubgamx= CO3-2                   
+         bxi= -6.63683E-06, bxistq= -3.26384E-04
+ iter=  10, delmax=  5.28343E-08 (unrelaxed)
+        del(CONC    H+      )= -5.28343E-08, delfnc =  9.99639E-01
+       beta(CONC    H+      )=  7.06554E-11, betfnc =  9.99407E-01
+       no. of under-relaxation cycles=   0
+        bbig=  1.21832E-11, ubbig= CL-                     
+        bneg= -1.40803E-15, ubneg= CO2(AQ)                 
+       bgamx=  1.25790E-10, ubgamx= CO3-2                   
+         bxi= -3.33970E-09, bxistq= -7.77280E-08
+
+
+ hybrid newton-raphson iteration converged in  10 steps 
+
+
+
+                     ----- Summary of the Aqueous Phase -----
+
+
+           ----- Elemental composition of the aqueous phase -----
+
+
+        element      mg/l           mg/kg            moles/kg
+
+          O      2726544.4492    2664306.2551     .1665253856E+03
+          H       114509.6467     111895.7617     .1110187139E+03
+          C       682305.4370     666730.6100     .5551000000E+02
+          CL            .3628           .3545     .1000000000E-04
+          NA            .2353           .2299     .1000000000E-04
+
+
+           ----- elemental composition as strict basis species -----
+
+
+        species     mg/l           mg/kg            moles/kg
+
+          H2O    3070067.8501    2999988.1275     .1665253856E+03
+          H+      114509.6467     111895.7617     .1110187139E+03
+          CO2(AQ 2500052.1042    2442983.9980     .5551000000E+02
+          CL-           .3628           .3545     .1000000000E-04
+          NA+           .2353           .2299     .1000000000E-04
+
+
+           --- equivalent composition of the aqueous phase (cte balances) ---
+
+            original basis                        existing basis
+
+   species              moles/kg h2o   species              moles/kg h2o
+
+     H2O              .5000000000E+01     H2O              .1665253856E+03
+     H+               .5000000000E+01     H+               .1110187139E+03
+     CO2(AQ)          .5000000000E+01     CO2(AQ)          .5551000000E+02
+     CL-              .5000000000E+01     CL-              .1000000000E-04
+     NA+              .5000000000E+01     NA+              .1000000000E-04
+
+
+   single ion activities and activity coefficients are here defined
+   with respect to the internal ph scale       
+
+
+
+                                       ph           eh           pe
+
+     internal ph scale               3.3070       -1.1414   -6.2315E+00
+     modified nbs ph scale           3.3069       -1.1414   -6.2314E+00
+     rational ph scale               3.2875       -1.1378   -6.2120E+00
+
+   phcl =      8.3646
+
+
+                             activity of water =     .50000
+                         log activity of water =    -.30103
+
+                    true osmotic coefficient=     .69313
+          stoichiometric osmotic coefficient=     .69313
+
+                    sum of true molalities=   55.5106980655298
+          sum of stoichiometric molalities=   55.5105366387387
+
+                    true ionic strength=     .0005254092876
+          stoichiometric ionic strength=     .0002683193694
+
+        equiv. stoich. ionic strength (CL-   ) =     .0000100000000
+
+           ----- electrical balance totals -----
+
+
+                                               equiv/kg
+
+                      sigma(mz) cations =      .5254083710E-03
+                      sigma(mz) anions  =     -.5254083710E-03
+                           total charge =      .1050816742E-02
+                            mean charge =      .5254083710E-03
+                       charge imbalance =      .7424583951E-13
+
+            total charge = sigma(mz) cations + abs ( sigma(mz) anions )
+            mean charge = 1/2 total charge
+
+
+            the electrical imbalance is 
+
+                              .00 per cent of the total charge
+                              .00 per cent of the mean charge
+                              .00 per cent of sigma(mz) cations
+                              .00 per cent of abs ( sigma(mz) anions )
+
+
+           ----- electrical balancing on H+     -----
+
+                log activity
+
+          input       -5.0000
+          final       -3.3070
+          adj          1.6930
+
+
+                     ----- activity ratios of ions -----
+
+           log ( act(CO2(AQ)     )               ) =       .9113
+           log ( act(CL-         ) x act(h+)xx 1 ) =     -8.3646
+           log ( act(NA+         ) / act(h+)xx 1 ) =     -1.7297
+
+
+           ----- distribution of aqueous species -----
+
+       species          molal conc   log conc      log g    activity     log act
+
+   CO2(AQ)               .5551E+02     1.7443     -.8331    .8152E+01      .9113
+   CO(AQ)                .3812E-02    -2.4188      .0000    .3812E-02    -2.4188
+   H+                    .5158E-03    -3.2875     -.0194    .4932E-03    -3.3070
+   HCO3-                 .5035E-03    -3.2980     -.0194    .4814E-03    -3.3175
+   H2(AQ)                .1504E-03    -3.8227      .0000    .1504E-03    -3.8227
+   OH-                   .1225E-04    -4.9118     -.0194    .1172E-04    -4.9313
+   NA+                   .9611E-05    -5.0173     -.0194    .9190E-05    -5.0367
+   CL-                   .9159E-05    -5.0382     -.0194    .8758E-05    -5.0576
+   HCOOH(AQ)             .8332E-05    -5.0793      .0000    .8332E-05    -5.0793
+   HCL(AQ)               .8409E-06    -6.0753      .0000    .8409E-06    -6.0753
+   HCOO-                 .5398E-06    -6.2678     -.0194    .5162E-06    -6.2872
+   NAHCO3(AQ)            .3886E-06    -6.4105      .0000    .3886E-06    -6.4105
+   CO3-2                 .9166E-09    -9.0378     -.0778    .7663E-09    -9.1156
+   NAOH(AQ)              .7599E-09    -9.1192      .0000    .7599E-09    -9.1192
+   NACL(AQ)              .1271E-09    -9.8960      .0000    .1271E-09    -9.8960
+   METHANE(AQ)           .1539E-10   -10.8127      .0000    .1539E-10   -10.8127
+   METHANOL(AQ)          .4452E-12   -12.3515      .0000    .4452E-12   -12.3515
+   NACO3-                .1488E-12   -12.8273     -.0194    .1423E-12   -12.8467
+   CH3COOH(AQ)           .2914E-13   -13.5355      .0000    .2914E-13   -13.5355
+   O2(AQ)                .6510E-14   -14.1864     -.8331    .9561E-15   -15.0195
+   CH3COO-               .1704E-16   -16.7686     -.0194    .1629E-16   -16.7881
+   ETHANOL(AQ)           .8609E-21   -21.0650      .0000    .8609E-21   -21.0650
+   ETHYLENE(AQ)          .1997E-21   -21.6997      .0000    .1997E-21   -21.6997
+   ETHANE(AQ)            .1565E-21   -21.8055      .0000    .1565E-21   -21.8055
+   PROPANOL(AQ)          .7984E-32   -32.0978      .0000    .7984E-32   -32.0978
+   PROPANE(AQ)           .3997E-32   -32.3982      .0000    .3997E-32   -32.3982
+
+
+           ----- major aqueous species contributing to mass balances -----
+
+
+ aqueous species accounting for 99% or more of CO2(AQ)           
+
+     species            molal conc    per cent
+
+   CO2(AQ)                .5551E+02    99.99
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.99
+
+
+ aqueous species accounting for 99% or more of CL-               
+
+     species            molal conc    per cent
+
+   CL-                    .9159E-05    91.59
+   HCL(AQ)                .8409E-06     8.41
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                              100.00
+
+
+ aqueous species accounting for 99% or more of NA+               
+
+     species            molal conc    per cent
+
+   NA+                    .9611E-05    96.11
+   NAHCO3(AQ)             .3886E-06     3.89
+ - - - - - - - - - - - - - - - - - - - - - - -
+   total                               99.99
+
+
+
+           ----- summary of aqueous redox reactions -----
+
+      couple         eh, volts      pe-       log fo2     ah, kcal
+
+   default            -1.141    -.6231E+01    -12.300     -26.323
+
+
+           ----- summary of aqueous non-equilibrium non-redox reactions -----
+
+      couple       affinity, kcal
+
+      none
+
+
+           ----- summary of stoichiometric mineral saturation states -----
+
+
+   mineral       log q/k   aff, kcal  state           mineral       log q/k   aff, kcal  state
+
+ DIAMOND          -5.240    -22.134                 GRAPHITE         -5.007    -21.151       
+ HALITE          -11.519    -48.657       
+
+
+     0 approx. saturated pure minerals
+     0 approx. saturated end-members of specified solid solutions
+     0 saturated end-members of hypothetical solid solutions
+
+
+     0 supersaturated pure minerals
+     0 supersatd. end-members of specified solid solutions
+     0 supersatd. hypothetical solid solution phases
+
+
+
+
+                     ----- summary of gases -----
+
+
+       gas                   fugacity    log fugacity
+
+   O2(G)                    .501187E-12    -12.30000
+   H2(G)                    .660948E-01     -1.17983
+   CO2(G)                   .234734E+06      5.37058
+   CH4(G)                   .214245E-07     -7.66909
+   H2O(G)                   .107614E+02      1.03187
+
+ ----- end of output -----
+ ----- pickup file successfully written -----
+
+ --- reading the input file ---
+
+ --- no further input found ---
+
+
+ normal exit
