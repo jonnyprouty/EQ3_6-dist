@@ -184,9 +184,19 @@ assert_no_match() {
 DATA1_CACHE="$REPO_ROOT/tests/.data1_cache"
 
 # Canonical platform tag used for reference output selection.
+# ubuntu: Ubuntu Linux (gfortran from Ubuntu apt produces different ODE paths)
+# mac:    macOS (Homebrew gfortran)
+# linux:  all other Linux distributions (baseline, Fedora-generated refs)
 case "$(uname -s)" in
     Darwin) _EQ_PLATFORM=mac ;;
-    *)      _EQ_PLATFORM=linux ;;
+    Linux)
+        if grep -qi ubuntu /etc/os-release 2>/dev/null; then
+            _EQ_PLATFORM=ubuntu
+        else
+            _EQ_PLATFORM=linux
+        fi
+        ;;
+    *) _EQ_PLATFORM=linux ;;
 esac
 
 # Stage the cached data1 file for the given dataset into workdir.

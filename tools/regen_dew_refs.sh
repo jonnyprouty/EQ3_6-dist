@@ -11,7 +11,14 @@ DEW_INPUTS="$REPO_ROOT/tests/dew/inputs"
 
 case "$(uname -s)" in
     Darwin) PLATFORM=mac ;;
-    *)      PLATFORM=linux ;;
+    Linux)
+        if grep -qi ubuntu /etc/os-release 2>/dev/null; then
+            PLATFORM=ubuntu
+        else
+            PLATFORM=linux
+        fi
+        ;;
+    *) PLATFORM=linux ;;
 esac
 EXPECTED="$REPO_ROOT/tests/dew/expected/$PLATFORM"
 
