@@ -1,0 +1,324 @@
+
+ EQ3NR, version 3245R110
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+ Supported by EQLIB, version 3245R136
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+
+ Run                    
+
+
+
+ --- reading the input file ---
+                                                                                 
+ Surface seawater                                                                
+                                                                                 
+                                                                                 
+  Suppress goethite as an example                                                
+                                                                                 
+  Carbonate ion is used for charge balance                                       
+                                                                                 
+                                                                                 
+ endit.                                                                          
+       tempc=  0.25000E+02
+         rho=  0.10000E+01    tdspkg=  0.00000E+00     tdspl=  0.00000E+00
+         fep= -0.70000E+00    uredox=                         
+       tolbt=  0.00000E+00     toldl=  0.00000E+00    tolsat=  0.00000E+00
+     itermx=  0
+                 1    2    3    4    5    6    7    8    9   10
+   iopt1-10=     0    0    0    0    0    0    0    0    0    0
+   iopg1-10=     0   -1    0    0    0    0    0    0    0    0
+   iopr1-10=     0    0    0    0    0    0    1    0    0    0
+  iopr11-20=     0    0    0    0    0    0    0    0    0    0
+   iodb1-10=     0    0    0    0    0    0    0    0    0    0
+      uebal= CO3--                   
+     uacion= CL-                     
+      nxmod=  1
+    species= GOETHITE                
+       type=  1              option= -1              xlkmod=  0.00000E+00
+ data file master species= NA+                     
+    switch with species=                         
+    jflag=  2   csp=   0.107700000E+05
+ data file master species= CL-                     
+    switch with species=                         
+    jflag=  2   csp=   0.193540000E+05
+ data file master species= H+                      
+    switch with species=                         
+    jflag= 16   csp=  -0.840000000E+01
+ data file master species= K+                      
+    switch with species=                         
+    jflag=  2   csp=   0.399000000E+03
+ data file master species= MG++                    
+    switch with species=                         
+    jflag=  2   csp=   0.129000000E+04
+ data file master species= CA++                    
+    switch with species=                         
+    jflag=  2   csp=   0.412000000E+03
+ data file master species= CO3--                   
+    switch with species=                         
+    jflag=  2   csp=   0.100000000E+00
+ data file master species= SO4--                   
+    switch with species=                         
+    jflag=  2   csp=   0.271200000E+04
+endit.  
+
+ --- the input file has been successfuly read ---
+
+ --- reading the data1 file ---
+
+ --- the data1 file has been successfully read ---
+ * note- suppress species GOETHITE                 was not among
+       the loaded minerals                 (eqlib/supprs)
+
+
+
+
+
+
+
+ eeee   qqq   33333  n   n  rrrr   
+ e     q   q      3  nn  n  r   r  
+ eeee  q   q    33   n n n  rrrr   
+ e     q q q      3  n  nn  r  r   
+ eeee   qqq   3333   n   n  r   r  
+           q                       
+
+
+MODIFIED FOR DEW CALCULATIONS     
+
+
+
+ eq3nr.3245R110
+  supported by eqlib.3245R136
+
+
+                                                                                 
+ Surface seawater                                                                
+                                                                                 
+                                                                                 
+  Suppress goethite as an example                                                
+                                                                                 
+  Carbonate ion is used for charge balance                                       
+                                                                                 
+                                                                                 
+
+ DATA FILE DATA0.3230U03                                                         
+   1 ATM.-STEAM SATURATION CURVE DATA                                            
+   LAST REVISED SEPT. 1991                                                       
+                                                                                 
+
+   the activity coefficients of aqueous solute species
+ and the activity of water are calculated according to
+ b-dot equation plus others      
+
+
+
+ temperature=  25.00 degrees celsius
+ pressure=    0.0320 bars
+
+
+         30 elements are in the data base
+         70 elements can be loaded into memory
+          9 elements are active in this problem
+
+
+        274 aqueous species are in the data base
+        104 aqueous species were loaded into memory
+        750 aqueous species can be loaded into memory
+         64 aqueous species are active in this problem
+
+        243 aqueous reactions are in the data base
+         73 aqueous reactions were loaded into memory
+        679 aqueous reactions can be loaded into memory
+
+
+             171 minerals are in the data base
+              17 minerals were loaded into memory
+             750 minerals can be loaded into memory
+              17 minerals are active in this problem
+
+              16 solid solutions are in the data base
+              20 solid solutions can be loaded into memory
+
+               8 gases are in the data base
+               7 gases were loaded into memory
+              15 gases can be loaded into memory
+               7 gases are active in this problem
+
+
+
+
+      iopt1  =  0 (redox option switch)
+      iopt2  =  0 (automatic basis switching switch)
+      iopt3  =  0 (interfacing output control switch)
+      iopt4  =  0 (turn-on solid solutions switch)
+      iopt5  =  0 (not used)
+      iopt6  =  0 (conv. test criteria switch)
+      iopt7  =  0 (0/1 3245/post-3245 pickup file)
+      iopt8  =  0 (not used)
+      iopt9  =  0 (not used)
+      iopt10 =  0 (not used)
+
+
+
+           iopg1  =  0 (act. coeff. choice)
+           iopg2  = -1 (ph scale convention switch)
+           iopg3  =  0 (iopg1=3 - 0/1 uelam= on/onplus)
+           iopg4  =  0 (iopg1=3 or 4 - f switch - 0/1 dhoa/dhca)
+           iopg5  =  0 (Activity coeff mode for C)
+           iopg6  =  0 (approx. of j(x) function)
+           iopg7  =  0 (a(H2O)=1 if =0, a(H2O)=X(H2O) if =1)
+           iopg8  =  0 (if =1 then uses high T range 650-1000 C)
+           iopg9  =  0 (position of C in the datafile)
+           iopg10 =  0 (Gamma-gam options)
+
+
+                iopr1  =  0 (list loading of species)
+                iopr2  =  0 (list reactions and log k values)
+                iopr3  =  0 (aqueous species print order control)
+                iopr4  =  0 (aqueous species print cut-off control)
+                iopr5  =  0 (mass balance percentages print control)
+                iopr6  =  0 (mean ionic act coeff print control)
+                iopr7  =  1 (mineral affinity print control)
+                iopr8  =  0 (ion size and hydr. no. print control)
+                iopr9  =  0 (pitzer coefficients tabulation)
+                iopr10 =  0 (print concbs array)
+                iopr11 =  0 (not used)
+                iopr12 =  0 (not used)
+                iopr13 =  0 (not used)
+                iopr14 =  0 (not used)
+                iopr15 =  0 (not used)
+                iopr16 =  0 (not used)
+                iopr17 =  0 (not used)
+                iopr18 =  0 (not used)
+                iopr19 =  0 (not used)
+                iopr20 =  0 (not used)
+
+
+                     iodb1  =  0 (print info. messages switch)
+                     iodb2  =  0 (print pre-newton-raphson optimizations switch)
+                     iodb3  =  0 (request iteration variables to kill)
+                     iodb4  =  0 (print newton-raphson iterations switch)
+                     iodb5  =  0 (list stoichiometric equivalences)
+                     iodb6  =  0 (controls iodb5 level of detail)
+                     iodb7  =  0 (write reactions on file rlist switch)
+                     iodb8  =  0 (not used)
+                     iodb9  =  0 (not used)
+                     iodb10 =  0 (not used)
+
+
+      the default redox state is constrained by log fo2 =      -0.7000 (log bars)
+
+
+                solution density =  1.00000 g/ml
+
+                total dissolved salts =       0.00 mg/kg solution
+                total dissolved salts =       0.00 mg/l
+
+
+           tolbt  =  0.10000E-05 (convergence tolerance on residual functions)
+           toldl  =  0.10000E-05 (convergence tolerance on correction terms)
+           tolsat =  0.50000E+00 (phase saturation tolerance, does not affect
+                                  convergence)
+
+
+
+                                    ----- input constraints -----
+
+     species          csp       jflag  type of input      controlling phase
+
+   NA+                         0.10770E+05    2   tot conc, mg/l                                     
+   CL-                         0.19354E+05    2   tot conc, mg/l                                     
+   H+                         -0.84000E+01   16   log activity                                       
+   K+                          0.39900E+03    2   tot conc, mg/l                                     
+   MG++                        0.12900E+04    2   tot conc, mg/l                                     
+   CA++                        0.41200E+03    2   tot conc, mg/l                                     
+   CO3--                       0.10000E+00    2   tot conc, mg/l                                     
+   SO4--                       0.27120E+04    2   tot conc, mg/l                                     
+
+
+ the ion that defines equiv. stoich. ionic strength
+   is CL-                     
+
+ electrical balance will be achieved by adjusting
+   the concentration of CO3--                   
+
+
+                     --- inactive aqueous species ---
+
+
+
+
+                                --- modified input constraints ---
+
+     species          csp       jflag  type of input      controlling phase
+
+   NA+                         0.46847E+00    0   tot conc, molal         
+   K+                          0.10205E-01    0   tot conc, molal         
+   CA++                        0.10279E-01    0   tot conc, molal         
+   MG++                        0.53076E-01    0   tot conc, molal         
+   H+                         -0.84000E+01   16   log activity            
+   CO3--                       0.16664E-05    0   tot conc, molal         
+   CL-                         0.54591E+00    0   tot conc, molal         
+   SO4--                       0.28233E-01    0   tot conc, molal         
+   O2(AQ)                      0.00000E+00   27   dependent species       
+   H2(AQ)                      0.00000E+00   27   dependent species       
+   CH4(AQ)                     0.00000E+00   30   eliminated species      
+   CH3OH(AQ)                   0.00000E+00   30   eliminated species      
+   HS-                         0.00000E+00   30   eliminated species      
+   HCO3-                       0.00000E+00   30   eliminated species      
+   CLO4-                       0.00000E+00   30   eliminated species      
+   OH-                         0.00000E+00   30   eliminated species      
+   HCOO-                       0.00000E+00   30   eliminated species      
+   CH3COO-                     0.00000E+00   30   eliminated species      
+   CH3CH2COO-                  0.00000E+00   30   eliminated species      
+   GLYCOLATE                   0.00000E+00   30   eliminated species      
+   LACTATE                     0.00000E+00   30   eliminated species      
+   PENTANOATE                  0.00000E+00   30   eliminated species      
+   PENTANOL                    0.00000E+00   30   eliminated species      
+   CO(AQ)                      0.00000E+00   30   eliminated species      
+   HEXANE(AQ)                  0.00000E+00   30   eliminated species      
+   OCTANE(AQ)                  0.00000E+00   30   eliminated species      
+   DECANE(AQ)                  0.00000E+00   30   eliminated species      
+   GLUTARIC,AQ                 0.00000E+00   30   eliminated species      
+   H-SUCCINATE                 0.00000E+00   30   eliminated species      
+
+
+
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+ * note- optimization ended outside requested limits (arrset)
+
+
+ --- reading the input file ---
+
+ --- no further input found ---
+
+
+ normal exit

@@ -1,0 +1,1080 @@
+
+ EQ3NR, version 3245R110
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+ Supported by EQLIB, version 3245R136
+
+   Copyright (c) 1987 The Regents of the University of California,
+   Lawrence Livermore National Laboratory. All rights reserved.
+
+
+ Run                    
+
+
+
+ --- reading the input file ---
+  Calcite solubility in water                                                    
+                                                                                 
+  Uses JHU datafile                                                              
+                                                                                 
+  Modified to suppress dolomite                                                  
+                                                                                 
+  CO3-- calculated BY USING CHARGE BALANCE                                       
+  O2 fugacity set at atmospheric value                                           
+  CO2 fugacity calculated (near atm.)                                            
+                                                                                 
+ pH calculated for equal Ca & C concentrations                                   
+                                                                                 
+ endit.                                                                          
+       tempc=  0.25000E+02
+         rho=  0.10000E+01    tdspkg=  0.00000E+00     tdspl=  0.00000E+00
+         fep= -0.70000E+00    uredox=                         
+       tolbt=  0.00000E+00     toldl=  0.00000E+00    tolsat=  0.00000E+00
+     itermx=  0
+                 1    2    3    4    5    6    7    8    9   10
+   iopt1-10=     0    0    0    0    0    0    0    0    0    0
+   iopg1-10=     0   -1    0    0    0    0    0    0    0    0
+   iopr1-10=     0    2    0    0    0    0    1    0    0    0
+  iopr11-20=     0    0    0    0    0    0    0    0    0    0
+   iodb1-10=     0    0    0    0    0    0    0    0    0    0
+      uebal= CO3--                   
+     uacion= CL-                     
+      nxmod=  6
+    species= F-APATITE               
+       type=  1              option= -1              xlkmod=  0.00000E+00
+    species= DOLOMITE                
+       type=  1              option= -1              xlkmod=  0.00000E+00
+    species= MAGNESITE               
+       type=  1              option= -1              xlkmod=  0.00000E+00
+    species= ARAGONITE               
+       type=  1              option= -1              xlkmod=  0.00000E+00
+    species= STRONTIANITE            
+       type=  1              option= -1              xlkmod=  0.00000E+00
+    species= DOLOMITE,DISS.          
+       type=  1              option= -1              xlkmod=  0.00000E+00
+ data file master species= NA+                     
+    switch with species=                         
+    jflag=  0   csp=   0.100000000E-05
+ data file master species= CA++                    
+    switch with species=                         
+    jflag= 19   csp=   0.000000000E+00
+            uphas1= CALCITE                    uphas2=                         
+ data file master species= CO3--                   
+    switch with species=                         
+    jflag=  0   csp=   0.270000000E-03
+ data file master species= CL-                     
+    switch with species=                         
+    jflag=  0   csp=   0.100000000E-05
+ data file master species= H+                      
+    switch with species=                         
+    jflag= 16   csp=  -0.990000000E+01
+endit.  
+
+ --- the input file has been successfuly read ---
+
+ --- reading the data1 file ---
+
+ --- the data1 file has been successfully read ---
+ * note- suppress species F-APATITE                was not among
+       the loaded minerals                 (eqlib/supprs)
+
+ * note- suppress species DOLOMITE                 was not among
+       the loaded minerals                 (eqlib/supprs)
+
+ * note- suppress species MAGNESITE                was not among
+       the loaded minerals                 (eqlib/supprs)
+
+ the species ARAGONITE                has been user-suppressed
+
+ * note- suppress species STRONTIANITE             was not among
+       the loaded minerals                 (eqlib/supprs)
+
+ * note- suppress species DOLOMITE,DISS.           was not among
+       the loaded minerals                 (eqlib/supprs)
+
+
+
+
+
+
+
+ eeee   qqq   33333  n   n  rrrr   
+ e     q   q      3  nn  n  r   r  
+ eeee  q   q    33   n n n  rrrr   
+ e     q q q      3  n  nn  r  r   
+ eeee   qqq   3333   n   n  r   r  
+           q                       
+
+
+MODIFIED FOR DEW CALCULATIONS     
+
+
+
+ eq3nr.3245R110
+  supported by eqlib.3245R136
+
+
+  Calcite solubility in water                                                    
+                                                                                 
+  Uses JHU datafile                                                              
+                                                                                 
+  Modified to suppress dolomite                                                  
+                                                                                 
+  CO3-- calculated BY USING CHARGE BALANCE                                       
+  O2 fugacity set at atmospheric value                                           
+  CO2 fugacity calculated (near atm.)                                            
+                                                                                 
+ pH calculated for equal Ca & C concentrations                                   
+                                                                                 
+
+ DATA FILE DATA0.3230U03                                                         
+   1 ATM.-STEAM SATURATION CURVE DATA                                            
+   LAST REVISED SEPT. 1991                                                       
+                                                                                 
+
+   the activity coefficients of aqueous solute species
+ and the activity of water are calculated according to
+ b-dot equation plus others      
+
+
+
+ temperature=  25.00 degrees celsius
+ pressure=    0.0320 bars
+
+
+         30 elements are in the data base
+         70 elements can be loaded into memory
+          6 elements are active in this problem
+
+
+        274 aqueous species are in the data base
+         90 aqueous species were loaded into memory
+        750 aqueous species can be loaded into memory
+         46 aqueous species are active in this problem
+
+        243 aqueous reactions are in the data base
+         59 aqueous reactions were loaded into memory
+        679 aqueous reactions can be loaded into memory
+
+
+             171 minerals are in the data base
+               7 minerals were loaded into memory
+             750 minerals can be loaded into memory
+               6 minerals are active in this problem
+
+              16 solid solutions are in the data base
+              20 solid solutions can be loaded into memory
+
+               8 gases are in the data base
+               5 gases were loaded into memory
+              15 gases can be loaded into memory
+               5 gases are active in this problem
+
+
+
+
+      iopt1  =  0 (redox option switch)
+      iopt2  =  0 (automatic basis switching switch)
+      iopt3  =  0 (interfacing output control switch)
+      iopt4  =  0 (turn-on solid solutions switch)
+      iopt5  =  0 (not used)
+      iopt6  =  0 (conv. test criteria switch)
+      iopt7  =  0 (0/1 3245/post-3245 pickup file)
+      iopt8  =  0 (not used)
+      iopt9  =  0 (not used)
+      iopt10 =  0 (not used)
+
+
+
+           iopg1  =  0 (act. coeff. choice)
+           iopg2  = -1 (ph scale convention switch)
+           iopg3  =  0 (iopg1=3 - 0/1 uelam= on/onplus)
+           iopg4  =  0 (iopg1=3 or 4 - f switch - 0/1 dhoa/dhca)
+           iopg5  =  0 (Activity coeff mode for C)
+           iopg6  =  0 (approx. of j(x) function)
+           iopg7  =  0 (a(H2O)=1 if =0, a(H2O)=X(H2O) if =1)
+           iopg8  =  0 (if =1 then uses high T range 650-1000 C)
+           iopg9  =  0 (position of C in the datafile)
+           iopg10 =  0 (Gamma-gam options)
+
+
+                iopr1  =  0 (list loading of species)
+                iopr2  =  2 (list reactions and log k values)
+                iopr3  =  0 (aqueous species print order control)
+                iopr4  =  0 (aqueous species print cut-off control)
+                iopr5  =  0 (mass balance percentages print control)
+                iopr6  =  0 (mean ionic act coeff print control)
+                iopr7  =  1 (mineral affinity print control)
+                iopr8  =  0 (ion size and hydr. no. print control)
+                iopr9  =  0 (pitzer coefficients tabulation)
+                iopr10 =  0 (print concbs array)
+                iopr11 =  0 (not used)
+                iopr12 =  0 (not used)
+                iopr13 =  0 (not used)
+                iopr14 =  0 (not used)
+                iopr15 =  0 (not used)
+                iopr16 =  0 (not used)
+                iopr17 =  0 (not used)
+                iopr18 =  0 (not used)
+                iopr19 =  0 (not used)
+                iopr20 =  0 (not used)
+
+
+                     iodb1  =  0 (print info. messages switch)
+                     iodb2  =  0 (print pre-newton-raphson optimizations switch)
+                     iodb3  =  0 (request iteration variables to kill)
+                     iodb4  =  0 (print newton-raphson iterations switch)
+                     iodb5  =  0 (list stoichiometric equivalences)
+                     iodb6  =  0 (controls iodb5 level of detail)
+                     iodb7  =  0 (write reactions on file rlist switch)
+                     iodb8  =  0 (not used)
+                     iodb9  =  0 (not used)
+                     iodb10 =  0 (not used)
+
+
+      the default redox state is constrained by log fo2 =      -0.7000 (log bars)
+
+
+                solution density =  1.00000 g/ml
+
+                total dissolved salts =       0.00 mg/kg solution
+                total dissolved salts =       0.00 mg/l
+
+
+           tolbt  =  0.10000E-05 (convergence tolerance on residual functions)
+           toldl  =  0.10000E-05 (convergence tolerance on correction terms)
+           tolsat =  0.50000E+00 (phase saturation tolerance, does not affect
+                                  convergence)
+
+
+
+                                    ----- input constraints -----
+
+     species          csp       jflag  type of input      controlling phase
+
+   NA+                         0.10000E-05    0   tot conc, molal                                    
+   CA++                        0.00000E+00   19   mineral equilibrium        CALCITE                 
+
+                       1.000  CALCITE                 
+                           ==
+                       1.000  CA++                    
+                    +  1.000  CO3--                   
+   CO3--                       0.27000E-03    0   tot conc, molal                                    
+   CL-                         0.10000E-05    0   tot conc, molal                                    
+   H+                         -0.99000E+01   16   log activity                                       
+
+
+ the ion that defines equiv. stoich. ionic strength
+   is CL-                     
+
+ electrical balance will be achieved by adjusting
+   the concentration of CO3--                   
+
+
+                     --- inactive aqueous species ---
+
+
+
+
+                                --- modified input constraints ---
+
+     species          csp       jflag  type of input      controlling phase
+
+   NA+                         0.10000E-05    0   tot conc, molal         
+   CA++                        0.00000E+00   19   mineral equilibrium        CALCITE                 
+
+                       1.000  CALCITE                 
+                           ==
+                       1.000  CA++                    
+                    +  1.000  CO3--                   
+   H+                         -0.99000E+01   16   log activity            
+   CO3--                       0.27000E-03    0   tot conc, molal         
+   CL-                         0.10000E-05    0   tot conc, molal         
+   O2(AQ)                      0.00000E+00   27   dependent species       
+   H2(AQ)                      0.00000E+00   27   dependent species       
+   CH4(AQ)                     0.00000E+00   30   eliminated species      
+   CH3OH(AQ)                   0.00000E+00   30   eliminated species      
+   HCO3-                       0.00000E+00   30   eliminated species      
+   CLO4-                       0.00000E+00   30   eliminated species      
+   OH-                         0.00000E+00   30   eliminated species      
+   HCOO-                       0.00000E+00   30   eliminated species      
+   CH3COO-                     0.00000E+00   30   eliminated species      
+   CH3CH2COO-                  0.00000E+00   30   eliminated species      
+   GLYCOLATE                   0.00000E+00   30   eliminated species      
+   LACTATE                     0.00000E+00   30   eliminated species      
+   PENTANOATE                  0.00000E+00   30   eliminated species      
+   PENTANOL                    0.00000E+00   30   eliminated species      
+   CO(AQ)                      0.00000E+00   30   eliminated species      
+   HEXANE(AQ)                  0.00000E+00   30   eliminated species      
+   OCTANE(AQ)                  0.00000E+00   30   eliminated species      
+   DECANE(AQ)                  0.00000E+00   30   eliminated species      
+   GLUTARIC,AQ                 0.00000E+00   30   eliminated species      
+   H-SUCCINATE                 0.00000E+00   30   eliminated species      
+
+
+
+
+
+ ---listing of species and reactions ---
+
+       temperature=     25.000 degrees celsius
+       pressure=  0.320000E-01 bars
+
+        --- strict basis species ---
+
+                              H2O                     
+                              NA+                     
+                              CA++                    
+                              H+                      
+                              CO3--                   
+                              CL-                     
+
+
+        --- aqueous species dissociation reactions ---
+
+ --------------------------------------------------
+
+                       1.000  O2(AQ)                  
+                           ==
+                       1.000  O2(G)                   
+
+          log k=       2.8980
+
+ --------------------------------------------------
+
+                       2.000  H2(AQ)                  
+                    +  1.000  O2(G)                   
+                           ==
+                       2.000  H2O                     
+
+          log k=      89.3150
+
+ --------------------------------------------------
+
+                       1.000  CH4(AQ)                 
+                    +  2.000  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=     128.0150
+
+ --------------------------------------------------
+
+                       1.000  CH3OH(AQ)               
+                    +  1.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=     103.2280
+
+ --------------------------------------------------
+
+                       1.000  HCO3-                   
+                           ==
+                       1.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=     -10.3290
+
+ --------------------------------------------------
+
+                       1.000  CLO4-                   
+                           ==
+                       1.000  CL-                     
+                    +  2.000  O2(G)                   
+
+          log k=      21.5050
+
+ --------------------------------------------------
+
+                       1.000  OH-                     
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+
+          log k=      13.9950
+
+ --------------------------------------------------
+
+                       1.000  HCOO-                   
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=      31.0270
+
+ --------------------------------------------------
+
+                       1.000  CH3COO-                 
+                    +  2.000  O2(G)                   
+                           ==
+                       3.000  H+                      
+                    +  2.000  CO3--                   
+
+          log k=     120.2940
+
+ --------------------------------------------------
+
+                       1.000  CH3CH2COO-              
+                    +  3.500  O2(G)                   
+                           ==
+                       5.000  H+                      
+                    +  3.000  CO3--                   
+
+          log k=     213.8920
+
+ --------------------------------------------------
+
+                       1.000  GLYCOLATE               
+                    +  1.500  O2(G)                   
+                           ==
+                       3.000  H+                      
+                    +  2.000  CO3--                   
+
+          log k=      96.1800
+
+ --------------------------------------------------
+
+                       1.000  LACTATE                 
+                    +  3.000  O2(G)                   
+                           ==
+                       5.000  H+                      
+                    +  3.000  CO3--                   
+
+          log k=     187.6800
+
+ --------------------------------------------------
+
+                       1.000  PENTANOATE              
+                    +  6.500  O2(G)                   
+                           ==
+                       9.000  H+                      
+                    +  5.000  CO3--                   
+
+          log k=     401.9300
+
+ --------------------------------------------------
+
+                       1.000  PENTANOL                
+                    +  7.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    + 10.000  H+                      
+                    +  5.000  CO3--                   
+
+          log k=     475.8500
+
+ --------------------------------------------------
+
+                       1.000  CO(AQ)                  
+                    +  1.000  H2O                     
+                    +  0.500  O2(G)                   
+                           ==
+                       2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=      29.9220
+
+ --------------------------------------------------
+
+                       0.500  HEXANE(AQ)              
+                    +  4.750  O2(G)                   
+                           ==
+                       0.500  H2O                     
+                    +  6.000  H+                      
+                    +  3.000  CO3--                   
+
+          log k=     299.9000
+
+ --------------------------------------------------
+
+                       0.500  OCTANE(AQ)              
+                    +  6.250  O2(G)                   
+                           ==
+                       0.500  H2O                     
+                    +  8.000  H+                      
+                    +  4.000  CO3--                   
+
+          log k=     393.9200
+
+ --------------------------------------------------
+
+                       0.100  DECANE(AQ)              
+                    +  1.550  O2(G)                   
+                           ==
+                       0.100  H2O                     
+                    +  2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=      97.6500
+
+ --------------------------------------------------
+
+                       1.000  GLUTARIC,AQ             
+                    +  1.000  H2O                     
+                    +  5.000  O2(G)                   
+                           ==
+                      10.000  H+                      
+                    +  5.000  CO3--                   
+
+          log k=     291.3600
+
+ --------------------------------------------------
+
+                       1.000  H-SUCCINATE             
+                    +  1.000  H2O                     
+                    +  3.500  O2(G)                   
+                           ==
+                       7.000  H+                      
+                    +  4.000  CO3--                   
+
+          log k=     202.3200
+
+ --------------------------------------------------
+
+                       1.000  CACL+                   
+                           ==
+                       1.000  CA++                    
+                    +  1.000  CL-                     
+
+          log k=       0.6855
+
+ --------------------------------------------------
+
+                       1.000  CACL2                   
+                           ==
+                       1.000  CA++                    
+                    +  2.000  CL-                     
+
+          log k=       0.6233
+
+ --------------------------------------------------
+
+                       1.000  CACO3                   
+                           ==
+                       1.000  CA++                    
+                    +  1.000  CO3--                   
+
+          log k=      -3.3336
+
+ --------------------------------------------------
+
+                       1.000  CAHCO3+                 
+                           ==
+                       1.000  CA++                    
+                    +  1.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=     -11.4068
+
+ --------------------------------------------------
+
+                       1.000  CA(OH)+                 
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CA++                    
+
+          log k=      12.5955
+
+ --------------------------------------------------
+
+                       1.000  NACL                    
+                           ==
+                       1.000  NA+                     
+                    +  1.000  CL-                     
+
+          log k=       0.7717
+
+ --------------------------------------------------
+
+                       1.000  NAHCO3                  
+                           ==
+                       1.000  NA+                     
+                    +  1.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=     -10.5164
+
+ --------------------------------------------------
+
+                       1.000  NAOH                    
+                    +  1.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  NA+                     
+
+          log k=      14.1877
+
+ --------------------------------------------------
+
+                       1.000  CO2(AQ)                 
+                    +  1.000  H2O                     
+                           ==
+                       2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=     -16.6931
+
+ --------------------------------------------------
+
+                       1.000  HCL                     
+                           ==
+                       1.000  H+                      
+                    +  1.000  CL-                     
+
+          log k=       0.6984
+
+ --------------------------------------------------
+
+                       1.000  CH3CH2COOH              
+                    +  3.500  O2(G)                   
+                           ==
+                       6.000  H+                      
+                    +  3.000  CO3--                   
+
+          log k=     209.0058
+
+ --------------------------------------------------
+
+                       1.000  CH3COOH                 
+                    +  2.000  O2(G)                   
+                           ==
+                       4.000  H+                      
+                    +  2.000  CO3--                   
+
+          log k=     115.5313
+
+ --------------------------------------------------
+
+                       1.000  HCOOH                   
+                    +  0.500  O2(G)                   
+                           ==
+                       2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=      27.2655
+
+ --------------------------------------------------
+
+                       1.000  SUCCINIC                
+                    +  1.000  H2O                     
+                    +  3.500  O2(G)                   
+                           ==
+                       8.000  H+                      
+                    +  4.000  CO3--                   
+
+          log k=     198.1052
+
+ --------------------------------------------------
+
+                       1.000  SUCCINATE               
+                    +  1.000  H2O                     
+                    +  3.500  O2(G)                   
+                           ==
+                       6.000  H+                      
+                    +  4.000  CO3--                   
+
+          log k=     207.9592
+
+ --------------------------------------------------
+
+                       1.000  GLYCOLIC                
+                    +  1.500  O2(G)                   
+                           ==
+                       4.000  H+                      
+                    +  2.000  CO3--                   
+
+          log k=      92.3412
+
+ --------------------------------------------------
+
+                       1.000  LACTIC                  
+                    +  3.000  O2(G)                   
+                           ==
+                       6.000  H+                      
+                    +  3.000  CO3--                   
+
+          log k=     183.8110
+
+ --------------------------------------------------
+
+                       1.000  CAAC+                   
+                    +  2.000  O2(G)                   
+                           ==
+                       1.000  CA++                    
+                    +  3.000  H+                      
+                    +  2.000  CO3--                   
+
+          log k=     119.0898
+
+ --------------------------------------------------
+
+                       1.000  NAAC                    
+                    +  2.000  O2(G)                   
+                           ==
+                       1.000  NA+                     
+                    +  3.000  H+                      
+                    +  2.000  CO3--                   
+
+          log k=     120.4612
+
+ --------------------------------------------------
+
+                       1.000  NAPROP                  
+                    +  3.500  O2(G)                   
+                           ==
+                       1.000  NA+                     
+                    +  5.000  H+                      
+                    +  3.000  CO3--                   
+
+          log k=     214.0601
+
+ --------------------------------------------------
+
+        --- mineral dissolution reactions ----
+
+ --------------------------------------------------
+
+                       1.000  LIME                    
+                    +  2.000  H+                      
+                           ==
+                       1.000  H2O                     
+                    +  1.000  CA++                    
+
+          log k=      32.6940
+
+ --------------------------------------------------
+
+                       1.000  PORTLANDITE             
+                    +  2.000  H+                      
+                           ==
+                       2.000  H2O                     
+                    +  1.000  CA++                    
+
+          log k=      22.8020
+
+ --------------------------------------------------
+
+                       1.000  CALCITE                 
+                           ==
+                       1.000  CA++                    
+                    +  1.000  CO3--                   
+
+          log k=      -8.4800
+
+ --------------------------------------------------
+
+                       1.000  GRAPHITE                
+                    +  1.000  H2O                     
+                    +  1.000  O2(G)                   
+                           ==
+                       2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=      50.9460
+
+ --------------------------------------------------
+
+                       1.000  HALITE                  
+                           ==
+                       1.000  NA+                     
+                    +  1.000  CL-                     
+
+          log k=       1.5850
+
+ --------------------------------------------------
+
+                       0.100  DECANE(L)               
+                    +  1.550  O2(G)                   
+                           ==
+                       0.100  H2O                     
+                    +  2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=      96.9600
+
+ --------------------------------------------------
+
+        --- gas dissolution reactions ---
+
+ --------------------------------------------------
+
+                       1.000  CO2(G)                  
+                    +  1.000  H2O                     
+                           ==
+                       2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=     -18.1430
+
+ --------------------------------------------------
+
+                       1.000  O2(G)                   
+                           ==
+                       1.000  O2(G)                   
+
+          log k=       0.0000
+
+ --------------------------------------------------
+
+                       1.000  CH4(G)                  
+                    +  2.000  O2(G)                   
+                           ==
+                       1.000  H2O                     
+                    +  2.000  H+                      
+                    +  1.000  CO3--                   
+
+          log k=     125.1660
+
+ --------------------------------------------------
+
+                       1.000  H2(G)                   
+                    +  0.500  O2(G)                   
+                           ==
+                       1.000  H2O                     
+
+          log k=      41.5530
+
+ --------------------------------------------------
+
+                       1.000  STEAM                   
+                           ==
+                       1.000  H2O                     
+
+          log k=       1.5057
+
+ --------------------------------------------------
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+      this run may crash because of poor choice of input constraints
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+
+ --- CA++         has a required concentration near          NaN molal ---
+
+ --- O2(AQ)       has a required concentration near          NaN molal ---
+
+ --- H2(AQ)       has a required concentration near          NaN molal ---
+
+ --- reconsider your choice of input constraints ---
+ * note- optimization ended outside requested limits (arrset)
+
+
+ --- reading the input file ---
+
+ --- no further input found ---
+
+
+ normal exit

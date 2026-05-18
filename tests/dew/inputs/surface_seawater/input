@@ -1,0 +1,51 @@
+
+Surface seawater
+        
+
+ Suppress goethite as an example
+
+ Carbonate ion is used for charge balance
+ 
+
+endit.                                                                          
+     tempc=          25.                                                        
+       rho=          1.0    tdspkg=           0.     tdspl=           0.        
+       fep=         -0.7    uredox=                                             
+     tolbt=           0.     toldl=           0.    tolsat=           0.        
+    itermx=  0                                                                  
+*               1    2    3    4    5    6    7    8    9  10                   
+  iopt1-10=     0    0    0    0    0    0    0    0    0   0                   
+  iopg1-10=     0   -1    0    0    0    0    0    0    0   0                   
+  iopr1-10=     0    0    0    0    0    0    1         0                       
+ iopr11-20=     0    0    0    0    0    0    0                                 
+  iodb1-10=     0    0    0    0    0    0    0                                 
+     uebal= CO3--  
+    uacion= CL-
+     nxmod=  1
+   SPECIES= GOETHITE
+      TYPE=  1              OPTION= -1             XLKMOD=  0.0
+data file master species= NA+                                                   
+   switch with species=                                                         
+   jflag=  2   csp= 10770.0                                                     
+data file master species= CL-                                                   
+   switch with species=                                                         
+   jflag=  2   csp= 19354.0
+data file master species= H+                                                    
+   switch with species=                                                         
+   jflag= 16   csp= -8.4
+data file master species= K+                                                   
+   switch with species=                                                         
+   jflag=  2   csp= 399.0                                                       
+data file master species= MG++                                                   
+   switch with species=                                                         
+   jflag=  2   csp= 1290.0                                                      
+data file master species= CA++                                                   
+   switch with species=                                                         
+   jflag=  2   csp= 412.0                                                      
+data file master species= CO3--
+   switch with species=                                                     
+   jflag=  2   csp= 0.1
+data file master species= SO4--
+   switch with species=                                                        
+   jflag=  2   csp= 2712.0
+endit.

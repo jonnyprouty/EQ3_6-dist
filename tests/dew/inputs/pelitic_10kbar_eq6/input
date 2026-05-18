@@ -1,0 +1,171 @@
+This run calculates the reaction of a pelitic eclogitic fluid with
+a spinel lherzolite consisting of
+ 
+Olivine(ss)   10.0 moles
+Cpx(ss)       10.0 moles
+Opx(ss)       10.0 moles
+Magnetite      0.010 moles
+Spinel         0.10 moles  
+                             
+
+All reacting with relative rates equal to 1.0
+
+TITRATION system at 550 C & 10.0 kb
+
+2025 data file
+
+
+
+The bottom half of this input file is the pickup file produced by
+eq3 for the politic eclogitic fluid   
+     
+endit.
+    nmodl1=  1              nmodl2=  0
+    tempc0=         550.     jtemp=  0
+       tk1=           0.       tk2=           0.       tk3=           0.
+    zistrt=          0.0     zimax= 10.0  
+     tstrt=           0.    timemx=           0.
+    kstpmx=         1000     cplim=           0.
+     dzipr=       1.e+38    dzprlg=          0.5    ksppmx= 10000
+    dzplot=       1.e+38    dzpllg=       10000.    ksplmx= 10000
+     ifile= 60
+  iopt1-10=     0    0    0    2    1    0    0    0    0    0
+     11-20=     0    0
+  iopr1-10=     0    0    1    0    1    1    0    1    0    0
+     11-20=     1    0
+  iodb1-10=     0    0    0    0    0    0    0    0    0    0
+     11-20=     0    0    0
+*  nxopt = number of subset selection options for suppressing minerals.
+*  nxopex = number of exceptions.
+     nxopt=  0
+*  nffg = number of gas fugacities to be fixed
+      NFFG=  0
+*   SPECIES= CO2(G)           MOFFG=  1.0            XLKFFG=  -3.5
+*   SPECIES= O2(G)            MOFFG=  1.0            XLKFFG=  -0.7
+*  nrct = number of reactants
+      nrct=  5
+*--------------------------------------------------------------------
+  reactant= OLIVINE(SS)
+     jcode= 1                jreac=  0
+      morr=     10.0          modr=           0.
+   FORSTERITE                 0.93
+   FAYALITE                   0.07
+   endit.
+       nsk=  0                  sk=           0.        fk=           0.
+       nrk=  1                nrpk=  0
+       rk1=      1.0           rk2=           0.       rk3=           0.
+* ----------------------------------------------------------------
+  reactant= CLINOPYROXENE(SS)
+     jcode= 1                jreac=  0
+      morr=     10.0          modr=           0.
+   DIOPSIDE                   0.85
+   HEDENBERGITE               0.10
+   JADEITE                    0.05
+   endit.
+       nsk=  0                  sk=           0.        fk=           0.
+       nrk=  1                nrpk=  0
+       rk1=      1.0           rk2=           0.       rk3=           0.
+* ----------------------------------------------------------------
+  reactant= ORTHOPYROXENE(SS)
+     jcode= 1                jreac=  0
+      morr=     10.0          modr=           0.
+   ENSTATITE_OR               0.90
+   FERROSILITE                0.10
+   endit.
+       nsk=  0                  sk=           0.        fk=           0.
+       nrk=  1                nrpk=  0
+       rk1=      1.0           rk2=           0.       rk3=           0.
+* ----------------------------------------------------------------
+  reactant= MAGNETITE
+     jcode= 0                jreac=  0
+      morr=    0.010          modr=           0.
+       nsk=  0                  sk=           0.        fk=           0.
+       nrk=  1                nrpk=  0
+       rk1=      1.0           rk2=           0.       rk3=           0.
+* ----------------------------------------------------------------
+  reactant= SPINEL
+     jcode= 0                jreac=  0
+      morr=    0.1            modr=           0.
+       nsk=  0                  sk=           0.        fk=           0.
+       nrk=  1                nrpk=  0
+       rk1=      1.0           rk2=           0.       rk3=           0.
+* ----------------------------------------------------------------
+*
+*           normally, take the defaults for parameters in this block
+*                       by entering zeros or blanks
+*
+    dlzidp=           0.
+     tolbt=       1.e-10     toldl=       1.e-10      tolx=           0.
+    tolsat=           0.    tolsst=           0.
+    screw1=           0.    screw2=           0.    screw3=           0.
+    screw4=           0.    screw5=           0.    screw6=           0.
+    zklogu=           0.    zklogl=           0.
+    dlzmx1=           0.    dlzmx2=           0.
+    itermx=  0              ntrymx=  0
+    npslmx=  0              nsslmx=  0
+*
+*--------------------------------------------------------------------
+* pickup file written by eq3nr.3245R110
+*  supported by eqlib.3245R136
+550 C & 10.0 kbar                                                               
+                                                                                
+Fluid in equilibrium with pelitic rock:                                         
+                                                                                
+Garnet & Cpx compositions based on Viete et al.                                 
+Sample CA-13-01                                                                 
+Garnet(ss):      Pyrope:    0.12                                                
+                 Almandine: 0.63                                                
+                 Grossular: 0.25                                                
+                                                                                
+Clinopyroxene: Diopside     0.32                                                
+               Hedenbergite 0.26                                                
+               Jadeite      0.42                                                
+Quartz                                                                          
+                                                                                
+                                                                                
+QFM is -17.3                                                                    
+                                                                                
+log fO2 at QFM - 1.0                                                            
+                                                                                
+                                                                                
+                                                                                
+endit.
+    uacion= CL-         
+    tempci=   .55000E+03
+     nxmod=  3
+   species= CRISTOBALITE-ALPHA
+      type=  1              option= -1              xlkmod=   .00000E+00
+   species= CA(OH)+           
+      type=  0              option= -1              xlkmod=   .00000E+00
+   species= H2CO3(AQ)         
+      type=  0              option= -1              xlkmod=   .00000E+00
+     iopg1=  0               iopg2= -1               iopg3=  0
+     iopg4=  0               iopg5=  0               iopg6=  0
+     iopg7=  1               iopg8=  0               iopg9=  8
+    iopg10=  2
+       kct= 11                 ksq= 12                 kmt= 12
+       kxt= 12                kdim= 12                kprs=  0
+   O                   .601560010108616E+02
+   H                   .113255684723682E+03
+   AL                  .294976520582776E-01
+   CA                  .819708279763397E-02
+   C                   .100000001826159E+01
+   SI                  .616996990465042E+00
+   CL                  .500000001156296E+00
+   FE                  .872255852942828E-02
+   K                   .240375965515157E-01
+   MG                  .344174122289689E+00
+   NA                  .276587716869247E+00
+   electr              .196692878651206E-07
+   H2O                H2O                     .174436091209183E+01
+   H+                 H+                     -.512677675219825E+01
+   AL+3               AL+3                   -.172923302336170E+02
+   CA+2               CA+2                   -.444561186340475E+01
+   CO2(AQ)            CO2(AQ)                -.283416186006869E+00
+   H4SIO4(AQ)         H4SIO4(AQ)             -.814187235488346E+00
+   CL-                CL-                    -.321917535638737E+00
+   FE+2               FE+2                   -.748856836612050E+01
+   K+                 K+                     -.166342372228890E+01
+   MG+2               MG+2                   -.602549074714542E+01
+   NA+                NA+                    -.736902743973004E+00
+   O2(G)              O2(G)                  -.183000000000000E+02

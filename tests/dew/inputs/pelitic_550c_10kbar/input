@@ -1,0 +1,104 @@
+550 C & 10.0 kbar
+
+Fluid in equilibrium with pelitic rock:
+
+Garnet & Cpx compositions based on Viete et al. 
+Sample CA-13-01
+Garnet(ss):      Pyrope:    0.12
+                 Almandine: 0.63
+                 Grossular: 0.25
+
+Clinopyroxene: Diopside     0.32
+               Hedenbergite 0.26
+               Jadeite      0.42
+Quartz
+   
+
+QFM is -17.3
+
+log fO2 at QFM - 1.0   
+ 
+
+
+endit.                                                                          
+     tempc=         550.                                                        
+       rho=      1.02336    tdspkg=           0.     tdspl=           0.        
+       fep=        -18.3    uredox=                                             
+     tolbt=           0.     toldl=           0.    tolsat=           0.        
+    itermx=  0                                                                  
+*               1    2    3    4    5    6    7    8    9  10                   
+  iopt1-10=     0    0    0    2    0    0    0    0    0   0                   
+  iopg1-10=     0   -1    0    0    0    0    1    0    8   2                   
+  iopr1-10=     0    2    0    0    0    0    1         0                       
+ iopr11-20=     0    0    0    0    0    0    0                                 
+  iodb1-10=     0    0    0    0    0    0    0                                 
+     uebal= NA+         
+    uacion= CL-
+     nxmod=  3
+   SPECIES= CRISTOBALITE-ALPHA
+      TYPE=  1              OPTION= -1              XLKMOD=
+   SPECIES= CA(OH)+
+      TYPE=  0              OPTION= -1              XLKMOD=
+   SPECIES= H2CO3(AQ)
+      TYPE=  0              OPTION= -1              XLKMOD=
+data file master species= NA+                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 0.5                                                       
+data file master species= CL-                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 0.5                                                       
+data file master species= K+                                                   
+   switch with species=                                                         
+   jflag= 20   csp=
+   uphase= KFELDSPAR(SS)           uphase=    KFELDSPAR
+data file master species= CA+2                                                   
+   switch with species=                                                         
+   jflag= 20   csp=
+   uphase= GARNET(SS)              uphase=    GROSSULAR
+data file master species= MG+2                                                   
+   switch with species=                                                         
+   jflag= 20   csp=
+   uphase= GARNET(SS)              uphase=    PYROPE
+data file master species= FE+2                                                   
+   switch with species=                                                         
+   jflag= 20   csp=
+   uphase= GARNET(SS)              uphase=    ALMANDINE
+data file master species= AL+3                                                   
+   switch with species=                                                         
+   jflag= 19   csp=
+   uphase= PARAGONITE
+data file master species= CO2(AQ)
+   switch with species=                                       
+   jflag=  0   csp= 1.0
+data file master species= H+                                                   
+   switch with species=                                                       
+   jflag= 20   csp=
+   uphase= PLAGIOCLASE(SS)         uphase=    ALBITE
+data file master species= H4SIO4(AQ)                                                   
+   switch with species=                                                         
+   jflag= 19   csp= 
+   uphase= QUARTZ_ALPHA
+endit.
+   GARNET(SS)                          
+      PYROPE                         0.12
+      ALMANDINE                      0.63
+      GROSSULAR                      0.25
+      endit.
+   CLINOPYROXENE(SS)                          
+      DIOPSIDE                       0.32
+      HEDENBERGITE                   0.26
+      JADEITE                        0.42
+      endit.
+   PLAGIOCLASE(SS)                          
+      ALBITE                         0.88
+      ANORTHITE                      0.12
+      endit.
+   KFELDSPAR(SS)                          
+      KFELDSPAR                      0.31
+      ALBITE                         0.69
+      endit.
+   BIOTITE(SS)                          
+      PHLOGOPITE                     0.51
+      ANNITE                         0.49
+      endit.
+   endit.

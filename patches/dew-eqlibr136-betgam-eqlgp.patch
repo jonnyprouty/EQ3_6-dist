@@ -1,0 +1,31 @@
+# Fix missing eqlgp.h include in subroutine betgam (eqlibr136.f).
+#
+# betgam references iopg1 (the activity coefficient model selector, stored in
+# COMMON /eqlgp/) but does not include "eqlgp.h".  Without this include, iopg1
+# resolves to an implicit-INTEGER local variable that is never initialised,
+# so its value is whatever happens to be on the stack — typically harmless, but
+# occasionally large enough to satisfy the "iopg1 .ge. 101" sanity check, which
+# aborts the run with:
+#
+#   * error- entry to betgam with iopg1 = ***** (eqlib/betgam)
+#
+# The original code included the monolithic 'eqlibr136.inc' file (see the
+# commented-out line immediately above the include block), which brought in
+# eqlgp.h transitively.  The DEW refactoring split that file into individual
+# includes but missed eqlgp.h for betgam.
+#
+# All other subroutines in eqlibr136.f that reference iopg1 either receive it
+# as an explicit subroutine argument or already include eqlgp.h.
+#
+# Intended for upstream submission to gitlab.com/ENKI-portal/SUPCRTandEQs.
+--- a/upstream-dew/eqlibr136.f
++++ b/upstream-dew/eqlibr136.f
+@@ -825,6 +825,8 @@
+ C  ************************************************                             
+       include "implicit.h"                                                
+ c                                                                               
++      include "eqlgp.h"                                                   
++c                                                                               
+       include "eqlun.h"                                                   
+ c                                                                               
+       character*24 uspec(*), ubgamx                                             

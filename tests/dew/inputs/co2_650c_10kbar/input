@@ -1,0 +1,46 @@
+650 C & 10.0 kbar, January, 2025
+
+Test CO2 with dilute NaCl fluid in equilibrium with:
+Nothing!
+
+QFM is -17.3
+log fO2 at QFM + 5.0
+
+New CO2 Jan. 17th, 2025 (iopg5 = 0)
+a(H2O) = X(H2O) (iopg7 = 1)
+
+Suppressed H2CO3(aq)ss
+  
+ 
+
+
+endit.                                                                          
+     tempc=         650.                                                        
+       rho=      1.02336    tdspkg=           0.     tdspl=           0.        
+       fep=        -12.3    uredox=                                             
+     tolbt=           0.     toldl=           0.    tolsat=           0.        
+    itermx=  0                                                                  
+*               1    2    3    4    5    6    7    8    9  10                   
+  iopt1-10=     0    0    0    0    0    0    0    0    0   0                   
+  iopg1-10=     0   -1    0    0    0    0    1    0    8   2                   
+  iopr1-10=     0    2    0    0    0    0    1         0                       
+ iopr11-20=     0    0    0    0    0    0    0                                 
+  iodb1-10=     0    0    0    0    0    0    0                                 
+     uebal= H+         
+    uacion= CL-
+     nxmod=  1
+   SPECIES= H2CO3(AQ)
+      TYPE=  0              OPTION= -1              XLKMOD=
+data file master species= NA+                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 0.00001                                                       
+data file master species= CL-                                                  
+   switch with species=                                                         
+   jflag=  0   csp= 0.00001                                                       
+data file master species= CO2(AQ)
+   switch with species=                                       
+   jflag=  0   csp= 55.51
+data file master species= H+                                                   
+   switch with species=                                                       
+   jflag= 16   csp= -5.0
+endit.

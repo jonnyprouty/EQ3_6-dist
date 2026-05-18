@@ -127,7 +127,7 @@ only. The native `bin-dew/` executables cover all direct EQ3/6 DEW use cases wit
 - [x] Add `upstream-dew/` submodule and `make build-dew` for native DEW variant build
 - [x] Add `make patch-dew` precompile hook (auto-applies `patches/dew-*.patch`)
 - [x] Add BATS smoke tests for DEW variant (`tests/cases/dew/smoke/smoke_dew.bats`)
-- [ ] Add BATS test cases for DEW calculations with actual EQ3 input/output pairs
+- [x] Add BATS test cases for DEW calculations with actual EQ3 input/output pairs
 - [ ] Document pyDEW container as optional dependency in README
 - [x] Package DEW variant (RPM/deb/Homebrew for `eq3-6-dew`) — includes DATA0 and sprons93 in `/usr/share/eq3-6-dew/` (or Homebrew's `share/eq3-6-dew/`)
 

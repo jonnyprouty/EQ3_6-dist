@@ -1,0 +1,137 @@
+NEW JHU 2 KB DATAFILE: MAY, 1993
+
+
+  This run calculates the reaction of MOR WATER with
+ 
+   CLINOCHLORE   1.0 MOLES 
+   PYRRHOTITE    0.01 MOLES (RATE 0.01)
+   MUSCOVITE     1.0 MOLES (RATE 0.03)
+
+                              
+TITRATION system at 350 C.
+
+
+
+
+  The bottom half of this input file is the pickup file produced by
+eq3nr using the input file MOR produced in MAY, 1993
+     
+     
+endit.
+    nmodl1=  1              nmodl2=  0
+    tempc0=         350.     jtemp=  0
+       tk1=           0.       tk2=           0.       tk3=           0.
+    zistrt=          0.0     zimax=    0.0000001  
+     tstrt=           0.    timemx=           0.
+    kstpmx=         1000     cplim=           0.
+     dzipr=       1.e+38    dzprlg=          0.5    ksppmx= 10000
+    dzplot=       1.e+38    dzpllg=       10000.    ksplmx= 10000
+     ifile= 60
+  iopt1-10=     0    0    0    0    0    0    0    0    0    0
+     11-20=     0    0
+  iopr1-10=     0    0    0    0    1    0    0    1    0    0
+     11-20=     0    0
+  iodb1-10=     0    0    0    0    0    0    0    0    0    0
+     11-20=     0    0    0
+*  nxopt = number of subset selection options for suppressing minerals.
+*  nxopex = number of exceptions.
+     nxopt=  0
+*  nffg = number of gas fugacities to be fixed
+      NFFG=  0
+*   SPECIES= CO2(G)           MOFFG=  1.0            XLKFFG=  -3.5
+*   SPECIES= O2(G)            MOFFG=  1.0            XLKFFG=  -0.7
+*  nrct = number of reactants
+      nrct=  3
+*--------------------------------------------------------------------
+  reactant= PYRRHOTITE
+     jcode= 0                jreac=  0
+      morr=      1.0E-02      modr=           0.
+       nsk=  0                  sk=           0.        fk=           0.
+       nrk=  1                nrpk=  0
+       rk1=      1.0E-02       rk2=           0.       rk3=           0.
+  reactant= CLINOCHLORE
+     jcode= 0                jreac=  0
+      morr=          1.0      modr=           0.
+       nsk=  0                  sk=           0.        fk=           0.
+       nrk=  1                nrpk=  0
+       rk1=          1.0       rk2=           0.       rk3=           0.
+  reactant= QUARTZ
+     jcode= 0                jreac=  0
+      morr=          1.0      modr=           0.
+       nsk=  0                  sk=           0.        fk=           0.
+       nrk=  1                nrpk=  0
+       rk1=          1.0       rk2=           0.       rk3=           0.
+* ----------------------------------------------------------------
+*
+*           normally, take the defaults for parameters in this block
+*                       by entering zeros or blanks
+*
+    dlzidp=           0.
+     tolbt=       1.e-10     toldl=       1.e-10      tolx=           0.
+    tolsat=           0.    tolsst=           0.
+    screw1=           0.    screw2=           0.    screw3=           0.
+    screw4=           0.    screw5=           0.    screw6=           0.
+    zklogu=           0.    zklogl=           0.
+    dlzmx1=           0.    dlzmx2=           0.
+    itermx=  0              ntrymx=  0
+    npslmx=  0              nsslmx=  0
+*
+*--------------------------------------------------------------------
+* pickup file written by eq3nr.R110
+*  supported by eqlib.3245R136
+    MID-OCEAN RIDGE HYDROTHERMAL FLUIDS                                         
+                                                                                
+        pH = 4.7                                                                
+        logfO2 =  -30                                                           
+                                                                                
+                                                                                
+        Uses May, 1993 JHU datafile                                             
+                                                                                
+                                                                                
+                                                                                
+endit.
+    uacion= CL-         
+    tempci=   .35000E+03
+     nxmod=  1
+   species= FECL2             
+      type=  0              option=  1              xlkmod=   .00000E+00
+     iopg1=  0               iopg2= -1               iopg3=  0
+     iopg4=  0               iopg5=  1               iopg6=  0
+     iopg7=  0               iopg8=  0               iopg9=  0
+    iopg10=  0
+       kct= 16                 ksq= 17                 kmt= 17
+       kxt= 17                kdim= 17                kprs=  0
+   O                   .555539249135419E+02
+   NA                  .430017373381608E+00
+   K                   .248604171705070E-01
+   CA                  .215069877583099E-01
+   MG                  .987451225799642E-04
+   AL                  .407686193274029E-05
+   SI                  .159941955826224E-01
+   ZN                  .110125429983335E-03
+   BA                  .946624998732634E-04
+   H                   .111023511000214E+03
+   C                   .661565258142792E-02
+   CL                  .488957237258014E+00
+   S                   .230070302066031E-02
+   MN                  .609778349401968E-03
+   FE                  .179955968972148E-02
+   CU                  .149498008351789E-04
+   electr              .143937482492311E-01
+   H2O                H2O                     .174436091209183E+01
+   NA+                NA+                    -.528416323166749E+00
+   K+                 K+                     -.169851312225154E+01
+   CA++               CA++                   -.221323256007240E+01
+   MG++               MG++                   -.509821212135359E+01
+   AL+++              AL+++                  -.157482451962909E+02
+   SIO2(AQ)           SIO2(AQ)               -.179604125348143E+01
+   ZN++               ZN++                   -.905213687489924E+01
+   BA++               BA++                   -.512587474377621E+01
+   H+                 H+                     -.454812585988131E+01
+   CO2(AQ)            CO3--                  -.218144455937116E+01
+   CL-                CL-                    -.488851953359396E+00
+   H2S(AQ)            SO4--                  -.264106955990582E+01
+   MN++               MN++                   -.585127416820321E+01
+   FE++               FE++                   -.455232585998420E+01
+   CU+                CU+                    -.929275374119144E+01
+   O2(G)              O2(G)                  -.300000000000000E+02

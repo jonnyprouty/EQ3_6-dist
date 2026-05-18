@@ -204,3 +204,77 @@ runs automatically as part of `make test`.
 
 `tests/cases/dew/smoke/smoke_dew.bats` checks that the DEW variant binaries (`bin-dew/`)
 exist and produce expected version identifiers. Run via `make test-dew`.
+
+---
+
+## DEW workshop tests
+
+`tests/cases/dew/workshop/` contains 8 functional tests that run actual EQ3/6 DEW
+calculations from the DEW community workshop materials and compare against committed
+reference outputs.
+
+```
+make extract-dew-workshop   # compile data caches + stage inputs (one-time setup)
+make test-dew-workshop      # run 8 workshop cases
+make test-dew               # smoke + workshop
+```
+
+### Datasets and cases
+
+Three DATA0 databases are compiled at setup time into `tests/.dew_data_cache/`:
+
+| Dataset | Source | Conditions |
+|---|---|---|
+| `psat` | `DEW/psat_data0___examples_from_enki.zip` | Surface to low P-T |
+| `10kbar` | `DEW/10_kbar_300-650c.zip` | 300–650°C, 10 kbar |
+| `upstream` | `upstream-dew/EQPT/DATA0` | Canonical DEW upstream example |
+
+| Case | Exe | Dataset | Condition | Normal exit? |
+|---|---|---|---|---|
+| `surface_seawater` | eq3 | psat | 25°C, psat | No (arrsim convergence failure in DEW R110) |
+| `calcite_25c` | eq3 | psat | 25°C, psat | Yes |
+| `calcite_solid_soln` | eq3 | psat | 25°C, psat | No (arrsim) |
+| `co2_h2o` | eq3 | psat | 25°C, psat | Yes |
+| `co2_650c_10kbar` | eq3 | 10kbar | 650°C, 10 kbar | Yes |
+| `pelitic_550c_10kbar` | eq3 | 10kbar | 550°C, 10 kbar | Yes |
+| `pelitic_10kbar_eq6` | eq6 | 10kbar | 650°C, 10 kbar | Yes (R100 "average value of delzi") |
+| `mor_hydrothermal` | eq6 | upstream | 350°C, MOR | Yes (R100 "average value of delzi") |
+
+### Reference outputs and reproducibility
+
+Reference outputs live in `tests/dew/expected/linux/`. A `mac/` directory would hold
+macOS references if they diverge; currently only `linux/` exists and the `assert_dew_output_matches_ref`
+helper falls back to `linux/` on any non-macOS platform.
+
+To regenerate references for the current platform:
+```bash
+make extract-dew-workshop   # rebuild data caches (required first)
+make regen-dew-refs         # writes to tests/dew/expected/<platform>/
+# commit the results
+```
+
+### Why the DEW binaries needed initialization flags
+
+The DEW R110/R100 source (from `upstream-dew/`, branch `DEW_activities`) contains
+numerous uninitialized Fortran variables that cause non-deterministic output across
+process invocations.  Three gfortran flags are applied to all DEW executables to
+eliminate this non-determinism:
+
+- **`-finit-character=32`** — initializes CHARACTER variables to spaces.  Without
+  this, `eqpt` writes heap garbage into CHARACTER fields of the binary data1/data2/data3
+  files, and `eq3`/`eq6` use uninitialized CHARACTER variables in species-name
+  comparisons that alter convergence paths.
+
+- **`-finit-real=zero`** — initializes REAL variables to 0.0.  Without this,
+  uninitialized REAL locals perturb the EQ6 ODE predictor-corrector, causing
+  last-digit pH/concentration differences across invocations.
+
+- **`-finit-integer=0`** — initializes INTEGER variables to 0.  Prevents
+  uninitialized INTEGER flags from taking invalid values that could misdirect
+  activity-model or convergence logic.
+
+A companion source patch (`patches/dew-eqlibr136-betgam-eqlgp.patch`) fixes a bug
+in `betgam` where the missing `include "eqlgp.h"` left `iopg1` (the activity
+coefficient model selector) as an uninitialized local variable rather than reading
+it from COMMON `/eqlgp/`.  This bug caused spurious "entry to betgam with iopg1 = *****"
+aborts when the CHARACTER initialization flag changed the stack layout.
