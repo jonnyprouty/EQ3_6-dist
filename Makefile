@@ -709,7 +709,7 @@ extract-testlib: $(EXTRACT_STAMP) $(TESTLIB_ALL_STAMPS)
 regen-testlib-refs: $(TESTLIB_ALL_STAMPS)
 	@bash tools/regen_testlib_refs.sh
 
-test-testlib: $(TARGETS) $(TESTLIB_ALL_STAMPS)
+test-testlib: build $(TESTLIB_ALL_STAMPS)
 	@bats --recursive tests/cases/testlib/
 
 # ============================================================
