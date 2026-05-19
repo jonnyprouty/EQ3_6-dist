@@ -138,6 +138,16 @@ FEDORA_FARM_REPO ?=
 UBUNTU_FARM_REPO ?=
 MAC_FARM_REPO    ?=
 
+# Remote URLs — default to HTTPS so builds work on machines without SSH keys.
+# Override any of these in ssh_build_farm.mk to use SSH on builders that have
+# keys configured (faster, avoids credential helpers):
+#   REPO_URL         = git@github.com:jonnyprouty/EQ3_6-dist.git
+#   UPSTREAM_URL     = git@github.com:llnl/EQ3_6.git
+#   UPSTREAM_DEW_URL = git@gitlab.com:ENKI-portal/SUPCRTandEQs.git
+REPO_URL         ?= https://github.com/jonnyprouty/EQ3_6-dist.git
+UPSTREAM_URL     ?= https://github.com/llnl/EQ3_6
+UPSTREAM_DEW_URL ?= https://gitlab.com/ENKI-portal/SUPCRTandEQs.git
+
 # Short hostname of this machine — decides local vs SSH for each platform.
 CURRENT_HOST := $(shell hostname -s 2>/dev/null || hostname)
 
@@ -173,7 +183,9 @@ build: $(EXTRACT_STAMP)
 # FETCH: initialize / update the upstream git submodule
 # ============================================================
 fetch:
-	git submodule update --init upstream
+	git submodule init upstream
+	git config submodule.upstream.url "$(UPSTREAM_URL)"
+	git submodule update upstream
 
 # Error rule: fires when make tries to build a target that needs the upstream
 # ZIP but the submodule hasn't been initialized yet.
@@ -394,7 +406,9 @@ DEW_TARGETS = \
 
 # ---- DEW fetch -----------------------------------------------
 fetch-dew:
-	git submodule update --init upstream-dew
+	git submodule init upstream-dew
+	git config submodule.upstream-dew.url "$(UPSTREAM_DEW_URL)"
+	git submodule update upstream-dew
 
 # Error rule: fires when make tries to build a DEW target but the submodule
 # hasn't been initialized yet.  The DEW patch stamp depends on this file to
@@ -953,15 +967,15 @@ farm-push:
 	git push
 
 farm-fedora:
-	$(FEDORA_CONNECTION) git -C $(FEDORA_FARM_REPO) pull --ff-only
+	$(FEDORA_CONNECTION) git -C $(FEDORA_FARM_REPO) pull --ff-only $(REPO_URL) main
 	$(FEDORA_CONNECTION) $(MAKE) -C $(FEDORA_FARM_REPO) platform-build PLATFORM_TARGET=fedora
 
 farm-ubuntu:
-	$(UBUNTU_CONNECTION) git -C $(UBUNTU_FARM_REPO) pull --ff-only
+	$(UBUNTU_CONNECTION) git -C $(UBUNTU_FARM_REPO) pull --ff-only $(REPO_URL) main
 	$(UBUNTU_CONNECTION) $(MAKE) -C $(UBUNTU_FARM_REPO) platform-build PLATFORM_TARGET=ubuntu
 
 farm-mac:
-	$(MAC_CONNECTION) git -C $(MAC_FARM_REPO) pull --ff-only
+	$(MAC_CONNECTION) git -C $(MAC_FARM_REPO) pull --ff-only $(REPO_URL) main
 	$(MAC_CONNECTION) $(MAKE) -C $(MAC_FARM_REPO) platform-build PLATFORM_TARGET=mac
 
 # Collect packages from all remote builders into local pkg/dist/.

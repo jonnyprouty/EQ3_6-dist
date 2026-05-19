@@ -226,6 +226,19 @@ test code.  A shared helper function would reduce this boilerplate.
 
 ---
 
+## 6. Makefile git URL defaults
+
+`fetch`, `fetch-dew`, and the `farm-*` targets now use HTTPS URLs by default
+(`REPO_URL`, `UPSTREAM_URL`, `UPSTREAM_DEW_URL` in the Makefile).  Override any of
+them in `ssh_build_farm.mk` to use SSH on builders with keys configured.
+
+- [x] `make fetch` pins `UPSTREAM_URL` (default HTTPS) in `.git/config` before updating
+- [x] `make fetch-dew` pins `UPSTREAM_DEW_URL` (default HTTPS) before updating
+- [x] `farm-fedora/ubuntu/mac` pass `REPO_URL` to `git pull` — no stale remote URL required
+- [x] `ssh_build_farm.mk.example` documents SSH override pattern
+
+---
+
 ## 5. Package build & install verification checklist
 
 Use this as a **manual release rubric** — run through it before tagging a release. It is a

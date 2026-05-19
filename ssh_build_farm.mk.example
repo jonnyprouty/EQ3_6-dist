@@ -8,3 +8,9 @@ MAC_BUILDER       := mac_builder
 FEDORA_FARM_REPO  := ~/EQ36-dist
 UBUNTU_FARM_REPO  := ~/EQ36-dist
 MAC_FARM_REPO     := ~/EQ36-dist
+
+# Remote URLs default to HTTPS in the Makefile so farm builds work on machines
+# without SSH keys.  Uncomment to override with SSH on builders that have keys:
+# REPO_URL         = git@github.com:jonnyprouty/EQ3_6-dist.git
+# UPSTREAM_URL     = git@github.com:llnl/EQ3_6.git
+# UPSTREAM_DEW_URL = git@gitlab.com:ENKI-portal/SUPCRTandEQs.git
