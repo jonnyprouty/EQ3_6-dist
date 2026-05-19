@@ -141,9 +141,6 @@ MAC_FARM_REPO    ?=
 # Remote URLs — default to HTTPS so builds work on machines without SSH keys.
 # Override any of these in ssh_build_farm.mk to use SSH on builders that have
 # keys configured (faster, avoids credential helpers):
-#   REPO_URL         = git@github.com:jonnyprouty/EQ3_6-dist.git
-#   UPSTREAM_URL     = git@github.com:llnl/EQ3_6.git
-#   UPSTREAM_DEW_URL = git@gitlab.com:ENKI-portal/SUPCRTandEQs.git
 REPO_URL         ?= https://github.com/jonnyprouty/EQ3_6-dist.git
 UPSTREAM_URL     ?= https://github.com/llnl/EQ3_6
 UPSTREAM_DEW_URL ?= https://gitlab.com/ENKI-portal/SUPCRTandEQs.git
@@ -498,7 +495,8 @@ test-dew: build-dew
 # ---- DEW clean -----------------------------------------------
 clean-dew:
 	rm -rf $(DEW_OBJ_DIR) $(DEW_BIN_DIR)
-	find upstream-dew -name '*.rej' -delete 2>/dev/null || true
+	git -C upstream-dew checkout -- . 2>/dev/null || true
+	find upstream-dew \( -name '*.rej' -o -name '*.orig' \) -delete 2>/dev/null || true
 
 # ============================================================
 # SYMLINKS: install executables as symlinks in a user-specified directory.
