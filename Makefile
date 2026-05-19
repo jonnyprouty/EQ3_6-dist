@@ -184,11 +184,14 @@ fetch:
 	git config submodule.upstream.url "$(UPSTREAM_URL)"
 	git submodule update upstream
 
-# Error rule: fires when make tries to build a target that needs the upstream
-# ZIP but the submodule hasn't been initialized yet.
-$(UPSTREAM_ZIP):
-	@echo "ERROR: $(UPSTREAM_ZIP) not found. Run: make fetch"
-	@exit 1
+# Auto-fetch rule: fires when make tries to build a target that needs an
+# upstream ZIP but the submodule hasn't been initialized yet.  Both ZIPs live
+# inside upstream/, so initializing the submodule provides both.
+$(UPSTREAM_ZIP) $(TESTLIB_PC_ZIP):
+	@echo "==> upstream submodule not initialized — running make fetch ..."
+	git submodule init upstream
+	git config submodule.upstream.url "$(UPSTREAM_URL)"
+	git submodule update upstream
 
 # ============================================================
 # EXTRACT: unpack source from upstream ZIP, then decompress
@@ -407,12 +410,14 @@ fetch-dew:
 	git config submodule.upstream-dew.url "$(UPSTREAM_DEW_URL)"
 	git submodule update upstream-dew
 
-# Error rule: fires when make tries to build a DEW target but the submodule
-# hasn't been initialized yet.  The DEW patch stamp depends on this file to
-# detect when the submodule is updated to a new commit.
+# Auto-fetch rule: fires when make tries to build a DEW target but the
+# submodule hasn't been initialized yet.  The DEW patch stamp depends on this
+# file to detect when the submodule is updated to a new commit.
 .git/modules/upstream-dew/HEAD:
-	@echo "ERROR: upstream-dew/ submodule not initialized. Run: make fetch-dew"
-	@exit 1
+	@echo "==> upstream-dew submodule not initialized — running make fetch-dew ..."
+	git submodule init upstream-dew
+	git config submodule.upstream-dew.url "$(UPSTREAM_DEW_URL)"
+	git submodule update upstream-dew
 
 # ---- DEW patch precompile hook --------------------------------
 # Applies all patches/dew-*.patch to upstream-dew/ before compilation.
@@ -489,7 +494,7 @@ $(DEW_BIN_DIR)/cprons92: $(DEW_CPRONS_OBJ) | $(DEW_BIN_DIR)
 	$(FC) $(LDFLAGS) -o $@ $^
 
 # ---- DEW test ------------------------------------------------
-test-dew: build-dew
+test-dew: $(DEW_TARGETS) $(DEW_WORKSHOP_STAMPS)
 	@bats --recursive tests/cases/dew/
 
 # ---- DEW clean -----------------------------------------------
@@ -704,7 +709,7 @@ extract-testlib: $(EXTRACT_STAMP) $(TESTLIB_ALL_STAMPS)
 regen-testlib-refs: $(TESTLIB_ALL_STAMPS)
 	@bash tools/regen_testlib_refs.sh
 
-test-testlib: $(TESTLIB_ALL_STAMPS)
+test-testlib: $(TARGETS) $(TESTLIB_ALL_STAMPS)
 	@bats --recursive tests/cases/testlib/
 
 # ============================================================
