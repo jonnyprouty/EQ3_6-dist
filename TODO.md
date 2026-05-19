@@ -239,7 +239,42 @@ them in `ssh_build_farm.mk` to use SSH on builders with keys configured.
 
 ---
 
-## 5. Package build & install verification checklist
+## 5. Cross-platform test diff tool (`tools/farm_test_diff.sh`)
+
+Goal: single script that SSHs to each build machine, runs the full test suite,
+collects raw BATS output, diffs results across platforms, and produces a
+structured summary suitable for updating `TESTS.md`.
+
+The script should:
+- Accept an optional list of platforms (default: all three from `ssh_build_farm.mk`)
+- Run `make test test-testlib test-dew` on each machine in parallel (background SSH jobs)
+- Capture full BATS TAP output per platform into timestamped local files
+  (`/tmp/farm_test_<platform>_<timestamp>.tap` or similar)
+- Diff outcomes across platforms: for each test, report pass/fail per platform
+  in a table (test name | fedora | ubuntu | mac)
+- Highlight cases that pass on some platforms but fail on others (genuine divergences)
+  vs cases that fail everywhere (regressions)
+- For failing cases, show the first differing line between platforms so the
+  nature of the divergence is immediately visible without reading full output files
+- Print a TESTS.md-ready markdown table of platform-divergent cases that can be
+  pasted into the "Known platform divergences" section
+
+Makefile hook:
+- [ ] Add `make farm-test-diff` target that invokes `tools/farm_test_diff.sh`
+- [ ] Add to `.PHONY`
+
+Implementation:
+- [ ] Write `tools/farm_test_diff.sh`
+  - Sources `ssh_build_farm.mk` (or reads the same variables via make) to get
+    `*_CONNECTION` and `*_FARM_REPO` without duplicating connection logic
+  - Uses `bats --tap` output format for machine-readable pass/fail lines
+  - Parallel SSH with `wait` + per-platform log files; prints each platform's
+    result block as it completes
+- [ ] Verify output on all three platforms and confirm TESTS.md table format
+
+---
+
+## 6. Package build & install verification checklist
 
 Use this as a **manual release rubric** — run through it before tagging a release. It is a
 template; do not check items off and commit. The goal is for every box to be checkable at
