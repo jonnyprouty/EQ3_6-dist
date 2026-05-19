@@ -1,16 +1,23 @@
-# Copy this file to ssh_build_farm.mk (gitignored) and fill in your builder hostnames.
-# ssh_build_farm.mk is never committed — hostnames and addresses stay out of git.
-# FARM_REPO must be an absolute path or a tilde path the remote shell can expand.
+# Copy this file to ssh_build_farm.mk (gitignored) and fill in your builder details.
+# ssh_build_farm.mk is never committed — connection strings and paths stay out of git.
+#
+# *_CONNECTION: empty string = run locally; 'ssh host' (or 'ssh host env PATH=...'
+#   for Mac) = run on a remote builder via SSH.
+# *_FARM_REPO: path to the repo on that machine (absolute or tilde-expandable).
 
-FEDORA_BUILDER    := fedora_builder
-UBUNTU_BUILDER    := ubuntu_builder
-MAC_BUILDER       := mac_builder
+FEDORA_CONNECTION :=
 FEDORA_FARM_REPO  := ~/EQ36-dist
+
+UBUNTU_CONNECTION := ssh ubuntu_builder
 UBUNTU_FARM_REPO  := ~/EQ36-dist
+
+MAC_CONNECTION    := ssh mac_builder env PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin
 MAC_FARM_REPO     := ~/EQ36-dist
 
-# Remote URLs default to HTTPS in the Makefile so farm builds work on machines
-# without SSH keys.  Uncomment to override with SSH on builders that have keys:
+# REPO_URL defaults to HTTPS in the Makefile so remote machines can pull without
+# SSH keys.  Uncomment to override with SSH on builders that have keys configured:
 # REPO_URL         = git@github.com:jonnyprouty/EQ3_6-dist.git
+
+# Submodule upstreams: override with SSH if builders have keys for faster fetches.
 # UPSTREAM_URL     = git@github.com:llnl/EQ3_6.git
 # UPSTREAM_DEW_URL = git@gitlab.com:ENKI-portal/SUPCRTandEQs.git

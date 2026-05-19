@@ -129,46 +129,22 @@ NPROC := $(shell nproc 2>/dev/null || sysctl -n hw.logicalcpu 2>/dev/null || ech
 # Copy ssh_build_farm.mk.example to ssh_build_farm.mk and fill in your hostnames.
 -include ssh_build_farm.mk
 
-FEDORA_BUILDER   ?=
-UBUNTU_BUILDER   ?=
-MAC_BUILDER      ?=
-# Per-platform repo paths (tilde expands on the LOCAL shell before SSH sees it,
-# so macOS builders with /Users/<user>/ need MAC_FARM_REPO set explicitly).
-FEDORA_FARM_REPO ?=
-UBUNTU_FARM_REPO ?=
-MAC_FARM_REPO    ?=
+# Per-platform farm connection strings and repo paths.
+# Set in ssh_build_farm.mk.  Empty CONNECTION = run locally; 'ssh host' (or
+# 'ssh host env PATH=...' for Mac) = run on a remote builder.
+# FARM_REPO must be a path the remote shell can expand (absolute or tilde).
+FEDORA_CONNECTION ?=
+UBUNTU_CONNECTION ?=
+MAC_CONNECTION    ?=
+FEDORA_FARM_REPO  ?=
+UBUNTU_FARM_REPO  ?=
+MAC_FARM_REPO     ?=
 
 # Remote URLs — default to HTTPS so builds work on machines without SSH keys.
-# Override any of these in ssh_build_farm.mk to use SSH on builders that have
-# keys configured (faster, avoids credential helpers):
+# Override in ssh_build_farm.mk to use SSH on builders that have keys configured.
 REPO_URL         ?= https://github.com/jonnyprouty/EQ3_6-dist.git
 UPSTREAM_URL     ?= https://github.com/llnl/EQ3_6
 UPSTREAM_DEW_URL ?= https://gitlab.com/ENKI-portal/SUPCRTandEQs.git
-
-# Short hostname of this machine — decides local vs SSH for each platform.
-CURRENT_HOST := $(shell hostname -s 2>/dev/null || hostname)
-
-# *_CONNECTION is empty when running on the designated builder (local execution),
-# or 'ssh <host>' when not (remote execution via SSH).
-# Evaluated at parse time so local/remote routing is decided before any recipe runs.
-ifeq ($(CURRENT_HOST),$(FEDORA_BUILDER))
-FEDORA_CONNECTION :=
-else
-FEDORA_CONNECTION := ssh $(FEDORA_BUILDER)
-endif
-
-ifeq ($(CURRENT_HOST),$(UBUNTU_BUILDER))
-UBUNTU_CONNECTION :=
-else
-UBUNTU_CONNECTION := ssh $(UBUNTU_BUILDER)
-endif
-
-# Mac needs Homebrew's bin dirs in PATH; pass via env so SSH sessions pick them up.
-ifeq ($(CURRENT_HOST),$(MAC_BUILDER))
-MAC_CONNECTION :=
-else
-MAC_CONNECTION := ssh $(MAC_BUILDER) env PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin
-endif
 
 # Two-phase build: extraction first, then a fresh $(MAKE) invocation for
 # compilation.  The sub-make ensures src/ is fully populated before any
@@ -798,11 +774,15 @@ PLATFORM_PKGS_fedora := rpm rpm-dew
 PLATFORM_PKGS_ubuntu := deb deb-dew
 PLATFORM_PKGS_mac    := brew brew-dew
 
+# Pull the latest commit from origin.  Runs on whichever machine make is
+# invoked on, so it reads that machine's ssh_build_farm.mk for REPO_URL.
+sync:
+	git pull --ff-only $(REPO_URL) main
+
 # Entry point invoked on each farm builder (locally or via SSH).
-# Assumes git pull has already been run by the calling farm target.
-# Initializes submodules, then runs the full build + test + packaging pipeline.
+# sync pulls the latest commit; submodules, build, test, and package follow.
 # PLATFORM_TARGET must be set to 'fedora', 'ubuntu', or 'mac'.
-platform-build:
+platform-build: sync
 	$(MAKE) fetch fetch-dew
 	$(MAKE) generate build build-dew test test-dew
 	$(MAKE) $(PLATFORM_PKGS_$(PLATFORM_TARGET))
@@ -970,15 +950,12 @@ farm-push:
 	git push
 
 farm-fedora:
-	$(FEDORA_CONNECTION) git -C $(FEDORA_FARM_REPO) pull --ff-only $(REPO_URL) main
 	$(FEDORA_CONNECTION) $(MAKE) -C $(FEDORA_FARM_REPO) platform-build PLATFORM_TARGET=fedora
 
 farm-ubuntu:
-	$(UBUNTU_CONNECTION) git -C $(UBUNTU_FARM_REPO) pull --ff-only $(REPO_URL) main
 	$(UBUNTU_CONNECTION) $(MAKE) -C $(UBUNTU_FARM_REPO) platform-build PLATFORM_TARGET=ubuntu
 
 farm-mac:
-	$(MAC_CONNECTION) git -C $(MAC_FARM_REPO) pull --ff-only $(REPO_URL) main
 	$(MAC_CONNECTION) $(MAKE) -C $(MAC_FARM_REPO) platform-build PLATFORM_TARGET=mac
 
 # Collect packages from all remote builders into local pkg/dist/.
@@ -987,10 +964,10 @@ farm-mac:
 farm-collect: _farm-check-config
 	mkdir -p pkg/dist
 ifneq ($(FEDORA_CONNECTION),)
-	rsync -a $(FEDORA_BUILDER):$(FEDORA_FARM_REPO)/pkg/dist/ pkg/dist/
+	$(FEDORA_CONNECTION) tar -C $(FEDORA_FARM_REPO)/pkg/dist -cf - . | tar -C pkg/dist -xf -
 endif
 ifneq ($(UBUNTU_CONNECTION),)
-	rsync -a $(UBUNTU_BUILDER):$(UBUNTU_FARM_REPO)/pkg/dist/ pkg/dist/
+	$(UBUNTU_CONNECTION) tar -C $(UBUNTU_FARM_REPO)/pkg/dist -cf - . | tar -C pkg/dist -xf -
 endif
 
 # ============================================================
@@ -1020,7 +997,7 @@ distclean: clean clean-dew
         rpm deb deb-doc brew test clean distclean \
         fetch-dew patch-dew build-dew test-dew clean-dew \
         rpm-dew deb-dew brew-dew \
-        farm _farm-check-config farm-push farm-fedora farm-ubuntu farm-mac farm-collect platform-build \
+        farm _farm-check-config farm-push farm-fedora farm-ubuntu farm-mac farm-collect platform-build sync \
         extract-testlib regen-testlib-refs test-testlib \
         extract-dew-workshop regen-dew-refs test-dew-workshop \
         compare-dew-container regen-container-refs
