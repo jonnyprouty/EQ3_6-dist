@@ -290,31 +290,8 @@ MODIFIED FOR DEW CALCULATIONS
 
 
 
-
- --- O2(AQ)       has a required concentration near          NaN molal ---
-
- --- H2(AQ)       has a required concentration near          NaN molal ---
-      this run may crash because of poor choice of input constraints
-
- --- O2(AQ)       has a required concentration near          NaN molal ---
-
- --- H2(AQ)       has a required concentration near          NaN molal ---
-
- --- reconsider your choice of input constraints ---
-
- --- O2(AQ)       has a required concentration near          NaN molal ---
-
- --- H2(AQ)       has a required concentration near          NaN molal ---
-
- --- reconsider your choice of input constraints ---
-
- --- O2(AQ)       has a required concentration near          NaN molal ---
-
- --- H2(AQ)       has a required concentration near          NaN molal ---
-
- --- reconsider your choice of input constraints ---
- * note- optimization ended outside requested limits (arrset)
-
+ * note- (arrsim) starting estimate is NaN for O2(AQ)                  
+       matrix is near-singular; reconsider constraints (arrset)
 
  --- reading the input file ---
 

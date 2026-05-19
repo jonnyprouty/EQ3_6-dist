@@ -144,10 +144,11 @@ The tests still pass (committed refs capture the failure state).
       `patches/dew-eq3nr110-arrset-nplim.patch`; submitted upstream to
       gitlab.com/ENKI-portal/SUPCRTandEQs. Neither failing case changed output — the NaN
       originates from a singular matrix in `arrsim` itself, not from the pass-count limit.
-- [ ] **Tier 2 (medium)**: Port the v8.0a overflow/NaN guard from `arrsim.f` lines 680–708
-      into the `arrsim` subroutine in `eq3nr110.f`. Replaces silent NaN output with a tiered
-      `ker=1` (warning) / `ker=2` (error) distinction matching v8.0a behavior. Bundle with
-      tier 1 in the same upstream patch.
+- [x] **Tier 2 (medium)**: Add NaN guard to `arrsim` result-loading loop and `ker` check to
+      `arrset` after arrsim returns. Patch at `patches/dew-eq3nr110-arrsim-nan-guard.patch`.
+      Reduces failure output from dozens of repeated NaN lines to one clean
+      "near-singular; reconsider constraints" message. Linux reference outputs for
+      `surface_seawater` and `calcite_solid_soln` updated to reflect new message format.
 - [ ] **Tier 3 (larger effort)**: `surface_seawater` at pe = −8.4 likely needs a direct
       analytical pre-estimate of log[O2(aq)] and log[H2(aq)] from the Nernst equation before
       entering `arrsim`, bypassing the ill-conditioned simultaneous-estimation path for

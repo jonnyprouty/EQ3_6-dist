@@ -1,0 +1,96 @@
+# Add NaN guard to arrsim and ker check to arrset in eq3nr110.f.
+#
+# Background
+# ----------
+# Two DEW workshop cases (surface_seawater, calcite_solid_soln) call
+# arrsim with constraint systems that yield a near-singular matrix.
+# msolvr returns ier=0 (no detected singularity) but produces NaN in
+# the solution vector del(), because the matrix is singular to
+# floating-point precision rather than exactly singular.  Without a NaN
+# check, the value propagates silently into zvclg1() and then into
+# every subsequent activity-coefficient calculation, producing:
+#
+#   --- O2(AQ)   has a required concentration near          NaN molal ---
+#   --- H2(AQ)   has a required concentration near          NaN molal ---
+#   ...
+#   * note- optimization ended outside requested limits (arrset)
+#
+# once per cycle for all nplim passes before arrset gives up.
+#
+# There are two distinct bugs:
+#
+# 1. arrsim does not check del() for NaN before storing into zvclg1().
+#    The existing concentration check (label 735) correctly detects the
+#    downstream NaN via texp(), but by then it has already propagated
+#    into the activity-coefficient calculation.
+#
+# 2. arrset never inspects ker after arrsim returns.  ker is reset to 0
+#    at label 3220 (start of each cycle), so any ker=2 set by arrsim
+#    is discarded.  The pass/cycle loop runs to exhaustion even after a
+#    confirmed singular system.
+#
+# Fix
+# ---
+# Hunk 1 (arrset): after the arrsim call, if ker >= 2 exit arrset
+# immediately rather than continuing the pass/cycle loop.
+#
+# Hunk 2 (arrsim): in the result-loading loop after msolvr, detect NaN
+# in del() before storing to zvclg1().  On detection: set ker=2, emit
+# a single diagnostic naming the offending species, and exit arrsim
+# via go to 999.  This replaces the repeated multi-pass NaN flood with
+# one clear message.
+#
+# Together these changes reduce the failure mode from:
+#   (nplim passes) x (ncylim cycles) x (nspecies) NaN lines
+# to:
+#   one "near-singular" note, one "optimization ended" note, exit
+#
+# The v8.0a arrset.f/arrsim.f handle this differently: they clamp
+# del() to [-100, +2.0] log units before storage, preventing NaN
+# from arising at all.  That approach requires a larger refactor
+# (tier 3); this patch is the minimal defensive fix.
+#
+# Intended for upstream submission to gitlab.com/ENKI-portal/SUPCRTandEQs.
+--- a/upstream-dew/EQ3/eq3nr110.f
++++ b/upstream-dew/EQ3/eq3nr110.f
+@@ -1691,9 +1691,13 @@
+ c                                                                               
+       call arrsim(kkndex,npass,ker,eh,ehfac,nsb,nsq,nsq1,nsqb,                  
+      $ nsqmax,nsqmx1,nhydr,iktmax,glgx,uspec,umin,ugas,jflag,                   
+-     $ iindx1,nend,xbarlg,lamlg)                                                
+-c                                                                               
+-      call ncmpx                                                                
++     $ iindx1,nend,xbarlg,lamlg)
++c
++c     if arrsim found a near-singular system (ker.ge.2), exit immediately
++c
++      if (ker.ge.2) go to 999
++c
++      call ncmpx
+       call betas(qcfrac,qabsw)                                                  
+ c                                                                               
+ c     print values of master iteration variables                                
+@@ -2443,9 +2447,20 @@
+       do 715 kcol=2,ksq                                                         
+       ns1=iindx1(kcol)                                                          
+       if (kkndex(ns1).le.0) go to 715                                           
+-      icol=icol+1                                                               
+-      zvclg1(kcol)=del(icol)                                                    
+-  715 continue                                                                  
++      icol=icol+1
++c
++c     nan guard: near-singular matrix yields NaN in del(); exit cleanly
++c
++      if (del(icol).ne.del(icol)) then
++        ker=2
++        write(noutpt,716) uspec(ns1)
++        write(nttyo,716) uspec(ns1)
++        go to 999
++      endif
++      zvclg1(kcol)=del(icol)
++  715 continue
++  716 format(' * note- (arrsim) starting estimate is NaN for ',a24,
++     $  /7x,'matrix is near-singular; reconsider constraints (arrset)')
+ c                                                                               
+       if (.not.qpr3) go to 725                                                  
+       write (noutpt,717)                                                        
