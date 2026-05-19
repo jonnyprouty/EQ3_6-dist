@@ -78,9 +78,11 @@ hostnames. The file is never committed — hostnames stay out of git.
 - Mac: Homebrew install via `make brew brew-dew`
 - Output from each machine is buffered and printed as a complete block when it finishes
 
-The machine whose `hostname -s` matches `FEDORA_BUILDER`, `UBUNTU_BUILDER`, or `MAC_BUILDER`
-runs its platform build locally without SSH. Routing is decided at Makefile parse time via
-`ifeq`, so recipe lines contain no conditionals.
+`*_CONNECTION` and `*_FARM_REPO` are defined directly in `ssh_build_farm.mk` — empty
+string for the local machine, `ssh host ...` for remote. `platform-build` includes a
+`sync` step that pulls the latest commit on whichever machine runs it, using that
+machine's `REPO_URL` from its own `ssh_build_farm.mk`, so pull authentication is
+resolved on the builder rather than the initiating machine.
 
 ## Architecture
 
@@ -256,6 +258,75 @@ dpkg -L libgfortran-dev | grep '\.a$'
 
 After cloning, run `make generate` before any deb targets — this produces the binary
 control files from `.in` templates using the local architecture.
+
+## Design decisions
+
+When a non-obvious design choice is made during a task, record the rationale here before
+closing the task — not in TODO.md checked-off items or commit messages alone, where it
+becomes hard to find. If the decision is already covered by existing policy in this file,
+no separate entry is needed.
+
+### Testing
+
+**Per-platform exact refs, not floating-point tolerance**
+EQ6 ODE path divergence across gfortran builds (Fedora RPM vs Ubuntu apt vs Homebrew) is
+genuine predictor-corrector step divergence, not rounding noise — a tolerance band would
+mask real regressions. Reference outputs live in `tests/testlib/expected/{linux,ubuntu,mac}/`
+and `tests/dew/expected/{linux,ubuntu,mac}/`.
+
+**Platform tags: `linux`, `ubuntu`, `mac`**
+`linux` = Fedora (baseline). `ubuntu` = Ubuntu apt gfortran (different ODE paths). `mac` =
+Homebrew gfortran. Detected in `tests/lib/helpers.bash` and all `tools/regen_*_refs.sh`
+scripts via `/etc/os-release`. Only differing refs are committed per platform; identical
+cases fall through to the `linux/` fallback in `assert_output_matches_ref`.
+
+**`test-testlib` must use `build` (PHONY), not `$(TARGETS)` directly**
+Make evaluates pattern rules at graph-parse time. If `src/` hasn't been extracted yet,
+`$(OBJ_DIR)/%.o` has no matching rule even with `$(EXTRACT_STAMP)` listed as a prerequisite.
+The two-phase `build` PHONY ensures extraction completes before the sub-make schedules
+compilation. `test-dew` can use `$(DEW_TARGETS)` directly because DEW sources are committed
+files in the submodule, not dynamically extracted.
+
+**Packaging-time test checks**
+RPM `%check`, deb `rules`, and Homebrew `test do` blocks remain as raw shell/Ruby —
+packaging CI environments lack the test input files. `tests/cases/packaging/packaging_checks.bats`
+validates the same logic against locally-installed binaries.
+
+### DEW variant compatibility
+
+**DEW DATA0 and data1 are incompatible with v8.0a**
+DEW DATA0 uses the old R71 format: explicit NCT/NSQ count header, no `basis species`
+section. v8.0a EQPT scans for `basis species` and hits EOF. DEW data1 binaries additionally
+use 8-byte Fortran record markers vs. our gfortran's 4-byte, and the internal data1
+structure changed between R71 and v8.0a. Pre-built `data1` files included in each DEW ZIP
+are usable directly without re-running EQPT.
+
+**DEW and v8.0a are parallel non-interoperating tracks**
+pyDEW generates R71-format DATA0 (same old format), not v8.0a-compatible. The pyDEW
+container bundles its own x86-64 Linux R71 EQPT/EQ3/EQ6; `pyDEW.Fluid()` uses those
+internally. The DEW EQPT binaries distributed in ZIPs (2025) are ARM64 (Apple Silicon)
+only — they will not run on Intel Macs or Linux.
+
+**DEW EQPT requires piped stdin**
+DEW EQPT requires three interactive prompts (`n/n/y` for Pitzer/HKF/data0s). Running
+without piped answers causes a `fmt: end of file` crash. `tools/run_dew_eqpt.sh` wraps
+this correctly for Apple Silicon users.
+
+### Farm build
+
+**`REPO_URL` defaults to HTTPS**
+Remote farm machines pull without SSH keys. Only override with SSH in `ssh_build_farm.mk`
+if the builder has keys configured. The `sync` prereq of `platform-build` runs on the
+target machine and reads its own `REPO_URL`, so authentication is resolved locally on
+each builder rather than being inherited from the initiating machine.
+
+**`*_CONNECTION` set directly — no `CURRENT_HOST` comparison**
+`ssh_build_farm.mk` defines `FEDORA_CONNECTION`, `UBUNTU_CONNECTION`, `MAC_CONNECTION`
+as empty string (local) or `ssh host ...` (remote). The old `FEDORA_BUILDER` /
+`CURRENT_HOST` / `ifeq` machinery that derived connections from hostname comparisons
+has been removed.
+
+---
 
 ## TODO list
 
