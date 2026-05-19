@@ -131,9 +131,48 @@ only. The native `bin-dew/` executables cover all direct EQ3/6 DEW use cases wit
 - [ ] Document pyDEW container as optional dependency in README
 - [x] Package DEW variant (RPM/deb/Homebrew for `eq3-6-dew`) — includes DATA0 and sprons93 in `/usr/share/eq3-6-dew/` (or Homebrew's `share/eq3-6-dew/`)
 
+### DEW EQ3 R110 upstream patches (arrsim/arrset convergence)
+
+Two DEW workshop cases (`surface_seawater`, `calcite_solid_soln`) fail to reach "Normal
+exit" because `arrset` in `eq3nr110.f` uses tighter iteration limits than the current v8.0a
+code and lacks the overflow/NaN guard that v8.0a added. The same failures occur in the
+pyDEW container (R71), so these are known R110 solver limitations, not build regressions.
+The tests still pass (committed refs capture the failure state).
+
+- [x] **Tier 1 (trivial)**: Increase `nplim/4/ → nplim/7/` and `ncylim/7/ → ncylim/15/` in
+      `eq3nr110.f` line 1424 to match v8.0a `arrset.f` line 202. Patch at
+      `patches/dew-eq3nr110-arrset-nplim.patch`; submitted upstream to
+      gitlab.com/ENKI-portal/SUPCRTandEQs. Neither failing case changed output — the NaN
+      originates from a singular matrix in `arrsim` itself, not from the pass-count limit.
+- [ ] **Tier 2 (medium)**: Port the v8.0a overflow/NaN guard from `arrsim.f` lines 680–708
+      into the `arrsim` subroutine in `eq3nr110.f`. Replaces silent NaN output with a tiered
+      `ker=1` (warning) / `ker=2` (error) distinction matching v8.0a behavior. Bundle with
+      tier 1 in the same upstream patch.
+- [ ] **Tier 3 (larger effort)**: `surface_seawater` at pe = −8.4 likely needs a direct
+      analytical pre-estimate of log[O2(aq)] and log[H2(aq)] from the Nernst equation before
+      entering `arrsim`, bypassing the ill-conditioned simultaneous-estimation path for
+      jflag=27 species when pe is explicitly specified. This mirrors deeper v8.0a arrset
+      machinery; scope is closer to a subsystem backport than a patch.
+
 ---
 
-## 4. Package build & install verification checklist
+## 4. Test environment setup helper
+
+The pattern of staging data files into a temp directory and running a binary is duplicated
+across `tools/compare_dew_container.sh`, `tools/regen_dew_refs.sh`, and inline in ad-hoc
+test code.  A shared helper function would reduce this boilerplate.
+
+- [ ] Add a `run_dew_case()` helper (in `tests/lib/helpers.bash` or a new `tools/lib.sh`)
+      that accepts: executable name, dataset name, input file path, and output file path.
+      It should: resolve the data cache path, stage data1/data2/data3 and input into a
+      fresh tmpdir, run the binary, normalize the output, write to the destination, and
+      clean up.  Callers pass only what differs between cases.
+- [ ] Refactor `tools/regen_dew_refs.sh` `run_case()` and `tools/compare_dew_container.sh`
+      `run_case_container()` to use the shared helper where possible.
+
+---
+
+## 5. Package build & install verification checklist
 
 Use this as a **manual release rubric** — run through it before tagging a release. It is a
 template; do not check items off and commit. The goal is for every box to be checkable at

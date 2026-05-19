@@ -1,0 +1,29 @@
+# Increase arrset pass/cycle limits in eq3nr110.f to match v8.0a values.
+#
+# The DEW EQ3 R110 code uses nplim=4 and ncylim=7, which are the original
+# 1987 values from the monolithic source.  The upstream v8.0a EQ3NR refactored
+# these into arrset.f (line 202) and raised them to nplim=7 / ncylim=15.
+#
+# nplim  controls the maximum number of passes in the arrset starting-estimate
+#        loop.  Each pass refines ionic strength, activity of water, and
+#        activity coefficients before re-solving the simultaneous constraint
+#        system via arrsim.
+# ncylim controls the maximum number of inner cycles within each pass, used
+#        to refine species concentrations.
+#
+# The tighter limits cause arrset to exit with "optimization ended outside
+# requested limits" for constraint combinations that require more iterations
+# to converge — in particular solid-solution equilibrium (jflag=20) and
+# redox-coupled species (jflag=27) under non-ambient conditions.
+#
+# This change brings the DEW R110 code in line with the current v8.0a standard.
+#
+# Intended for upstream submission to gitlab.com/ENKI-portal/SUPCRTandEQs.
+--- a/upstream-dew/EQ3/eq3nr110.f
++++ b/upstream-dew/EQ3/eq3nr110.f
+@@ -1421,7 +1421,7 @@ c   species concentrations before new estimates of ionic strength, etc.,
+ c   are made.
+ c
+-      data nlopmx/12/,nplim/4/,ncylim/7/
++      data nlopmx/12/,nplim/7/,ncylim/15/
+       data nttyi/5/
