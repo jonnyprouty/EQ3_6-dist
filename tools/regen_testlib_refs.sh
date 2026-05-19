@@ -10,10 +10,17 @@ DATA1_CACHE="$REPO_ROOT/tests/.data1_cache"
 INPUTS="$REPO_ROOT/tests/testlib/inputs"
 CASES="$REPO_ROOT/tests/cases/testlib"
 
-# Canonical platform tag: 'linux' or 'mac'.
+# Canonical platform tag — must match _EQ_PLATFORM detection in tests/lib/helpers.bash.
 case "$(uname -s)" in
     Darwin) PLATFORM=mac ;;
-    *)      PLATFORM=linux ;;
+    Linux)
+        if grep -qi ubuntu /etc/os-release 2>/dev/null; then
+            PLATFORM=ubuntu
+        else
+            PLATFORM=linux
+        fi
+        ;;
+    *) PLATFORM=linux ;;
 esac
 EXPECTED="$REPO_ROOT/tests/testlib/expected/$PLATFORM"
 
