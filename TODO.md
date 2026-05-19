@@ -156,7 +156,60 @@ The tests still pass (committed refs capture the failure state).
 
 ---
 
-## 4. Test environment setup helper
+## 4. Minimal Fortran reproducers for platform divergence
+
+The test suites document two distinct platform-divergence mechanisms that produce different
+reference outputs on Fedora, Ubuntu, and macOS despite identical source code and compiler
+version numbers.  Small, self-contained Fortran programs that exhibit the same divergence
+would serve as license-free, upstream-submittable reproduction cases.
+
+**Requirements:**
+- Single source file per reproducer; same file compiled unmodified on all three platforms
+- No EQ3/6 source, headers, or data files — the programs must stand alone
+- No architecture-specific pragmas or compiler flags beyond standard `-O2`
+- When the binary is built on Fedora (gfortran 15.2.1 RPM), Ubuntu (gfortran 15.2.0 apt),
+  and macOS (gfortran 15.2.0 Homebrew), the output should visibly diverge in the same
+  character as the test suite divergences: different last-digit values or different
+  branch-taken counts
+
+**Reproducer 1 — ODE predictor-corrector step divergence** (`tools/repro/ode_diverge.f`):
+
+Implement an adaptive-step Adams-Bashforth-Moulton predictor-corrector loop for a
+nonlinear ODE (e.g. a Lotka-Volterra or logistic equation) over enough steps that
+accumulated Taylor-coefficient differences cross the step-acceptance threshold at
+least once.  The acceptance criterion should be a floating-point comparison against
+a fixed tolerance, so that a ≤1 ULP difference in the residual can flip the branch
+and produce a different step count or final state value.  This mirrors the `taylor`
+→ `zvecpr` → `path` divergence in `eq6r100.f` that causes the EQ6 ODE cases to
+produce different reaction-progress values on Ubuntu and macOS.
+
+**Reproducer 2 — Iterated activity-coefficient inner-product divergence** (`tools/repro/actcoef_diverge.f`):
+
+Implement a fixed-point iteration for ionic-strength-weighted activity coefficients
+using the extended Debye-Hückel equation (no EQ3/6 code; just the published formula).
+Run at a high-P-T condition where the Born dielectric correction term is large (order
+10² – 10³).  After convergence, print the final log γ values to sufficient precision
+to expose the last-digit difference.  This mirrors the `betgam` HKF iteration in
+`eqlibr136.f` that causes the two high-P-T EQ3 DEW cases (`co2_650c_10kbar`,
+`pelitic_550c_10kbar`) to differ between macOS and Fedora/Ubuntu.
+
+**Verification:**
+- Build each reproducer on all three platforms with `gfortran -O2 repro.f -o repro`
+- Run and capture output; diff the three outputs
+- The diff pattern should qualitatively match the corresponding divergences in
+  `TESTS.md` (last-digit differences in the ODE case, last-digit log γ in the
+  activity-coefficient case)
+- If the outputs are identical across platforms, the reproducer does not yet capture
+  the right operation — iterate on the formula or iteration count
+
+- [ ] Write `tools/repro/ode_diverge.f` and verify it diverges across platforms
+- [ ] Write `tools/repro/actcoef_diverge.f` and verify it diverges across platforms
+- [ ] Add a `make test-repro` target that builds both on the current platform and
+      prints the output (comparison across platforms is manual / farm-build)
+
+---
+
+## 5. Test environment setup helper
 
 The pattern of staging data files into a temp directory and running a binary is duplicated
 across `tools/compare_dew_container.sh`, `tools/regen_dew_refs.sh`, and inline in ad-hoc
