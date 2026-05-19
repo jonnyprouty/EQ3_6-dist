@@ -7,12 +7,14 @@ The test suite uses [bats-core](https://github.com/bats-core/bats-core). Install
 
 ```
 make test          # smoke tests + packaging checks + source validation
-make test-testlib  # upstream test library (170 cases, requires make extract-testlib first)
+make test-testlib  # upstream test library (170 cases; auto-fetches, builds, and extracts inputs)
+make test-dew      # DEW smoke + workshop tests (auto-builds bin-dew/ and data caches)
 ```
 
 `make test-testlib` is separate because it requires the upstream test library ZIP
 (`upstream/EQ3_6v8.0a TestLibrary PC.zip`) and takes a few minutes to run. It does not
 run as part of `make test` or the packaging-time `%check` / `dh_auto_test` checks.
+All prerequisites (submodule init, extraction, data1 compilation) are handled automatically.
 
 ---
 
@@ -42,20 +44,21 @@ the official EQ3/6 v8.0a distribution. Each case pairs an input file (`.3i` for 
 
 ### Reference outputs and per-platform refs
 
-Reference outputs live in `tests/testlib/expected/<platform>/`. Two platforms are
-committed: `linux/` (generated on Fedora 43 with gfortran 15.2.1) and `mac/` (generated
-on macOS 15 with Homebrew gfortran 15.2.0).
+Reference outputs live in `tests/testlib/expected/<platform>/`. Three platforms are
+committed: `linux/` (generated on Fedora 43 with gfortran 15.2.1), `ubuntu/` (generated
+on Ubuntu 26.04 with gfortran 15.2.0 apt), and `mac/` (generated on macOS 15 with
+Homebrew gfortran 15.2.0).
 
 `assert_output_matches_ref` in `tests/lib/helpers.bash` resolves:
-1. `tests/testlib/expected/<uname-s>-derived platform>/<lib>/<case>.out` if it exists
+1. `tests/testlib/expected/<platform>/<lib>/<case>.out` if it exists
 2. `tests/testlib/expected/linux/<lib>/<case>.out` as fallback
 
-The platform tag is `linux` on Linux and `mac` on macOS (from `uname -s`). This gives
-each platform an exact match rather than a toleranced comparison.
+The platform tag is `linux` on Fedora/RHEL, `ubuntu` on Ubuntu (detected via
+`/etc/os-release`), and `mac` on macOS (from `uname -s`). This gives each platform an
+exact match rather than a toleranced comparison.
 
 To regenerate refs for the current platform:
 ```bash
-make extract-testlib       # extract inputs and compile data1 files
 make regen-testlib-refs    # writes to tests/testlib/expected/<platform>/
 # commit the results
 ```
@@ -169,6 +172,76 @@ One EQ3NR case also differs slightly (charge balance diagnostic in the YMP Pitze
 
 ---
 
+### Ubuntu-specific divergences
+
+Ubuntu (gfortran 15.2.0 apt) diverges from Fedora (gfortran 15.2.1 RPM) on 27 cases.
+Where a case also diverges on macOS, the Ubuntu value differs from both; where it is
+not in the Mac tables above, Ubuntu is the only diverging platform.
+
+#### Ubuntu-divergent EQ3NR cases (3tlib_ymp)
+
+| Case | First differing quantity | Linux value | Ubuntu value |
+|---|---|---|---|
+| `henleyph` | Ionic asymmetry (J) | 3.25261E-17 | 3.68629E-17 |
+
+#### Ubuntu-divergent EQ6 cases (6tlib_cmp)
+
+| Case | First differing quantity | Linux value | Ubuntu value |
+|---|---|---|---|
+| `heatswfl` | Charge discrepancy | 7.4925E-12 | 7.4924E-12 |
+| `heatsw` | Antigorite saturation index | -0.00000 | 0.00000 |
+| `j13wtitr` | Charge discrepancy | -6.5173E-16 | -6.5260E-16 |
+| `j13wtuff` | Charge discrepancy | 1.8521E-15 | 1.8504E-15 |
+| `methane` | Charge discrepancy | 1.6335E-13 | 1.6336E-13 |
+| `pyrsw` | Charge discrepancy | -1.2928E-15 | -1.4038E-15 |
+| `swxrca` | Exchanger 1 saturation | 0.00000 | -0.00000 |
+| `swxrcaft` | Exchanger 1 saturation | 0.00000 | -0.00000 |
+
+#### Ubuntu-divergent EQ6 cases (6tlib_fmt)
+
+| Case | First differing quantity | Linux value | Ubuntu value |
+|---|---|---|---|
+| `c4pgwbN2` | Charge discrepancy | -1.7584E-11 | -1.7585E-11 |
+| `f24vc7b3` | Most rapidly changing species | Cl- (-0.8267) | Na+ (-0.4288) |
+| `f24vc7m` | Actual charge imbalance | 1.3975E-13 | 1.2764E-13 |
+
+#### Ubuntu-divergent EQ6 cases (6tlib_hmw)
+
+| Case | First differing quantity | Linux value | Ubuntu value |
+|---|---|---|---|
+| `evapsw` | delxi (step size) | 2.4498E-01 | 2.4499E-01 |
+| `evswgyha` | Charge discrepancy | 6.4965E-16 | 5.8775E-16 |
+| `mgso4` | delxi (step size) | 4.2093E-06 | 4.2092E-06 |
+
+#### Ubuntu-divergent EQ6 cases (6tlib_ymp)
+
+| Case | First differing quantity | Linux value | Ubuntu value |
+|---|---|---|---|
+| `heatswfl` | Charge discrepancy | -3.7407E-11 | -3.7408E-11 |
+| `heatsw` | Charge discrepancy | -3.0802E-16 | -8.5977E-17 |
+| `j13wtuff` | delxi (step size) | 8.6454E-05 | 8.6453E-05 |
+| `micro` | Actual charge imbalance | 0.0000E+00 | 2.7105E-20 |
+| `microft` | Actual charge imbalance | 3.7947E-19 | 2.9816E-19 |
+| `pptcal` | Charge discrepancy | 9.5566E-18 | 1.4762E-17 |
+| `swxrca` | Charge discrepancy | -2.2009E-17 | -1.3303E-16 |
+| `swxrcaft` | delxi (step size) | 8.0780E-03 | 8.0772E-03 |
+
+#### Ubuntu-divergent EQ6 cases (6tlib_ypf)
+
+| Case | First differing quantity | Linux value | Ubuntu value |
+|---|---|---|---|
+| `calhal90` | Actual charge imbalance | 2.1427E-13 | 2.1416E-13 |
+| `evapsw60` | Charge discrepancy | 9.0466E-14 | 9.0384E-14 |
+
+#### Ubuntu-divergent xchtlib cases
+
+| Case | First differing quantity | Linux value | Ubuntu value |
+|---|---|---|---|
+| `swxrca` (eq6) | Exchanger 1 saturation | 0.00000 | -0.00000 |
+| `swxrcaft` (eq6) | Exchanger 1 saturation | 0.00000 | -0.00000 |
+
+---
+
 ### Known non-converging cases
 
 Three cases fail to reach "Normal exit" — both in our build and in the upstream PC
@@ -214,9 +287,8 @@ calculations from the DEW community workshop materials and compare against commi
 reference outputs.
 
 ```
-make extract-dew-workshop   # compile data caches + stage inputs (one-time setup)
-make test-dew-workshop      # run 8 workshop cases
-make test-dew               # smoke + workshop
+make test-dew               # smoke + workshop (auto-builds bin-dew/ and data caches)
+make test-dew-workshop      # workshop cases only
 ```
 
 ### Datasets and cases
@@ -259,7 +331,6 @@ Platform is detected at test time from `uname -s` and `/etc/os-release` (see
 
 To regenerate references for the current platform:
 ```bash
-make extract-dew-workshop   # rebuild data caches (required first)
 make regen-dew-refs         # writes to tests/dew/expected/<platform>/
 # commit the results
 ```

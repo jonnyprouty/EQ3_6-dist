@@ -42,7 +42,7 @@ make build-dew   # applies source patches + compiles 5 executables to bin-dew/
 | `make symlinks LINK_DIR=/path` | Create symlinks; **`LINK_DIR` must be set explicitly** |
 | `make docs` | Download documentation PDFs from OSTI to `docs/` |
 | `make docs-package` | Create `pkg/dist/eq3-6-docs_8.0a.tar.gz` from downloaded PDFs |
-| `make test` | Run the BATS test suite (requires `bats-core` and a prior `make build`) |
+| `make test` | Run the BATS test suite (requires `bats-core`; auto-fetches and builds if needed) |
 | `make rpm` | Build RPM (requires `rpm-build`); output → `pkg/dist/` |
 | `make deb` | Build binary .deb (requires `dpkg-dev`); output → `pkg/dist/` |
 | `make deb-doc` | Build documentation .deb; output → `pkg/dist/` |
@@ -55,7 +55,7 @@ make build-dew   # applies source patches + compiles 5 executables to bin-dew/
 | `make fetch-dew` | Init/update `upstream-dew/` submodule |
 | `make patch-dew` | Apply all `patches/dew-*.patch` to `upstream-dew/` (auto-run before compile) |
 | `make build-dew` | Apply patches + compile all 5 DEW executables to `bin-dew/` |
-| `make test-dew` | Run DEW BATS smoke tests (skipped if `bin-dew/` absent) |
+| `make test-dew` | Run DEW smoke + workshop tests (auto-builds `bin-dew/` and data caches if needed) |
 | `make clean-dew` | Remove `obj-dew/` and `bin-dew/` |
 | `make symlinks-dew LINK_DIR=/path` | Create `dew-` prefixed symlinks; **`LINK_DIR` must be set explicitly** |
 | `make rpm-dew` | Build DEW RPM (requires `rpm-build`); output → `pkg/dist/` |
