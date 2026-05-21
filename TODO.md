@@ -71,17 +71,23 @@ to expose the last-digit difference.  This mirrors the `betgam` HKF iteration in
 
 ## 3. Test environment setup helper
 
-The pattern of staging data files into a temp directory and running a binary is duplicated
-across `tools/compare_dew_container.sh`, `tools/regen_dew_refs.sh`, and inline in ad-hoc
-test code.  A shared helper function would reduce this boilerplate.
+The pattern of copying data files into a tmpdir, running a binary with `cwd=tmpdir`, and
+cleaning up is duplicated across `tools/compare_dew_container.sh`, `tools/regen_dew_refs.sh`,
+and `tests/lib/helpers.bash` (`run_eq3nr`, `run_eq6`, `run_eq3_dew`, `run_eq6_dew`).
+A single generic helper would replace all of these.
 
-- [ ] Add a `run_dew_case()` helper (in `tests/lib/helpers.bash` or a new `tools/lib.sh`)
-      that accepts: executable name, dataset name, input file path, and output file path.
-      It should: resolve the data cache path, stage data1/data2/data3 and input into a
-      fresh tmpdir, run the binary, normalize the output, write to the destination, and
-      clean up.  Callers pass only what differs between cases.
+- [ ] Add a `run_eq_case()` helper in `tests/lib/helpers.bash` that accepts: binary path
+      (full), workdir, and input file path.  It should: copy the input file to
+      `workdir/input`, run the binary with `cwd=workdir`, and capture stdout+stderr to
+      `workdir/run.log`.  Data file staging remains the caller's responsibility (via the
+      existing `stage_data1_for`, `stage_dew_data`, etc.) — `run_eq_case()` handles only
+      execution.  This works for any EQ binary regardless of variant.
+- [ ] Replace the per-binary wrappers (`run_eq3nr`, `run_eq6`, `run_eq3_dew`, `run_eq6_dew`)
+      with thin one-liners over `run_eq_case()` so callers that already use those names
+      keep working.
 - [ ] Refactor `tools/regen_dew_refs.sh` `run_case()` and `tools/compare_dew_container.sh`
-      `run_case_container()` to use the shared helper where possible.
+      `run_case_container()` to source `tests/lib/helpers.bash` and call `run_eq_case()`
+      rather than re-implementing the same loop.
 
 ---
 
