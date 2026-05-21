@@ -63,11 +63,13 @@ UNAME_S := $(shell uname -s)
 # Debian/Ubuntu architecture token (e.g. amd64, arm64)
 DEB_ARCH := $(shell dpkg --print-architecture 2>/dev/null || echo amd64)
 
-# SHA256 verification command (sha256sum on Linux, shasum on macOS)
+# SHA256 commands (sha256sum on Linux, shasum on macOS; same output format)
 ifeq ($(UNAME_S),Darwin)
-  SHA256_CHECK = shasum -a 256 -c
+  SHA256_CHECK   = shasum -a 256 -c
+  SHA256_COMPUTE = shasum -a 256
 else
-  SHA256_CHECK = sha256sum -c
+  SHA256_CHECK   = sha256sum -c
+  SHA256_COMPUTE = sha256sum
 endif
 
 # ---- Source directories ----------------------------------------
@@ -553,7 +555,7 @@ $(DEW_SRC_TARBALL): | $(DEW_UPSTREAM)
 	    | gzip > $@
 
 pkg/brew/eq3_6_dew.rb: pkg/brew/eq3_6_dew.rb.in Makefile $(DEW_SRC_TARBALL)
-	@DEW_SHA256=$$(sha256sum $(DEW_SRC_TARBALL) | cut -d' ' -f1); \
+	@DEW_SHA256=$$($(SHA256_COMPUTE) $(DEW_SRC_TARBALL) | cut -d' ' -f1); \
 	DEW_URL="file://$(CURDIR)/$(DEW_SRC_TARBALL)"; \
 	sed \
 	    -e 's|@@FFLAGS@@|$(FFLAGS)|g' \

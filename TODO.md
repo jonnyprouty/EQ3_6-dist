@@ -147,3 +147,62 @@ release time.
 - [ ] `brew install --build-from-source pkg/brew/eq3_6.rb` succeeds
 - [ ] `brew test eq3_6` passes
 - [ ] All five executables are accessible via `brew`
+
+---
+
+## 6. DEW build warning cleanup
+
+Observed in `make farm` output (RPM `%build` section and direct `make build-dew`).
+Items are ordered roughly by ease of fix.
+
+### Rank mismatch warnings (upstream F77 idioms)
+
+gfortran flags several argument rank mismatches that are harmless under Fortran
+pass-by-reference semantics but pollute build output:
+
+- `eqlibr136.f:8149` — `ir` passed rank-1 to `msolvr` (expects scalar)
+- `eqlibr136.f:7763` — `ir` passed scalar to `nrstep` (expects rank-1)
+- `eq3nr110.f:1818,5736` — `cstor` rank mismatch in `gcsts` calls
+- `eq3nr110.f:374` — `nxmod` rank-1 vs scalar
+- `eq3nr110.f:1288` — `cstor` scalar vs rank-2
+- `eq6r100.f:8972–8974` — `ars`, `amn`, `ags`, `azero`, `hydn`, `conc` in `pabssw` call
+
+These are candidates for upstream bug reports and/or `patches/dew-*.patch` fixes.
+Fixing them requires understanding whether the caller or callee has the correct
+declaration and adjusting the other side. Adding `-w` to `DEW_FFLAGS` would silence
+all warnings but would also hide future real issues — prefer targeted fixes.
+
+- [ ] Audit each rank mismatch; determine correct array rank and fix via patch
+- [ ] Submit fixed files upstream to ENKI-portal/SUPCRTandEQs
+
+### COMMON block size mismatches
+
+`eq6r100.f` includes `vx.h` and `nk.h` but declares COMMON blocks at sizes that
+disagree with those seen by other compilation units:
+
+- `vxc`: 9920 bytes in `eq6r100.f` vs 9824 bytes elsewhere
+- `nk`: 392 bytes in `eq6r100.f` vs 196 bytes elsewhere
+
+A COMMON block size mismatch is a real bug: if different compilation units lay out
+the block differently, one unit will read variables at wrong offsets. The program
+may run because the larger unit never accesses the tail fields, but it is still
+undefined behavior. This should be investigated before the mismatch grows.
+
+- [ ] Identify which compilation unit has the correct size for `vxc` and `nk`
+- [ ] Fix the mismatch via a `patches/dew-*.patch` and submit upstream
+
+### RPM `%check` null byte warning
+
+`command substitution: ignored null byte in input` — the RPM `%check` smoke test
+captures DEW binary output via `$()`. DEW binaries write null bytes in timing
+fields (uninitialized `CHARACTER` buffers), so the shell silently drops them and
+emits this warning. The test still passes; the warning is cosmetic.
+
+Fixing it properly would require either piping through `tr -d '\0'` in the spec's
+`%check` block or patching the DEW binaries to initialize those buffers (the
+determinism flags `-finit-character=32` already cover new code, but this is a
+pre-existing initialized `CHARACTER` with a specific fill pattern that still
+contains nulls in the timing section).
+
+- [ ] Evaluate whether adding `tr -d '\0'` to the `%check` output capture in
+      `pkg/rpm/eq3_6_dew.spec.in` is sufficient to silence the warning cleanly

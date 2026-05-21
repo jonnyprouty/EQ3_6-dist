@@ -1,0 +1,11 @@
+--- a/upstream-dew/EQ3/eq3nr110.f
++++ b/upstream-dew/EQ3/eq3nr110.f
+@@ -2084,7 +2084,7 @@
+ c                                                                               
+       data ublank/'                        '/                                   
+       data ueh   /'eh                      '/                                   
+-      data ured  /'aq. redox reaction       '/                                  
++      data ured  /'aq. redox reaction      '/                                  
+       data uaqeq /'aq. equilibrium         '/                                   
+       data qfalse/.false./                                                      
+ c                                                                               

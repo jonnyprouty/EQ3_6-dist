@@ -1,0 +1,11 @@
+--- a/upstream-dew/EQPT/eqpt.f
++++ b/upstream-dew/EQPT/eqpt.f
+@@ -4710,7 +4710,7 @@
+ c                                                                               
+       data uendit/'endit.  '/,ublank/'        '/                                
+       data ublk24 /'                        '/                                  
+-      data udat1,udat2,udat3 /'data1   ','data2   ','data3    '/                
++      data udat1,udat2,udat3 /'data1   ','data2   ','data3   '/                
+       data udata0/'data0   '/                                                   
+       data (uname(i), i=1,17)/'temp    ','press   ','adh     ',                 
+      $  'bdh     ','bdot    ',                                                  
