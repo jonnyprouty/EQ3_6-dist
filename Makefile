@@ -72,6 +72,9 @@ else
   SHA256_COMPUTE = sha256sum
 endif
 
+# Suppress Homebrew auto-update and env-hint banners during brew install
+BREW_ENV = HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_ENV_HINTS=1
+
 # ---- Source directories ----------------------------------------
 EQLIBU_SRC_DIR = $(SRC_BASE)/eqlibu/src
 EQLIBG_SRC_DIR = $(SRC_BASE)/eqlibg/src
@@ -845,7 +848,7 @@ endif
 brew: pkg/brew/eq3_6.rb
 	@which brew > /dev/null 2>&1 || \
 	    { echo "ERROR: brew not found. See https://brew.sh"; exit 1; }
-	@set -e; \
+	@set -e; export $(BREW_ENV); \
 	 TAP_DIR="$$(brew --repository)/Library/Taps/local/homebrew-eq3-6"; \
 	 mkdir -p "$$TAP_DIR/Formula"; \
 	 if [ ! -d "$$TAP_DIR/.git" ]; then \
@@ -906,7 +909,7 @@ endif
 brew-dew: pkg/brew/eq3_6_dew.rb
 	@which brew > /dev/null 2>&1 || \
 	    { echo "ERROR: brew not found. See https://brew.sh"; exit 1; }
-	@set -e; \
+	@set -e; export $(BREW_ENV); \
 	 TAP_DIR="$$(brew --repository)/Library/Taps/local/homebrew-eq3-6"; \
 	 mkdir -p "$$TAP_DIR/Formula"; \
 	 if [ ! -d "$$TAP_DIR/.git" ]; then \
